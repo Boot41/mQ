@@ -14,6 +14,13 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+        "3xl": "1600px",
+        "4xl": "1920px",
+        "6xl": "1920px",
+      },
+      maxWidth: {
+        "3xl": "1600px",
+        "4xl": "1920px",
       },
     },
     extend: {
@@ -94,7 +101,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwindcss-animate'),
+    require("tailwindcss-animate"),
     function ({ addUtilities }) {
       const newUtilities = {
         ".backface-hidden": {
