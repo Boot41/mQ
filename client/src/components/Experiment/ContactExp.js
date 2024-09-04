@@ -1,46 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const ContactForm = () => {
+function App() {
+  const [isSignIn, setIsSignIn] = useState(true);
+
   return (
-    <div className="flex items-center justify-center min-h-90" style={{ backgroundColor: "#303134" }}>
-      <div className="flex flex-col md:flex-row max-w-8xl w-full p-8 text-white">
-        <div className="flex-1 p-6">
-          <form className="space-y-4">
-            <div className="flex space-x-4">
-              <div className="flex-1">
-                <label htmlFor="name" className="block text-sm">Name</label>
-                <input type="text" id="name" placeholder="Seu nome" className="w-full mt-1 p-2 bg-transparent border-b border-gray-400 focus:outline-none" />
-              </div>
-              <div className="flex-1">
-                <label htmlFor="email" className="block text-sm">E-mail*</label>
-                <input type="email" id="email" placeholder="Seu e-mail" className="w-full mt-1 p-2 bg-transparent border-b border-gray-400 focus:outline-none" />
-              </div>
-              <div className="flex-1">
-                <label htmlFor="phone" className="block text-sm">Telephone</label>
-                <input type="text" id="phone" placeholder="Seu telefone" className="w-full mt-1 p-2 bg-transparent border-b border-gray-400 focus:outline-none" />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-sm">Message</label>
-              <textarea id="message" placeholder="Mensagem" className="w-full mt-1 p-2 bg-transparent border-b border-gray-400 focus:outline-none h-24"></textarea>
-            </div>
-            <div className="flex items-center mt-6">
-              <input type="checkbox" id="robot" className="mr-2" />
-              <label htmlFor="robot" className="text-sm">Remember me </label>
-            </div>
-            <button type="submit" className="mt-4 bg-white text-black px-8 py-2 rounded-sm">SUBMIT</button>
-          </form>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-200 to-blue-200">
+      <div className="relative w-full max-w-[768px] min-h-[480px] bg-white rounded-[30px] shadow-lg overflow-hidden flex transition-all duration-600 ease-in-out">
+        
+        {/* Connect for Services (Sign Up) Form */}
+        <div className={`absolute top-0 left-0 w-1/2 h-full bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out ${isSignIn ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100'} z-10`}>
+          <h1 className="text-2xl font-bold mb-4">Connect for Services</h1>
+          <span className="text-sm mb-4">or use your email for registration</span>
+          <input type="text" placeholder="Name" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <input type="email" placeholder="Company Email" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <input type="phone" placeholder="Telephone" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <input type="text" placeholder="Messages" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <button className="bg-purple-700 text-white px-10 py-2 rounded-lg font-semibold mt-4">Submit</button>
+          <button onClick={() => setIsSignIn(true)} className="mt-4 bg-transparent border-2 border-purple-700 text-purple-700 px-10 py-2 rounded-lg font-semibold">Connect for Careers</button>
         </div>
 
-        <div className="">
-          <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
-          <p className="mb-6">Nos envie uma mensagem preenchendo o formulário, entraremos em contato o mais rápido possível!</p>
-          <p className="mt-4">Se preferir, tire suas dúvidas através do telefone:</p>
-          <p className="text-3xl font-bold mt-2">(47) 3084-5500</p>
+        {/* Connect for Careers (Sign In) Form */}
+        <div className={`absolute top-0 left-1/2 w-1/2 h-full bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out ${isSignIn ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'} z-10`}>
+          <h1 className="text-2xl font-bold mb-4">Connect for Careers</h1>
+          <span className="text-sm mb-4">or use your email for login</span>
+          <input type="text" placeholder="Name" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <input type="email" placeholder="Email" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <input type="text" placeholder="Country" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <input type="file" className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none" />
+          <button className="bg-purple-700 text-white px-10 py-2 rounded-lg font-semibold mt-4">Submit</button>
+          <button onClick={() => setIsSignIn(false)} className="mt-4 bg-transparent border-2 border-purple-700 text-purple-700 px-10 py-2 rounded-lg font-semibold">Connect for Services</button>
+        </div>
+
+        {/* Decorative Panel */}
+        <div className={`absolute top-0 left-1/2 w-1/2 h-full bg-gradient-to-r from-blue-400 to-purple-700 transition-transform duration-500 ease-in-out ${isSignIn ? '-translate-x-full' : 'translate-x-0'} z-0 rounded-r-full flex flex-col items-center justify-center p-10 text-white`}>
+          <div className={`${isSignIn ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500`}>
+            <h1 className="text-2xl font-bold mb-4">Welcome Back!</h1>
+            <p className="mb-4">Enter your personal details to use all site features</p>
+            <button onClick={() => setIsSignIn(true)} className="bg-transparent border-2 border-white text-white px-10 py-2 rounded-lg font-semibold            ">Connect for Careers</button>
+          </div>
+          <div className={`${isSignIn ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
+            <h1 className="text-2xl font-bold mb-4">Hello, Friend!</h1>
+            <p className="mb-4">Register with your personal details to enjoy the features</p>
+            <button onClick={() => setIsSignIn(false)} className="bg-transparent border-2 border-white text-white px-10 py-2 rounded-lg font-semibold">Connect for Services</button>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
-export default ContactForm;
+export default App;
+

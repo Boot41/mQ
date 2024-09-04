@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const CarouselItem = ({ item }) => (
@@ -15,6 +14,16 @@ const CarouselItem = ({ item }) => (
 
 const Carousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === items.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, [items.length]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) =>
@@ -77,7 +86,7 @@ const Boot41 = () => {
   ];
 
   return (
-    <div className=" flex flex-col justify-center items-center bg-gray-100 py-4">
+    <div className=" flex flex-col justify-center items-center bg-white py-4">
       <header className="text-center mb-4">
         <h1 className="text-3xl font-bold leading-tight">
           We create radical new technologies

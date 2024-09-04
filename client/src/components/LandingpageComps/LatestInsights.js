@@ -46,11 +46,11 @@ const LatestInsights = () => {
         className="relative h-[300px] bg-cover bg-center rounded-lg overflow-hidden shadow-xl mb-12"
         style={{ backgroundImage: "url(podcast2.jpg)" }}
       >
-        <div className="absolute bottom-0 left-0 w-full h-1/4 bg-black bg-opacity-40 p-4">
-          <h2 className="text-4xl font-bold text-gray-200">
+        <div className="absolute bottom-0 left-0 w-full h-1/4 bg-white bg-opacity-40 p-4">
+          <h2 className="text-4xl font-bold text-gray-900">
             Skyrocket your audience
           </h2>
-          <p className="text-lg text-gray-200 mt-2">
+          <p className="text-lg text-gray-900 mt-2">
             Meet the most powerful team that will skyrocket your audience by
             generating the right content.
           </p>
@@ -83,9 +83,9 @@ const LatestInsights = () => {
               alt={post.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-black bg-opacity-40 p-4">
-              <h2 className="text-xl font-bold text-gray-200">{post.title}</h2>
-              <p className="text-gray-200 mt-2 text-sm">{post.excerpt}</p>
+            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-white bg-opacity-10 p-4">
+              <h2 className="text-xl font-bold text-gray-900">{post.title}</h2>
+              <p className="text-gray-900 mt-2 text-sm">{post.excerpt}</p>
               <div className="flex items-center justify-between text-gray-500 mt-3">
                 <div className="flex items-center">
                   <svg
