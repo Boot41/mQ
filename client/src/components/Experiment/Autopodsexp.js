@@ -11,7 +11,7 @@ const AutoPodsExp = () => {
 
 const ParallaxSection = () => {
   const backgroundStyle = {
-    backgroundImage: 'url(auto2.jpeg)', // Replace with your image URL
+    backgroundImage: 'url()', // Replace with your image URL
     backgroundAttachment: 'fixed',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -24,12 +24,12 @@ const ParallaxSection = () => {
       <div className="absolute inset-0" style={backgroundStyle}>
         <div className="absolute inset-0 flex items-center justify-center text-center">
           <div className="p-10 bg-black bg-opacity-50 rounded-lg backdrop-filter backdrop-blur-sm">
-            <h2 className="text-4xl font-bold mb-4">Together We Advance</h2>
+            <h2 className="text-4xl font-bold mb-4">Schedule the Interview Now</h2>
             <p className="mb-6">
-              AMD is pushing the limits of innovation to tackle some of the world's toughest challenges and provide value to our partners.
+              Try our interviews to help and analyse this furthuer 
             </p>
             <button className="bg-white text-black font-semibold py-2 px-6 rounded-full hover:bg-gray-200 transition duration-300">
-              Learn More
+              Try Now
             </button>
           </div>
         </div>

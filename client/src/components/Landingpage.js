@@ -16,6 +16,7 @@ import FeaturedSolutionsSlider from "./Experiment/services";
 import GradientBackground from "./Experiment/Hero";
 import Hero from "./Experiment/Hero";
 import HeroSection2 from "./LandingpageComps/HeroSection";
+import PressSection from "./Experiment/PressSection";
 
 const LandingPage = () => {
   const [showChat, setShowChat] = useState(false);
@@ -60,6 +61,8 @@ const LandingPage = () => {
       <div className="py-20">
         <ServicesPage />
       </div>
+
+      <PressSection />
 
       <div className="min-h-screen ">
         <Demo2 />
