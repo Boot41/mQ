@@ -1,5 +1,31 @@
-// teamMembers.js
-export const teamMembers = [
+//Company Statistics
+
+export const CompanyStats = [
+  {
+    value: "130",
+    label: "Financed More Startups",
+    dotPosition: "bottom-0 left-0 -translate-x-1/2 translate-y-1/2",
+  },
+  {
+    value: "20+",
+    label: "Services Offered",
+    dotPosition: "top-0 right-0 translate-x-1/2 -translate-y-1/2",
+  },
+  {
+    value: "32",
+    label: "Team Members",
+    dotPosition: "bottom-0 left-0 -translate-x-1/2 translate-y-1/2",
+  },
+  {
+    value: "130",
+    label: "Volume Of Investment",
+    dotPosition: "top-0 right-0 translate-x-1/2 -translate-y-1/2",
+  },
+];
+
+// About Founders
+
+export const FoundersData = [
   {
     name: "Mr. Anshuman Singh, CEO",
     description:
@@ -30,7 +56,9 @@ export const teamMembers = [
   },
 ];
 
-const slidesData = [
+// About Vision , Approach , Impact
+
+export const VisionData = [
   {
     title: "Our Vision",
     header: "Our Vision",
@@ -65,5 +93,3 @@ const slidesData = [
     bgColor: "bg-slate-300",
   },
 ];
-
-export default slidesData;

@@ -1,26 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-const blogPosts = [
-  {
-    title: "The Future of Generative AI",
-    excerpt:
-      "Explore how generative AI is shaping the future of various industries...",
-    date: "August 15, 2024",
-    image: "blog2.webp",
-    author: "Jane Doe",
-    tags: ["AI", "Tech", "Innovation"],
-  },
-  {
-    title: "Responsible AI: A Necessity",
-    excerpt:
-      "Learn about the importance of responsible AI practices in today's tech landscape...",
-    date: "August 20, 2024",
-    image: "blog1.jpg",
-    author: "John Smith",
-    tags: ["AI", "Ethics", "Technology"],
-  },
-];
+import { BlogPosts } from "../../InformationFiles/LandingPageInfo";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -69,7 +49,7 @@ const LatestInsights = () => {
 
       {/* Blog Posts Section */}
       <div className="flex gap-8 overflow-x-auto py-2">
-        {blogPosts.map((post, index) => (
+        {BlogPosts.map((post, index) => (
           <motion.div
             key={index}
             className="relative bg-white rounded-lg overflow-hidden w-[400px] h-80 shadow border border-gray-200"

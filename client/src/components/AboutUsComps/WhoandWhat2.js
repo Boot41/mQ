@@ -1,12 +1,12 @@
 import React from "react";
-import slidesData from "./Information";
+import { VisionData } from "../../InformationFiles/AboutUsInfo";
 import { Box, Typography, CardMedia, Container, Paper } from "@mui/material";
 
 export default function WhoAndWhat2() {
   return (
     <Box sx={{ bgcolor: "background.paper", py: 8, margin: 4 }}>
       <Container>
-        {slidesData.map((slide, index) => (
+        {VisionData.map((slide, index) => (
           <Paper
             key={index}
             elevation={0} // Remove shadow
