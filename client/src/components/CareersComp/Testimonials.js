@@ -1,44 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { testimonials } from "../../InformationFiles/CareersInfo";
 
 const TestimonialSection = () => {
-  const testimonials = [
-    {
-      id: 1,
-      image: 'placeholder.png',
-      name: 'John Doe',
-      role: 'CEO, Company A',
-      text: 'Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.'
-    },
-    {
-      id: 2,
-      image: 'placeholder.png',
-      name: 'Jane Smith',
-      role: 'CTO, Company B',
-      text: 'Organizations can seamlessly deliver forward-thinking services using standards compliant responsive web design.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.'
-    },
-    {
-      id: 3,
-      image: 'placeholder.png',
-      name: 'Mike Johnson',
-      role: 'CFO, Company C',
-      text: 'Monotonectally monetize fully tested and back-end leadership skills.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.'
-    },
-    {
-      id: 4,
-      image: 'placeholder.png',
-      name: 'Sarah Brown',
-      role: 'COO, Company D',
-      text: 'Efficiently unleash cross-media information without cross-media value.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.'
-    },
-    {
-      id: 5,
-      image: 'placeholder.png',
-      name: 'Tom Wilson',
-      role: 'CIO, Company E',
-      text: 'Collaboratively administrate empowered markets via plug-and-play networks.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.'
-    },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(1);
 
   const nextTestimonial = () => {
@@ -46,74 +9,78 @@ const TestimonialSection = () => {
   };
 
   const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length
+    );
   };
 
   const getVisibleTestimonials = () => {
     const visibleIndices = [
       (currentIndex - 1 + testimonials.length) % testimonials.length,
       currentIndex,
-      (currentIndex + 1) % testimonials.length
+      (currentIndex + 1) % testimonials.length,
     ];
-    return visibleIndices.map(index => testimonials[index]);
+    return visibleIndices.map((index) => testimonials[index]);
   };
 
   return (
     <section className="py-16 bg-white relative overflow-hidden">
-  <div className="max-w-4xl mx-auto text-center relative z-10">
-    <p className="text-orange-500 font-semibold mb-3 relative z-10">
-      What our employees have to say about us
-    </p>
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <p className="text-orange-500 font-semibold mb-3 relative z-10">
+          What our employees have to say about us
+        </p>
 
-    <div className="relative mb-16">
-      <h2
-        className="text-[8rem] font-bold text-gray-100 absolute inset-0 flex items-center justify-center tracking-wide"
-        aria-hidden="true"
-      >
-        Testimonials
-      </h2>
-      <h2 className="text-4xl font-bold text-gray-900 relative z-10 mb-20">
-        Testimonials
-      </h2>
-    </div>
-
-    <div className="flex justify-center items-center space-x-4">
-      <button onClick={prevTestimonial} className="text-3xl">
-        &lt;
-      </button>
-      <div className="flex justify-center items-center space-x-4">
-        {getVisibleTestimonials().map((testimonial, index) => (
-          <div 
-            key={testimonial.id} 
-            className={`bg-white p-6 rounded-lg shadow-lg ${index === 1 ? 'scale-110 z-10' : 'scale-90 blur-sm'} transition-all duration-300 hover:scale-105 hover:shadow-2xl`} // Added hover effect
-            style={{width: '300px'}}
+        <div className="relative mb-16">
+          <h2
+            className="text-[8rem] font-bold text-gray-100 absolute inset-0 flex items-center justify-center tracking-wide"
+            aria-hidden="true"
           >
-            <div className="flex items-center mb-4">
-              <img
-                src={testimonial.image}
-                alt={testimonial.name}
-                className="w-20 h-20 rounded-full mr-4"
-              />
-              <div className="text-left">
-                <h3 className="text-xl font-semibold text-gray-800">{testimonial.name}</h3>
-                <p className="text-gray-600">{testimonial.role}</p>
-              </div>
-            </div>
-            <p className="text-gray-700 mt-2 text-left">
-              "{testimonial.text}"
-            </p>
-          </div>
-        ))}
-      </div>
-      <button onClick={nextTestimonial} className="text-3xl">
-        &gt;
-      </button>
-    </div>
-  </div>
-</section>
+            Testimonials
+          </h2>
+          <h2 className="text-4xl font-bold text-gray-900 relative z-10 mb-20">
+            Testimonials
+          </h2>
+        </div>
 
+        <div className="flex justify-center items-center space-x-4">
+          <button onClick={prevTestimonial} className="text-3xl">
+            &lt;
+          </button>
+          <div className="flex justify-center items-center space-x-4">
+            {getVisibleTestimonials().map((testimonial, index) => (
+              <div
+                key={testimonial.id}
+                className={`bg-white p-6 rounded-lg shadow-lg ${
+                  index === 1 ? "scale-110 z-10" : "scale-90 blur-sm"
+                } transition-all duration-300 hover:scale-105 hover:shadow-2xl`} // Added hover effect
+                style={{ width: "300px" }}
+              >
+                <div className="flex items-center mb-4">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-20 h-20 rounded-full mr-4"
+                  />
+                  <div className="text-left">
+                    <h3 className="text-xl font-semibold text-gray-800">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-gray-600">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 mt-2 text-left">
+                  "{testimonial.text}"
+                </p>
+              </div>
+            ))}
+          </div>
+          <button onClick={nextTestimonial} className="text-3xl">
+            &gt;
+          </button>
+        </div>
+      </div>
+    </section>
   );
-}
+};
 
 export default TestimonialSection;
-

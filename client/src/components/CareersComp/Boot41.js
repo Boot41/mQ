@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Boot41Slides } from "../../InformationFiles/CareersInfo";
 
 const CarouselItem = ({ item }) => (
   <div className="flex flex-col items-center p-3 bg-white shadow-sm rounded-lg transition-all duration-300 hover:shadow-md">
@@ -68,7 +69,7 @@ const Carousel = ({ items }) => {
           <button
             key={index}
             className={`w-1.5 h-1.5 rounded-full ${
-              index === currentIndex ? 'bg-gray-800' : 'bg-gray-400'
+              index === currentIndex ? "bg-gray-800" : "bg-gray-400"
             }`}
             onClick={() => setCurrentIndex(index)}
           />
@@ -79,12 +80,6 @@ const Carousel = ({ items }) => {
 };
 
 const Boot41 = () => {
-  const carouselItems = [
-    { imageSrc: "ai1.png", alt: "Description of Image 1", text: "Text for Image 1" },
-    { imageSrc: "ai1.png", alt: "Description of Image 2", text: "Text for Image 2" },
-    { imageSrc: "ai1.png", alt: "Description of Image 3", text: "Text for Image 3" },
-  ];
-
   return (
     <div className=" flex flex-col justify-center items-center bg-white py-4">
       <header className="text-center mb-4">
@@ -104,14 +99,16 @@ const Boot41 = () => {
           </div>
           <div className="text-base lg:w-full">
             <p>
-              Boot41 is a diverse group of inventors and entrepreneurs who build and launch technologies
-              that aim to improve the lives of millions, even billions, of people. Our goal? 10x impact
-              on the world's most intractable problems, not just 10% improvement. We approach projects that
-              have the aspiration and riskiness of research with the speed and ambition of a startup.
+              Boot41 is a diverse group of inventors and entrepreneurs who build
+              and launch technologies that aim to improve the lives of millions,
+              even billions, of people. Our goal? 10x impact on the world's most
+              intractable problems, not just 10% improvement. We approach
+              projects that have the aspiration and riskiness of research with
+              the speed and ambition of a startup.
             </p>
           </div>
         </div>
-        <Carousel items={carouselItems} />
+        <Carousel items={Boot41Slides} />
       </main>
     </div>
   );
