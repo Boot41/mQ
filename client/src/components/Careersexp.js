@@ -1,11 +1,11 @@
 import React from 'react';
-import HeroSection from './Experiment/Craeershero';
+import HeroSection from './CareersComp/Craeershero';
 import Values from './CareersComp/Values';
-import FreightCompanySection from './Experiment/Testimonials';
-import UnmatchedServicesSection from './Experiment/lifeatT41';
-import ValueProp from './Experiment/ValueProp';
-import JobListing from './Experiment/JobListings';
-import Fun from './Experiment/Fun';
+import FreightCompanySection from './CareersComp/Testimonials';
+import UnmatchedServicesSection from './CareersComp/lifeatT41';
+import ValueProp from './CareersComp/ValueProp'
+import JobListing from './CareersComp/JobListings';
+import Fun from './CareersComp/Fun';
 import Boot41 from './CareersComp/Boot41';
 
 const LandingPage = () => {
