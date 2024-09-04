@@ -14,7 +14,8 @@ import {
   Button,
 } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { teamMembers } from "./Information";
+
+import { FoundersData } from "../../InformationFiles/AboutUsInfo";
 import "../../stylesheets/MeetFounders.css";
 
 function MeetFounders() {
@@ -50,7 +51,7 @@ function MeetFounders() {
           className="swiper_container flex justify-center items-center"
           style={{ height: "100%" }}
         >
-          {teamMembers.map((member, index) => (
+          {FoundersData.map((member, index) => (
             <SwiperSlide key={index}>
               <Card
                 sx={{

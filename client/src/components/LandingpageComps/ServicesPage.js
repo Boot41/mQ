@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../index.css";
-
+import { ServicesData } from "../../InformationFiles/LandingPageInfo";
 const ParallaxCard = ({ title, subtitle, image, link }) => {
   const [inView, setInView] = useState(false);
 
@@ -118,45 +117,6 @@ const ParallaxCard = ({ title, subtitle, image, link }) => {
 };
 
 const ServicesSection = () => {
-  const cards = [
-    {
-      title: "Data and AI",
-      subtitle: "Know More",
-      image: "ai1.png",
-      link: "data-ai",
-    },
-    {
-      title: "Digitalization",
-      subtitle: "Know More",
-      image: "a2.png",
-      link: "digitalization",
-    },
-    {
-      title: "Enterprise Platform",
-      subtitle: "Know More",
-      image: "ai3.jpg",
-      link: "enterprise-platform",
-    },
-    {
-      title: "Cloud Solutions",
-      subtitle: "Know More",
-      image: "a1.png",
-      link: "cloud-solutions",
-    },
-    {
-      title: "Technology Transformation",
-      subtitle: "Know More",
-      image: "a3.png",
-      link: "technology-transformation",
-    },
-    {
-      title: "Software Engineering",
-      subtitle: "Know More",
-      image: "a4.png",
-      link: "software-engineering",
-    },
-  ];
-
   return (
     <div className="ServicesSection -mt-36">
       <header className="text-center my-10">
@@ -168,7 +128,7 @@ const ServicesSection = () => {
         </p>
       </header>
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 justify-center">
-        {cards.map((card, index) => (
+        {ServicesData.map((card, index) => (
           <div key={index}>
             <ParallaxCard
               title={card.title}

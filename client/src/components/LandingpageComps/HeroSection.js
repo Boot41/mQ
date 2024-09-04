@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Typography, Button, Box } from "@mui/material";
 import Typical from "react-typical";
-// import humanrobo from "../../assets/images/humanrobo";
+import { typicalConfig } from "../../InformationFiles/LandingPageInfo";
 
 function HeroSection2() {
   return (
@@ -22,24 +22,7 @@ function HeroSection2() {
             Envision{" "}
             <span style={{ color: "orange" }}>
               <Typical
-                steps={[
-                  "Excellence in Every Line of Code",
-                  2000, // Hold for 2 seconds
-                  "",
-                  500, // Brief pause for smooth transition
-                  "Tailored AI Solutions for Your Business",
-                  2000, // Hold for 2 seconds
-                  "",
-                  500, // Another brief pause
-                  "AI-Driven Success Stories",
-                  2000, // Hold for 2 seconds
-                  "",
-                  500, // Brief pause for smooth transition
-                  "Iterating Until Perfection",
-                  2000, // Hold for 2 seconds
-                  "",
-                  500, // Another brief pause
-                ]}
+                steps={typicalConfig.steps}
                 loop={Infinity}
                 wrapper="span"
               />

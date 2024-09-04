@@ -1,6 +1,8 @@
 import React from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
+
 const Autopods = () => {
   return (
     <div className="-mt-52">
@@ -8,7 +10,7 @@ const Autopods = () => {
         {/* Video Section */}
         <div className="w-1/2 p-24 ml-10">
           <video
-            src="/autobots.webm" // Ensure this path is correct
+            src={AutoPodsData.videoSrc} // Using data from the object
             autoPlay
             loop
             muted
@@ -27,7 +29,7 @@ const Autopods = () => {
             gutterBottom
             sx={{ fontSize: { xs: "3rem", md: "3rem", lg: "4rem" } }}
           >
-            AutoPods
+            {AutoPodsData.title}
           </Typography>
           <Typography
             variant="h6"
@@ -36,7 +38,7 @@ const Autopods = () => {
             fontWeight="medium"
             sx={{ fontSize: { xs: "1.5rem", md: "2rem", lg: "1.7rem" }, mb: 2 }}
           >
-            Pods empowered with AI tools delivering exceptional performance
+            {AutoPodsData.subtitle1}
           </Typography>
           <Typography
             variant="h6"
@@ -45,7 +47,7 @@ const Autopods = () => {
             fontWeight="medium"
             sx={{ fontSize: { xs: "1.5rem", md: "2rem", lg: "1.5rem" }, mb: 2 }}
           >
-            Trained on AI by AI
+            {AutoPodsData.subtitle2}
           </Typography>
           <Typography
             variant="h6"
@@ -54,13 +56,10 @@ const Autopods = () => {
             fontWeight="medium"
             sx={{ fontSize: { xs: "1.5rem", md: "2rem", lg: "1.2rem" }, mb: 4 }}
           >
-            Trained on AI tools, our pod team members are innovative, iterative,
-            and exceptionally fast in executing processes, all while maintaining
-            high-quality standards. With a strong focus on automating internal
-            processes, we extend this mindset to everything we do.
+            {AutoPodsData.description}
           </Typography>
           <Box className="flex justify-start space-x-4">
-            <Link to="/visualizingai">
+            <Link to={AutoPodsData.link}>
               <Button
                 variant="outlined"
                 color="warning"
@@ -93,7 +92,7 @@ const Autopods = () => {
                   },
                 }}
               >
-                Know More..
+                {AutoPodsData.buttonText}
               </Button>
             </Link>
           </Box>
