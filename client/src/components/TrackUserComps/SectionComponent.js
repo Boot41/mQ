@@ -1,18 +1,21 @@
-// SectionComponent.js
 import React, { useRef, useEffect } from "react";
 import useIntersectionObserver from "./useIntersectionObserver";
-import { useSection } from "./SectionContext";
 
 const SectionComponent = ({ id, children }) => {
   const ref = useRef(null);
-  const { setCurrentSection } = useSection();
-  const isVisible = useIntersectionObserver(ref, { threshold: 0.1 });
+  const { isIntersecting, hasBeenInViewFor2Seconds } = useIntersectionObserver(
+    ref,
+    {
+      threshold: 0.1, // Adjust as needed
+    }
+  );
 
   useEffect(() => {
-    if (isVisible) {
-      setCurrentSection(id);
+    if (hasBeenInViewFor2Seconds) {
+      console.log(`Section ${id} has been in view for more than 2 seconds.`);
+      // You can dispatch an action or update context here
     }
-  }, [isVisible, id, setCurrentSection]);
+  }, [hasBeenInViewFor2Seconds, id]);
 
   return (
     <div ref={ref} id={id}>

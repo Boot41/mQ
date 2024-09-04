@@ -6,7 +6,7 @@ import { typicalConfig } from "../../InformationFiles/LandingPageInfo";
 import { useSection } from "../TrackUserComps/SectionContext";
 function HeroSection2() {
   const { currentSection } = useSection();
-  console.log("this is hero section" + currentSection);
+  // console.log("this is hero section" + currentSection);
   return (
     <Box className="relative h-[calc(100vh-300px)] backdrop:blur-md flex items-center justify-between text-left text-white overflow-hidden mt-24 backdrop-blur-lg  mx-10">
       {/* Content */}
