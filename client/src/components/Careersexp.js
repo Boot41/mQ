@@ -1,16 +1,16 @@
-import React from 'react';
-import HeroSection from './CareersComp/Craeershero';
-import Values from './CareersComp/Values';
-import FreightCompanySection from './CareersComp/Testimonials';
-import UnmatchedServicesSection from './CareersComp/lifeatT41';
-import ValueProp from './CareersComp/ValueProp'
-import JobListing from './CareersComp/JobListings';
-import Fun from './CareersComp/Fun';
-import Boot41 from './CareersComp/Boot41';
+import React from "react";
+import HeroSection from "./CareersComp/Heropage";
+import Values from "./CareersComp/Values";
+import FreightCompanySection from "./CareersComp/Testimonials";
+import UnmatchedServicesSection from "./CareersComp/lifeatT41";
+
+import JobListing from "./CareersComp/JobListings";
+import Fun from "./CareersComp/Fun";
+import Boot41 from "./CareersComp/Boot41";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div className="mt-32">
       <HeroSection />
       <Values />
       <UnmatchedServicesSection />
