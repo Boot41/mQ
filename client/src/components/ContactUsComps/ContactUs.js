@@ -16,7 +16,7 @@ function ContactUs() {
         <div
           className={`absolute top-0 left-0 w-1/2  bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out ${
             isCareers
-              ? "translate-x-full opacity-0"
+              ? "translate-y-full opacity-0"
               : "translate-x-0 opacity-100"
           } z-10`}
         >
@@ -63,7 +63,7 @@ function ContactUs() {
           className={`absolute top-0 left-1/2 w-1/2 h-full bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out ${
             isCareers
               ? "translate-x-0 opacity-100"
-              : "translate-x-full opacity-0"
+              : "translate-y-full opacity-0"
           } z-10`}
         >
           <h1 className="text-2xl font-bold mb-4">Connect for Careers</h1>
