@@ -2,7 +2,7 @@ import React from "react";
 import ItemsContainer from "./ItemsContainer";
 import SocialIcons from "./SocialIcons";
 import { Icons } from "./Menus";
-import { FaAutoprefixer } from "react-icons/fa";
+import { LuArrowUpFromLine } from "react-icons/lu";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -17,9 +17,15 @@ const Footer = () => {
         </h1>
       </div>
       <div className="flex justify-center -mb-5 cursor-pointer p-2">
-        <duv className="h-fit w-full max-w-[52vw] flex justify-end ">
-          <FaAutoprefixer size={48} color="orange " onClick={scrollToTop} />
-        </duv>
+        <div className="h-fit w-full max-w-[52vw] flex justify-end ">
+          <LuArrowUpFromLine
+            size={48}
+            color="orange "
+            onClick={scrollToTop}
+            className="border-2 border-orange-400 p-3"
+          />
+          {/* <TfiUpload /> */}
+        </div>
       </div>
 
       <ItemsContainer />

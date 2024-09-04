@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { DemoData } from "../../InformationFiles/LandingPageInfo";
+import { useSection } from "../TrackUserComps/SectionContext";
 
 const Demo = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const { currentSection } = useSection();
+  // console.log("this is demo page");
 
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
