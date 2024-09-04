@@ -19,17 +19,7 @@ import "../../stylesheets/MeetFounders.css";
 
 function MeetFounders() {
   return (
-    <div
-      id="leadership-section" // Add an ID here
-      className="container flex justify-center items-center"
-      style={{
-        background: "#ffff",
-        borderRadius: "16px",
-        padding: "24px",
-        boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-        minHeight: "30vh",
-      }}
-    >
+    <div>
       <div
         className="inner-container flex justify-center items-center"
         style={{

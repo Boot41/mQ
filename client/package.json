@@ -19,10 +19,9 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^11.3.31",
+    "framer-motion": "^11.4.0",
     "glider-js": "^1.7.9",
     "loglevel": "^1.9.1",
     "lottie-web": "^5.12.2",
