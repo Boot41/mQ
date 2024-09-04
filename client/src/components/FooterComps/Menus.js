@@ -1,13 +1,15 @@
-export const Address = [
-  { name: "Drag And Drop", link: "#" },
-  { name: "Visual Studio X", link: "#" },
-  { name: "Easy Content", link: "#" },
-];export const PRODUCTS = [
-  { name: "Drag And Drop", link: "#" },
+export const Pages = [
+  { name: "Home", link: "" },
+  { name: "Careers", link: "Careers" },
+  { name: "About Us", link: "about-us" },
+  { name: "Visualize AI", link: "visualizing-ai" },
+];
+export const PRODUCTS = [
+  { name: "Drag And Drop", link: "" },
   { name: "Visual Studio X", link: "#" },
   { name: "Easy Content", link: "#" },
 ];
-export const RESOURCES = [
+export const Services = [
   { name: "Industries and tools", link: "#" },
   { name: "Use cases", link: "#" },
   { name: "Blog", link: "#" },
