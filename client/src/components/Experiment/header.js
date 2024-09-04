@@ -132,9 +132,8 @@ const Header = () => {
   return (
     <>
       <header
-        className={`absolute top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 transition-all duration-300 ${isOpen ? 'bg-white shadow-lg' : 'bg-transparent'}`}
+        className={`fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 bg-white`}
         id="header-content"
-        onMouseEnter={() => setIsOpen(true)}
         onMouseLeave={handleMouseLeave}
       >
         <div className="flex justify-between items-center">
@@ -150,7 +149,6 @@ const Header = () => {
                 <div
                   key={section}
                   onMouseEnter={() => handleMouseEnter(section)}
-                  onMouseLeave={handleMouseLeave}
                 >
                   <Link
                     to={`/${section}`}
