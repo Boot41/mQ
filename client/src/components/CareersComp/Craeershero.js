@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <div className="flex items-center justify-center h-96 bg-cover bg-center" style={{ backgroundImage: 'url(careers2.webp)' }}>
+    <div className="flex items-center justify-center h-[400px] bg-cover bg-center" style={{ backgroundImage: 'url(careers2.webp)' }}>
       <div className="text-center text-white px-4 bg-black bg-opacity-50 py-8 rounded-md">
-        <h1 className="text-4xl font-bold mb-4">
+        <h1 className="text-4xl font-bold mb-3">
           We Help Businesses Grow <span className="text-orange-400">And Innovate</span>
         </h1>
         <p className="mb-6">

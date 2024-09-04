@@ -73,11 +73,16 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        progress: {
+          '0%': { strokeDasharray: '0 628' },
+          '100%': { strokeDasharray: '628 0' },
+        },
       },
       animation: {
         "slide-in": "slide-in 1s ease-out forwards",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        progress: "progress 2s ease-out forwards",
       },
       perspective: {
         1000: "1000px",

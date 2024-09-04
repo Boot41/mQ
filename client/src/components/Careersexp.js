@@ -17,7 +17,7 @@ const LandingPage = () => {
       <Boot41 />
       <FreightCompanySection />
       <div className="py-20"></div>
-      {/* <ValueProp /> */}
+      <ValueProp />
       <JobListing />
       <Fun />
     </div>
