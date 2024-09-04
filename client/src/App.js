@@ -5,15 +5,16 @@ import Footer from "./components/FooterComps/Footer";
 import Careersexp from "./components/Careersexp";
 import Visualizingai from "./components/Visualizingai";
 import AboutUS2 from "./components/AboutUS2";
-import ContactUsHome from "./components/ContactUsHome";
+
 import Services from "./components/Services";
 import InsightsHome from "./components/InsightsHome";
 import ai from "./assets/images/ai.gif";
 import ReadMore from "./components/InsightsComps/ReadMore";
-import LoginPage from "./components/Experiment/ContactExp";
+
 import LandingPage from "./components/Landingpage";
 import JobList from "./components/CareersComp/Openpositions";
 import { LoadingScreen } from "./components/AnimatedNumber";
+import ContactUs from "./components/ContactUsComps/ContactUs";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -48,7 +49,7 @@ function App() {
             <Route path="/visualizingai" element={<Visualizingai />} />
             <Route path="/careers" element={<Careersexp />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<LoginPage />} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/openpositions" element={<JobList />} />
             <Route path="/insights" element={<InsightsHome />} />
             <Route path="/readmore" element={<ReadMore />} />
