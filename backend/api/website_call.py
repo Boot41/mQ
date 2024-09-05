@@ -10,7 +10,7 @@ import random
 
 logger = logging.getLogger(__name__)
 
-def generate_response_website(user_input, relevant_content, model_name, section_info, user_context):
+def generate_response_website(user_input, relevant_content, model_name, section_info, user_context=None):
     ai_model = AIModelFactory.get_model(model_name)
     
     context = "\n".join([f"{content.title}:\n{content.content}" for content in relevant_content])
@@ -27,6 +27,11 @@ def generate_response_website(user_input, relevant_content, model_name, section_
     else:
         section_specific_instruction = "Provide general information about Think41 relevant to the current section."
     
+    # Format user context if provided
+    user_context_str = ""
+    if user_context:
+        user_context_str = "User Context:\n" + "\n".join([f"{key}: {value}" for key, value in user_context.items()])
+    
     prompt = f"""You are an AI assistant for Think41, a technology consulting company specializing in Custom Software as a Service (CSaaS) and leveraging Generative AI. Your role is to provide helpful information about Think41 and assist users navigating the website. Maintain a professional, friendly, and concise tone.
 
 User query: '{user_input}'
@@ -37,16 +42,19 @@ Relevant information from the database:
 Current section information:
 {section_context}
 
+{user_context_str}
+
 {section_specific_instruction}
 
 Guidelines:
 1. Provide a concise response (50-100 words) that directly addresses the user's query.
 2. Use the relevant information provided to answer the query accurately.
 3. Tailor your response to the current section of the website.
-4. Highlight Think41's expertise in GenAI and custom software development.
-5. If asked about specific services or Autopods, provide detailed information.
-6. For questions about founders or company background, offer relevant insights.
-7. If the information isn't available in the context, suggest contacting Think41 for more details.
+4. If user context is provided, use it to personalize the response.
+5. Highlight Think41's expertise in GenAI and custom software development.
+6. If asked about specific services or Autopods, provide detailed information.
+7. For questions about founders or company background, offer relevant insights.
+8. If the information isn't available in the context, suggest contacting Think41 for more details.
 
 Response:"""
 
@@ -87,7 +95,7 @@ def website_interaction(request):
         user_input = data.get('user_input')
         model_name = data.get('model_name', '4o-mini')
         section_id = data.get('section_id')
-        user_context = data.get('user_context', {})  # New: Get additional user context
+        user_context = data.get('user_context')  # This can be None if not provided
 
         assistant = GPTAssistant(current_page='home', model_name=model_name)
         
@@ -112,7 +120,7 @@ def website_interaction(request):
                     'snippet': content.content[:100] + '...' if len(content.content) > 100 else content.content
                 } for content in relevant_content
             ],
-            'current_section': section_info.title  # New: Include current section title in response
+            'current_section': section_info.title
         })
     except json.JSONDecodeError:
         logger.error("Invalid JSON in request body")
@@ -202,4 +210,5 @@ Response:"""
         logger.error(f"Error in know_more_about_service: {str(e)}", exc_info=True)
         return JsonResponse({'error': 'Internal server error'}, status=500)
 
-# ... (keep the get_more_info function as is)
+
+
