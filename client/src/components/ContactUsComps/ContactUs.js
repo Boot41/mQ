@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import config from "../../lib/config";
 
 function ContactUs() {
   const [isCareers, setCareers] = useState(true);
@@ -9,8 +11,49 @@ function ContactUs() {
   const { register, handleSubmit } = useForm();
 
   // Handle form submission
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const formData = new FormData();
+
+      if (isService) {
+        // Service Form Fields
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("phone", data.phone);
+        formData.append("message", data.message);
+
+        if (data.fileUpload && data.fileUpload.length > 0) {
+          formData.append("fileUpload", data.fileUpload[0]);
+        }
+      } else {
+        // Careers Form Fields
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("country", data.country);
+
+        if (data.fileUpload && data.fileUpload.length > 0) {
+          formData.append("fileUpload", data.fileUpload[0]);
+        }
+      }
+
+      const endpoint = isService
+        ? "api/service-contact/"
+        : "api/career-contact/";
+
+      const response = await axios.post(
+        `${config.API_URL}/${endpoint}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("API Response:", response.data);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
   };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -102,13 +145,13 @@ function ContactUs() {
           {/* Form Starts */}
           <form onSubmit={handleSubmit(onSubmit)} className="w-full">
             <input
-              {...register("careerName")}
+              {...register("name")}
               type="text"
               placeholder="Name"
               className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
             />
             <input
-              {...register("careerEmail")}
+              {...register("email")}
               type="email"
               placeholder="Email"
               className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
