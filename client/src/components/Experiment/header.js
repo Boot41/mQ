@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState(null);
@@ -13,8 +13,8 @@ const Header = () => {
   };
 
   const handleLogoClick = () => {
-    navigate('/');
-    setActiveSection('home');
+    navigate("/");
+    setActiveSection("home");
   };
 
   const handleMouseEnter = (section) => {
@@ -24,7 +24,10 @@ const Header = () => {
 
   const handleMouseLeave = () => {
     setTimeout(() => {
-      if (!document.querySelector('#header-content:hover') && !document.querySelector('#dropdown-content:hover')) {
+      if (
+        !document.querySelector("#header-content:hover") &&
+        !document.querySelector("#dropdown-content:hover")
+      ) {
         setIsOpen(false);
         setActiveSection(null);
       }
@@ -33,30 +36,51 @@ const Header = () => {
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
-      if (!e.target.closest('#header-content') && !e.target.closest('#dropdown-content')) {
+      if (
+        !e.target.closest("#header-content") &&
+        !e.target.closest("#dropdown-content")
+      ) {
         setIsOpen(false);
         setActiveSection(null);
       }
     };
-    window.addEventListener('click', handleOutsideClick);
-    return () => window.removeEventListener('click', handleOutsideClick);
+    window.addEventListener("click", handleOutsideClick);
+    return () => window.removeEventListener("click", handleOutsideClick);
   }, []);
 
   const renderContent = () => {
     switch (activeSection) {
-      case 'about-us':
+      case "about-us":
         return (
-          <div id="about" className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4">
+          <div
+            id="about"
+            className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4"
+          >
             <h2 className="text-xl font-bold mb-2">About Us</h2>
             <div className="space-y-2">
               {[
-                { title: 'T41 Advantage', description: 'Discover what sets us apart.' },
-                { title: 'Mission and Vision', description: 'Understand our mission and vision.' },
-                { title: 'Our Approach', description: 'Learn about our approach to innovation.' },
-                { title: 'Impact', description: 'See the impact of our work.' },
-                { title: 'Founders', description: 'Meet our founders and their story.' }
+                {
+                  title: "T41 Advantage",
+                  description: "Discover what sets us apart.",
+                },
+                {
+                  title: "Mission and Vision",
+                  description: "Understand our mission and vision.",
+                },
+                {
+                  title: "Our Approach",
+                  description: "Learn about our approach to innovation.",
+                },
+                { title: "Impact", description: "See the impact of our work." },
+                {
+                  title: "Founders",
+                  description: "Meet our founders and their story.",
+                },
               ].map(({ title, description }) => (
-                <div key={title} className="hover:bg-gray-100 p-2 rounded cursor-pointer">
+                <div
+                  key={title}
+                  className="hover:bg-gray-100 p-2 rounded cursor-pointer"
+                >
                   <h4 className="text-md font-semibold">{title}</h4>
                   <p className="text-gray-700">{description}</p>
                 </div>
@@ -65,16 +89,28 @@ const Header = () => {
           </div>
         );
 
-      case 'services':
+      case "services":
         return (
-          <div id="services" className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4">
+          <div
+            id="services"
+            className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4"
+          >
             <h2 className="text-xl font-bold mb-2">Our Services</h2>
             <div className="space-y-2">
               {[
-                { title: 'Capabilities', description: 'Discover our capabilities and benefits.' },
-                { title: 'Partnership', description: 'Learn about partnership opportunities.' }
+                {
+                  title: "Capabilities",
+                  description: "Discover our capabilities and benefits.",
+                },
+                {
+                  title: "Partnership",
+                  description: "Learn about partnership opportunities.",
+                },
               ].map(({ title, description }) => (
-                <div key={title} className="hover:bg-gray-100 p-2 rounded cursor-pointer">
+                <div
+                  key={title}
+                  className="hover:bg-gray-100 p-2 rounded cursor-pointer"
+                >
                   <h4 className="text-md font-semibold">{title}</h4>
                   <p className="text-gray-700">{description}</p>
                 </div>
@@ -83,19 +119,37 @@ const Header = () => {
           </div>
         );
 
-      case 'careers':
+      case "careers":
         return (
-          <div id="careers" className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4">
+          <div
+            id="careers"
+            className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4"
+          >
             <h2 className="text-xl font-bold mb-2">Careers</h2>
             <div className="space-y-2">
               {[
-                { title: 'Why Us', description: 'Why you should consider working with us.' },
-                { title: 'Life at Think 41', description: 'What to expect working here.' },
-                { title: 'Boot41', description: 'Our training programs.' },
-                { title: 'Testimonials', description: 'Hear from our employees.' },
-                { title: 'Open Positions', description: 'Current job openings.' }
+                {
+                  title: "Why Us",
+                  description: "Why you should consider working with us.",
+                },
+                {
+                  title: "Life at Think 41",
+                  description: "What to expect working here.",
+                },
+                { title: "Boot41", description: "Our training programs." },
+                {
+                  title: "Testimonials",
+                  description: "Hear from our employees.",
+                },
+                {
+                  title: "Open Positions",
+                  description: "Current job openings.",
+                },
               ].map(({ title, description }) => (
-                <div key={title} className="hover:bg-gray-100 p-2 rounded cursor-pointer">
+                <div
+                  key={title}
+                  className="hover:bg-gray-100 p-2 rounded cursor-pointer"
+                >
                   <h4 className="text-md font-semibold">{title}</h4>
                   <p className="text-gray-700">{description}</p>
                 </div>
@@ -104,18 +158,27 @@ const Header = () => {
           </div>
         );
 
-      case 'visualizing-ai':
+      case "visualizing-ai":
         return (
-          <div id="visualizing-ai" className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4">
+          <div
+            id="visualizing-ai"
+            className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4"
+          >
             <h2 className="text-xl font-bold mb-2">Visualizing AI</h2>
             <div className="space-y-2">
               {[
-                { title: 'Our Secret Sauce', description: 'What makes our AI unique.' },
-                { title: 'Recruit 41', description: 'How we recruit talent.' },
-                { title: 'CQ', description: 'Customer Quotient insights.' },
-                { title: 'RQ', description: 'Recruitment Quotient insights.' }
+                {
+                  title: "Our Secret Sauce",
+                  description: "What makes our AI unique.",
+                },
+                { title: "Recruit 41", description: "How we recruit talent." },
+                { title: "CQ", description: "Customer Quotient insights." },
+                { title: "RQ", description: "Recruitment Quotient insights." },
               ].map(({ title, description }) => (
-                <div key={title} className="hover:bg-gray-100 p-2 rounded cursor-pointer">
+                <div
+                  key={title}
+                  className="hover:bg-gray-100 p-2 rounded cursor-pointer"
+                >
                   <h4 className="text-md font-semibold">{title}</h4>
                   <p className="text-gray-700">{description}</p>
                 </div>
@@ -132,9 +195,14 @@ const Header = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 bg-white`}
+
+        className={`fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 transition-all duration-300 ${
+          isOpen ? "bg-white shadow-lg" : "bg-white"
+        }`}
         id="header-content"
-        onMouseLeave={handleMouseLeave}
+        // onMouseEnter={() => setIsOpen(true)}
+        // onMouseLeave={handleMouseLeave}
+
       >
         <div className="flex justify-between items-center">
           <div
@@ -145,7 +213,7 @@ const Header = () => {
           </div>
           <nav className="flex space-x-6 items-center">
             <div className="relative flex space-x-6">
-              {['about-us', 'visualizing-ai', 'careers'].map((section) => (
+              {["about-us", "visualizing-ai", "careers"].map((section) => (
                 <div
                   key={section}
                   onMouseEnter={() => handleMouseEnter(section)}
@@ -155,7 +223,7 @@ const Header = () => {
                     className="text-black hover:text-black hover:underline"
                     onClick={() => handleHeaderClick(section)}
                   >
-                    {section.replace('-', ' ').toUpperCase()}
+                    {section.replace("-", " ").toUpperCase()}
                   </Link>
                 </div>
               ))}
@@ -172,8 +240,8 @@ const Header = () => {
       {isOpen && (
         <div
           id="dropdown-content"
-          className="absolute top-16 left-0 w-full bg-white shadow-lg rounded-lg p-4"
-          style={{ zIndex: 10 }}
+          className="fixed top-16 left-0 w-full bg-white shadow-lg rounded-lg p-4"
+          style={{ zIndex: 100 }}
           onMouseEnter={() => setIsOpen(true)}
           onMouseLeave={handleMouseLeave}
         >

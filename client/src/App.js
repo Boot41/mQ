@@ -5,16 +5,15 @@ import Footer from "./components/FooterComps/Footer";
 import Careersexp from "./components/Careersexp";
 import Visualizingai from "./components/Visualizingai";
 import AboutUS2 from "./components/AboutUS2";
-
 import Services from "./components/Services";
 import InsightsHome from "./components/InsightsHome";
 import ai from "./assets/images/ai.gif";
 import ReadMore from "./components/InsightsComps/ReadMore";
-
 import LandingPage from "./components/Landingpage";
 import JobList from "./components/CareersComp/Openpositions";
 import { LoadingScreen } from "./components/AnimatedNumber";
 import ContactUs from "./components/ContactUsComps/ContactUs";
+import { SectionProvider } from "../src/components/TrackUserComps/SectionContext"; // Import the SectionProvider
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -41,7 +40,7 @@ function App() {
       {loading ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
-        <>
+        <SectionProvider>
           <Header className="mb-56" />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -62,7 +61,7 @@ function App() {
               className="w-full h-full object-contain bg-blend-lighten"
             />
           </div>
-        </>
+        </SectionProvider>
       )}
     </Router>
   );
