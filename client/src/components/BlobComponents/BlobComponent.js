@@ -1,30 +1,13 @@
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useState,
-  useCallback,
-} from "react";
+import React, { useCallback } from "react";
 import axios from "axios";
 import ai from "../../assets/images/ai.gif";
+import { useSection } from "../TrackUserComps/SectionContext";
 
-const BlobComponent = forwardRef((props, ref) => {
-  const [sectionId, setSectionId] = useState("");
+const BlobComponent = () => {
+  const { currentSection } = useSection();
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      handleIdChange(id) {
-        setSectionId(id);
-        console.log("ID received:", id);
-        console.log("ID received:", sectionId);
-      },
-    }),
-    []
-  );
-
-  // Debounced handleClick function to avoid excessive API calls
   const handleClick = useCallback(async () => {
-    if (!sectionId) {
+    if (!currentSection) {
       console.error("Section ID is not set");
       return;
     }
@@ -33,20 +16,19 @@ const BlobComponent = forwardRef((props, ref) => {
       const response = await axios.post(
         "http://localhost:8000/api/website-interaction/",
         {
-          user_input: "Tell me about Think41's services",
+          user_input: `As an AI assistant for Think41's website, I'm here to help you understand the content of the ${currentSection} section. Based on this section, could you provide a brief overview of its key points and how they relate to Think41's services? Additionally, what specific questions might a user have about this section, and how can I best address them?`,
           model_name: "4o-mini",
-          section_id: sectionId,
+          section_id: currentSection,
           user_context: {},
         }
       );
 
-      // Handle the response as needed
       console.log("API Response:", response.data);
+      // Here you can add logic to display the response to the user
     } catch (error) {
-      // Handle errors
       console.error("Error making API call:", error);
     }
-  }, [sectionId]);
+  }, [currentSection]);
 
   return (
     <div>
@@ -60,6 +42,6 @@ const BlobComponent = forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
+};
 
 export default BlobComponent;
