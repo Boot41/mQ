@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import config from "../../lib/config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ContactUs() {
   const [isCareers, setCareers] = useState(true);
   const [isService, setService] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState("");
   // Initialize useForm hook
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   // Handle form submission
   const onSubmit = async (data) => {
@@ -50,9 +52,13 @@ function ContactUs() {
         }
       );
 
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
+      toast.success("Form submitted successfully!"); // Show success toast
+      reset();
+      setUploadedFileName("");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      // console.error("Error submitting form:", error);
+      toast.error("Error submitting form. Please try again."); // Show error toast
     }
   };
   const handleFileChange = (event) => {
@@ -289,6 +295,7 @@ function ContactUs() {
             </div>
           </div>
         )}
+        <ToastContainer />
       </div>
     </div>
   );
