@@ -1,55 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Briefcase, Calendar } from "lucide-react";
-import {
-  experiencedJobs,
-  fresherJobs,
-} from "../../InformationFiles/CareersInfo";
+import { jobs } from "../../InformationFiles/CareersInfo"; // Ensure this path is correct
 
 const JobList = () => {
-  const [jobType, setJobType] = useState("experienced");
   const [searchTerm, setSearchTerm] = useState("");
-
-  const jobs = jobType === "experienced" ? experiencedJobs : fresherJobs;
 
   const filteredJobs = jobs.filter(
     (job) =>
       job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      job.department.toLowerCase().includes(searchTerm.toLowerCase())
+      job.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      job.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="bg-gray-50 py-16 px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="bg-gray-50 py-20 px-6">
+      <div className="max-w-4xl mx-auto pt-12">
         <h1 className="text-5xl font-light text-center mb-12">
           Open positions
         </h1>
-
-        {/* Job Type Slider */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-white rounded-full p-1 shadow-md">
-            <button
-              className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                jobType === "fresher"
-                  ? "bg-orange-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-              onClick={() => setJobType("fresher")}
-            >
-              Fresher
-            </button>
-            <button
-              className={`px-6 py-2 rounded-full transition-all duration-300 ${
-                jobType === "experienced"
-                  ? "bg-orange-500 text-white"
-                  : "text-gray-700 hover:bg-gray-100"
-              }`}
-              onClick={() => setJobType("experienced")}
-            >
-              Experienced
-            </button>
-          </div>
-        </div>
 
         {/* Search Bar */}
         <div className="relative mb-12">
@@ -75,19 +44,23 @@ const JobList = () => {
           {filteredJobs.map((job, index) => (
             <Link to="/contact-us" key={index} className="block group">
               <div className="p-6 bg-white border border-gray-200 rounded-lg transition-all duration-300 transform hover:scale-102 hover:shadow-lg">
-                <h2 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-orange-500 transition-colors duration-300">
-                  {job.title}
-                </h2>
-                <div className="flex items-center text-sm text-gray-600 mb-3">
-                  <Briefcase className="mr-2 w-4 h-4" />
-                  <span>{job.department}</span>
-                  <span className="mx-2">•</span>
-                  <Calendar className="mr-2 w-4 h-4" />
-                  <span>Application Deadline: 29 July</span>
-                </div>
-                <p className="text-base text-gray-700">{job.description}</p>
-                <div className="mt-4 text-orange-500 font-medium group-hover:underline">
-                  Learn More
+                <div className="flex flex-col h-full">
+                  <p className="text-base text-gray-700 mb-4 flex-grow">
+                    {job.description}
+                  </p>
+                  <div className="flex flex-col mt-4">
+                    <div className="flex items-center text-sm text-gray-600 mb-2">
+                      <Briefcase className="mr-2 w-4 h-4" />
+                      <span>{job.type}</span>
+                    </div>
+                    <div className="flex items-center text-sm text-gray-600">
+                      <Calendar className="mr-2 w-4 h-4" />
+                      <span>Application Deadline: {new Date(job.applyBy).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                  <div className="mt-4 text-orange-500 font-medium group-hover:underline">
+                    Apply Now
+                  </div>
                 </div>
               </div>
             </Link>
