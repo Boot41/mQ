@@ -20,8 +20,8 @@ class Company(models.Model):
     industry = models.CharField(max_length=100)
     founded_year = models.PositiveIntegerField(
         validators=[MinValueValidator(1800), MaxValueValidator(2100)],
-        null=True,  # Add this line
-        blank=True  # Add this line
+        null=True,
+        blank=True
     )
     website = models.URLField()
     logo = models.ImageField(upload_to='company_logos/', null=True, blank=True)
@@ -203,3 +203,51 @@ class PPTSlide(models.Model):
 
     def __str__(self):
         return f"Slide {self.order}: {self.title}"
+    
+# Model for service connection form
+class ServiceContact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
+    file_upload = models.FileField(upload_to='uploads/services/', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table ='service_contact'
+        
+
+# Model for career connection form
+class CareerContact(models.Model):
+    career_name = models.CharField(max_length=255)
+    career_email = models.EmailField()
+    country = models.CharField(max_length=100)
+    file_upload = models.FileField(upload_to='uploads/careers/', blank=True, null=True)
+
+    def __str__(self):
+        return self.career_name
+    class Meta:
+        db_table ='careers_contact'
+
+# New model for website sections
+class WebsiteSection(models.Model):
+    section_id = models.CharField(max_length=100, unique=True)
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    content = models.TextField()
+    additional_info = models.JSONField(default=dict, blank=True, null=True)  # Add this line
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['section_id']),
+            models.Index(fields=['title']),
+            models.Index(fields=['is_active']),
+        ]
+
+    def __str__(self):
+        return f"{self.title} ({self.section_id})"

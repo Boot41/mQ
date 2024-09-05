@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ServicesData } from "../../InformationFiles/LandingPageInfo";
+import axios from "axios";
+
 const ParallaxCard = ({ title, subtitle, image, link }) => {
   const [inView, setInView] = useState(false);
 
@@ -21,8 +23,23 @@ const ParallaxCard = ({ title, subtitle, image, link }) => {
     };
   }, [title]);
 
-  const handleClick = () => {
-    window.location.href = `/services#${link}`;
+  const handleClick = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/know-more-about-service/",
+        {
+          service_name: title,
+          model_name: "4o-mini",
+        }
+      );
+
+      // Handle the response as needed
+      console.log("API Response:", response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error making API call:", error);
+    }
+    // console.log(title);
   };
 
   return (
@@ -31,7 +48,10 @@ const ParallaxCard = ({ title, subtitle, image, link }) => {
       className={`relative overflow-hidden rounded-lg shadow-lg w-[300px] h-[200px] transition-all duration-500 transform-gpu bg-black   ${
         inView ? "opacity-100" : "opacity-0"
       } hover:scale-105 hover:shadow-2xl group cursor-pointer `}
-      onClick={handleClick}
+      onClick={
+        // console.log("button is clicked " + title);
+        handleClick
+      }
       style={{
         position: "relative",
         overflow: "hidden",

@@ -1,29 +1,48 @@
 import React from "react";
-import HeroSection from "./CareersComp/Craeershero";// Assuming HeroSection is the correct component name
+import HeroSection from "./CareersComp/Craeershero"; // Assuming HeroSection is the correct component name
 import Values from "./CareersComp/Values";
 import Testimonials from "./CareersComp/Testimonials"; // Assuming FreightCompanySection is actually Testimonials
- // Assuming UnmatchedServicesSection is actually LifeAtT41
+// Assuming UnmatchedServicesSection is actually LifeAtT41
 import JobListings from "./CareersComp/JobListings"; // Assuming JobListing is actually JobListings
 import Fun from "./CareersComp/Fun";
 import Boot41 from "./CareersComp/Boot41";
+
 import { LifeAtT41 }  from "../InformationFiles/CareersInfo";
 import GlassdoorRating from "./CareersComp/Glassdoor";
 
+// import { LifeAtT41 } from "../InformationFiles/CareersInfo"
 
-const CareersHome= () => {
+const CareersHome = () => {
   return (
     <div className="mt-32">
-      <HeroSection />
+      <SectionComponent id="careers-hero">
+        <HeroSection />
+      </SectionComponent>
 
-      {/* Glassdoor Review Badge */}
+     
     <GlassdoorRating />
-      <Values />
+    
+      
+      <SectionComponent id="values-careers">
+        <Values />
+      </SectionComponent>
+
       {/* <LifeAtT41 /> */}
-      <Boot41 />
-      <Testimonials />
+      <SectionComponent id="boot41-careers">
+        <Boot41 />
+      </SectionComponent>
+
+      <SectionComponent id="testimonials-careers">
+        <Testimonials />
+      </SectionComponent>
+
       <div className="py-20"></div>
-      <JobListings />
-      <Fun />
+      <SectionComponent id="joblisting-careers">
+        <JobListings />
+      </SectionComponent>
+      <SectionComponent id="fun-careers">
+        <Fun />
+      </SectionComponent>
     </div>
   );
 };

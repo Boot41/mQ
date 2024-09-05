@@ -2,8 +2,27 @@ import React from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
-
+import axios from "axios";
 const Autopods = () => {
+  const handleClick = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/website-interaction/",
+        {
+          user_input: "Tell me about Think41's services",
+          model_name: "4o-mini",
+          section_id: "services-section",
+          user_context: {},
+        }
+      );
+
+      // Handle the response as needed
+      console.log("API Response:", response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error making API call:", error);
+    }
+  };
   return (
     <div className="-mt-52">
       <div className="container mx-auto flex flex-col md:flex-row items-center">
@@ -59,8 +78,9 @@ const Autopods = () => {
             {AutoPodsData.description}
           </Typography>
           <Box className="flex justify-start space-x-4">
-            <Link to={AutoPodsData.link}>
+            <Link>
               <Button
+                onClick={() => handleClick("Button1")}
                 variant="outlined"
                 color="warning"
                 sx={{
