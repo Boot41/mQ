@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import useIntersectionObserver from "./useIntersectionObserver";
-import BlobComponent from "../BlobComponents/BlobComponent";
+import { useSection } from "./SectionContext";
 
 const SectionComponent = ({ id, children }) => {
   const ref = useRef(null);
@@ -9,23 +9,18 @@ const SectionComponent = ({ id, children }) => {
     { threshold: 0.1 }
   );
 
-  const blobRef = useRef(null);
+  const { setCurrentSection } = useSection();
 
   useEffect(() => {
     if (hasBeenInViewFor2Seconds) {
       console.log(`Section ${id} has been in view for more than 2 seconds.`);
-      if (blobRef.current) {
-        // Call a method or handle data in BlobComponent
-        blobRef.current.handleIdChange(id);
-      }
+      setCurrentSection(id);
     }
-  }, [hasBeenInViewFor2Seconds, id]);
+  }, [hasBeenInViewFor2Seconds, id, setCurrentSection]);
 
   return (
     <div ref={ref} id={id}>
       {children}
-      {/* BlobComponent is not rendered, just using the ref */}
-      <BlobComponent ref={blobRef} />
     </div>
   );
 };

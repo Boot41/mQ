@@ -9,9 +9,9 @@ const Autopods = () => {
       const response = await axios.post(
         "http://localhost:8000/api/website-interaction/",
         {
-          user_input: "Tell me about Think41's services",
+          user_input: "I'd like to know more about Think41's Autopods. Can you provide detailed information about what Autopods are, how they work, their benefits, and how they integrate Gen AI agents? Also, how do Autopods enhance the software development process and what makes them unique compared to traditional development teams?",
           model_name: "4o-mini",
-          section_id: "services-section",
+          section_id: "autopods-section",
           user_context: {},
         }
       );
