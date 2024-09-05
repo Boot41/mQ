@@ -4,19 +4,19 @@ import podcast from "../assets/images/podcast.webp";
 
 export const typicalConfig = {
   steps: [
-    "Excellence in Every Line of Code",
+    "Empowering Digital Innovation & Transformation",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Tailored AI Solutions for Your Business",
+    "Reimagining Enterprise Software",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
-    "AI-Driven Success Stories",
+    "Innovate faster. Transform faster",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Iterating Until Perfection",
+    "Build As You Think. Custom Software-As-A- Service",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
@@ -28,28 +28,23 @@ export const typicalConfig = {
 export const CVPData = [
   {
     image: "p1.png",
-    title: "AI-Driven User Experiences",
+    title: "Streamline and optimise existing software or business processes, such as SDLC, to enhance efficiency & speed.",
     description:
-      "Deliver a simple, intuitive interface coupled with powerful AI-driven features. Transform user interactions into insightful, actionable experiences.",
+      "Accelerated software development cycles through AI-driven automation, Agentic led business processes.",
   },
   {
     image: "p2.png",
-    title: "AI-Powered Ecosystem Integration",
+    title: "Transform previously impossible use-cases into reality, enabling innovative solutions.",
     description:
-      "Seamlessly integrate with partner ecosystems. Elevate your operations with real-time insights and collaborative AI-driven solutions.",
+      "Fully automated initial interviews using Conversational AI.",
   },
   {
     image: "p3.png",
-    title: "AI-Augmented Decision Making",
+    title: "Explore and develop use-cases that push the boundaries of what's imaginable.",
     description:
-      "Empower your business with AI-enhanced decision-making tools. Leverage predictive analytics and intelligent insights to drive smarter, faster decisions.",
+      "AI-driven personalized learning environments that adapt to individual styles. Use cases around computer vision for inventory management, Doctor Co-pilot, Autonomous Decision Making for specific business processes ",
   },
-  {
-    image: "p4.png",
-    title: "Generative AI Innovation",
-    description:
-      "Unleash the full potential of generative AI to create transformative solutions. Drive creativity, efficiency, and success in diverse applications.",
-  },
+  
 ];
 
 //Auto Pods Data
@@ -58,11 +53,8 @@ export const AutoPodsData = {
   videoSrc: "/autobots.webm",
   title: "AutoPods",
   subtitle1: "Pods empowered with AI tools delivering exceptional performance",
-  subtitle2: "Trained on AI by AI",
-  description: `Trained on AI tools, our pod team members are innovative, iterative,
-    and exceptionally fast in executing processes, all while maintaining
-    high-quality standards. With a strong focus on automating internal
-    processes, we extend this mindset to everything we do.`,
+  description: `Autonomous pods is a cross-functional teams consisting of full stack engineers, engineering & product managers, working alongside Gen AI agents. This approach ensures that we deliver robust, end-to-end products and services tailored to your specific needs
+`,
   buttonText: "Know More..",
   link: "/visualizingai",
 };

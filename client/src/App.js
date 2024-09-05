@@ -14,6 +14,7 @@ import JobList from "./components/CareersComp/Openpositions";
 import { LoadingScreen } from "./components/AnimatedNumber";
 import ContactUs from "./components/ContactUsComps/ContactUs";
 import { SectionProvider } from "../src/components/TrackUserComps/SectionContext"; // Import the SectionProvider
+import CareersHome from "./components/Careersexp";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -46,7 +47,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/about-us" element={<AboutUS2 />} />
             <Route path="/visualizingai" element={<Visualizingai />} />
-            <Route path="/careers" element={<Careersexp />} />
+            <Route path="/careers" element={<CareersHome />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/openpositions" element={<JobList />} />
