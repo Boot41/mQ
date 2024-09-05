@@ -3,26 +3,31 @@ export const Boot41Slides = [
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 1",
-    text: "Text for Image 1",
+    text: "Learn from industry leaders about both tech and business.",
   },
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 2",
-    text: "Text for Image 2",
+    text: "Master SDLC, full-stack concepts, use AI, and build prototypes.",
   },
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 3",
-    text: "Text for Image 3",
+    text: "Take regular breaks from work and have fun.",
+  },
+  {
+    imageSrc: "ai1.png",
+    alt: "Description of Image 3",
+    text: "Get recognized and appreciated for hard work.",
   },
 ];
 
 export const heroSectionData = {
   backgroundImage: "careers2.webp",
-  title: "We Help Businesses Grow",
-  highlightText: "And Innovate",
+  title: "Be the force behind impactful",
+  highlightText: "AI advancements",
   description:
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    "We are a bunch of  tech enthusiasts and dreamers who want to turn AI possibilities into reality. Founded by seasoned entrepreneurs, we  offer a culture of inclusivity, balance, and a flat structure where your career growth is in your hands. Join us and be the force behind impactful AI advancements.",
   buttons: [
     {
       link: "/openpositions",
@@ -196,16 +201,16 @@ export const testimonials = [
   {
     id: 1,
     image: "placeholder.png",
-    name: "John Doe",
-    role: "CEO, Company A",
-    text: "Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.",
+    name: "Hussain",
+    role: "Engineering Manager",
+    text: "At Think41, the culture is exactly what I expected—innovative and supportive. The integration of AI into our projects is impressive, and the autonomy to lead my team while having leadership support is invaluable. It's great to work in an environment where freedom and collaboration go hand in hand.",
   },
   {
     id: 2,
     image: "placeholder.png",
-    name: "Jane Smith",
-    role: "CTO, Company B",
-    text: "Organizations can seamlessly deliver forward-thinking services using standards compliant responsive web design.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.",
+    name: "Adarsh",
+    role: "Full Stack Engineer",
+    text: "Starting as an intern and transitioning to a full-time role at Think41 has been a fantastic journey. The learning curve has been steep but incredibly rewarding. I’ve made great friends, enjoy the vibrant office location in HSR, and see tremendous growth potential here. It's a place where my career is truly flourishing.",
   },
   {
     id: 3,
@@ -235,12 +240,12 @@ export const testimonials = [
 // valuesData.js
 
 export const valuesData = {
-  title: "We are principled",
+  title: "We are a born in AI Company",
   description:
-    "From our hiring decisions to our interactions with each other, our customers, and our partners, we are guided by a clear set of principles integrity, kindness, pragmatism, humility, vision, execution, communication, beauty, and reflection.",
+    "AI is ingrained in our DNA, guiding our constant ideation on its use cases and enhancing efficiency without compromising functionality. From automated hiring processes to internal operations, we integrate AI tools at every step to optimise workflows. This same spirit drives our client services, leveraging AI advancements to introduce operational efficiencies.",
   whatItMeans: {
-    title: "What it means to you",
-    text: "Built on Principles. Our principles create a common language and frame of reference for our employees. You will work in a professional, kind, and supportive environment, encouraged to collectively focus on shared goals.",
+    title: "So what’s in it for you?",
+    text: "With AI streamlining processes, you'll experience enhanced productivity, freeing you to innovate, work on creativity and grow. You'll relearn software development in the AI age, staying at the forefront of technology. At Think41, AI isn't just a tool; it's a catalyst for your professional development and success.",
   },
   image: {
     src: "careerswhyus2.jpeg",

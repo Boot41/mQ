@@ -25,14 +25,14 @@ const TestimonialSection = () => {
 
   return (
     <section className="py-16 bg-white relative overflow-hidden">
-      <div className="max-w-4xl mx-auto text-center relative z-10">
+      <div className="max-w-4xl mx-auto text-center relative z-10 px-4">
         <p className="text-orange-500 font-semibold mb-3 relative z-10">
           What our employees have to say about us
         </p>
 
         <div className="relative mb-16">
           <h2
-            className="text-[8rem] font-bold text-gray-100 absolute inset-0 flex items-center justify-center tracking-wide"
+            className="text-[8rem] font-bold text-gray-100 absolute inset-0 flex items-center justify-center tracking-wide hidden md:flex"
             aria-hidden="true"
           >
             Testimonials
@@ -46,14 +46,14 @@ const TestimonialSection = () => {
           <button onClick={prevTestimonial} className="text-3xl">
             &lt;
           </button>
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex justify-center items-center space-x-4 md:flex-row flex-col">
             {getVisibleTestimonials().map((testimonial, index) => (
               <div
                 key={testimonial.id}
                 className={`bg-white p-6 rounded-lg shadow-lg ${
-                  index === 1 ? "scale-110 z-10" : "scale-90 blur-sm"
-                } transition-all duration-300 hover:scale-105 hover:shadow-2xl`} // Added hover effect
-                style={{ width: "300px" }}
+                  index === 1 ? "md:scale-110 z-10" : "md:scale-90 md:blur-sm"
+                } transition-all duration-300 hover:scale-105 hover:shadow-2xl mb-4 md:mb-0`}
+                style={{ width: "300px", maxWidth: "100%" }}
               >
                 <div className="flex items-center mb-4">
                   <img
