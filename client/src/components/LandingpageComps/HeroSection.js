@@ -22,7 +22,7 @@ function HeroSection2() {
           sx={{ fontSize: { xs: "3rem", md: "3rem", lg: "4rem" } }}
         >
           <span>
-            Envision{" "}
+            {" "}
             <span style={{ color: "orange" }}>
               <Typical
                 steps={typicalConfig.steps}

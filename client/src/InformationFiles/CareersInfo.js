@@ -75,36 +75,42 @@ export const FunActivityData = {
 
 export const jobs = [
   {
-    title: "Senior UI/UX Designer",
-    location: "Jakarta",
+    title: "Product Analyst",
     type: "Full-time",
     applyBy: "2024-09-15",
+    description:
+      "We are seeking a detail-oriented Product Analyst to join our team. You will be responsible for analyzing and interpreting data to support business decisions.",
   },
   {
-    title: "Part-time Graphic Designer",
-    location: "Remote",
+    title: "Engineering Manager",
     type: "Part-time",
     applyBy: "2024-09-10",
+    description:
+      "As an Engineering Manager, you will oversee engineering projects, lead a team of engineers, and ensure the successful delivery of high-quality software solutions.",
   },
   {
-    title: "Senior Visual Designer",
-    location: "Jakarta",
+    title: "Tech Architect",
     type: "Full-time",
     applyBy: "2024-09-20",
+    description:
+      "Join us as a Tech Architect and design the architecture of our tech solutions. You will collaborate with development teams to create scalable and efficient systems.",
   },
   {
-    title: "Junior Front End Developer",
-    location: "Jakarta",
+    title: "UX UI Designer",
     type: "Internship",
     applyBy: "2024-09-05",
+    description:
+      "As a UX UI Designer Intern, you will assist in designing user interfaces and improving the user experience for our products.",
   },
   {
-    title: "Senior Back End Developer",
-    location: "Remote",
-    type: "Full-time",
+    title: "Full Stack Developer",
+    type: "Internship",
     applyBy: "2024-09-25",
+    description:
+      "Join our team as a Full Stack Developer Intern. You will work on both front-end and back-end development tasks, gaining hands-on experience in full-stack development.",
   },
 ];
+
 
 // LifeATT41.js
 
@@ -215,24 +221,11 @@ export const testimonials = [
   {
     id: 3,
     image: "placeholder.png",
-    name: "Mike Johnson",
-    role: "CFO, Company C",
-    text: "Monotonectally monetize fully tested and back-end leadership skills.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.",
+    name: "Anusha",
+    role: "Technical Product Manager",
+    text: "At Think41, working as a product manager has been an enriching experience. The leadership is open and approachable, fostering a culture where every idea is valued. Our team is not only friendly but deeply collaborative, making problem-solving a truly collective effort. The work is challenging, with thought-provoking projects that keep us engaged and always learning.",
   },
-  {
-    id: 4,
-    image: "placeholder.png",
-    name: "Sarah Brown",
-    role: "COO, Company D",
-    text: "Efficiently unleash cross-media information without cross-media value.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.",
-  },
-  {
-    id: 5,
-    image: "placeholder.png",
-    name: "Tom Wilson",
-    role: "CIO, Company E",
-    text: "Collaboratively administrate empowered markets via plug-and-play networks.Compellingly strategize cost-effective ideas through high-quality imperatives. It is imperative to ensure that functional value does not become trivial.",
-  },
+  
 ];
 
 //Why Us Data

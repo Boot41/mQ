@@ -43,7 +43,7 @@ const OpenPositions = () => {
             <div>
               <h3 className="text-lg font-bold">{job.title}</h3>
               <p className="text-gray-500">
-                {job.type} - {job.location} - Apply by {job.applyBy}
+                {job.type} - Apply by {job.applyBy}
               </p>
             </div>
             <a
