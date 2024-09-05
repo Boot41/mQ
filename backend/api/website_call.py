@@ -10,30 +10,42 @@ import random
 
 logger = logging.getLogger(__name__)
 
-def generate_response_website(user_input, relevant_content, model_name, section_info):
+def generate_response_website(user_input, relevant_content, model_name, section_info, user_context):
     ai_model = AIModelFactory.get_model(model_name)
     
     context = "\n".join([f"{content.title}:\n{content.content}" for content in relevant_content])
     
     section_context = f"Section ID: {section_info.section_id}\nTitle: {section_info.title}\nDescription: {section_info.description}\nContent: {section_info.content}"
     
-    prompt = f"""You are an AI assistant for Think41, a technology consulting company with a product mindset. Your role is to provide helpful information about Think41 and assist users navigating the website. Maintain a professional, friendly, and concise tone.
+    # Customize prompt based on section
+    if section_info.section_id == 'services-section':
+        section_specific_instruction = "Focus on explaining Think41's services in detail, highlighting their unique aspects and benefits."
+    elif section_info.section_id == 'autopods-section':
+        section_specific_instruction = "Emphasize the concept of Autopods and how they revolutionize software development."
+    elif section_info.section_id == 'hero-section':
+        section_specific_instruction = "Provide an overview of Think41's mission and value proposition."
+    else:
+        section_specific_instruction = "Provide general information about Think41 relevant to the current section."
+    
+    prompt = f"""You are an AI assistant for Think41, a technology consulting company specializing in Custom Software as a Service (CSaaS) and leveraging Generative AI. Your role is to provide helpful information about Think41 and assist users navigating the website. Maintain a professional, friendly, and concise tone.
 
 User query: '{user_input}'
 
 Relevant information from the database:
 {context}
 
-Section information:
+Current section information:
 {section_context}
+
+{section_specific_instruction}
 
 Guidelines:
 1. Provide a concise response (50-100 words) that directly addresses the user's query.
 2. Use the relevant information provided to answer the query accurately.
-3. If the user asks for additional information about a section, elaborate on the details from the relevant content.
-4. Focus on Think41's services, expertise, and how they can help businesses.
-5. If asked about specific pages or navigation, provide clear and brief instructions.
-6. For questions not related to Think41 or the website, politely redirect the conversation.
+3. Tailor your response to the current section of the website.
+4. Highlight Think41's expertise in GenAI and custom software development.
+5. If asked about specific services or Autopods, provide detailed information.
+6. For questions about founders or company background, offer relevant insights.
 7. If the information isn't available in the context, suggest contacting Think41 for more details.
 
 Response:"""
@@ -41,18 +53,31 @@ Response:"""
     ai_response = ai_model.generate_response(prompt)
     
     engagement_phrases = [
-        "Is there anything else you'd like to know about Think41?",
-        "How else can I assist you with information about our services?",
-        "Do you have any other questions about Think41's expertise?",
-        "What other aspects of our company would you like to explore?",
+        "Is there anything else you'd like to know about Think41's services or approach?",
+        "How else can I assist you with information about our GenAI solutions?",
+        "Do you have any other questions about Think41's expertise or Autopods?",
+        "What other aspects of our custom software development would you like to explore?",
     ]
     
     if ai_response:
         response = f"{ai_response.strip()}\n\n{random.choice(engagement_phrases)}"
     else:
-        response = "I apologize, but I'm having trouble generating a response. Is there a specific aspect of Think41 or our services you'd like to know more about?"
+        response = "I apologize, but I'm having trouble generating a response. Is there a specific aspect of Think41's services or GenAI solutions you'd like to know more about?"
 
     return response
+
+def fetch_section_info(section_id):
+    try:
+        section_info = WebsiteSection.objects.get(section_id=section_id)
+        logger.info(f"Fetched section information: Section ID: {section_info.section_id}, "
+                    f"Title: {section_info.title}, "
+                    f"Description: {section_info.description}, "
+                    f"Content: {section_info.content}, "
+                    f"Is Active: {section_info.is_active}")
+        return section_info
+    except WebsiteSection.DoesNotExist:
+        logger.error(f"Section ID not found: {section_id}")
+        return None
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -62,6 +87,7 @@ def website_interaction(request):
         user_input = data.get('user_input')
         model_name = data.get('model_name', '4o-mini')
         section_id = data.get('section_id')
+        user_context = data.get('user_context', {})  # New: Get additional user context
 
         assistant = GPTAssistant(current_page='home', model_name=model_name)
         
@@ -69,10 +95,12 @@ def website_interaction(request):
         relevant_content = assistant.search_relevant_content(user_input)
         
         # Fetch section information
-        section_info = WebsiteSection.objects.get(section_id=section_id)
-        
-        # Generate response using the relevant content and section information
-        response = generate_response_website(user_input, relevant_content, model_name, section_info)
+        section_info = fetch_section_info(section_id)
+        if not section_info:
+            return JsonResponse({'error': 'Section ID not found'}, status=404)
+
+        # Generate response using the relevant content, section information, and user context
+        response = generate_response_website(user_input, relevant_content, model_name, section_info, user_context)
 
         return JsonResponse({
             'response': response,
@@ -83,19 +111,15 @@ def website_interaction(request):
                     'content_type': content.content_type,
                     'snippet': content.content[:100] + '...' if len(content.content) > 100 else content.content
                 } for content in relevant_content
-            ]
+            ],
+            'current_section': section_info.title  # New: Include current section title in response
         })
-    except WebsiteSection.DoesNotExist:
-        logger.error("Section ID not found")
-        return JsonResponse({'error': 'Section ID not found'}, status=404)
     except json.JSONDecodeError:
         logger.error("Invalid JSON in request body")
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
     except Exception as e:
         logger.error(f"Error in website_interaction: {str(e)}", exc_info=True)
         return JsonResponse({'error': 'Internal server error'}, status=500)
-
-# ... (keep the get_more_info function as is)
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -113,6 +137,11 @@ def know_more_about_service(request):
         # Implement RAG by searching for relevant content about the service
         relevant_content = assistant.search_relevant_content(service_name)
         
+        # Fetch section information
+        section_info = fetch_section_info('services-section')
+        if not section_info:
+            return JsonResponse({'error': 'Section ID not found'}, status=404)
+        
         # Custom prompt for the know_more_about_service function
         context = "\n".join([f"{content.title}:\n{content.content}" for content in relevant_content])
         prompt = f"""You are an AI assistant for Think41, a technology consulting company with a product mindset. Your role is to provide detailed information about Think41's services. Maintain a professional, friendly, and concise tone.
@@ -121,6 +150,12 @@ Service: {service_name}
 
 Relevant information from the database:
 {context}
+
+Section information:
+Section ID: {section_info.section_id}
+Title: {section_info.title}
+Description: {section_info.description}
+Content: {section_info.content}
 
 Guidelines:
 1. Provide a detailed response (100-150 words) that elaborates on the service.
