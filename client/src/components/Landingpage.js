@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import { useSection } from "../../src/components/TrackUserComps/SectionContext";
 import ServicesPage from "./LandingpageComps/ServicesPage";
-
+import SectionComponent from "./TrackUserComps/SectionComponent";
 import LatestInsights from "./LandingpageComps/LatestInsights";
 import About from "./LandingpageComps/About";
 import Autopods from "./LandingpageComps/Autopods";
-
 import Demo2 from "./LandingpageComps/Demo2";
-
 import HeroSection2 from "./LandingpageComps/HeroSection";
 import PressSection from "./Experiment/PressSection";
 
@@ -23,6 +21,8 @@ const LandingPage = () => {
   const handleClick = (buttonName) => {
     setClickedButton(buttonName);
   };
+
+  const { currentSection } = useSection();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,31 +40,37 @@ const LandingPage = () => {
 
   return (
     <div>
-      <HeroSection2 />
+      <SectionComponent id="hero-section">
+        <HeroSection2 />
+      </SectionComponent>
 
-      {/* About Section */}
-      <About />
+      <SectionComponent id="about-section">
+        <About />
+      </SectionComponent>
 
-      {/* AI Tools Section */}
-      <Autopods />
+      <SectionComponent id="autopods-section">
+        <Autopods />
+      </SectionComponent>
 
-      {/* Services Section */}
-      <div className="py-20">
-        <ServicesPage />
-      </div>
+      <SectionComponent id="services-section">
+        <div className="py-20">
+          <ServicesPage />
+        </div>
+      </SectionComponent>
 
-      <PressSection />
+      <SectionComponent id="press-section">
+        <PressSection />
+      </SectionComponent>
 
-      <div className="min-h-screen ">
-        <Demo2 />
-      </div>
+      <SectionComponent id="demo-section">
+        <div className="min-h-screen ">
+          <Demo2 />
+        </div>
+      </SectionComponent>
 
-      {/* Latest Insights Section */}
-      <LatestInsights />
-      {/* <FeaturedSolutionsSlider /> */}
-      {/* <ConnectSection /> */}
-
-      {/* Start Your Journey Section */}
+      <SectionComponent id="latest-insights-section">
+        <LatestInsights />
+      </SectionComponent>
     </div>
   );
 };

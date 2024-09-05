@@ -1,19 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'primereact/resources/themes/saga-blue/theme.css';  // Choose the theme you prefer
-import 'primereact/resources/primereact.min.css';           // Core PrimeReact CSS
-import 'primeicons/primeicons.css';                         // PrimeIcons CSS
-import 'primeflex/primeflex.css';                           // PrimeFlex CSS (if installed)
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "primereact/resources/themes/saga-blue/theme.css"; // Choose the theme you prefer
+import "primereact/resources/primereact.min.css"; // Core PrimeReact CSS
+import "primeicons/primeicons.css"; // PrimeIcons CSS
+import "primeflex/primeflex.css"; // PrimeFlex CSS (if installed)
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
