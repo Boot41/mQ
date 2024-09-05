@@ -5,7 +5,7 @@ import { heroSectionData } from "../../InformationFiles/CareersInfo"; // Adjust 
 const HeroSection = () => {
   return (
     <div
-      className="flex items-center justify-center h-96 bg-cover bg-center"
+      className="flex items-center justify-center h-[400px] bg-cover bg-center"
       style={{ backgroundImage: `url(${heroSectionData.backgroundImage})` }}
     >
       <div className="text-center text-white px-4 bg-black bg-opacity-50 py-8 rounded-md">

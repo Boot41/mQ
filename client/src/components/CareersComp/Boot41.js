@@ -7,9 +7,10 @@ const CarouselItem = ({ item }) => (
     <img
       src={item.imageSrc}
       alt={item.alt}
-      className="w-full h-64 object-cover rounded-lg mb-4"
+      className="w-full object-cover rounded-lg mb-4"
+      style={{ height: '200px' }} // Adjust the height value to be slightly smaller
     />
-    <p className="text-lg text-center text-gray-800 font-medium">{item.text}</p>
+    <p className="text-base text-center text-gray-800 font-medium">{item.text}</p>
   </div>
 );
 
@@ -81,9 +82,9 @@ const Carousel = ({ items }) => {
 
 const Boot41 = () => {
   return (
-    <div className="flex flex-col items-center bg-gray-100 py-8">
-      <header className="text-center mb-8 px-4">
-        <h1 className="text-4xl font-extrabold leading-tight text-gray-800">
+    <div className="flex flex-col items-center bg-gray-100 py-8 px-4">
+      <header className="text-center mb-8">
+        <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight text-gray-800">
           We create radical new technologies
           <br />
           to solve some of the world's
@@ -91,20 +92,15 @@ const Boot41 = () => {
           hardest problems
         </h1>
       </header>
-      <main className="flex flex-col items-center px-4 w-full max-w-6xl">
+      <main className="flex flex-col items-center w-full max-w-6xl">
         <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-8">
-          <div className="text-3xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900">
+          <div className="text-2xl lg:text-3xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900">
             <p>Boot</p>
             <p>41</p>
           </div>
-          <div className="text-lg lg:w-full text-gray-700">
+          <div className="text-base lg:text-lg lg:w-full text-gray-700">
             <p>
-              Boot41 is a diverse group of inventors and entrepreneurs who build
-              and launch technologies that aim to improve the lives of millions,
-              even billions, of people. Our goal? 10x impact on the world's most
-              intractable problems, not just 10% improvement. We approach
-              projects that have the aspiration and riskiness of research with
-              the speed and ambition of a startup.
+            Explanation: Bootcamps at Think41 are intense learning programs that transform new hires into Think41 professionals. It blends a work-hard, play-hard vibe with fun activities and deep dives into full-stack development and AI. You’ll connect with industry leaders, learn from peers, and develop a transformative mindset focused on AI's vast applications. The bootcamp  gives you the skills and mindset to thrive in our innovative, tech-driven environment.
             </p>
           </div>
         </div>
