@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { DemoData } from "../../InformationFiles/LandingPageInfo";
 import { useSection } from "../TrackUserComps/SectionContext";
-
+import axios from "axios";
 const Demo = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   // const { currentSection } = useSection();
@@ -21,6 +21,29 @@ const Demo = () => {
     return () => clearInterval(interval);
   }, [DemoData.length]);
 
+  const handleClick = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/website-interaction/",
+        {
+          user_input: "Tell me More About AutoPods",
+          current_page: DemoData[currentIndex].name, // Dynamically set current page title
+          model_name: "4o-mini",
+        }
+      );
+
+      // Handle the response as needed
+      console.log("API Response:", response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error making API call:", error);
+    }
+    // console.log(DemoData[currentIndex].name);
+  };
+
+  const handleKnowMoreClick = () => {
+    console.log("button clicked");
+  };
   const handleDotClick = (index) => {
     setCurrentIndex(index);
   };
@@ -63,44 +86,6 @@ const Demo = () => {
                     {DemoData[currentIndex].description}
                   </Typography>
                 </Box>
-
-                <Button
-                  variant="contained"
-                  sx={{
-                    position: "relative",
-                    overflow: "hidden",
-                    color: "white",
-                    margin: "8px",
-                    backgroundColor: "orange",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid white",
-                    transform: "scale(1)",
-                    transition:
-                      "transform 0.3s ease, background-color 0.3s ease",
-                    "&:hover": {
-                      backgroundColor: "rgba(0, 0, 0, 0.7)",
-                      transform: "scale(1.05)",
-                      color: "white",
-                    },
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "rgba(255, 255, 255, 0.2)",
-                      zIndex: -1,
-                      transition: "opacity 0.3s ease",
-                      opacity: 0,
-                    },
-                    "&:hover::before": {
-                      opacity: 1,
-                    },
-                  }}
-                >
-                  Experience
-                </Button>
               </Box>
             </Box>
           </Box>
@@ -124,18 +109,16 @@ const Demo = () => {
               />
             </Box>
           ))}
-          <Box className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 bg-black">
-            {DemoData.map((_, index) => (
-              <Box
-                key={index}
-                onClick={() => handleDotClick(index)}
-                className={`cursor-pointer w-3 h-3 rounded-full ${
-                  index === currentIndex ? "bg-blue-500" : "bg-gray-300"
-                }`}
-              />
-            ))}
-          </Box>
         </Box>
+        <div className="flex justify-center mt-20 bottom-0">
+          <Button
+            variant="contained"
+            onClick={handleClick}
+            className="bottom-0 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-6 rounded-full text-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+          >
+            Know More
+          </Button>
+        </div>
       </Box>
     </>
   );
