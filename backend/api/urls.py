@@ -12,6 +12,7 @@ from .user_views import user_login, user_logout
 from .analytics_views import get_tour_analytics, get_detailed_analytics
 from .youtube_views import handle_youtube_command
 from .ppt_presenter import get_ppt_data
+from .website_call import website_interaction
 
 urlpatterns = [
     # Tour related endpoints
@@ -32,6 +33,7 @@ urlpatterns = [
     # User related endpoints
     path('login/', user_login, name='user_login'),
     path('logout/', user_logout, name='user_logout'),
+    path('website-interaction/', website_interaction, name='website_interaction'),
 
     # Unused endpoints (not currently used in the frontend)
     # ====================================================
@@ -63,6 +65,7 @@ urlpatterns = [
     # PPT data related unused endpoints
     path('ppt-data/', get_ppt_data, name='get_ppt_data'),
 
+    
     # Contact Us page endpoints
     path('service-contact/', handle_service_contact, name='service-contact'),
     path('career-contact/', handle_career_contact, name='career-contact'),
