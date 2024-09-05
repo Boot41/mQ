@@ -12,6 +12,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # Virtual Environment
+T41Web/*
 T41Web/
 T41Web/bin
 T41Web/lib
