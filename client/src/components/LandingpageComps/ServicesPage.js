@@ -26,10 +26,9 @@ const ParallaxCard = ({ title, subtitle, image, link }) => {
   const handleClick = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
+        "http://localhost:8000/api/know-more-about-service/",
         {
-          user_input: "Tell me More About ",
-          current_page: title,
+          service_name: title,
           model_name: "4o-mini",
         }
       );

@@ -9,9 +9,10 @@ const Autopods = () => {
       const response = await axios.post(
         "http://localhost:8000/api/website-interaction/",
         {
-          user_input: "Tell me More About AutoPods",
-          current_page: "autopods-section",
+          user_input: "Tell me about Think41's services",
           model_name: "4o-mini",
+          section_id: "services-section",
+          user_context: {},
         }
       );
 

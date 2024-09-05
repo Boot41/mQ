@@ -15,6 +15,7 @@ import { LoadingScreen } from "./components/AnimatedNumber";
 import ContactUs from "./components/ContactUsComps/ContactUs";
 import { SectionProvider } from "../src/components/TrackUserComps/SectionContext"; // Import the SectionProvider
 import CareersHome from "./components/Careersexp";
+import BlobComponent from "./components/BlobComponents/BlobComponent";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -55,13 +56,7 @@ function App() {
             <Route path="/readmore" element={<ReadMore />} />
           </Routes>
           <Footer />
-          <div className="fixed bottom-24 right-24 w-24 h-24 z-50">
-            <img
-              src={ai}
-              alt="AI Assistant"
-              className="w-full h-full object-contain bg-blend-lighten"
-            />
-          </div>
+          <BlobComponent />
         </SectionProvider>
       )}
     </Router>
