@@ -87,3 +87,75 @@ def website_interaction(request):
         return JsonResponse({'error': 'Internal server error'}, status=500)
 
 # ... (keep the get_more_info function as is)
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def know_more_about_service(request):
+    try:
+        data = json.loads(request.body)
+        service_name = data.get('service_name')
+        model_name = data.get('model_name', '4o-mini')
+        
+        if not service_name:
+            return JsonResponse({'error': 'Service name is required'}, status=400)
+        
+        assistant = GPTAssistant(current_page='services', model_name=model_name)
+        
+        # Implement RAG by searching for relevant content about the service
+        relevant_content = assistant.search_relevant_content(service_name)
+        
+        # Custom prompt for the know_more_about_service function
+        context = "\n".join([f"{content.title}:\n{content.content}" for content in relevant_content])
+        prompt = f"""You are an AI assistant for Think41, a technology consulting company with a product mindset. Your role is to provide detailed information about Think41's services. Maintain a professional, friendly, and concise tone.
+
+Service: {service_name}
+
+Relevant information from the database:
+{context}
+
+Guidelines:
+1. Provide a detailed response (100-150 words) that elaborates on the service.
+2. Use the relevant information provided to answer accurately.
+3. Highlight the benefits and features of the service.
+4. If the user asks for additional information, elaborate on the details from the relevant content.
+5. Focus on how Think41's services can help businesses.
+6. If the information isn't available in the context, suggest contacting Think41 for more details.
+
+Response:"""
+        
+        # Use the GPT4oMiniModel to generate the response
+        ai_model = AIModelFactory.get_model(model_name)
+        ai_response = ai_model.generate_response(prompt)
+        
+        engagement_phrases = [
+            "Is there anything else you'd like to know about this service?",
+            "How else can I assist you with information about our services?",
+            "Do you have any other questions about this service?",
+            "What other aspects of this service would you like to explore?",
+        ]
+        
+        if ai_response:
+            response = f"{ai_response.strip()}\n\n{random.choice(engagement_phrases)}"
+        else:
+            response = "I apologize, but I'm having trouble generating a response. Is there a specific aspect of this service you'd like to know more about?"
+
+        return JsonResponse({
+            'response': response,
+            'service_name': service_name,
+            'has_more_info': bool(relevant_content),
+            'relevant_content': [
+                {
+                    'title': content.title,
+                    'content_type': content.content_type,
+                    'snippet': content.content[:100] + '...' if len(content.content) > 100 else content.content
+                } for content in relevant_content
+            ]
+        })
+    except json.JSONDecodeError:
+        logger.error("Invalid JSON in request body")
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        logger.error(f"Error in know_more_about_service: {str(e)}", exc_info=True)
+        return JsonResponse({'error': 'Internal server error'}, status=500)
+
+# ... (keep the get_more_info function as is)
