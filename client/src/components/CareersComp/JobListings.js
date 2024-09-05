@@ -1,15 +1,41 @@
-import React from "react";
-// import JobList from '../CareersComp/Openpositions';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { jobs } from "../../InformationFiles/CareersInfo";
 
 const OpenPositions = () => {
+  const [randomJobs, setRandomJobs] = useState([]);
+
+  useEffect(() => {
+    // Function to get 5 random jobs
+    const getRandomJobs = (allJobs, count) => {
+      const shuffled = [...allJobs].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, count);
+    };
+
+    // Set 5 random jobs or all jobs if less than 5
+    setRandomJobs(getRandomJobs(jobs, Math.min(jobs.length, 5)));
+  }, []);
+
+  if (jobs.length === 0) {
+    return (
+      <div className="bg-white rounded-lg shadow-md overflow-hidden w-2/3">
+        <div className="px-6 py-4 border-b">
+          <h2 className="text-2xl font-bold">Open Positions</h2>
+        </div>
+        <div className="px-6 py-4">
+          <p>There are currently no open positions.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden w-2/3">
       <div className="px-6 py-4 border-b">
         <h2 className="text-2xl font-bold">Open Positions</h2>
       </div>
       <div className="px-6 py-4 space-y-4">
-        {jobs.map((job, index) => (
+        {randomJobs.map((job, index) => (
           <div
             key={index}
             className="border-b pb-4 flex justify-between items-center transition-transform transform hover:scale-105 hover:shadow-lg"
@@ -52,12 +78,12 @@ const HeroImage = () => {
           Explore new career opportunities and find the perfect job for you.
           Discover positions that match your skills and interests.
         </p>
-        <a
-          href="/openpositions"
+        <Link
+          to="/openpositions"
           className="bg-white text-black px-5 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors"
         >
           Explore More &rarr;
-        </a>
+        </Link>
       </div>
       <style jsx>{`
         @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
