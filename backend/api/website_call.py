@@ -4,24 +4,28 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .gpt_assistant import GPTAssistant
 from .ai_models import AIModelFactory
+from .models import WebsiteSection
 import logging
 import random
 
 logger = logging.getLogger(__name__)
 
-def generate_response_website(user_input, relevant_content, current_page, model_name):
+def generate_response_website(user_input, relevant_content, model_name, section_info):
     ai_model = AIModelFactory.get_model(model_name)
     
     context = "\n".join([f"{content.title}:\n{content.content}" for content in relevant_content])
     
+    section_context = f"Section ID: {section_info.section_id}\nTitle: {section_info.title}\nDescription: {section_info.description}\nContent: {section_info.content}"
+    
     prompt = f"""You are an AI assistant for Think41, a technology consulting company with a product mindset. Your role is to provide helpful information about Think41 and assist users navigating the website. Maintain a professional, friendly, and concise tone.
-
-Current page: {current_page}
 
 User query: '{user_input}'
 
 Relevant information from the database:
 {context}
+
+Section information:
+{section_context}
 
 Guidelines:
 1. Provide a concise response (50-100 words) that directly addresses the user's query.
@@ -56,20 +60,22 @@ def website_interaction(request):
     try:
         data = json.loads(request.body)
         user_input = data.get('user_input')
-        current_page = data.get('current_page', 'home')
         model_name = data.get('model_name', '4o-mini')
-        
-        assistant = GPTAssistant(current_page=current_page, model_name=model_name)
+        section_id = data.get('section_id')
+
+        assistant = GPTAssistant(current_page='home', model_name=model_name)
         
         # Implement RAG by searching for relevant content
         relevant_content = assistant.search_relevant_content(user_input)
         
-        # Generate response using the relevant content
-        response = generate_response_website(user_input, relevant_content, current_page, model_name)
+        # Fetch section information
+        section_info = WebsiteSection.objects.get(section_id=section_id)
+        
+        # Generate response using the relevant content and section information
+        response = generate_response_website(user_input, relevant_content, model_name, section_info)
 
         return JsonResponse({
             'response': response,
-            'current_page': current_page,
             'has_more_info': bool(relevant_content),
             'relevant_content': [
                 {
@@ -79,6 +85,9 @@ def website_interaction(request):
                 } for content in relevant_content
             ]
         })
+    except WebsiteSection.DoesNotExist:
+        logger.error("Section ID not found")
+        return JsonResponse({'error': 'Section ID not found'}, status=404)
     except json.JSONDecodeError:
         logger.error("Invalid JSON in request body")
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
