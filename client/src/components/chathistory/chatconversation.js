@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './ChatConversation.css';
 
-const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse, isCollapsed }) => {
+const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse, isCollapsed, isSpeaking }) => {
   const [inputMessage, setInputMessage] = useState('');
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
@@ -21,7 +28,8 @@ const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse
     <div className={`chat-conversation ${isOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="chat-header">
         <h3>{isCollapsed ? 'Chat' : 'Chat History'}</h3>
-        <div>
+        <div className="header-buttons">
+          {isSpeaking && <span className="speaking-indicator">🔊</span>}
           <button onClick={onCollapse} className="collapse-button">
             {isCollapsed ? '▲' : '▼'}
           </button>
@@ -29,12 +37,15 @@ const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse
         </div>
       </div>
       {!isCollapsed && (
-        <div className="chat-messages">
-          {messages.map((message, index) => (
-            <div key={index} className={`message ${message.type}`}>
-              <div className="message-content">{message.content}</div>
-            </div>
-          ))}
+        <div className="chat-content">
+          <div className="chat-messages">
+            {messages.map((message, index) => (
+              <div key={index} className={`message ${message.type}`}>
+                <div className="message-content">{message.content}</div>
+              </div>
+            ))}
+            <div ref={messagesEndRef} />
+          </div>
         </div>
       )}
       <div className="chat-input">
@@ -46,8 +57,8 @@ const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse
           placeholder="Type your message..."
         />
         <button onClick={handleSendMessage}>Send</button>
-        <button className="record-button">Record</button>
       </div>
+      {!isCollapsed && <div className="chat-tail"></div>}
     </div>
   );
 };

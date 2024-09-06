@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import axios from "axios";
 import { ServicesData } from "../../InformationFiles/LandingPageInfo";
+import ChatConversation from "../chathistory/chatconversation";
 
-const ParallaxCard = ({ title, description, image }) => {
+const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -26,6 +27,8 @@ const ParallaxCard = ({ title, description, image }) => {
 
   const handleclick = async () => {
     try {
+      onMessageAdd({ type: 'user', content: `Tell me more about ${title}` });
+
       const response = await axios.post(
         "http://localhost:8000/api/know-more-about-service/",
         {
@@ -34,11 +37,11 @@ const ParallaxCard = ({ title, description, image }) => {
         }
       );
 
-      // Handle the response as needed
+      onMessageAdd({ type: 'assistant', content: response.data.response });
       console.log("API Response:", response.data);
     } catch (error) {
-      // Handle errors
       console.error("Error making API call:", error);
+      onMessageAdd({ type: 'assistant', content: "Sorry, I encountered an error. Please try again." });
     }
   };
 
@@ -91,8 +94,25 @@ const ParallaxCard = ({ title, description, image }) => {
 };
 
 const ServicesSection = () => {
+  const [chatMessages, setChatMessages] = useState([]);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleMessageAdd = (newMessage) => {
+    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    setIsChatOpen(true);
+  };
+
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  };
+
+  const handleSendMessage = (newMessage) => {
+    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    // You might want to add API call logic here similar to BlobComponent's handleSendMessage
+  };
+
   return (
-    <div className=" py-20">
+    <div className="py-20 relative">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
           <h1 className="text-5xl text-gray-800 font-bold mb-4">
@@ -111,11 +131,21 @@ const ServicesSection = () => {
                 title={card.title}
                 image={card.image}
                 description={card.description}
+                onMessageAdd={handleMessageAdd}
               />
             </div>
           ))}
         </section>
       </div>
+      <ChatConversation 
+        messages={chatMessages}
+        isOpen={isChatOpen}
+        onClose={handleChatClose}
+        onSendMessage={handleSendMessage}
+        onCollapse={() => {}} // Add collapse functionality if needed
+        isCollapsed={false}
+        isSpeaking={false}
+      />
     </div>
   );
 };
