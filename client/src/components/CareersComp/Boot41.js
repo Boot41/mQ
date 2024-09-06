@@ -8,7 +8,7 @@ const CarouselItem = ({ item }) => (
       src={item.imageSrc}
       alt={item.alt}
       className="w-full object-cover rounded-lg mb-4"
-      style={{ height: '300px' }} // Adjust the height value to be slightly smaller
+      style={{ height: '350px' }} // Adjust the height value to be slightly smaller
     />
     <p className="text-base text-center text-gray-800 font-medium">{item.text}</p>
   </div>
@@ -83,26 +83,26 @@ const Carousel = ({ items }) => {
 const Boot41 = () => {
   return (
     <div className="flex flex-col items-center bg-gray-100 py-8 px-4">
-      <header className="text-center mb-8">
+      <header className="text-center mb-4"> {/* Reduced margin-bottom here */}
         <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight text-black">
           Boot41 at Think41
-          
         </h1>
       </header>
       <main className="flex flex-col items-center w-full max-w-6xl">
-        <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-8">
+        <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-4"> {/* Reduced margin-bottom here */}
           <div className="text-2xl lg:text-3xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900">
-            
+            {/* Optional content */}
           </div>
           <div className="text-base lg:text-lg lg:w-full text-gray-700">
             <p>
-            Bootcamps at Think41 are high-energy, hands-on programs designed to transform new hires into top-notch Think41 professionals. With a blend of intense learning, interactive activities, and deep dives into full-stack development and AI, you'll gain practical skills and a forward-thinking mindset. Connect with industry leaders, collaborate with peers, and immerse yourself in AI’s exciting possibilities. Our bootcamp equips you with the expertise and enthusiasm to excel in our innovative tech-driven culture.
+              Bootcamps at Think41 are high-energy, hands-on programs designed to transform new hires into top-notch Think41 professionals. With a blend of intense learning, interactive activities, and deep dives into full-stack development and AI, you'll gain practical skills and a forward-thinking mindset. Connect with industry leaders, collaborate with peers, and immerse yourself in AI’s exciting possibilities. Our bootcamp equips you with the expertise and enthusiasm to excel in our innovative tech-driven culture.
             </p>
           </div>
         </div>
         <Carousel items={Boot41Slides} />
       </main>
     </div>
+
   );
 };
 

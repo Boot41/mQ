@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Menu, X } from "lucide-react"; // Import menu and close icons from lucide-react
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // For mobile menu
   const navigate = useNavigate();
 
   const handleHeaderClick = (section) => {
     navigate(`/${section}`);
     setActiveSection(section);
     setIsOpen(false);
+    setIsMenuOpen(false); // Close mobile menu
   };
 
   const handleLogoClick = () => {
     navigate("/");
     setActiveSection("home");
+    setIsMenuOpen(false); // Close mobile menu
   };
 
   const handleMouseEnter = (section) => {
@@ -89,36 +93,6 @@ const Header = () => {
           </div>
         );
 
-      case "services":
-        return (
-          <div
-            id="services"
-            className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4"
-          >
-            <h2 className="text-xl font-bold mb-2">Our Services</h2>
-            <div className="space-y-2">
-              {[
-                {
-                  title: "Capabilities",
-                  description: "Discover our capabilities and benefits.",
-                },
-                {
-                  title: "Partnership",
-                  description: "Learn about partnership opportunities.",
-                },
-              ].map(({ title, description }) => (
-                <div
-                  key={title}
-                  className="hover:bg-gray-100 p-2 rounded cursor-pointer"
-                >
-                  <h4 className="text-md font-semibold">{title}</h4>
-                  <p className="text-gray-700">{description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
       case "careers":
         return (
           <div
@@ -158,35 +132,6 @@ const Header = () => {
           </div>
         );
 
-      case "visualizing-ai":
-        return (
-          <div
-            id="visualizing-ai"
-            className="flex flex-col bg-white shadow-lg rounded-lg p-4 space-y-4"
-          >
-            <h2 className="text-xl font-bold mb-2">Visualizing AI</h2>
-            <div className="space-y-2">
-              {[
-                {
-                  title: "Our Secret Sauce",
-                  description: "What makes our AI unique.",
-                },
-                { title: "Recruit 41", description: "How we recruit talent." },
-                { title: "CQ", description: "Customer Quotient insights." },
-                { title: "RQ", description: "Recruitment Quotient insights." },
-              ].map(({ title, description }) => (
-                <div
-                  key={title}
-                  className="hover:bg-gray-100 p-2 rounded cursor-pointer"
-                >
-                  <h4 className="text-md font-semibold">{title}</h4>
-                  <p className="text-gray-700">{description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
       default:
         return null;
     }
@@ -195,25 +140,32 @@ const Header = () => {
   return (
     <>
       <header
-
         className={`fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 transition-all duration-300 ${
           isOpen ? "bg-white shadow-lg" : "bg-white"
         }`}
         id="header-content"
-        // onMouseEnter={() => setIsOpen(true)}
-        // onMouseLeave={handleMouseLeave}
-
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={handleMouseLeave}
       >
         <div className="flex justify-between items-center">
           <div
             className="text-orange-500 font-bold text-2xl cursor-pointer"
             onClick={handleLogoClick}
           >
-            THINK 41
+            THINK41
           </div>
-          <nav className="flex space-x-6 items-center">
+          <div className="lg:hidden">
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-gray-800 focus:outline-none"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+          <nav className="hidden lg:flex space-x-6 items-center">
             <div className="relative flex space-x-6">
-              {["about-us", "visualizing-ai", "careers"].map((section) => (
+              {["about-us", "careers"].map((section) => (
                 <div
                   key={section}
                   onMouseEnter={() => handleMouseEnter(section)}
@@ -237,6 +189,36 @@ const Header = () => {
           </nav>
         </div>
       </header>
+
+      {/* Mobile Menu Content */}
+      {isMenuOpen && (
+        <div
+          id="mobile-menu"
+          className="fixed top-16 left-0 w-full bg-white shadow-lg rounded-lg p-4 lg:hidden"
+        >
+          <div className="flex flex-col space-y-4">
+            {["about-us", "careers"].map((section) => (
+              <Link
+                key={section}
+                to={`/${section}`}
+                className="text-black hover:text-black hover:underline"
+                onClick={() => {
+                  handleHeaderClick(section);
+                }}
+              >
+                {section.replace("-", " ").toUpperCase()}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      )}
+
       {isOpen && (
         <div
           id="dropdown-content"
