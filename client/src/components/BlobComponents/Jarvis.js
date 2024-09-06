@@ -277,7 +277,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
         transition: 'all 0.5s ease-in-out',
         bottom: '20px',
         right: '20px',
-        zIndex: 1001,
+        zIndex: 1002,
         cursor: 'pointer'
       }}
       onClick={onClick}

@@ -13,6 +13,19 @@ const BlobComponent = () => {
   const [chatMessages, setChatMessages] = useState([]);
   const playerRef = useRef(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const speak = (text) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.error('Text-to-speech not supported in this browser.');
+    }
+  };
+
   const handleClick = useCallback(async () => {
     if (!currentSection) {
       console.error("Section ID is not set");
@@ -80,18 +93,15 @@ const BlobComponent = () => {
 
       console.log("API Response:", response.data);
 
-      // Add the assistant's response to chat messages
-      setChatMessages(prevMessages => [
-        ...prevMessages,
-        { type: 'assistant', content: response.data.response }
-      ]);
+      const assistantResponse = response.data.response;
+      setChatMessages(prevMessages => [...prevMessages, { type: 'assistant', content: assistantResponse }]);
+
+      speak(assistantResponse);
     } catch (error) {
       console.error("Error making API call:", error);
-      // Optionally, add an error message to the chat
-      setChatMessages(prevMessages => [
-        ...prevMessages,
-        { type: 'assistant', content: "Sorry, I encountered an error. Please try again." }
-      ]);
+      const errorMessage = "Sorry, I encountered an error. Please try again.";
+      setChatMessages(prevMessages => [...prevMessages, { type: 'assistant', content: errorMessage }]);
+      speak(errorMessage);
     }
   };
 
@@ -113,6 +123,7 @@ const BlobComponent = () => {
         onSendMessage={handleSendMessage}
         onCollapse={handleChatCollapse}
         isCollapsed={isCollapsed}
+        isSpeaking={isSpeaking}
       />
     </div>
   );

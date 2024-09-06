@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
+import axios from "axios";
+import { ServicesData } from "../../InformationFiles/LandingPageInfo";
+import ChatConversation from "../chathistory/chatconversation";
 
-const ParallaxCard = ({ title, description, image }) => {
+const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -21,6 +24,26 @@ const ParallaxCard = ({ title, description, image }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [title]);
+
+  const handleclick = async () => {
+    try {
+      onMessageAdd({ type: 'user', content: `Tell me more about ${title}` });
+
+      const response = await axios.post(
+        "http://localhost:8000/api/know-more-about-service/",
+        {
+          service_name: title,
+          model_name: "4o-mini",
+        }
+      );
+
+      onMessageAdd({ type: 'assistant', content: response.data.response });
+      console.log("API Response:", response.data);
+    } catch (error) {
+      console.error("Error making API call:", error);
+      onMessageAdd({ type: 'assistant', content: "Sorry, I encountered an error. Please try again." });
+    }
+  };
 
   return (
     <div
@@ -71,29 +94,25 @@ const ParallaxCard = ({ title, description, image }) => {
 };
 
 const ServicesSection = () => {
-  const updatedServicesData = [
-    {
-      title: "POC to Production",
-      image: "services3.webp",
-      description:
-        "Think41 transforms GenAI MVPs into scalable, production-ready systems, ensuring efficient transitions while maintaining quality and cost-effectiveness. We help turn your AI innovations into impactful solutions.",
-    },
-    {
-      title: "Conversational AI at Scale",
-      image: "services2.webp",
-      description:
-        "Think41 excels in perfecting the final 25% of GenAI voice systems, creating scalable, low-cost solutions with human-like latency, reactions, and conversational flow. Our Recruit41 bot showcases this expertise by conducting nuanced, human-like interviews beyond basic Q&A.",
-    },
-    {
-      title: "Custom Agent Development",
-      image: "services4.webp",
-      description:
-        "Think41 builds autonomous AI agents that predict, recommend, and adapt, seamlessly integrating with your systems to automate tasks and enhance decision-making. Experience the future of automation with rQ.",
-    },
-  ];
+  const [chatMessages, setChatMessages] = useState([]);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleMessageAdd = (newMessage) => {
+    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    setIsChatOpen(true);
+  };
+
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  };
+
+  const handleSendMessage = (newMessage) => {
+    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    // You might want to add API call logic here similar to BlobComponent's handleSendMessage
+  };
 
   return (
-    <div className="bg-gray-100 py-20">
+    <div className="py-20 relative">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
           <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
@@ -111,11 +130,21 @@ const ServicesSection = () => {
                 title={card.title}
                 image={card.image}
                 description={card.description}
+                onMessageAdd={handleMessageAdd}
               />
             </div>
           ))}
         </section>
       </div>
+      <ChatConversation 
+        messages={chatMessages}
+        isOpen={isChatOpen}
+        onClose={handleChatClose}
+        onSendMessage={handleSendMessage}
+        onCollapse={() => {}} // Add collapse functionality if needed
+        isCollapsed={false}
+        isSpeaking={false}
+      />
     </div>
   );
 };
