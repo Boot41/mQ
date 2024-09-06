@@ -38,21 +38,20 @@ const ParallaxCard = ({ title, description, image }) => {
 
       {/* Content container */}
       <div className="relative h-full">
-  {/* Title and line container */}
-  <div className="relative h-full">
-  {/* Title and line container */}
-  <div
-    className={`absolute bottom-0 w-full transition-transform duration-300 ease-in-out transform ${
-      inView ? "translate-y-0" : "translate-y-full"
-    } group-hover:translate-y-[-60%] z-20`}
-  >
-    <div className="bg-gradient-to-t from-black to-transparent p-4">
-      <h2 className="text-xl font-bold mb-2 text-white">{title}</h2>
-      <div className="border-t border-white w-16 mb-4"></div>
-    </div>
-  </div>
-</div>
-
+        {/* Title and line container */}
+        <div className="relative h-full">
+          {/* Title and line container */}
+          <div
+            className={`absolute bottom-0 w-full transition-transform duration-300 ease-in-out transform ${
+              inView ? "translate-y-0" : "translate-y-full"
+            } group-hover:translate-y-[-60%] z-20`}
+          >
+            <div className="bg-gradient-to-t from-black to-transparent p-4">
+              <h2 className="text-xl font-bold mb-2 text-white">{title}</h2>
+              <div className="border-t border-white w-16 mb-4"></div>
+            </div>
+          </div>
+        </div>
 
         {/* Description container */}
         <div
@@ -93,7 +92,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <div className="bg-gray-100 py-20">
+    <div className=" py-20">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
           <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
@@ -101,11 +100,12 @@ const ServicesSection = () => {
           </h1>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover the latest innovations in AI and how we can transform your business.
+            Discover the latest innovations in AI and how we can transform your
+            business.
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
-        {updatedServicesData.map((card, index) => (
+          {updatedServicesData.map((card, index) => (
             <div key={index} className="flex justify-center">
               <ParallaxCard
                 title={card.title}
@@ -121,4 +121,3 @@ const ServicesSection = () => {
 };
 
 export default ServicesSection;
-
