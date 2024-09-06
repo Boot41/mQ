@@ -1,54 +1,64 @@
-import React from "react";
-import { useSection } from "../TrackUserComps/SectionContext";
+import React from 'react';
+import { Button } from '@mui/material';
+
 const AboutHero = () => {
-  //  const { currentSection } = useSection();
-  //  console.log("this is About Us section");
+  const handleLearnMore = () => {
+    console.log('Learn More clicked');
+  };
+
   return (
-    <div className="text-black font-sans">
-      <div className="max-w-6xl mx-auto py-16 px-8">
-        <h1 className="text-5xl font-bold mb-4">
-          Designing Futures,
-          <br />
-          Crafting Experiences
+    <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
+      <div 
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{ backgroundImage: 'url("r5.png")' }}
+      />
+      <div className="absolute inset-0 bg-black opacity-50 z-10" />
+      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-3xl">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-6 leading-tight">
+          Leading with Passion and Purpose
         </h1>
-        <p className="text-lg mb-8">
-          We blend creativity and innovation to craft immersive designs that
-          redefine experiences. From web interfaces to product aesthetics.
+        <p className="text-xl sm:text-2xl text-gray-200 mb-8">
+          Discover our journey of innovation and impact.
         </p>
-        <button className="flex items-center bg-white border-2 border-black px-4 py-2 rounded-full">
-          <span className="mr-2">Let's Talk</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14.25 9l-4.5 4.5m0 0l4.5 4.5m-4.5-4.5H3.75m9 0a9 9 0 11-9-9 9 9 0 019 9z"
-            />
-          </svg>
-        </button>
-      </div>
-      <div className="w-full h-[300px] overflow-hidden mb-16">
-        <img
-          src="about1hero.jpeg"
-          alt="Team working together"
-          className="w-full object-cover"
-        />
-      </div>
-      <div className="max-w-6xl mx-auto px-8">
-        <h2 className="text-2xl font-bold mb-2">About Us</h2>
-        <p className="text-lg">
-          Welcome to Asigncy, where creative innovation. Our agency is a team of
-          passionate designers to crafting digital experiences.
-        </p>
+        <Button
+          onClick={handleLearnMore}
+          variant="outlined"
+          color="warning"
+          sx={{
+            position: "relative",
+            overflow: "hidden",
+            borderColor: "black",
+            backgroundColor: "black",
+            color: "white",
+            px: 4,
+            py: 2,
+            "&:hover": {
+              color: "white",
+              backgroundColor: "transparent",
+            },
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: "-100%",
+              width: "100%",
+              height: "100%",
+              backgroundColor: "orange",
+              transition: "left 0.5s ease",
+              zIndex: -1,
+              border: "white",
+            },
+            "&:hover::before": {
+              left: 0,
+            },
+          }}
+        >
+          Learn More
+        </Button>
       </div>
     </div>
   );
 };
 
 export default AboutHero;
+  

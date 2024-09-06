@@ -8,7 +8,7 @@ const CarouselItem = ({ item }) => (
       src={item.imageSrc}
       alt={item.alt}
       className="w-full object-cover rounded-lg mb-4"
-      style={{ height: '200px' }} // Adjust the height value to be slightly smaller
+      style={{ height: '300px' }} // Adjust the height value to be slightly smaller
     />
     <p className="text-base text-center text-gray-800 font-medium">{item.text}</p>
   </div>
@@ -84,23 +84,19 @@ const Boot41 = () => {
   return (
     <div className="flex flex-col items-center bg-gray-100 py-8 px-4">
       <header className="text-center mb-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight text-gray-800">
-          We create radical new technologies
-          <br />
-          to solve some of the world's
-          <br />
-          hardest problems
+        <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight text-black">
+          Boot41 at Think41
+          
         </h1>
       </header>
       <main className="flex flex-col items-center w-full max-w-6xl">
         <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-8">
           <div className="text-2xl lg:text-3xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900">
-            <p>Boot</p>
-            <p>41</p>
+            
           </div>
           <div className="text-base lg:text-lg lg:w-full text-gray-700">
             <p>
-            Explanation: Bootcamps at Think41 are intense learning programs that transform new hires into Think41 professionals. It blends a work-hard, play-hard vibe with fun activities and deep dives into full-stack development and AI. You’ll connect with industry leaders, learn from peers, and develop a transformative mindset focused on AI's vast applications. The bootcamp  gives you the skills and mindset to thrive in our innovative, tech-driven environment.
+            Bootcamps at Think41 are high-energy, hands-on programs designed to transform new hires into top-notch Think41 professionals. With a blend of intense learning, interactive activities, and deep dives into full-stack development and AI, you'll gain practical skills and a forward-thinking mindset. Connect with industry leaders, collaborate with peers, and immerse yourself in AI’s exciting possibilities. Our bootcamp equips you with the expertise and enthusiasm to excel in our innovative tech-driven culture.
             </p>
           </div>
         </div>

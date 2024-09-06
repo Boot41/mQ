@@ -4,19 +4,19 @@ import podcast from "../assets/images/podcast.webp";
 
 export const typicalConfig = {
   steps: [
-    "Empowering Digital Innovation & Transformation",
+    "Empowering Digital Innovation & Transformation with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Reimagining Enterprise Software",
+    "Reimagining Enterprise Software in the age of Generative AI",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
-    "Innovate faster. Transform faster",
+    "Innovate faster. Transform faster. Predictable outcome with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Build As You Think. Custom Software-As-A- Service",
+    "Build As You Think. Custom Software-As-A- Service C-SaaS",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
@@ -28,23 +28,22 @@ export const typicalConfig = {
 export const CVPData = [
   {
     image: "p1.png",
-    title: "Streamline and optimise existing software or business processes, such as SDLC, to enhance efficiency & speed.",
+    title: "Optimize processes for speed and efficiency.",
     description:
-      "Accelerated software development cycles through AI-driven automation, Agentic led business processes.",
+      "Leverage AI-driven automation to accelerate software cycles. Enhance business processes for faster, smarter delivery.",
   },
   {
     image: "p2.png",
-    title: "Transform previously impossible use-cases into reality, enabling innovative solutions.",
+    title: "Enable innovative, once-impossible solutions.",
     description:
-      "Fully automated initial interviews using Conversational AI.",
+      "Automate initial interviews using Conversational AI. Unlock new possibilities through advanced automation.",
   },
   {
     image: "p3.png",
-    title: "Explore and develop use-cases that push the boundaries of what's imaginable.",
+    title: "Develop cutting-edge, Innovative use cases.",
     description:
-      "AI-driven personalized learning environments that adapt to individual styles. Use cases around computer vision for inventory management, Doctor Co-pilot, Autonomous Decision Making for specific business processes ",
+      "Create personalized AI-driven learning environments. Utilize AI for vision, decision-making, and business processes.",
   },
-  
 ];
 
 //Auto Pods Data
@@ -137,24 +136,26 @@ export const ServicesData = [
 
 export const DemoData = [
   {
-    name: "Podcast Generator",
-    description:
-      "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
-    img: podcast,
-  },
-
-  {
-    name: "Auto Mailer",
-    description:
-      "Auto Mailer is a cutting-edge AI-powered email marketing outreach tool that automates the creation and delivery of personalized email campaigns. With its advanced content generation capabilities, Auto Mailer can scrape user data, create dynamic templates, and send tailored emails to target audiences based on their interests. The platform's ability to map multiple content pieces to different users ensures that every message is relevant, increasing engagement and conversion rates.",
-    img: podcast,
-  },
-  {
     name: "Recruit 41",
     description:
       "Recruit 41 is an AI-powered digital hiring web application designed to revolutionize the recruitment process. Leveraging advanced machine learning algorithms, Recruit 41 helps companies identify and hire the best-fitting employees by analyzing resumes, assessing skills, and matching candidates to job roles with precision. This automated recruitment agent streamlines the hiring process, reduces time-to-hire, and ensures that organizations find the most qualified talent efficiently.",
-    img: podcast,
+    img: "Recruit41.webp",
   },
+  {
+    name: "RQ",
+    description:
+      "Auto Mailer is a cutting-edge AI-powered email marketing outreach tool that automates the creation and delivery of personalized email campaigns. With its advanced content generation capabilities, Auto Mailer can scrape user data, create dynamic templates, and send tailored emails to target audiences based on their interests. The platform's ability to map multiple content pieces to different users ensures that every message is relevant, increasing engagement and conversion rates.",
+    img: "RQ.webp",
+  },
+  {
+    name: "Podcast Generator",
+    description:
+      "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
+    img: "podcastdemo.png",
+  },
+
+  
+  
 ];
 
 //Latest Insights

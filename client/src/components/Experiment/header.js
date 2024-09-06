@@ -206,7 +206,7 @@ const Header = () => {
       >
         <div className="flex justify-between items-center">
           <div
-            className="text-orange-500 font-bold text-xl cursor-pointer"
+            className="text-orange-500 font-bold text-2xl cursor-pointer"
             onClick={handleLogoClick}
           >
             THINK 41
