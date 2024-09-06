@@ -7,7 +7,6 @@ import JobListings from "./CareersComp/JobListings"; // Assuming JobListing is a
 import Fun from "./CareersComp/Fun";
 import Boot41 from "./CareersComp/Boot41";
 import SectionComponent from "./TrackUserComps/SectionComponent";
-
 import { LifeAtT41 }  from "../InformationFiles/CareersInfo";
 import GlassdoorRating from "./CareersComp/Glassdoor";
 

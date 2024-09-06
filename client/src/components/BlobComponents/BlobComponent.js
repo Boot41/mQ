@@ -1,16 +1,22 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import axios from "axios";
-import ai from "../../assets/images/ai.gif";
 import { useSection } from "../TrackUserComps/SectionContext";
+import Jarvis from "./Jarvis";
 
 const BlobComponent = () => {
   const { currentSection } = useSection();
+  const [isRecording, setIsRecording] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const playerRef = useRef(null);
 
   const handleClick = useCallback(async () => {
     if (!currentSection) {
       console.error("Section ID is not set");
       return;
     }
+
+    setIsRecording(true);
 
     try {
       const response = await axios.post(
@@ -27,19 +33,20 @@ const BlobComponent = () => {
       // Here you can add logic to display the response to the user
     } catch (error) {
       console.error("Error making API call:", error);
+    } finally {
+      setIsRecording(false);
     }
   }, [currentSection]);
 
   return (
-    <div>
-      <div className="fixed bottom-24 right-24 w-24 h-24 z-50">
-        <img
-          src={ai}
-          alt="AI Assistant"
-          className="w-full h-full object-contain bg-blend-lighten"
-          onClick={handleClick}
-        />
-      </div>
+    <div ref={playerRef} style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
+      <Jarvis
+        isRecording={isRecording}
+        isMinimized={isMinimized}
+        isClosing={isClosing}
+        playerRef={playerRef}
+        onClick={handleClick}
+      />
     </div>
   );
 };
