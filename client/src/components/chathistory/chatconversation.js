@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './ChatConversation.css';
 
-const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse, isCollapsed }) => {
+const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse, isCollapsed, isSpeaking }) => {
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
 
@@ -29,6 +29,7 @@ const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse
       <div className="chat-header">
         <h3>{isCollapsed ? 'Chat' : 'Chat History'}</h3>
         <div className="header-buttons">
+          {isSpeaking && <span className="speaking-indicator">🔊</span>}
           <button onClick={onCollapse} className="collapse-button">
             {isCollapsed ? '▲' : '▼'}
           </button>
