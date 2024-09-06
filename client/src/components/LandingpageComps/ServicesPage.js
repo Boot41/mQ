@@ -124,7 +124,7 @@ const ServicesSection = () => {
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
-          {updatedServicesData.map((card, index) => (
+          {ServicesData.map((card, index) => (
 
             <div key={index} className="flex justify-center">
               <ParallaxCard
