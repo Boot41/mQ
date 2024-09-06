@@ -4,19 +4,19 @@ import podcast from "../assets/images/podcast.webp";
 
 export const typicalConfig = {
   steps: [
-    "Empowering Digital Innovation & Transformation",
+    "Empowering Digital Innovation & Transformation with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Reimagining Enterprise Software",
+    "Reimagining Enterprise Software in the age of Generative AI",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
-    "Innovate faster. Transform faster",
+    "Innovate faster. Transform faster. Predictable outcome with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Build As You Think. Custom Software-As-A- Service",
+    "Build As You Think. Custom Software-As-A- Service C-SaaS",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
@@ -28,23 +28,22 @@ export const typicalConfig = {
 export const CVPData = [
   {
     image: "p1.png",
-    title: "Streamline and optimise existing software or business processes, such as SDLC, to enhance efficiency & speed.",
+    title: "Optimize processes for speed and efficiency.",
     description:
-      "Accelerated software development cycles through AI-driven automation, Agentic led business processes.",
+      "Leverage AI-driven automation to accelerate software cycles. Enhance business processes for faster, smarter delivery.",
   },
   {
     image: "p2.png",
-    title: "Transform previously impossible use-cases into reality, enabling innovative solutions.",
+    title: "Enable innovative, once-impossible solutions.",
     description:
-      "Fully automated initial interviews using Conversational AI.",
+      "Automate initial interviews using Conversational AI. Unlock new possibilities through advanced automation.",
   },
   {
     image: "p3.png",
-    title: "Explore and develop use-cases that push the boundaries of what's imaginable.",
+    title: "Develop cutting-edge, Innovative use cases.",
     description:
-      "AI-driven personalized learning environments that adapt to individual styles. Use cases around computer vision for inventory management, Doctor Co-pilot, Autonomous Decision Making for specific business processes ",
+      "Create personalized AI-driven learning environments. Utilize AI for vision, decision-making, and business processes.",
   },
-  
 ];
 
 //Auto Pods Data
@@ -96,40 +95,22 @@ export const pressSectionData = {
 
 export const ServicesData = [
   {
-    title: "Data and AI",
-    subtitle: "Know More",
-    image: "ai1.png",
-    link: "data-ai",
+    title: "POC to Production",
+    image: "services3.webp",
+    description:
+      "Think41 transforms GenAI MVPs into scalable, production-ready systems, ensuring efficient transitions while maintaining quality and cost-effectiveness. We help turn your AI innovations into impactful solutions.",
   },
   {
-    title: "Digitalization",
-    subtitle: "Know More",
-    image: "a2.png",
-    link: "digitalization",
+    title: "Conversational AI at Scale",
+    image: "services2.webp",
+    description:
+      "Think41 excels in perfecting the final 25% of GenAI voice systems, creating scalable, low-cost solutions with human-like latency, reactions, and conversational flow. Our Recruit41 bot showcases this expertise by conducting nuanced, human-like interviews beyond basic Q&A.",
   },
   {
-    title: "Enterprise Platform",
-    subtitle: "Know More",
-    image: "ai3.jpg",
-    link: "enterprise-platform",
-  },
-  {
-    title: "Cloud Solutions",
-    subtitle: "Know More",
-    image: "a1.png",
-    link: "cloud-solutions",
-  },
-  {
-    title: "Technology Transformation",
-    subtitle: "Know More",
-    image: "a3.png",
-    link: "technology-transformation",
-  },
-  {
-    title: "Software Engineering",
-    subtitle: "Know More",
-    image: "a4.png",
-    link: "software-engineering",
+    title: "Custom Agent Development",
+    image: "services4.webp",
+    description:
+      "Think41 builds autonomous AI agents that predict, recommend, and adapt, seamlessly integrating with your systems to automate tasks and enhance decision-making. Experience the future of automation with rQ.",
   },
 ];
 
@@ -154,9 +135,6 @@ export const DemoData = [
       "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
     img: "podcastdemo.png",
   },
-
-  
-  
 ];
 
 //Latest Insights
