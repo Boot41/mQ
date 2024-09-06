@@ -132,7 +132,7 @@ function MeetFounders() {
                       alignItems: "baseline",
                     }}
                   >
-                    <div className="mt-2 ">
+                    <div className="-mt-5 ">
                       <IconButton
                         component="a"
                         href={member.linkedin}
@@ -152,7 +152,7 @@ function MeetFounders() {
                           sx={{ fontSize: "inherit", marginRight: "1rem" }}
                         />
                       </IconButton>
-                      <Button
+                      {/* <Button
                         variant="contained"
                         color="primary"
                         onClick={() => alert("Know More clicked!")}
@@ -170,7 +170,7 @@ function MeetFounders() {
                         }}
                       >
                         Know More
-                      </Button>
+                      </Button> */}
                     </div>
                   </div>
                 </CardContent>

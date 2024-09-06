@@ -27,10 +27,11 @@ function AboutUS2() {
             <WhoAndWhat2 />
           </div>
         </SectionComponent>
-        <SectionComponent id="comp-stats">
+        <StatsSection />
+        {/* <SectionComponent id="comp-stats">
           <CompStats />
-        </SectionComponent>
-        <StatsSection/>
+        </SectionComponent> */}
+
         <SectionComponent id="meetfounders-section">
           <div id="t41-advantage">
             <MeetFounders />

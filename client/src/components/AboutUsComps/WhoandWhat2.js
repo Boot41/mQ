@@ -53,7 +53,7 @@ export default function WhoAndWhat2() {
               >
                 {slide.header}
               </Typography>
-              <Typography
+              {/* <Typography
                 variant="h6"
                 component="h2"
                 color="text.secondary"
@@ -68,25 +68,35 @@ export default function WhoAndWhat2() {
                 }}
               >
                 {slide.header2}
-              </Typography>
+              </Typography> */}
               <Typography
-                variant="body1"
+                variant="h6"
                 sx={{
                   mb: 2,
-                  fontSize: { xs: "body2.fontSize", sm: "body1.fontSize" },
+                  fontSize: {
+                    xs: "body2.fontSize",
+                    sm: "body1.fontSize",
+                    lg: "h6.fontSize",
+                  },
                   color: "grey", // Text color
+                  textAlign: "justify", // Justify the text
                 }}
               >
-                {slide.body}
+                {"  " + slide.body}
               </Typography>
               <Typography
-                variant="body1"
+                variant=""
                 sx={{
-                  fontSize: { xs: "body2.fontSize", sm: "body1.fontSize" },
+                  fontSize: {
+                    xs: "body2.fontSize",
+                    sm: "body1.fontSize",
+                    lg: "h6.fontSize",
+                  },
                   color: "grey", // Text color
+                  textAlign: "justify", // Justify the text
                 }}
               >
-                {slide.body2}
+                {"  " + slide.body2}
               </Typography>
             </Box>
 
