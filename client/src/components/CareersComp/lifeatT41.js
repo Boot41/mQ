@@ -15,9 +15,9 @@ const OurAds = () => {
           {/* Left Column: Image */}
           <div className="w-full md:w-1/2">
             <img
-              src="careers.jpg"
+              src="careersabout.webp"
               alt="Life at Think 41"
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-[200px] object-cover rounded-lg"
             />
           </div>
           
@@ -32,41 +32,9 @@ const OurAds = () => {
         </div>
 
         {/* Four Key Benefits */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-24 pt-12 border-t border-gray-200">
-          {[
-            {
-              percentage: "",
-              title: "Flexible Work Hours",
-              description: "Front and center"
-            },
-            {
-              percentage: "",
-              title: "Free Meals",
-              description: "5% viewing time"
-            },
-            {
-              percentage: "",
-              title: "Incubator for New Ideas",
-              description: "Front and center"
-            },
-            {
-              percentage: "",
-              title: "Fun With Purpose",
-              description: "Guaranteed views"
-            }
-            
-          ].map((benefit, index) => (
-            <div key={index} className="flex items-center space-x-4 p-4 border rounded-lg shadow-sm">
-              <div className="flex-none w-16 h-16 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 text-center flex items-center justify-center text-xl font-bold text-white">
-                {benefit.percentage}
-              </div>
-              <div>
-                <h3 className="font-semibold text-base">{benefit.title}</h3>
-                <p className="text-sm text-gray-600">{benefit.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-24 pt-12 border-t border-gray-200">{[{ title: "Flexible Work Hours" }, { title: "Free Meals" }, { title: "Incubator for New Ideas" }, { title: "Fun With Purpose" }, { title: "Health and Wellness Programs" }].map((benefit, index) => (<div key={index} className="flex items-center space-x-4 p-4 border rounded-lg shadow-sm bg-white"><div className="flex-none w-16 h-16 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 text-center flex items-center justify-center text-xl font-bold text-white"><span className="text-2xl">✓</span></div><div><h3 className="font-semibold text-lg">{benefit.title}</h3></div></div>))}</div>
+
+
       </div>
     </div>
   );

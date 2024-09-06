@@ -1,22 +1,22 @@
 // Boot 41 Slides Info
 export const Boot41Slides = [
   {
-    imageSrc: "ai1.png",
+    imageSrc: "boot1.jpeg",
     alt: "Description of Image 1",
     text: "Learn from industry leaders on cutting-edge tech and business insights.",
   },
   {
-    imageSrc: "ai1.png",
+    imageSrc: "boot2.jpeg",
     alt: "Description of Image 2",
     text: "Master SDLC and full-stack concepts with hands-on AI experience.",
   },
   {
-    imageSrc: "ai1.png",
+    imageSrc: "boot3.jpeg",
     alt: "Description of Image 3",
     text: "Take breaks and enjoy fun activities to recharge and connect.",
   },
   {
-    imageSrc: "ai1.png",
+    imageSrc: "boot4.jpeg",
     alt: "Description of Image 3",
     text: "Receive recognition and appreciation for your hard work and achievements.",
   },

@@ -60,25 +60,23 @@ export const FoundersData = [
 
 export const VisionData = [
   {
-    title: "Our Vision",
-    header: "Our Vision",
-    header2: "Empowering Industries with AI & Machine Learning",
+    title: "We use Gen AI and Agentic Workflows for Operations ",
+    header: "We use Gen AI and Agentic Workflows for Operations ",
+    header2: "Impact",
     body: "We move faster be it recruitment, training, project management, allocations, execution and so on. This while providing an extra personalised experience - where software works according to your needs and not the other way around.",
-    body2:
-      "With a commitment to cutting-edge research and development, we aim to be the pioneers in transforming how businesses operate, making data-driven decisions more accessible and impactful.",
+    
     imgSrc:
-      "https://media.mktg.workday.com/is/image/workday/illustration-people-tree-technology-FoW-1?fmt=png-alpha&wid=1000",
+      "aboutus2.webp",
     bgColor: "bg-slate-300",
   },
   {
     title: "Our Approach",
-    header: "Our Approach",
+    header: "Dev41 Platform for Software Generation & Management",
     header2: "Innovating with Purpose and Precision",
     body: "With Dev41 our teams create and launch products much faster. This unique platform lets us deliver more with less - and works across the SDLC. It can be customised to specific client needs - accelerating software development across teams.",
-    body2:
-      "By leveraging the full potential of S&P Global's data and combining it with state-of-the-art machine learning models, we create solutions that are both scalable and reliable, ensuring our clients stay ahead in a rapidly evolving market.",
+    
     imgSrc:
-      "https://www.pngall.com/wp-content/uploads/10/Artist-No-Background.png",
+      "aboutus1.webp",
     bgColor: "bg-slate-300",
   },
   {
@@ -86,8 +84,7 @@ export const VisionData = [
     header: "Our Impact",
     header2: "Transforming Data into Actionable Insights",
     body: "We invest in a Gen AI foundation, so we can offer a much higher value proposition to our clients. We can take projects most others would find challenging and deliver them in lesser time and with minimum hassle.",
-    body2:
-      "Our impact is felt across various sectors, from finance to healthcare, where we provide essential intelligence that drives progress and innovation. We are committed to continuing this journey, constantly pushing the boundaries of what AI can achieve.",
+    
     imgSrc:
       "https://png.pngtree.com/png-vector/20240309/ourmid/pngtree-small-business-worker-occupation-landing-header-vector-png-image_11904072.png",
     bgColor: "bg-slate-300",
