@@ -4,19 +4,19 @@ import podcast from "../assets/images/podcast.webp";
 
 export const typicalConfig = {
   steps: [
-    "Empowering Digital Innovation & Transformation ...!",
+    "Empowering Digital Innovation & Transformation with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Reimagining Enterprise Software ...!",
+    "Reimagining Enterprise Software in the age of Generative AI",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
-    "Innovate faster. Transform faster ...!",
+    "Innovate faster. Transform faster. Predictable outcome with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Build As You Think. Custom Software-As-A- Service ...!",
+    "Build As You Think. Custom Software-As-A- Service C-SaaS",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
