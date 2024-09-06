@@ -150,27 +150,11 @@ function MeetFounders() {
                       >
                         <LinkedInIcon
                           sx={{ fontSize: "inherit", marginRight: "1rem" }}
+                          onclick={() => {
+                            window.open(member.linkedin, "_blank");
+                          }}
                         />
                       </IconButton>
-                      {/* <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => alert("Know More clicked!")}
-                        sx={{
-                          fontSize: {
-                            xs: "0.6rem",
-                            sm: "0.8rem",
-                            md: "1.2rem",
-                          },
-                          padding: {
-                            xs: "8px 16px",
-                            sm: "10px 20px",
-                            md: "12px 24px",
-                          },
-                        }}
-                      >
-                        Know More
-                      </Button> */}
                     </div>
                   </div>
                 </CardContent>

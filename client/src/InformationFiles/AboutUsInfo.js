@@ -30,26 +30,30 @@ export const FoundersData = [
   {
     name: "Anshuman Singh, CEO",
     description:
-      "Anshu loves tech and scalability, having built hundreds of products and driven significant growth  in the past 13 years. He approaches business problems like chess challenges, drawing from his expertise as a chess master. Outside of work, Anshu enjoys playing carrom and tennis, balancing his strategic mind with fun and competition. ",
+      "Anshu loves tech and scalability, having built hundreds of products and driven significant growth in the past 13 years. He approaches business problems like chess challenges, drawing from his expertise as a chess master. Outside of work, Anshu enjoys playing carrom and tennis, balancing his strategic mind with fun and competition.",
     image: "anshuman.jpeg",
+    linkedin: "https://www.linkedin.com/in/anshum4n/", // Add the LinkedIn profile URL here
   },
   {
     name: "Harshit Singhal, CTO",
     description:
       "Harshit loves business and has supercharged the growth trajectory for HashedIn, significantly expanding the mid-market segment for Deloitte. Previously, he co-founded Auctus Advisors, a strategy consulting firm acquired by YCP, and worked as a management consultant with SDG. Passionate about history, Harshit also enjoys diving deep into the past to draw lessons for the future.",
     image: "Harshit.jpeg",
+    linkedin: "https://www.linkedin.com/in/harshitsinghal01/", // Add the LinkedIn profile URL here
   },
   {
     name: "Himanshu Varshney, COO",
     description:
       "Himanshu is a people person. Along with leading HashedIn, he has championed the creation of an open culture at Deloitte Engineering and was recognized as one of India's Top 25 Trusted Leaders by GPTW. Formerly with Trilogy, Himanshu is also an All-Star sportsman from IIT Guwahati and HashedIn. He remains active in various sports, continually fostering teamwork and spirit.",
     image: "himanshu.jpeg",
+    linkedin: "https://www.linkedin.com/in/himanshuhv/", // Add the LinkedIn profile URL here
   },
   {
     name: "Sripathi Krishnan, CFO",
     description:
       "Sri is a tech guy who served as the CTO and MD of Modern Software Engineering at Deloitte US, where he was responsible for technology strategy and GenAI innovation. He previously founded RDBTools, acquired by RedisLabs. Known as a champ for GenAI CoE, Sri is also a foodie who loves hosting and attending parties, blending his passion for technology with a zest for life.",
     image: "sripathi.jpeg",
+    linkedin: "https://www.linkedin.com/in/sripathikrishnan/", // Add the LinkedIn profile URL here
   },
 ];
 
