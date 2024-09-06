@@ -8,6 +8,8 @@ import CompStats from "./AboutUsComps/CompanyStats";
 import AboutHero from "./AboutUsComps/AboutHero";
 
 import SectionComponent from "./TrackUserComps/SectionComponent";
+import WhyUsSection from "./AboutUsComps/Whyus";
+import StatsSection from "./AboutUsComps/Stats";
 
 function AboutUS2() {
   return (
@@ -18,14 +20,17 @@ function AboutUS2() {
           <AboutHero />
         </SectionComponent>
 
-        <SectionComponent id="comp-stats">
-          <CompStats />
-        </SectionComponent>
+        <WhyUsSection />
+
         <SectionComponent id="mission-vision">
           <div id="mission-vision">
             <WhoAndWhat2 />
           </div>
         </SectionComponent>
+        <SectionComponent id="comp-stats">
+          <CompStats />
+        </SectionComponent>
+        <StatsSection/>
         <SectionComponent id="meetfounders-section">
           <div id="t41-advantage">
             <MeetFounders />
