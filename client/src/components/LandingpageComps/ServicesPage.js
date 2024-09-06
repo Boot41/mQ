@@ -15,7 +15,7 @@ const ParallaxCard = ({ title, description, image }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll();
+    handleScroll(); // Initial check
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -36,51 +36,57 @@ const ParallaxCard = ({ title, description, image }) => {
         }}
       />
 
-      {/* Title and line container */}
-      <div
-        className={`absolute bottom-0 bg-gradient-to-t from-black to-transparent p-4 transition-transform duration-300 ease-in-out transform ${
-          inView ? "translate-y-0" : "translate-y-full"
-        } group-hover:translate-y-[-50%]`} // Moves up on hover
-      >
-        <h2 className="text-xl font-bold mb-2">{title}</h2>
-        <div className="border-t border-white w-16 transition-all duration-300 group-hover:w-full"></div>
-      </div>
+      {/* Content container */}
+      <div className="relative h-full">
+  {/* Title and line container */}
+  <div className="relative h-full">
+  {/* Title and line container */}
+  <div
+    className={`absolute bottom-0 w-full transition-transform duration-300 ease-in-out transform ${
+      inView ? "translate-y-0" : "translate-y-full"
+    } group-hover:translate-y-[-60%] z-20`}
+  >
+    <div className="bg-gradient-to-t from-black to-transparent p-4">
+      <h2 className="text-xl font-bold mb-2 text-white">{title}</h2>
+      <div className="border-t border-white w-16 mb-4"></div>
+    </div>
+  </div>
+</div>
 
-      {/* Description container */}
-      <div
-        className={`bg-black bg-opacity-80 p-4 absolute inset-x-0 bottom-0 transition-transform duration-300 ease-in-out transform ${
-          inView ? "translate-y-full" : "translate-y-full"
-        } group-hover:translate-y-0`} // Slides into view on hover
-      >
-        <p className="text-sm mb-4">{description}</p>
-        <div className="flex items-center text-orange-400 font-semibold">
-          Learn More <ChevronRight className="ml-2" size={18} />
+
+        {/* Description container */}
+        <div
+          className={`absolute bottom-0 w-full bg-black bg-opacity-80 p-4 transition-transform duration-300 ease-in-out transform ${
+            inView ? "translate-y-full" : "translate-y-full"
+          } group-hover:translate-y-0 group-hover:z-30`}
+        >
+          <p className="text-sm mb-4 text-white">{description}</p>
+          <div className="flex items-center text-orange-400 font-semibold">
+            Learn More <ChevronRight className="ml-2" size={18} />
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-
-
-
 const ServicesSection = () => {
   const updatedServicesData = [
     {
       title: "POC to Production",
-      image: "ai1.png",
+      image: "services3.webp",
       description:
         "Think41 transforms GenAI MVPs into scalable, production-ready systems, ensuring efficient transitions while maintaining quality and cost-effectiveness. We help turn your AI innovations into impactful solutions.",
     },
     {
       title: "Conversational AI at Scale",
-      image: "ai3.jpg",
+      image: "services2.webp",
       description:
         "Think41 excels in perfecting the final 25% of GenAI voice systems, creating scalable, low-cost solutions with human-like latency, reactions, and conversational flow. Our Recruit41 bot showcases this expertise by conducting nuanced, human-like interviews beyond basic Q&A.",
     },
     {
       title: "Custom Agent Development",
-      image: "r4.jpg",
+      image: "services4.webp",
       description:
         "Think41 builds autonomous AI agents that predict, recommend, and adapt, seamlessly integrating with your systems to automate tasks and enhance decision-making. Experience the future of automation with rQ.",
     },
@@ -90,16 +96,16 @@ const ServicesSection = () => {
     <div className="bg-gray-100 py-20">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
-          <h1 className="text-5xl text-white font-bold font-['Baskervville SC, serif'] mb-4">
+          <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
             Our Services
           </h1>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
-          <p className="text-xl text-white max-w-2xl mx-auto">
-          Discover the latest innovations in AI and how we can transform your business.
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Discover the latest innovations in AI and how we can transform your business.
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
-          {updatedServicesData.map((card, index) => (
+        {updatedServicesData.map((card, index) => (
             <div key={index} className="flex justify-center">
               <ParallaxCard
                 title={card.title}
