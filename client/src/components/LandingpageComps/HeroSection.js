@@ -138,7 +138,6 @@ function HeroSection2() {
           width="100%"
           height="100%"
           title="Spline Model"
-          style={{ zIndex: 1 }}
         ></iframe>
       </Box>
     </Box>
