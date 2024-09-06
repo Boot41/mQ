@@ -24,13 +24,14 @@ function HeroSection2() {
             fontFamily="Baskervville SC, serif"
             gutterBottom
             sx={{
-              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "3rem" }, // Adjusted for smaller screens
-              lineHeight: "2", // Consistent line spacing
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "4rem" }, // Adjusted for smaller screens
+              lineHeight: "1.2", // Consistent line spacing
               maxWidth: "100%", // Ensure full-width usage
-              height: { xs: "4rem", sm: "5rem", md: "6rem", lg: "9rem" }, // Fixed height for different screen sizes
+              height: { xs: "4rem", sm: "5rem", md: "6rem", lg: "20rem" }, // Fixed height for different screen sizes
               overflow: "hidden", // Prevent content overflow
               display: "flex", // Flex display for centering
               alignItems: "center", // Vertically center text
+              justifyContent: "center", // Horizontally center text
             }}
           >
             <span style={{ color: "orange" }}>

@@ -45,11 +45,11 @@ const LandingPage = () => {
         <HeroSection2 />
       </SectionComponent>
 
-      <SectionComponent id="about-section">
+      <SectionComponent id="about-section" className="-mb-28">
         <About />
       </SectionComponent>
 
-      <SectionComponent id="autopods-section">
+      <SectionComponent id="autopods-section" className="mt-28">
         <Autopods />
       </SectionComponent>
 
