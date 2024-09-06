@@ -136,24 +136,26 @@ export const ServicesData = [
 
 export const DemoData = [
   {
-    name: "Podcast Generator",
-    description:
-      "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
-    img: podcast,
-  },
-
-  {
-    name: "Auto Mailer",
-    description:
-      "Auto Mailer is a cutting-edge AI-powered email marketing outreach tool that automates the creation and delivery of personalized email campaigns. With its advanced content generation capabilities, Auto Mailer can scrape user data, create dynamic templates, and send tailored emails to target audiences based on their interests. The platform's ability to map multiple content pieces to different users ensures that every message is relevant, increasing engagement and conversion rates.",
-    img: podcast,
-  },
-  {
     name: "Recruit 41",
     description:
       "Recruit 41 is an AI-powered digital hiring web application designed to revolutionize the recruitment process. Leveraging advanced machine learning algorithms, Recruit 41 helps companies identify and hire the best-fitting employees by analyzing resumes, assessing skills, and matching candidates to job roles with precision. This automated recruitment agent streamlines the hiring process, reduces time-to-hire, and ensures that organizations find the most qualified talent efficiently.",
-    img: podcast,
+    img: "Recruit41.webp",
   },
+  {
+    name: "RQ",
+    description:
+      "Auto Mailer is a cutting-edge AI-powered email marketing outreach tool that automates the creation and delivery of personalized email campaigns. With its advanced content generation capabilities, Auto Mailer can scrape user data, create dynamic templates, and send tailored emails to target audiences based on their interests. The platform's ability to map multiple content pieces to different users ensures that every message is relevant, increasing engagement and conversion rates.",
+    img: "RQ.webp",
+  },
+  {
+    name: "Podcast Generator",
+    description:
+      "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
+    img: "podcastdemo.png",
+  },
+
+  
+  
 ];
 
 //Latest Insights

@@ -32,13 +32,13 @@ const TestimonialSection = () => {
 
         <div className="relative mb-16">
           <h2
-            className="text-[8rem] font-bold text-gray-100 absolute inset-0 flex items-center justify-center tracking-wide hidden md:flex"
+            className="text-[8rem] font-bold text-gray-200 absolute inset-0 flex items-center justify-center tracking-wide hidden md:flex"
             aria-hidden="true"
           >
-            Testimonials
+            Thinkers
           </h2>
           <h2 className="text-4xl font-bold text-gray-900 relative z-10 mb-20">
-            Testimonials
+            Speak
           </h2>
         </div>
 

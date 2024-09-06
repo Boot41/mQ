@@ -17,7 +17,7 @@ const JobList = () => {
     <div className="bg-gray-50 py-20 px-6">
       <div className="max-w-4xl mx-auto pt-12">
         <h1 className="text-5xl font-light text-center mb-12">
-          Open positions
+          Open positions  
         </h1>
 
         {/* Search Bar */}
