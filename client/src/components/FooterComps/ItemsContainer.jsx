@@ -2,9 +2,10 @@ import Item from "./Item";
 import { PRODUCTS, Services, COMPANY, Pages } from "./Menus";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+
 const ItemsContainer = () => {
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div>
         {Pages.map((page) => (
           <Link
@@ -14,7 +15,7 @@ const ItemsContainer = () => {
           ></Link>
         ))}
       </div>
-      <div className="flex justify-around items-start px-4 sm:px-12 p-20 bg-white/10 w-full max-w-[52vw] gap-8   border-orange-300">
+      <div className="flex flex-col md:flex-row justify-around items-start sm:px-4 md:px-12 py-10 bg-white/10 w-full max-w-[52vw]  gap-4 md:gap-8 border-orange-300">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <HiOutlineBuildingOffice2
@@ -22,7 +23,7 @@ const ItemsContainer = () => {
               color="orange"
               className="mr-2 border-2 border-orange-400 p-1"
             />
-            <h1 className="text-xl font-semibold text-orange-400">
+            <h1 className="text-lg md:text-xl font-semibold text-orange-400">
               Office Address
             </h1>
           </div>
@@ -38,7 +39,6 @@ const ItemsContainer = () => {
         <Item Links={Services} title="Services" />
         <Item Links={PRODUCTS} title="PRODUCTS" />
         <Item Links={COMPANY} title="COMPANY" />
-        {/* <Item Links={SUPPORT} title="SUPPORT" /> */}
       </div>
     </div>
   );
