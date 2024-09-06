@@ -20,12 +20,17 @@ const CareersHome = () => {
         <HeroSection />
       </SectionComponent>
 
-      <GlassdoorRating />
-      <OurAds />
 
+     
+    <GlassdoorRating />
+    
+      
+=======
+      
       <SectionComponent id="values-careers">
         <Values />
       </SectionComponent>
+      <OurAds />
 
       {/* <LifeAtT41 /> */}
       <SectionComponent id="boot41-careers">
@@ -40,9 +45,9 @@ const CareersHome = () => {
       <SectionComponent id="joblisting-careers">
         <JobListings />
       </SectionComponent>
-      <SectionComponent id="fun-careers">
+      {/* <SectionComponent id="fun-careers">
         <Fun />
-      </SectionComponent>
+      </SectionComponent> */}
     </div>
   );
 };

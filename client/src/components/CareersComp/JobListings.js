@@ -62,11 +62,15 @@ const OpenPositions = () => {
 const HeroImage = () => {
   return (
     <div className="relative w-1/3 h-7xl">
-      <img
-        src="careersopenpositions.jpeg"
-        alt="Hero Image"
-        className="w-full h-full object-cover rounded-lg"
-      />
+      <div className="relative w-full h-full">
+  <img
+    src="r3.webp"
+    alt="Hero Image"
+    className="w-full h-full object-cover rounded-lg"
+  />
+  <div className="absolute inset-0 bg-gray-200 opacity-30 rounded-lg"></div>
+</div>
+
       <div
         className="absolute inset-0 flex flex-col justify-center items-center text-center bg-transparent p-4"
         style={{ fontFamily: "Open Sans, sans-serif" }}

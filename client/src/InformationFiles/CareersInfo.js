@@ -241,7 +241,7 @@ export const valuesData = {
     text: "Imagine a place where AI handles the routine, so you can focus on the extraordinary. At Think41, AI streamlines processes to boost your productivity, giving you more space to innovate, create, and grow. Here, AI is not just a tool—it’s a catalyst for your career, helping you stay ahead in technology and turn your ideas into impactful solutions.",
   },
   image: {
-    src: "careerswhyus2.jpeg",
+    src: "careerslifeatthink41.webp",
     alt: "office",
   },
 };
