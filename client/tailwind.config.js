@@ -24,6 +24,11 @@ module.exports = {
       },
     },
     extend: {
+      scrollbar: {
+        thin: "2px",
+        thumb: "gray",
+        track: "white",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -81,8 +86,8 @@ module.exports = {
           to: { height: "0" },
         },
         progress: {
-          '0%': { strokeDasharray: '0 628' },
-          '100%': { strokeDasharray: '628 0' },
+          "0%": { strokeDasharray: "0 628" },
+          "100%": { strokeDasharray: "628 0" },
         },
       },
       animation: {
@@ -106,6 +111,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwind-scrollbar"),
     require("tailwindcss-animate"),
     function ({ addUtilities }) {
       const newUtilities = {

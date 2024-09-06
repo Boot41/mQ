@@ -46,11 +46,11 @@ const LandingPage = () => {
       </SectionComponent>
 
       <SectionComponent id="about-section">
-        <About />
+        <About className="-mb-28" />
       </SectionComponent>
 
       <SectionComponent id="autopods-section">
-        <Autopods />
+        <Autopods className=" mb-28" />
       </SectionComponent>
 
       <SectionComponent id="services-section">

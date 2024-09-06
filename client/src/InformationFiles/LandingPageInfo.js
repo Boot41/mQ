@@ -4,19 +4,19 @@ import podcast from "../assets/images/podcast.webp";
 
 export const typicalConfig = {
   steps: [
-    "Empowering Digital Innovation & Transformation",
+    "Empowering Digital Innovation & Transformation with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Reimagining Enterprise Software",
+    "Reimagining Enterprise Software in the age of Generative AI",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
-    "Innovate faster. Transform faster",
+    "Innovate faster. Transform faster. Predictable outcome with Autopods",
     2000, // Hold for 2 seconds
     "",
     500, // Brief pause for smooth transition
-    "Build As You Think. Custom Software-As-A- Service",
+    "Build As You Think. Custom Software-As-A- Service C-SaaS",
     2000, // Hold for 2 seconds
     "",
     500, // Another brief pause
@@ -28,23 +28,22 @@ export const typicalConfig = {
 export const CVPData = [
   {
     image: "p1.png",
-    title: "Streamline and optimise existing software or business processes, such as SDLC, to enhance efficiency & speed.",
+    title: "Optimize processes for speed and efficiency.",
     description:
-      "Accelerated software development cycles through AI-driven automation, Agentic led business processes.",
+      "Leverage AI-driven automation to accelerate software cycles. Enhance business processes for faster, smarter delivery.",
   },
   {
     image: "p2.png",
-    title: "Transform previously impossible use-cases into reality, enabling innovative solutions.",
+    title: "Enable innovative, once-impossible solutions.",
     description:
-      "Fully automated initial interviews using Conversational AI.",
+      "Automate initial interviews using Conversational AI. Unlock new possibilities through advanced automation.",
   },
   {
     image: "p3.png",
-    title: "Explore and develop use-cases that push the boundaries of what's imaginable.",
+    title: "Develop cutting-edge, Innovative use cases.",
     description:
-      "AI-driven personalized learning environments that adapt to individual styles. Use cases around computer vision for inventory management, Doctor Co-pilot, Autonomous Decision Making for specific business processes ",
+      "Create personalized AI-driven learning environments. Utilize AI for vision, decision-making, and business processes.",
   },
-  
 ];
 
 //Auto Pods Data
