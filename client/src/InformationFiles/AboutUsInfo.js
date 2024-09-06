@@ -63,7 +63,7 @@ export const VisionData = [
     title: "Our Vision",
     header: "Our Vision",
     header2: "Empowering Industries with AI & Machine Learning",
-    body: "At Think41, we envision a world where AI and machine learning are seamlessly integrated into every aspect of business, driving innovation and efficiency. We strive to unlock new opportunities and insights that were previously unimaginable.",
+    body: "We move faster be it recruitment, training, project management, allocations, execution and so on. This while providing an extra personalised experience - where software works according to your needs and not the other way around.",
     body2:
       "With a commitment to cutting-edge research and development, we aim to be the pioneers in transforming how businesses operate, making data-driven decisions more accessible and impactful.",
     imgSrc:
@@ -74,7 +74,7 @@ export const VisionData = [
     title: "Our Approach",
     header: "Our Approach",
     header2: "Innovating with Purpose and Precision",
-    body: "Think41 believes in the power of purpose-driven innovation. Our approach is centered around developing AI solutions that not only solve complex problems but also enhance the quality of decision-making processes across industries.",
+    body: "With Dev41 our teams create and launch products much faster. This unique platform lets us deliver more with less - and works across the SDLC. It can be customised to specific client needs - accelerating software development across teams.",
     body2:
       "By leveraging the full potential of S&P Global's data and combining it with state-of-the-art machine learning models, we create solutions that are both scalable and reliable, ensuring our clients stay ahead in a rapidly evolving market.",
     imgSrc:
@@ -85,7 +85,7 @@ export const VisionData = [
     title: "Our Impact",
     header: "Our Impact",
     header2: "Transforming Data into Actionable Insights",
-    body: "The technologies developed at Think41 are at the forefront of turning vast amounts of data into actionable insights. Our AI and machine learning solutions empower businesses to make informed decisions with confidence, leading to better outcomes and sustained growth.",
+    body: "We invest in a Gen AI foundation, so we can offer a much higher value proposition to our clients. We can take projects most others would find challenging and deliver them in lesser time and with minimum hassle.",
     body2:
       "Our impact is felt across various sectors, from finance to healthcare, where we provide essential intelligence that drives progress and innovation. We are committed to continuing this journey, constantly pushing the boundaries of what AI can achieve.",
     imgSrc:

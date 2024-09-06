@@ -9,6 +9,7 @@ import AboutHero from "./AboutUsComps/AboutHero";
 
 import SectionComponent from "./TrackUserComps/SectionComponent";
 import WhyUsSection from "./AboutUsComps/Whyus";
+import StatsSection from "./AboutUsComps/Stats";
 
 function AboutUS2() {
   return (
@@ -29,6 +30,7 @@ function AboutUS2() {
         <SectionComponent id="comp-stats">
           <CompStats />
         </SectionComponent>
+        <StatsSection/>
         <SectionComponent id="meetfounders-section">
           <div id="t41-advantage">
             <MeetFounders />

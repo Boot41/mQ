@@ -15,7 +15,7 @@ const ParallaxCard = ({ title, description, image }) => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -36,25 +36,33 @@ const ParallaxCard = ({ title, description, image }) => {
         }}
       />
 
-      {/* Content container */}
-      <div className="absolute inset-0 flex flex-col justify-end text-white">
-        {/* Title and line container */}
-        <div className="bg-gradient-to-t from-black to-transparent p-4 transition-transform duration-300 ease-in-out transform group-hover:translate-y-[-70px]">
-          <h2 className="text-xl font-bold mb-2">{title}</h2>
-          <div className="border-t border-white w-16 transition-all duration-300 group-hover:w-full"></div>
-        </div>
+      {/* Title and line container */}
+      <div
+        className={`absolute bottom-0 bg-gradient-to-t from-black to-transparent p-4 transition-transform duration-300 ease-in-out transform ${
+          inView ? "translate-y-0" : "translate-y-full"
+        } group-hover:translate-y-[-50%]`} // Moves up on hover
+      >
+        <h2 className="text-xl font-bold mb-2">{title}</h2>
+        <div className="border-t border-white w-16 transition-all duration-300 group-hover:w-full"></div>
+      </div>
 
-        {/* Description (initially hidden, revealed on hover) */}
-        <div className="bg-black bg-opacity-80 p-4 absolute inset-x-0 bottom-0 transition-transform duration-300 ease-in-out transform translate-y-full group-hover:translate-y-0">
-          <p className="text-sm mb-4">{description}</p>
-          <div className="flex items-center text-orange-400 font-semibold">
-            Learn More <ChevronRight className="ml-2" size={18} />
-          </div>
+      {/* Description container */}
+      <div
+        className={`bg-black bg-opacity-80 p-4 absolute inset-x-0 bottom-0 transition-transform duration-300 ease-in-out transform ${
+          inView ? "translate-y-full" : "translate-y-full"
+        } group-hover:translate-y-0`} // Slides into view on hover
+      >
+        <p className="text-sm mb-4">{description}</p>
+        <div className="flex items-center text-orange-400 font-semibold">
+          Learn More <ChevronRight className="ml-2" size={18} />
         </div>
       </div>
     </div>
   );
 };
+
+
+
 
 const ServicesSection = () => {
   const updatedServicesData = [
@@ -82,12 +90,12 @@ const ServicesSection = () => {
     <div className="bg-gray-100 py-20">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
-          <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
+          <h1 className="text-5xl text-white font-bold font-['Baskervville SC, serif'] mb-4">
             Our Services
           </h1>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover the latest innovations in AI and how we can transform your business.
+          <p className="text-xl text-white max-w-2xl mx-auto">
+          Discover the latest innovations in AI and how we can transform your business.
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
@@ -107,3 +115,4 @@ const ServicesSection = () => {
 };
 
 export default ServicesSection;
+
