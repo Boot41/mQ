@@ -27,32 +27,32 @@ export const CompanyStats = [
 
 export const FoundersData = [
   {
-    name: "Mr. Anshuman Singh, CEO",
+    name: "Anshuman Singh, CEO",
     description:
-      "Anshuman is a visionary leader with a passion for technology and scalability. With over 15 years in the tech industry, he has successfully led multiple startups. He fosters a culture of innovation and encourages his team to think creatively and embrace new ideas.",
+      "Anshu loves tech and scalability, having built hundreds of products and driven significant growth  in the past 13 years. He approaches business problems like chess challenges, drawing from his expertise as a chess master. Outside of work, Anshu enjoys playing carrom and tennis, balancing his strategic mind with fun and competition. ",
     image:
-      "https://png.pngtree.com/png-vector/20230918/ourmid/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_10094392.png",
+      "anshuman.jpeg",
   },
   {
-    name: "Mr. Harshit Singhal, CTO",
+    name: "Harshit Singhal, CTO",
     description:
-      "Harshit is a tech enthusiast skilled in solving complex problems. As the CTO, he has enhanced the company’s technical infrastructure, ensuring smooth operations and innovative solutions. His expertise in AI and machine learning has propelled the company forward.",
+      "Harshit loves business and has supercharged the growth trajectory for HashedIn, significantly expanding the mid-market segment for Deloitte. Previously, he co-founded Auctus Advisors, a strategy consulting firm acquired by YCP, and worked as a management consultant with SDG. Passionate about history, Harshit also enjoys diving deep into the past to draw lessons for the future.",
     image:
-      "https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_13146336.png",
+      "Harshit.jpeg",
   },
   {
-    name: "Mr. Himanshu Varshney, COO",
+    name: "Himanshu Varshney, COO",
     description:
-      "Himanshu excels at building and leading teams with his dynamic leadership and people skills. His extensive experience in operations and management ensures the company runs smoothly and efficiently, with a strong focus on team cohesion and operational excellence.",
+      "Himanshu is a people person. Along with leading HashedIn, he has championed the creation of an open culture at Deloitte Engineering and was recognized as one of India's Top 25 Trusted Leaders by GPTW. Formerly with Trilogy, Himanshu is also an All-Star sportsman from IIT Guwahati and HashedIn. He remains active in various sports, continually fostering teamwork and spirit.",
     image:
-      "https://png.pngtree.com/png-vector/20230918/ourmid/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_10094392.png",
+      "himanshu.jpeg",
   },
   {
-    name: "Mr. Sripathi Krishnan, CFO",
+    name: "Sripathi Krishnan, CFO",
     description:
-      "Sripathi is a financial expert with a background in tech-driven finance. As CFO, he manages the company’s financial health, ensuring growth and profitability. His analytical skills and meticulous attention to detail are crucial for the company’s financial strategy.",
+      "Sri is a tech guy who served as the CTO and MD of Modern Software Engineering at Deloitte US, where he was responsible for technology strategy and GenAI innovation. He previously founded RDBTools, acquired by RedisLabs. Known as a champ for GenAI CoE, Sri is also a foodie who loves hosting and attending parties, blending his passion for technology with a zest for life.",
     image:
-      "https://png.pngtree.com/png-vector/20230918/ourmid/pngtree-man-in-shirt-smiles-and-gives-thumbs-up-to-show-approval-png-image_10094392.png",
+      "sripathi.jpeg",
   },
 ];
 

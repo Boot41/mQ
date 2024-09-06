@@ -10,6 +10,7 @@ import SectionComponent from "./TrackUserComps/SectionComponent";
 
 import { LifeAtT41 }  from "../InformationFiles/CareersInfo";
 import GlassdoorRating from "./CareersComp/Glassdoor";
+import OurAds from "./CareersComp/lifeatT41";
 
 // import { LifeAtT41 } from "../InformationFiles/CareersInfo"
 
@@ -22,7 +23,7 @@ const CareersHome = () => {
 
      
     <GlassdoorRating />
-    
+    <OurAds />
       
       <SectionComponent id="values-careers">
         <Values />

@@ -3,22 +3,22 @@ export const Boot41Slides = [
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 1",
-    text: "Learn from industry leaders about both tech and business.",
+    text: "Learn from industry leaders on cutting-edge tech and business insights.",
   },
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 2",
-    text: "Master SDLC, full-stack concepts, use AI, and build prototypes.",
+    text: "Master SDLC and full-stack concepts with hands-on AI experience.",
   },
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 3",
-    text: "Take regular breaks from work and have fun.",
+    text: "Take breaks and enjoy fun activities to recharge and connect.",
   },
   {
     imageSrc: "ai1.png",
     alt: "Description of Image 3",
-    text: "Get recognized and appreciated for hard work.",
+    text: "Receive recognition and appreciation for your hard work and achievements.",
   },
 ];
 
@@ -209,21 +209,21 @@ export const testimonials = [
     image: "placeholder.png",
     name: "Hussain",
     role: "Engineering Manager",
-    text: "At Think41, the culture is exactly what I expected—innovative and supportive. The integration of AI into our projects is impressive, and the autonomy to lead my team while having leadership support is invaluable. It's great to work in an environment where freedom and collaboration go hand in hand.",
+    text: "At Think41, the culture perfectly matches my expectations—innovative and supportive. The seamless integration of AI into our projects is impressive. I value the autonomy to lead my team while receiving strong support from leadership. It’s fantastic to work in an environment where freedom and collaboration thrive together.",
   },
   {
     id: 2,
-    image: "placeholder.png",
-    name: "Adarsh",
+    image: "adarsh.jpeg",
+    name: "Kumar Adarsh Pandita",
     role: "Full Stack Engineer",
-    text: "Starting as an intern and transitioning to a full-time role at Think41 has been a fantastic journey. The learning curve has been steep but incredibly rewarding. I’ve made great friends, enjoy the vibrant office location in HSR, and see tremendous growth potential here. It's a place where my career is truly flourishing.",
+    text: "Transitioning from an intern to a full-time role at Think41 has been an incredible journey. The steep learning curve has been highly rewarding. I've made great friends, love the vibrant office in HSR, and see immense growth potential here. It’s a place where my career is truly thriving.",
   },
   {
     id: 3,
-    image: "placeholder.png",
-    name: "Anusha",
+    image: "anusha.jpeg",
+    name: "Anusha Aravapalli",
     role: "Technical Product Manager",
-    text: "At Think41, working as a product manager has been an enriching experience. The leadership is open and approachable, fostering a culture where every idea is valued. Our team is not only friendly but deeply collaborative, making problem-solving a truly collective effort. The work is challenging, with thought-provoking projects that keep us engaged and always learning.",
+    text: "Working as a product manager at Think41 has been incredibly rewarding. The open and approachable leadership fosters a culture where every idea is valued. Our team is both friendly and highly collaborative, making problem-solving a collective effort. The work is challenging and engaging, with thought-provoking projects that keep us constantly learning.",
   },
   
 ];
@@ -233,12 +233,12 @@ export const testimonials = [
 // valuesData.js
 
 export const valuesData = {
-  title: "We are a born in AI Company",
+  title: " AI is in Our DNA",
   description:
-    "AI is ingrained in our DNA, guiding our constant ideation on its use cases and enhancing efficiency without compromising functionality. From automated hiring processes to internal operations, we integrate AI tools at every step to optimise workflows. This same spirit drives our client services, leveraging AI advancements to introduce operational efficiencies.",
+    "At Think41, AI isn’t just a part of what we do—it’s who we are. We’re at the forefront of transforming bold ideas into real-world AI solutions. From making our own operations smarter to revolutionizing how we serve our clients, AI drives everything we do. We don’t just use AI; we live it, breathe it, and innovate with it every day.",
   whatItMeans: {
-    title: "So what’s in it for you?",
-    text: "With AI streamlining processes, you'll experience enhanced productivity, freeing you to innovate, work on creativity and grow. You'll relearn software development in the AI age, staying at the forefront of technology. At Think41, AI isn't just a tool; it's a catalyst for your professional development and success.",
+    title: "Why You’ll Love Working Here",
+    text: "Imagine a place where AI handles the routine, so you can focus on the extraordinary. At Think41, AI streamlines processes to boost your productivity, giving you more space to innovate, create, and grow. Here, AI is not just a tool—it’s a catalyst for your career, helping you stay ahead in technology and turn your ideas into impactful solutions.",
   },
   image: {
     src: "careerswhyus2.jpeg",
