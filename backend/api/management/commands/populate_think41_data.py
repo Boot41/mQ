@@ -172,9 +172,30 @@ class Command(BaseCommand):
                 "content": "Think41 Founder Sripathi Krishnan blends technology expertise with a love for hosting and attending parties.",
                 "content_type": "founder_info"
             },
+            # Add new entries for Think41 products
+            {
+                "title": "Think41 Products Overview",
+                "content": "Think41 offers three innovative AI-driven products: RQ, Recruit41, and AI-Generated Podcast. These products leverage advanced AI technologies to revolutionize product management, recruitment, and content creation respectively.",
+                "content_type": "products"
+            },
+            {
+                "title": "RQ - AI-Powered Product Management",
+                "content": "RQ is an audio-based user interface that transforms product management. It enables conversations with a virtual agent to capture requirements, automatically generate Product Requirements Documents (PRDs), and create user stories organized into sprints. RQ streamlines idea gathering, documentation, and sprint planning, offering an efficient and intuitive way to create actionable development plans.",
+                "content_type": "products"
+            },
+            {
+                "title": "Recruit41 - AI-Driven Recruitment Platform",
+                "content": "Recruit41 is an AI-driven platform that automates the interview process. It eliminates scheduling conflicts, offers customizable interview formats, and provides objective candidate evaluations. With persona-driven experiences and 24/7 interview capabilities, Recruit41 significantly reduces time-to-hire and improves the quality of hires.",
+                "content_type": "products"
+            },
+            {
+                "title": "AI-Generated Podcast",
+                "content": "The AI-Generated Podcast platform creates fully automated podcast episodes based on user input. Users can specify speakers and their personalities to generate customized scripts. The system supports one fixed host and multiple guests, allowing for dynamic and engaging podcast content. It streamlines podcast production by automating script creation and audio generation.",
+                "content_type": "products"
+            },
         ]
 
         for item in data:
             UniversalContent.objects.create(**item)
 
-        self.stdout.write(self.style.SUCCESS('Successfully populated Think41 data'))
+        self.stdout.write(self.style.SUCCESS('Successfully populated Think41 data including product information'))

@@ -10,7 +10,6 @@ import SectionComponent from "./TrackUserComps/SectionComponent";
 import { LifeAtT41 }  from "../InformationFiles/CareersInfo";
 import GlassdoorRating from "./CareersComp/Glassdoor";
 
-import SectionComponent from "./TrackUserComps/SectionComponent";
 
 import OurAds from "./CareersComp/lifeatT41";
 
