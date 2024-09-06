@@ -95,40 +95,22 @@ export const pressSectionData = {
 
 export const ServicesData = [
   {
-    title: "Data and AI",
-    subtitle: "Know More",
-    image: "ai1.png",
-    link: "data-ai",
+    title: "POC to Production",
+    image: "services3.webp",
+    description:
+      "Think41 transforms GenAI MVPs into scalable, production-ready systems, ensuring efficient transitions while maintaining quality and cost-effectiveness. We help turn your AI innovations into impactful solutions.",
   },
   {
-    title: "Digitalization",
-    subtitle: "Know More",
-    image: "a2.png",
-    link: "digitalization",
+    title: "Conversational AI at Scale",
+    image: "services2.webp",
+    description:
+      "Think41 excels in perfecting the final 25% of GenAI voice systems, creating scalable, low-cost solutions with human-like latency, reactions, and conversational flow. Our Recruit41 bot showcases this expertise by conducting nuanced, human-like interviews beyond basic Q&A.",
   },
   {
-    title: "Enterprise Platform",
-    subtitle: "Know More",
-    image: "ai3.jpg",
-    link: "enterprise-platform",
-  },
-  {
-    title: "Cloud Solutions",
-    subtitle: "Know More",
-    image: "a1.png",
-    link: "cloud-solutions",
-  },
-  {
-    title: "Technology Transformation",
-    subtitle: "Know More",
-    image: "a3.png",
-    link: "technology-transformation",
-  },
-  {
-    title: "Software Engineering",
-    subtitle: "Know More",
-    image: "a4.png",
-    link: "software-engineering",
+    title: "Custom Agent Development",
+    image: "services4.webp",
+    description:
+      "Think41 builds autonomous AI agents that predict, recommend, and adapt, seamlessly integrating with your systems to automate tasks and enhance decision-making. Experience the future of automation with rQ.",
   },
 ];
 
@@ -153,9 +135,6 @@ export const DemoData = [
       "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
     img: "podcastdemo.png",
   },
-
-  
-  
 ];
 
 //Latest Insights
