@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
+import axios from "axios";
+import { ServicesData } from "../../InformationFiles/LandingPageInfo";
 
 const ParallaxCard = ({ title, description, image }) => {
   const [inView, setInView] = useState(false);
@@ -22,12 +24,31 @@ const ParallaxCard = ({ title, description, image }) => {
     };
   }, [title]);
 
+  const handleclick = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/know-more-about-service/",
+        {
+          service_name: title,
+          model_name: "4o-mini",
+        }
+      );
+
+      // Handle the response as needed
+      console.log("API Response:", response.data);
+    } catch (error) {
+      // Handle errors
+      console.error("Error making API call:", error);
+    }
+  };
+
   return (
     <div
       id={title}
       className={`relative overflow-hidden rounded-lg shadow-lg w-[250px] h-[200px] transition-transform duration-500 transform-gpu ${
         inView ? "opacity-100" : "opacity-0"
       } group hover:scale-105 hover:shadow-2xl cursor-pointer`}
+      onClick={handleclick}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -61,7 +82,8 @@ const ParallaxCard = ({ title, description, image }) => {
         >
           <p className="text-sm mb-4 text-white">{description}</p>
           <div className="flex items-center text-orange-400 font-semibold">
-            Learn More <ChevronRight className="ml-2" size={18} />
+            Learn More{" "}
+            <ChevronRight className="ml-2" size={18} onClick={handleclick} />
           </div>
         </div>
       </div>
@@ -70,27 +92,6 @@ const ParallaxCard = ({ title, description, image }) => {
 };
 
 const ServicesSection = () => {
-  const updatedServicesData = [
-    {
-      title: "POC to Production",
-      image: "services3.webp",
-      description:
-        "Think41 transforms GenAI MVPs into scalable, production-ready systems, ensuring efficient transitions while maintaining quality and cost-effectiveness. We help turn your AI innovations into impactful solutions.",
-    },
-    {
-      title: "Conversational AI at Scale",
-      image: "services2.webp",
-      description:
-        "Think41 excels in perfecting the final 25% of GenAI voice systems, creating scalable, low-cost solutions with human-like latency, reactions, and conversational flow. Our Recruit41 bot showcases this expertise by conducting nuanced, human-like interviews beyond basic Q&A.",
-    },
-    {
-      title: "Custom Agent Development",
-      image: "services4.webp",
-      description:
-        "Think41 builds autonomous AI agents that predict, recommend, and adapt, seamlessly integrating with your systems to automate tasks and enhance decision-making. Experience the future of automation with rQ.",
-    },
-  ];
-
   return (
     <div className=" py-20">
       <div className="container mx-auto px-4">
@@ -105,7 +106,7 @@ const ServicesSection = () => {
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
-          {updatedServicesData.map((card, index) => (
+          {ServicesData.map((card, index) => (
             <div key={index} className="flex justify-center">
               <ParallaxCard
                 title={card.title}
