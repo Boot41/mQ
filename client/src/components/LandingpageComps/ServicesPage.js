@@ -96,6 +96,21 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
 const ServicesSection = () => {
   const [chatMessages, setChatMessages] = useState([]);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [updatedServicesData, setUpdatedServicesData] = useState([]);
+
+  useEffect(() => {
+    // Fetch or initialize your services data here
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/services"); // Replace with your API endpoint
+        setUpdatedServicesData(response.data);
+      } catch (error) {
+        console.error("Error fetching services data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleMessageAdd = (newMessage) => {
     setChatMessages(prevMessages => [...prevMessages, newMessage]);
@@ -124,7 +139,7 @@ const ServicesSection = () => {
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
-        {updatedServicesData.map((card, index) => (
+          {updatedServicesData.map((card, index) => (
             <div key={index} className="flex justify-center">
               <ParallaxCard
                 title={card.title}
@@ -148,6 +163,7 @@ const ServicesSection = () => {
     </div>
   );
 };
+
 
 export default ServicesSection;
 
