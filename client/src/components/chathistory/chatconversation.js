@@ -1,7 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatConversation.css';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane } from 'react-icons/fa';
 
-const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse, isCollapsed, isSpeaking }) => {
+const ChatConversation = ({ 
+  messages, 
+  isOpen, 
+  onClose, 
+  onSendMessage, 
+  onCollapse, 
+  isCollapsed, 
+  isSpeaking,
+  isVoiceMode,
+  setIsVoiceMode,
+  transcript,
+  resetTranscript,
+  startRecording,
+  stopRecording
+}) => {
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
 
@@ -11,17 +27,39 @@ const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse
 
   useEffect(scrollToBottom, [messages]);
 
+  useEffect(() => {
+    if (isVoiceMode && transcript) {
+      setInputMessage(transcript);
+    }
+  }, [isVoiceMode, transcript]);
+
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
       onSendMessage({ type: 'user', content: inputMessage.trim() });
       setInputMessage('');
+      resetTranscript();
     }
   };
 
+  const handleInputChange = (e) => {
+    setInputMessage(e.target.value);
+  };
+
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendMessage();
     }
+  };
+
+  const toggleVoiceMode = () => {
+    if (isVoiceMode) {
+      stopRecording();
+      resetTranscript();
+    } else {
+      startRecording();
+    }
+    setIsVoiceMode(!isVoiceMode);
   };
 
   return (
@@ -48,15 +86,25 @@ const ChatConversation = ({ messages, isOpen, onClose, onSendMessage, onCollapse
           </div>
         </div>
       )}
-      <div className="chat-input">
+      <div className="chat-input-container">
+        <button
+          onClick={toggleVoiceMode}
+          className="voice-mode-button"
+          type="button"
+        >
+          {isVoiceMode ? <FaMicrophone /> : <FaMicrophoneSlash />}
+        </button>
         <input
           type="text"
           value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
+          onChange={handleInputChange}
           onKeyPress={handleKeyPress}
           placeholder="Type your message..."
+          className="input-field"
         />
-        <button onClick={handleSendMessage}>Send</button>
+        <button onClick={handleSendMessage} className="send-button" type="button">
+          <FaPaperPlane />
+        </button>
       </div>
       {!isCollapsed && <div className="chat-tail"></div>}
     </div>
