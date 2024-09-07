@@ -2,9 +2,26 @@ import React, { useState, useEffect } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { DemoData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
+import ChatConversation from "../chathistory/chatconversation";
 
-const Demo = () => {
+const Demo = ({ onMessageAdd }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleMessageAdd = (newMessage) => {
+    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+    setIsChatOpen(true);
+  };
+
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  };
+
+  const handleSendMessage = (newMessage) => {
+    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
+    // You might want to add API call logic here similar to BlobComponent's handleSendMessage
+  };
 
   const handleThumbnailClick = (index) => {
     setCurrentIndex(index);
@@ -22,19 +39,27 @@ const Demo = () => {
 
   const handleClick = async () => {
     try {
+      onMessageAdd({
+        type: "user",
+        content: `Tell me more about ${DemoData[currentIndex].name}`,
+      });
       const response = await axios.post(
         "http://localhost:8000/api/website-interaction/",
         {
-          user_input: `Tell me about ${DemoData[currentIndex].name} if You Dont have information tell me what u have regarding demo section` ,
+          user_input: `Tell me about ${DemoData[currentIndex].name} if You Dont have information tell me what u have regarding demo section`,
           model_name: "4o-mini",
           section_id: "demo-section",
           user_context: {},
         }
       );
-
+      onMessageAdd({ type: "assistant", content: response.data.response });
       console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error making API call:", error);
+      onMessageAdd({
+        type: "assistant",
+        content: "Sorry, I encountered an error. Please try again.",
+      });
     }
   };
 
@@ -55,6 +80,7 @@ const Demo = () => {
           <Box
             className="absolute inset-0 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
             style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
+           
           >
             <Box className="w-full h-full flex items-center justify-center p-4 md:p-6">
               <Box className="absolute inset-y-1/2 left-4 transform -translate-y-80 hidden md:flex flex-col bg-opacity-50 p-4 md:p-6 rounded-lg w-full max-w-xs md:max-w-md">
@@ -115,6 +141,15 @@ const Demo = () => {
           ))}
         </Box>
       </Box>
+      <ChatConversation
+        messages={chatMessages}
+        isOpen={isChatOpen}
+        onClose={handleChatClose}
+        onSendMessage={handleSendMessage}
+        onCollapse={() => {}} // Add collapse functionality if needed
+        isCollapsed={false}
+        isSpeaking={false}
+      />
     </>
   );
 };

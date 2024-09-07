@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { BlogPosts } from "../../InformationFiles/LandingPageInfo";
+import { useNavigate } from "react-router-dom"; // For navigation
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -8,6 +9,12 @@ const cardVariants = {
 };
 
 const LatestInsights = () => {
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleReadMoreClick = (post) => {
+    navigate("/ReadmoreBlogs", { state: { post } }); // Navigates to the Readmore section with post data
+  };
+
   return (
     <div className="relative  px-6 mx-auto max-w-7xl -mt-60">
       {/* Heading Section */}
@@ -61,11 +68,12 @@ const LatestInsights = () => {
             <img
               src={post.image}
               alt={post.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover cursor-pointer"
+              onClick={() => handleReadMoreClick(post)}
             />
-            <div className="absolute bottom-0 left-0 w-full h-1/3 bg-white bg-opacity-10 p-4">
+            <div className="absolute bottom-0 left-0 w-full h-fit bg-white bg-opacity-10 p-4">
               <h2 className="text-xl font-bold text-gray-900">{post.title}</h2>
-              <p className="text-gray-900 mt-2 text-sm">{post.excerpt}</p>
+              <p className="text-gray-900 mt-2 text-sm">{post.summary}</p>
               <div className="flex items-center justify-between text-gray-500 mt-3">
                 <div className="flex items-center">
                   <svg
@@ -98,14 +106,12 @@ const LatestInsights = () => {
                   ))}
                 </div>
                 <div>
-                  <svg
-                    className="w-5 h-5 text-gray-600 hover:text-blue-600 cursor-pointer"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <button
+                    onClick={() => handleReadMoreClick(post)}
+                    className="text-blue-500 text-sm font-semibold hover:underline"
                   >
-                    <path d="M10 15l-6-6h12l-6 6z" />
-                  </svg>
+                    Read More
+                  </button>
                 </div>
               </div>
             </div>
