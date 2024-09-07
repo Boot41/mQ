@@ -2,8 +2,8 @@ import logging
 from .models import UniversalContent
 from .ai_models import AIModelFactory
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank, TrigramSimilarity
-from django.db.models import Q, F, Value, FloatField
-from django.db.models.functions import Coalesce
+from django.db.models import Q, F, Value, FloatField, ExpressionWrapper
+from django.db.models.functions import Coalesce, Greatest
 import random
 
 logging.basicConfig(level=logging.INFO)
@@ -113,50 +113,84 @@ Initial Response:"""
     def search_relevant_content(self, query):
         logger.info(f"Searching for relevant content with query: {query}")
 
+        # Normalize the query
+        normalized_query = query.lower().strip()
+
         # Create a more sophisticated search query
-        search_query = SearchQuery(query, config='english')
+        search_query = SearchQuery(normalized_query, config='english')
 
         # Use both full-text search and trigram similarity
         relevant_content = UniversalContent.objects.annotate(
-            rank=SearchRank(F('search_vector'), search_query) +
-                 Coalesce(SearchRank(SearchVector('title'), search_query), Value(0.0), output_field=FloatField()) * 1.5 +
-                 Coalesce(SearchRank(SearchVector('content'), search_query), Value(0.0), output_field=FloatField()),
-            trigram_similarity_title=TrigramSimilarity('title', query),
-            trigram_similarity_content=TrigramSimilarity('content', query)
+            search_rank=Coalesce(SearchRank(F('search_vector'), search_query), Value(0.0)),
+            title_rank=Coalesce(SearchRank(F('search_vector'), SearchQuery(normalized_query, config='english', search_type='phrase')), Value(0.0)),
+            content_rank=Coalesce(SearchRank(F('search_vector'), search_query), Value(0.0)),
+            trigram_similarity_title=TrigramSimilarity('title', normalized_query),
+            trigram_similarity_content=TrigramSimilarity('content', normalized_query),
+            combined_rank=ExpressionWrapper(
+                F('search_rank') * 2 +
+                F('title_rank') * 3 +
+                F('content_rank') * 1.5 +
+                Greatest(F('trigram_similarity_title') * 2, F('trigram_similarity_content')),
+                output_field=FloatField()
+            )
         ).filter(
             Q(search_vector=search_query) |
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
+            Q(title__icontains=normalized_query) |
+            Q(content__icontains=normalized_query) |
             Q(trigram_similarity_title__gt=0.1) |
             Q(trigram_similarity_content__gt=0.1)
-        ).order_by('-rank', '-trigram_similarity_title', '-trigram_similarity_content')
+        ).order_by('-combined_rank')
 
         logger.info(f"Initial search found {relevant_content.count()} results")
 
-        # If no results, try splitting the query into words and search again
-        if not relevant_content.exists():
-            logger.info("No results found, trying word-by-word search")
-            words = query.split()
+        # If no results or low-quality results, try splitting the query into words and search again
+        if not relevant_content.exists() or relevant_content.first().combined_rank < 0.1:
+            logger.info("No results or low-quality results found, trying word-by-word search")
+            words = normalized_query.split()
             q_objects = Q()
             for word in words:
-                q_objects |= Q(title__icontains=word) | Q(content__icontains=word) | Q(trigram_similarity_title__gt=0.1) | Q(trigram_similarity_content__gt=0.1)
+                q_objects |= Q(title__icontains=word) | Q(content__icontains=word)
             
-            relevant_content = UniversalContent.objects.filter(q_objects).distinct().annotate(
-                rank=SearchRank(F('search_vector'), SearchQuery(' '.join(words), config='english')) +
-                     Coalesce(SearchRank(SearchVector('title'), SearchQuery(' '.join(words), config='english')), Value(0.0), output_field=FloatField()) * 1.5 +
-                     Coalesce(SearchRank(SearchVector('content'), SearchQuery(' '.join(words), config='english')), Value(0.0), output_field=FloatField()),
-                trigram_similarity_title=TrigramSimilarity('title', ' '.join(words)),
-                trigram_similarity_content=TrigramSimilarity('content', ' '.join(words))
-            ).order_by('-rank', '-trigram_similarity_title', '-trigram_similarity_content')
+            word_by_word_content = UniversalContent.objects.filter(q_objects).distinct().annotate(
+                search_rank=Coalesce(SearchRank(F('search_vector'), SearchQuery(' '.join(words), config='english')), Value(0.0)),
+                title_rank=Coalesce(SearchRank(F('search_vector'), SearchQuery(' '.join(words), config='english', search_type='phrase')), Value(0.0)),
+                content_rank=Coalesce(SearchRank(F('search_vector'), SearchQuery(' '.join(words), config='english')), Value(0.0)),
+            )
+
+            # Handle trigram similarity for single and multiple words
+            if len(words) == 1:
+                word_by_word_content = word_by_word_content.annotate(
+                    trigram_similarity_title=TrigramSimilarity('title', words[0]),
+                    trigram_similarity_content=TrigramSimilarity('content', words[0])
+                )
+            else:
+                word_by_word_content = word_by_word_content.annotate(
+                    trigram_similarity_title=Greatest(*[TrigramSimilarity('title', word) for word in words]),
+                    trigram_similarity_content=Greatest(*[TrigramSimilarity('content', word) for word in words])
+                )
+
+            relevant_content = word_by_word_content.annotate(
+                combined_rank=ExpressionWrapper(
+                    F('search_rank') * 2 +
+                    F('title_rank') * 3 +
+                    F('content_rank') * 1.5 +
+                    Greatest(F('trigram_similarity_title') * 2, F('trigram_similarity_content')),
+                    output_field=FloatField()
+                )
+            ).order_by('-combined_rank')
 
             logger.info(f"Word-by-word search found {relevant_content.count()} results")
 
-        results = relevant_content[:5]  # Return top 5 results
+        results = relevant_content.filter(combined_rank__gt=0.01)[:5]  # Return top 5 results with a minimum rank
         logger.info(f"Returning top {len(results)} results")
         
         # Log the titles of the results for debugging
         for result in results:
-            logger.info(f"Result: {result.title} (Rank: {result.rank}, Trigram Sim Title: {result.trigram_similarity_title}, Trigram Sim Content: {result.trigram_similarity_content})")
+            logger.info(f"Result: {result.title} (Combined Rank: {result.combined_rank:.4f}, "
+                        f"Search Rank: {result.search_rank:.4f}, Title Rank: {result.title_rank:.4f}, "
+                        f"Content Rank: {result.content_rank:.4f}, "
+                        f"Trigram Sim Title: {result.trigram_similarity_title:.4f}, "
+                        f"Trigram Sim Content: {result.trigram_similarity_content:.4f})")
 
         return results
 
