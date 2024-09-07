@@ -15,11 +15,13 @@
   transform: translateY(20px);
   overflow: hidden;
   z-index: 1003;
+  pointer-events: none;
 }
 
 .chat-conversation.open {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .chat-conversation.collapsed {
@@ -98,42 +100,48 @@
   align-self: flex-start;
 }
 
-.chat-input {
+.chat-input-container {
   display: flex;
+  align-items: center;
   padding: 10px;
+  background-color: #f0f0f0;
   border-top: 1px solid #e0e0e0;
+  position: relative;
+  z-index: 1006;
 }
 
-.chat-input input {
-  flex-grow: 1;
-  padding: 6px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  margin-right: 6px;
-  font-size: 12px;
-}
-
-.chat-input button {
-  padding: 6px 10px;
-  background-color: #ff6b00;
-  color: white;
+.voice-mode-button,
+.send-button {
+  background: none;
   border: none;
-  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  font-size: 12px;
+  padding: 8px;
+  margin: 0 5px;
+  font-size: 20px;
+  color: #ff6b00;
+  transition: color 0.2s ease;
+  z-index: 1007;
 }
 
-.chat-input button:hover {
-  background-color: #e65100;
+.voice-mode-button:hover,
+.send-button:hover {
+  color: #e65100;
 }
 
-.chat-input .record-button {
-  background-color: #f44336;
+.input-field {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  z-index: 1007;
+  background-color: white;
 }
 
-.chat-input .record-button:hover {
-  background-color: #d32f2f;
+.input-field:focus {
+  border-color: #ff6b00;
+  box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
 }
 
 .chat-tail {
@@ -158,7 +166,7 @@
   max-height: 0;
 }
 
-.chat-conversation.collapsed .chat-input {
+.chat-conversation.collapsed .chat-input-container {
   border-top: none;
 }
 
@@ -168,16 +176,16 @@
   padding-right: 10px;
 }
 
-.chat-conversation.collapsed .chat-input {
+.chat-conversation.collapsed .chat-input-container {
   flex: 1 1 auto;
   border-top: none;
   padding-left: 0;
 }
 
-.chat-conversation.collapsed .chat-input input {
+.chat-conversation.collapsed .input-field {
   border-radius: 12px 0 0 12px;
 }
 
-.chat-conversation.collapsed .chat-input button {
+.chat-conversation.collapsed .send-button {
   border-radius: 0 12px 12px 0;
 }
