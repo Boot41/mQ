@@ -7,7 +7,7 @@ import About from "./LandingpageComps/About";
 import Autopods from "./LandingpageComps/Autopods";
 import Demo2 from "./LandingpageComps/Demo2";
 import HeroSection2 from "./LandingpageComps/HeroSection";
-import PressSection from "./Experiment/PressSection";
+import PressSection from "./LandingpageComps/PressSection";
 import BlobComponent from "./BlobComponents/BlobComponent";
 
 const LandingPage = () => {
