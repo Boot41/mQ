@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatConversation.css';
+import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane, FaUser, FaRobot, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane } from 'react-icons/fa';
+import debounce from 'lodash.debounce';
 
 const ChatConversation = ({ 
   messages, 
@@ -10,28 +11,72 @@ const ChatConversation = ({
   onSendMessage, 
   onCollapse, 
   isCollapsed, 
-  isSpeaking,
   isVoiceMode,
   setIsVoiceMode,
-  transcript,
-  resetTranscript,
-  startRecording,
-  stopRecording
+  darkMode,
+  isSpeaking, // Add this prop
 }) => {
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
+  const [abortController, setAbortController] = useState(new AbortController());
+  const [timeoutId, setTimeoutId] = useState(null);
+  const [speakingTimeoutId, setSpeakingTimeoutId] = useState(null);
+  const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const {
+    transcript,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition({
+    continuous: true,
+    onError: (event) => {
+      console.error('Speech recognition error:', event.error);
+      if (event.error === 'no-speech' || event.error === 'audio-capture') {
+        startRecording();
+      }
+    }
+  });
 
-  useEffect(scrollToBottom, [messages]);
+  useEffect(() => {
+    scrollToBottom();
+    if (isOpen && !isCollapsed) {
+      inputRef.current?.focus();
+    }
+  }, [messages, isOpen, isCollapsed]);
 
   useEffect(() => {
     if (isVoiceMode && transcript) {
       setInputMessage(transcript);
     }
   }, [isVoiceMode, transcript]);
+
+  useEffect(() => {
+    if (isVoiceMode && transcript !== '') {
+      setInputMessage(transcript);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (pauseTimeoutId) {
+        clearTimeout(pauseTimeoutId);
+      }
+      const id = setTimeout(() => {
+        setTimeout(() => {
+          handleSendMessage();
+        }, 100);
+      }, 4000);
+      setTimeoutId(id);
+
+      const pauseId = setTimeout(() => {
+        // Placeholder for any future logic
+      }, 5000);
+      setPauseTimeoutId(pauseId);
+    }
+  }, [transcript, isVoiceMode]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
@@ -52,61 +97,91 @@ const ChatConversation = ({
     }
   };
 
+  const startRecording = useCallback(() => {
+    SpeechRecognition.startListening({ continuous: true, language: 'en-GB' });
+    if (speakingTimeoutId) {
+      clearTimeout(speakingTimeoutId);
+    }
+    const id = setTimeout(() => {
+      // Placeholder for any future logic
+    }, 10000);
+    setSpeakingTimeoutId(id);
+  }, [speakingTimeoutId]);
+
+  const stopRecording = useCallback(() => {
+    setAbortController(new AbortController());
+    abortController.abort();
+    SpeechRecognition.stopListening();
+    if (speakingTimeoutId) {
+      clearTimeout(speakingTimeoutId);
+    }
+    if (pauseTimeoutId) {
+      clearTimeout(pauseTimeoutId);
+    }
+  }, [abortController, speakingTimeoutId, pauseTimeoutId]);
+
   const toggleVoiceMode = () => {
     if (isVoiceMode) {
       stopRecording();
       resetTranscript();
+      setInputMessage('');
     } else {
       startRecording();
     }
     setIsVoiceMode(!isVoiceMode);
   };
 
+  if (!isOpen) return null;
+
   return (
-    <div className={`chat-conversation ${isOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''}`}>
+    <div className={`chat-conversation ${isOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''} ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-header">
-        <h3>{isCollapsed ? 'Chat' : 'Chat History'}</h3>
+        <h3>Chat History</h3>
         <div className="header-buttons">
-          {isSpeaking && <span className="speaking-indicator">🔊</span>}
-          <button onClick={onCollapse} className="collapse-button">
-            {isCollapsed ? '▲' : '▼'}
+          {isSpeaking && <span className="speaking-indicator" title="AI is speaking">🔊</span>}
+          <button onClick={onCollapse} className="collapse-button" title={isCollapsed ? "Expand" : "Collapse"}>
+            {isCollapsed ? <FaChevronDown /> : <FaChevronUp />}
           </button>
-          <button onClick={onClose} className="close-button">×</button>
+          <button onClick={onClose} className="close-button" title="Close chat">
+            <FaTimes />
+          </button>
         </div>
       </div>
-      {!isCollapsed && (
-        <div className="chat-content">
-          <div className="chat-messages">
-            {messages.map((message, index) => (
-              <div key={index} className={`message ${message.type}`}>
-                <div className="message-content">{message.content}</div>
+      <div className={`chat-content ${isCollapsed ? 'collapsed' : ''}`}>
+        <div className="chat-messages">
+          {messages.map((message, index) => (
+            <div key={index} className={`message ${message.type}`}>
+              <div className="message-icon">
+                {message.type === 'user' ? <FaUser /> : <FaRobot />}
               </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
+              <div className="message-content">{message.content}</div>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
         </div>
-      )}
+      </div>
       <div className="chat-input-container">
         <button
           onClick={toggleVoiceMode}
-          className="voice-mode-button"
+          className={`voice-mode-button ${isVoiceMode ? 'active' : ''}`}
           type="button"
+          title={isVoiceMode ? "Disable voice input" : "Enable voice input"}
         >
           {isVoiceMode ? <FaMicrophone /> : <FaMicrophoneSlash />}
         </button>
         <input
+          ref={inputRef}
           type="text"
           value={inputMessage}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
-          placeholder="Type your message..."
+          placeholder={isVoiceMode ? "Speak your message..." : "Type your message..."}
           className="input-field"
         />
-        <button onClick={handleSendMessage} className="send-button" type="button">
+        <button onClick={handleSendMessage} className="send-button" type="button" title="Send message">
           <FaPaperPlane />
         </button>
       </div>
-      {!isCollapsed && <div className="chat-tail"></div>}
     </div>
   );
 };
