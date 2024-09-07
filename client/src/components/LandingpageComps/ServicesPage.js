@@ -27,7 +27,7 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
 
   const handleclick = async () => {
     try {
-      onMessageAdd({ type: 'user', content: `Tell me more about ${title}` });
+      onMessageAdd({ type: "user", content: `Tell me more about ${title}` });
 
       const response = await axios.post(
         "http://localhost:8000/api/know-more-about-service/",
@@ -37,11 +37,14 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
         }
       );
 
-      onMessageAdd({ type: 'assistant', content: response.data.response });
+      onMessageAdd({ type: "assistant", content: response.data.response });
       console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error making API call:", error);
-      onMessageAdd({ type: 'assistant', content: "Sorry, I encountered an error. Please try again." });
+      onMessageAdd({
+        type: "assistant",
+        content: "Sorry, I encountered an error. Please try again.",
+      });
     }
   };
 
@@ -50,7 +53,7 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
       id={title}
       className={`relative overflow-hidden rounded-lg shadow-lg w-[250px] h-[200px] transition-transform duration-500 transform-gpu ${
         inView ? "opacity-100" : "opacity-0"
-      } group hover:scale-105 hover:shadow-2xl cursor-pointer`}
+      } group hover:scale-105 hover:shadow-2xl cursor-pointer `}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -113,7 +116,7 @@ const ServicesSection = () => {
   }, []);
 
   const handleMessageAdd = (newMessage) => {
-    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
     setIsChatOpen(true);
   };
 
@@ -122,7 +125,7 @@ const ServicesSection = () => {
   };
 
   const handleSendMessage = (newMessage) => {
-    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
     // You might want to add API call logic here similar to BlobComponent's handleSendMessage
   };
 
@@ -134,24 +137,28 @@ const ServicesSection = () => {
             Our Services
           </h1>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover the latest innovations in AI and how we can transform your business.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Think41 excels in turning Generative AI MVPs into scalable,
+            production-ready solutions, seamlessly integrating them across your
+            organization. Our expertise extends to perfecting Conversational AI
+            with human-like interactions and developing custom autonomous agents
+            that predict, recommend, and adapt. Experience the future of
+            AI-driven efficiency and automation with our innovative solutions.
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">
-          {updatedServicesData.map((card, index) => (
+          {ServicesData.map((card, index) => (
             <div key={index} className="flex justify-center">
               <ParallaxCard
                 title={card.title}
                 image={card.image}
                 description={card.description}
-                onMessageAdd={handleMessageAdd}
               />
             </div>
           ))}
         </section>
       </div>
-      <ChatConversation 
+      <ChatConversation
         messages={chatMessages}
         isOpen={isChatOpen}
         onClose={handleChatClose}

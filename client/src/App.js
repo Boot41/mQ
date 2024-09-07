@@ -16,6 +16,7 @@ import ContactUs from "./components/ContactUsComps/ContactUs";
 import { SectionProvider } from "../src/components/TrackUserComps/SectionContext"; // Import the SectionProvider
 import CareersHome from "./components/Careersexp";
 import BlobComponent from "./components/BlobComponents/BlobComponent";
+import ReadMoreBlog from "./components/LandingpageComps/ReadMore";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -54,6 +55,7 @@ function App() {
             <Route path="/openpositions" element={<JobList />} />
             <Route path="/insights" element={<InsightsHome />} />
             <Route path="/readmore" element={<ReadMore />} />
+            <Route path="/ReadmoreBlogs" element={<ReadMoreBlog />} />
           </Routes>
           <Footer />
           <BlobComponent />
