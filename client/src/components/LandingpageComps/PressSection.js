@@ -29,7 +29,8 @@ const PressSection = () => {
               <img
                 src={post.image}
                 alt={post.title}
-                className="w-full h-48 object-cover"
+                className="w-full h-48 object-cover cursor-pointer"
+                onClick={() => handleReadMoreClick(post)}
               />
               <div className="p-6 flex-grow">
                 <h2 className="text-xl font-bold text-gray-900 mb-2">
@@ -52,7 +53,7 @@ const PressSection = () => {
                 </div>
 
                 <a
-                  className="text-blue-600 hover:underline mt-auto"
+                  className="text-blue-600 hover:underline mt-auto cursor-pointer"
                   onClick={() => handleReadMoreClick(post)}
                 >
                   Read More

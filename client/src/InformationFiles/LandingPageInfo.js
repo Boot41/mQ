@@ -60,36 +60,78 @@ export const AutoPodsData = {
 
 // pressSectionData.js
 
-export const pressSectionData = {
-  title: "Press Release",
-  seeAllLink: "/",
-  cards: [
-    {
-      imgSrc: "news.jpeg",
-      imgAlt: "Success",
-      title: "How To Measure Success",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
-      readMoreLink: "/",
-    },
-    {
-      imgSrc: "news3.jpeg",
-      imgAlt: "Success",
-      title: "How To Measure Success",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
-      readMoreLink: "/",
-    },
-    {
-      imgSrc: "a3.png",
-      imgAlt: "Success",
-      title: "How To Measure Success",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
-      readMoreLink: "/",
-    },
-  ],
-};
+// export const pressSectionData = {
+//   title: "Press Release",
+//   seeAllLink: "/",
+//   cards: [
+//     {
+//       imgSrc: "news.jpeg",
+//       imgAlt: "Success",
+//       title: "How To Measure Success",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
+//       readMoreLink: "/",
+//     },
+//     {
+//       imgSrc: "news3.jpeg",
+//       imgAlt: "Success",
+//       title: "How To Measure Success",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
+//       readMoreLink: "/",
+//     },
+//     {
+//       imgSrc: "a3.png",
+//       imgAlt: "Success",
+//       title: "How To Measure Success",
+//       description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
+//       readMoreLink: "/",
+//     },
+//   ],
+// };
+
+export const PressReleasePosts = [
+  {
+    title: "How To Measure Success",
+    summary:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
+    date: "September 5, 2024", // Add a sample date
+    image: "news.jpeg",
+    author: "John Doe", // Add a sample author
+    tags: ["Business", "Success", "Leadership"], // Add sample tags
+    content1: `Success is often measured by various factors, including professional achievements, personal growth, and the impact you have on others. In this article, we explore different metrics that can be used to gauge success, from financial stability to the pursuit of passion.`,
+    content2: `However, it's essential to remember that success is subjective, and what works for one person may not be applicable to another. Striking a balance between ambition and satisfaction is key to maintaining long-term success and happiness.`,
+    readTime: "5 min read", // Add a sample read time
+    relatedPosts: ["Growth Mindset", "Keys to Leadership"], // Add sample related posts
+  },
+  {
+    title: "How To Measure Success",
+    summary:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
+    date: "August 30, 2024", // Add a sample date
+    image: "news3.jpeg",
+    author: "Jane Doe", // Add a sample author
+    tags: ["Success", "Career", "Motivation"], // Add sample tags
+    content1: `Understanding how to measure success involves setting clear goals and assessing progress along the way. Successful individuals often break down their objectives into manageable tasks, ensuring steady growth over time.`,
+    content2: `Whether in personal life or business, measuring success requires discipline, perseverance, and the ability to adapt to changing circumstances. In this guide, we provide practical tips for tracking progress and overcoming obstacles.`,
+    readTime: "6 min read", // Add a sample read time
+    relatedPosts: ["Motivation Hacks", "Work-Life Balance"], // Add sample related posts
+  },
+  {
+    title: "How To Measure Success",
+    summary:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
+    date: "September 1, 2024", // Add a sample date
+    image: "a3.png",
+    author: "Michael Smith", // Add a sample author
+    tags: ["Success", "Entrepreneurship", "Strategy"], // Add sample tags
+    content1: `Success in entrepreneurship is not just about profits but also about resilience, innovation, and leadership. In this post, we dive into the strategies successful entrepreneurs use to grow their businesses and make a lasting impact.`,
+    content2: `From building a solid team to cultivating a positive company culture, the road to success in business requires a multifaceted approach. Learn how top entrepreneurs stay ahead in competitive markets.`,
+    readTime: "7 min read", // Add a sample read time
+    relatedPosts: ["Startup Tips", "Building Teams"], // Add sample related posts
+  },
+];
 
 //Services Page Data
 
