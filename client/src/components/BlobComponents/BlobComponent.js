@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSection } from "../TrackUserComps/SectionContext";
 import Jarvis from "./Jarvis";
 import ChatConversation from "../chathistory/chatconversation";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const BlobComponent = () => {
   const { currentSection } = useSection();
@@ -14,6 +15,7 @@ const BlobComponent = () => {
   const playerRef = useRef(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isVoiceMode, setIsVoiceMode] = useState(true);
 
   const speak = (text) => {
     if ('speechSynthesis' in window) {
@@ -25,6 +27,21 @@ const BlobComponent = () => {
       console.error('Text-to-speech not supported in this browser.');
     }
   };
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition({
+    continuous: true,
+    onError: (event) => {
+      console.error('Speech recognition error:', event.error);
+      if (event.error === 'no-speech' || event.error === 'audio-capture') {
+        startRecording();
+      }
+    }
+  });
 
   const handleClick = useCallback(async () => {
     if (!currentSection) {
@@ -76,6 +93,9 @@ const BlobComponent = () => {
 
   const handleSendMessage = async (newMessage) => {
     setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    if (isVoiceMode) {
+      stopRecording();
+    }
 
     try {
       const response = await axios.post(
@@ -102,8 +122,20 @@ const BlobComponent = () => {
       const errorMessage = "Sorry, I encountered an error. Please try again.";
       setChatMessages(prevMessages => [...prevMessages, { type: 'assistant', content: errorMessage }]);
       speak(errorMessage);
+    } finally {
+      if (isVoiceMode) {
+        startRecording();
+      }
     }
   };
+
+  const startRecording = useCallback(() => {
+    SpeechRecognition.startListening({ continuous: true, language: 'en-GB' });
+  }, []);
+
+  const stopRecording = useCallback(() => {
+    SpeechRecognition.stopListening();
+  }, []);
 
   return (
     <div style={{ position: 'fixed', bottom: '20px', right: '20px' }}>
@@ -124,6 +156,12 @@ const BlobComponent = () => {
         onCollapse={handleChatCollapse}
         isCollapsed={isCollapsed}
         isSpeaking={isSpeaking}
+        isVoiceMode={isVoiceMode}
+        setIsVoiceMode={setIsVoiceMode}
+        transcript={transcript}
+        resetTranscript={resetTranscript}
+        startRecording={startRecording}
+        stopRecording={stopRecording}
       />
     </div>
   );
