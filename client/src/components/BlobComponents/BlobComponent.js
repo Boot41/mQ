@@ -6,15 +6,14 @@ import ChatConversation from "../chathistory/chatconversation";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { CSSTransition } from 'react-transition-group';
 import { FaChevronUp, FaChevronDown, FaTimes } from 'react-icons/fa';
+import { useChat } from '../../context/ChatContext';
+import { speakText } from '../../utils/speechUtils';
 
 const BlobComponent = () => {
   const { currentSection } = useSection();
   const [isRecording, setIsRecording] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [chatMessages, setChatMessages] = useState([]);
-  const playerRef = useRef(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isVoiceMode, setIsVoiceMode] = useState(true);
@@ -26,6 +25,8 @@ const BlobComponent = () => {
   const [abortController, setAbortController] = useState(new AbortController());
   const [speakingTimeoutId, setSpeakingTimeoutId] = useState(null);
   const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
+
+  const { chatMessages, isChatOpen, addMessage, toggleChat } = useChat();
 
   const stopRecording = useCallback(() => {
     setAbortController(new AbortController());
@@ -48,45 +49,9 @@ const BlobComponent = () => {
     }, 5000);
   }, [isVoiceMode]);
 
-  const speakText = useCallback((text) => {
-    if (isVoiceBotActive && 'speechSynthesis' in window) {
-      console.log('BlobComponent: Speaking text:', text);
-      const utterances = text.match(/.{1,200}(?:\s|$)/g);
-      const voices = speechSynthesis.getVoices();
-      
-      // Select a specific voice and use it consistently
-      const selectedVoice = voices.find(voice => voice.name === 'Google US English') || voices[0];
-      console.log('BlobComponent: Selected voice:', selectedVoice.name);
-
-      // Cancel any ongoing speech
-      speechSynthesis.cancel();
-
-      utterances.forEach((chunk, index) => {
-        const speech = new SpeechSynthesisUtterance(chunk);
-        speech.voice = selectedVoice;
-        speech.rate = 1;
-        speech.pitch = 1;
-        speech.volume = 1;
-        speech.onstart = () => {
-          console.log('BlobComponent: Speech started:', chunk);
-          setIsSpeaking(true);
-          stopRecording();
-        };
-        speech.onend = () => {
-          console.log('BlobComponent: Speech ended:', chunk);
-          if (index === utterances.length - 1) {
-            handleSpeechEnd();
-          }
-        };
-        speech.onerror = (event) => {
-          console.error('BlobComponent: Speech synthesis error:', event.error);
-        };
-        speechSynthesis.speak(speech);
-      });
-    } else {
-      console.log('BlobComponent: Speech synthesis not supported or voice bot not active');
-    }
-  }, [isVoiceBotActive, stopRecording, handleSpeechEnd]);
+  const speakTextWrapper = useCallback((text) => {
+    speakText(text, true, setIsSpeaking, () => {}, () => {});
+  }, []);
 
   const {
     transcript,
@@ -105,6 +70,8 @@ const BlobComponent = () => {
 
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
   const welcomeMessageRef = useRef(null);
+
+  const playerRef = useRef(null);
 
   useEffect(() => {
     if (showWelcomeMessage) {
@@ -154,14 +121,11 @@ const BlobComponent = () => {
 
       console.log("API Response:", response.data);
       
-      setChatMessages(prevMessages => [
-        ...prevMessages,
-        { type: 'user', content: `Question about ${currentSection} section` },
-        { type: 'assistant', content: response.data.response }
-      ]);
+      addMessage({ type: 'user', content: `Question about ${currentSection} section` });
+      addMessage({ type: 'assistant', content: response.data.response });
       
-      setIsChatOpen(true);
-      speakText(response.data.response);
+      toggleChat();
+      speakTextWrapper(response.data.response);
     } catch (error) {
       console.error("Error making API call:", error);
     } finally {
@@ -169,17 +133,12 @@ const BlobComponent = () => {
     }
   }, [currentSection]);
 
-  const handleChatClose = () => {
-    setIsChatOpen(false);
-    setChatMessages([]);
-  };
-
   const handleChatCollapse = () => {
     setIsCollapsed(!isCollapsed);
   };
 
   const handleSendMessage = async (newMessage) => {
-    setChatMessages(prevMessages => [...prevMessages, newMessage]);
+    addMessage(newMessage);
     if (isVoiceMode) {
       stopRecording();
     }
@@ -201,15 +160,15 @@ const BlobComponent = () => {
       console.log("API Response:", response.data);
 
       const assistantResponse = response.data.response;
-      setChatMessages(prevMessages => [...prevMessages, { type: 'assistant', content: assistantResponse }]);
+      addMessage({ type: 'assistant', content: assistantResponse });
 
-      speakText(assistantResponse);
+      speakTextWrapper(assistantResponse);
       setProgress(response.data.progress || 0);
     } catch (error) {
       console.error("Error making API call:", error);
       const errorMessage = "Sorry, I encountered an error. Please try again.";
-      setChatMessages(prevMessages => [...prevMessages, { type: 'assistant', content: errorMessage }]);
-      speakText(errorMessage);
+      addMessage({ type: 'assistant', content: errorMessage });
+      speakTextWrapper(errorMessage);
     } finally {
       if (isVoiceMode) {
         startRecording();
@@ -280,13 +239,10 @@ const BlobComponent = () => {
     <div>
       {isChatOpen && (
         <ChatConversation 
-          messages={chatMessages}
-          isOpen={isChatOpen}
-          onClose={handleChatClose}
           onSendMessage={handleSendMessage}
           onCollapse={handleChatCollapse}
           isCollapsed={isCollapsed}
-          isSpeaking={isSpeaking} // Pass this from BlobComponent
+          isSpeaking={isSpeaking}
           isVoiceMode={isVoiceMode}
           setIsVoiceMode={setIsVoiceMode}
           darkMode={darkMode}

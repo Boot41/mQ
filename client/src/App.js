@@ -17,6 +17,7 @@ import { SectionProvider } from "../src/components/TrackUserComps/SectionContext
 import CareersHome from "./components/Careersexp";
 import BlobComponent from "./components/BlobComponents/BlobComponent";
 import ReadMoreBlog from "./components/LandingpageComps/ReadMore";
+import { ChatProvider } from "./context/ChatContext";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -43,23 +44,25 @@ function App() {
       {loading ? (
         <LoadingScreen onComplete={handleLoadingComplete} />
       ) : (
-        <SectionProvider>
-          <Header className="mb-56" />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/about-us" element={<AboutUS2 />} />
-            <Route path="/visualizingai" element={<Visualizingai />} />
-            <Route path="/careers" element={<CareersHome />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/openpositions" element={<JobList />} />
-            <Route path="/insights" element={<InsightsHome />} />
-            <Route path="/readmore" element={<ReadMore />} />
-            <Route path="/ReadmoreBlogs" element={<ReadMoreBlog />} />
-          </Routes>
-          <Footer />
-          <BlobComponent />
-        </SectionProvider>
+        <ChatProvider>
+          <SectionProvider>
+            <Header className="mb-56" />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/about-us" element={<AboutUS2 />} />
+              <Route path="/visualizingai" element={<Visualizingai />} />
+              <Route path="/careers" element={<CareersHome />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/contact" element={<ContactUs />} />
+              <Route path="/openpositions" element={<JobList />} />
+              <Route path="/insights" element={<InsightsHome />} />
+              <Route path="/readmore" element={<ReadMore />} />
+              <Route path="/ReadmoreBlogs" element={<ReadMoreBlog />} />
+            </Routes>
+            <Footer />
+            <BlobComponent />
+          </SectionProvider>
+        </ChatProvider>
       )}
     </Router>
   );
