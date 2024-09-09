@@ -1,5 +1,5 @@
 import Item from "./Item";
-import { PRODUCTS, Services, COMPANY, Pages } from "./Menus";
+import { DEMOS,Pages,SOCIAL} from "./Menus";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const ItemsContainer = () => {
           ></Link>
         ))}
       </div>
-      <div className="flex flex-col md:flex-row justify-around items-start sm:px-4 md:px-12 py-10 bg-white/10 w-full max-w-[52vw]  gap-4 md:gap-8 border-orange-300">
+      <div className="flex flex-col md:flex-row justify-evenly items-start sm:px-4 md:px-12 py-10 bg-white/10 w-full max-w-[40vw] border-orange-300">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <HiOutlineBuildingOffice2
@@ -35,10 +35,9 @@ const ItemsContainer = () => {
           </div>
         </div>
 
-        <Item Links={Pages} title="Pages" />
-        <Item Links={Services} title="Services" />
-        <Item Links={PRODUCTS} title="PRODUCTS" />
-        <Item Links={COMPANY} title="COMPANY" />
+        <Item  Links={Pages} title="PAGES" />
+        <Item Links={DEMOS} title="DEMOS" />
+        <Item Links={SOCIAL} title="SOCIAL" />
       </div>
     </div>
   );

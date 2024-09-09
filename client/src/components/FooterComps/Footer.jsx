@@ -27,11 +27,11 @@ const Footer = () => {
       <ItemsContainer />
 
       <div className="flex flex-col text-center px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-2 mt-4">
-          <span className="text-sm">© 2020 Appy. All rights reserved.</span>
+        <div className="flex flex-col sm:flex-row justify-center items-center space-y-1 sm:space-y-0 sm:space-x-2 mb-2 mt-4">
+          <span className="text-sm">© 2024 Appy. All rights reserved.</span>
           <span className="text-sm">Terms · Privacy Policy</span>
         </div>
-        <SocialIcons Icons={Icons} className="mt-6" />
+        {/* <SocialIcons Icons={Icons} className="mt-6" /> */}
       </div>
     </footer>
   );
