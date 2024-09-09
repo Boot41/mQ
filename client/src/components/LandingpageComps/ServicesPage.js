@@ -130,7 +130,7 @@ const ServicesSection = () => {
   };
 
   return (
-    <div className="py-20 relative">
+    <div className="mb-10 relative">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
           <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">

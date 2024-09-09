@@ -27,7 +27,7 @@ const Autopods = () => {
   };
 
   return (
-    <div className="py-10 mb-28">
+    <div className="py-10 mb-10">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           {/* Video Section */}

@@ -44,17 +44,18 @@ const Header = () => {
                 <div key={section}>
                   <Link
                     to={`/${section}`}
-                    className="text-black hover:text-black hover:underline"
+                    className="text-black hover:text-black hover:underline text-lg" // Increased font size
                     onClick={() => handleHeaderClick(section)}
                   >
-                    {section.replace("-", " ").toUpperCase()}
+                    {section.charAt(0).toUpperCase() + section.slice(1).replace("-", " ")} {/* Updated this line */}
                   </Link>
                 </div>
               ))}
             </div>
             <Link
               to="/contact"
-              className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600"
+              className="text-black hover:text-black hover:underline text-lg" // Increased font size
+              onClick={() => handleHeaderClick("contact")}
             >
               Contact Us
             </Link>

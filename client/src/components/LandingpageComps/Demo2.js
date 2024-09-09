@@ -125,9 +125,10 @@ const Demo = ({ onMessageAdd = () => {} }) => {
   return (
     <>
       <header className="text-center my-10 p-4 md:p-10">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-orange-400">
+        <h1 className="text-5xl md:text-5xl font-extrabold text-gray-900 mb-4">
           Check Out Some Demos
         </h1>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
         <p className="mt-3 text-base md:text-lg text-gray-500">
           Discover the features and capabilities of our latest demos and see how
           they can benefit you.
@@ -146,15 +147,9 @@ const Demo = ({ onMessageAdd = () => {} }) => {
                 <Box className="text-center bg-opacity-50 p-4 bg-transparent backdrop-blur-3xl border-4 rounded-3xl">
                   <Typography
                     variant="h2"
-                    className="text-orange-400 text-3xl md:text-5xl font-bold mb-2 border-b-2"
+                    className="text-orange-400 text-3xl md:text-5xl font-bold mb-4 border-b-2"
                   >
                     {DemoData[currentIndex].name}
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    className="text-gray-400 text-lg md:text-2xl font-semibold mb-4"
-                  >
-                    Discover Our Product
                   </Typography>
                   <Typography
                     variant="body1"
