@@ -27,10 +27,6 @@ function AboutUS2() {
             <WhoAndWhat2 />
           </div>
         </SectionComponent>
-        <StatsSection />
-        {/* <SectionComponent id="comp-stats">
-          <CompStats />
-        </SectionComponent> */}
 
         <SectionComponent id="meetfounders-section">
           <div id="t41-advantage">
