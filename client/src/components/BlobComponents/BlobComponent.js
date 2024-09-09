@@ -267,9 +267,6 @@ const BlobComponent = () => {
           onClick={handleClick}
         />
       </div>
-      <button onClick={testSpeech}>Test Speech</button>
-      <button onClick={initializeAudio}>Initialize Audio</button>
-      <button onClick={testAudio}>Test Audio</button>
     </div>
   );
 };

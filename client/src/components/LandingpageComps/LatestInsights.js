@@ -19,9 +19,10 @@ const LatestInsights = () => {
     <div className="relative  px-6 mx-auto max-w-7xl -mt-60">
       {/* Heading Section */}
       <div className="text-center mb-12">
-        <h1 className="text-5xl font-extrabold text-gray-800 mb-4">
+        <h1 className="text-6xl font-extrabold text-gray-800 mb-4">
           Latest Insights
         </h1>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
         <p className="text-lg text-gray-600">
           Stay updated with the latest trends and developments in the world of
           AI and technology.
@@ -37,7 +38,7 @@ const LatestInsights = () => {
           <h2 className="text-4xl font-bold text-gray-900">
             Skyrocket your audience
           </h2>
-          <p className="text-lg text-gray-900 mt-2">
+          <p className="text-lg text-gray-600 mt-2">
             Meet the most powerful team that will skyrocket your audience by
             generating the right content.
           </p>
@@ -73,7 +74,7 @@ const LatestInsights = () => {
             />
             <div className="absolute bottom-0 left-0 w-full h-fit bg-white bg-opacity-10 p-4">
               <h2 className="text-xl font-bold text-gray-900">{post.title}</h2>
-              <p className="text-gray-900 mt-2 text-sm">{post.summary}</p>
+              <p className="text-gray-600 mt-2 text-sm">{post.summary}</p>
               <div className="flex items-center justify-between text-gray-500 mt-3">
                 <div className="flex items-center">
                   <svg
