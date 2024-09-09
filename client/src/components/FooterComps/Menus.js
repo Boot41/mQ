@@ -29,6 +29,16 @@ export const SUPPORT = [
   { name: "Webinars", link: "#" },
   { name: "Open-source", link: "#" },
 ];
+export const DEMOS = [
+  { name: "R41", link: "#" },
+  { name: "RQ", link: "#" },
+  { name: "CQ", link: "#" },
+];
+export const SOCIAL = [
+  { name: "Linkdin", link: "https://www.linkedin.com/company/think41/?originalSubdomain=in" },
+  { name: "Facebook", link: "https://www.facebook.com/Think41corp?_rdr" },
+  { name: "Instagram", link: "https://www.instagram.com/think41corp/" },
+];
 
 export const Icons = [
   { name: "logo-facebook", link: "#" },
