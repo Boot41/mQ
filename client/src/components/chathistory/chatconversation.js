@@ -3,19 +3,18 @@ import './ChatConversation.css';
 import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane, FaUser, FaRobot, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import debounce from 'lodash.debounce';
+import { useChat } from '../../context/ChatContext';
 
 const ChatConversation = ({ 
-  messages, 
-  isOpen, 
-  onClose, 
   onSendMessage, 
   onCollapse, 
   isCollapsed, 
   isVoiceMode,
   setIsVoiceMode,
   darkMode,
-  isSpeaking, // Add this prop
+  isSpeaking,
 }) => {
+  const { chatMessages, isChatOpen, toggleChat } = useChat();
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -40,10 +39,10 @@ const ChatConversation = ({
 
   useEffect(() => {
     scrollToBottom();
-    if (isOpen && !isCollapsed) {
+    if (isChatOpen && !isCollapsed) {
       inputRef.current?.focus();
     }
-  }, [messages, isOpen, isCollapsed]);
+  }, [chatMessages, isChatOpen, isCollapsed]);
 
   useEffect(() => {
     if (isVoiceMode && transcript) {
@@ -131,10 +130,10 @@ const ChatConversation = ({
     setIsVoiceMode(!isVoiceMode);
   };
 
-  if (!isOpen) return null;
+  if (!isChatOpen) return null;
 
   return (
-    <div className={`chat-conversation ${isOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''} ${darkMode ? 'dark-mode' : ''}`}>
+    <div className={`chat-conversation ${isChatOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''} ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-header">
         <h3>Chat History</h3>
         <div className="header-buttons">
@@ -142,14 +141,14 @@ const ChatConversation = ({
           <button onClick={onCollapse} className="collapse-button" title={isCollapsed ? "Expand" : "Collapse"}>
             {isCollapsed ? <FaChevronDown /> : <FaChevronUp />}
           </button>
-          <button onClick={onClose} className="close-button" title="Close chat">
+          <button onClick={toggleChat} className="close-button" title="Close chat">
             <FaTimes />
           </button>
         </div>
       </div>
       <div className={`chat-content ${isCollapsed ? 'collapsed' : ''}`}>
         <div className="chat-messages">
-          {messages.map((message, index) => (
+          {chatMessages.map((message, index) => (
             <div key={index} className={`message ${message.type}`}>
               <div className="message-icon">
                 {message.type === 'user' ? <FaUser /> : <FaRobot />}
