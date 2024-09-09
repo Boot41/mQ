@@ -67,7 +67,8 @@ function HeroSection2() {
                   borderColor: "black",
                   backgroundColor: "black",
                   color: "white",
-                  px: { xs: 3, lg: 4 },
+                  fontSize: { xs: "16px", lg: "14px" },
+                  px: { xs: 3, lg: 2 },
                   py: { xs: 1.5, lg: 2 },
                   "&:hover": {
                     color: "white",
@@ -78,6 +79,7 @@ function HeroSection2() {
                     position: "absolute",
                     top: 0,
                     left: "-100%",
+              
                     width: "100%",
                     height: "100%",
                     backgroundColor: "orange",
@@ -101,9 +103,10 @@ function HeroSection2() {
                 overflow: "hidden",
                 borderColor: "black",
                 backgroundColor: "white",
+                fontSize: { xs: "16px", lg: "14px" },
                 color: "black",
-                px: { xs: 3, lg: 4 },
-                py: { xs: 1.5, lg: 2 },
+                px: { xs: 3, lg: 2 },
+                py: { xs: 1.5, lg: 0 },
                 "&:hover": {
                   color: "white",
                   backgroundColor: "transparent",

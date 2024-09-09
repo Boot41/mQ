@@ -3,7 +3,7 @@ import React from 'react';
 const VisualizeAIButton = () => {
   return (
     <button className="mx-auto flex items-center justify-between border border-white text-white rounded-full px-6 py-2  hover:bg-white hover:text-black group">
-      <span className="mr-5">Visualize AI</span>
+      <span className="mr-5 text-lg">Visualize AI</span>
       <span className="flex items-center justify-center w-6 h-6 border border-white rounded-full group-hover:border-black">
         <svg
           xmlns="http://www.w3.org/2000/svg"

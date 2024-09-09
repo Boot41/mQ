@@ -153,26 +153,26 @@ const Demo = ({ onMessageAdd = () => {} }) => {
                   </Typography>
                   <Typography
                     variant="body1"
-                    className="text-white text-sm md:text-base leading-relaxed text-justify"
+                    className="text-white text-sm md:text-base leading-relaxed text-justify mb-6" // Increased margin-bottom
                   >
                     {DemoData[currentIndex].description}
                   </Typography>
+                  {/* Button container */}
+                  <Box className="flex justify-center w-full mt-4"> {/* Changed to flex and added margin-top */}
+                    <Button
+                      variant="contained"
+                      onClick={handleClick} // Ensure this is correctly set
+                      className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300"
+                    >
+                      Know More
+                    </Button>
+                  </Box>
+                </Box>
                 </Box>
               </Box>
             </Box>
           </Box>
 
-          {/* Button container */}
-          <Box className="absolute bottom-5 w-5/6 flex  justify-end  space-x-2 overflow-x-auto pb-4 ">
-            <Button
-              variant="contained"
-              onClick={handleClick}
-              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300 ml-10"
-            >
-              Know More
-            </Button>
-          </Box>
-        </Box>
 
         {/* Thumbnail images */}
         <Box className="absolute bottom-20 w-full flex justify-end space-x-2 overflow-x-auto pb-4 ">

@@ -4,6 +4,7 @@ import { CVPData } from "../../InformationFiles/LandingPageInfo";
 const About = () => {
   return (
     <div className="py-10 rounded-t-3xl">
+      <h1 className="text-center text-6xl text-orange-400 font-bold">Unlocking AI's Potential With The 3P's</h1>
       <div className="container mx-auto px-4">
         <div className="flex justify-center">
           <div className="flex overflow-x-auto gap-8 py-4 scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
