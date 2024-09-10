@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import axios from "axios";
 import { ServicesData } from "../../InformationFiles/LandingPageInfo";
 import ChatConversation from "../chathistory/chatconversation";
-import { API_BASE_URL } from '../config';
+import config from '../../lib/config';
 import { useChat } from '../../context/ChatContext';
 
 const ParallaxCard = ({ title, description, image }) => {
@@ -34,7 +34,7 @@ const ParallaxCard = ({ title, description, image }) => {
       toggleChat();
 
       const response = await axios.post(
-        "${API_BASE_URL}/api/know-more-about-service/",
+         `${config.API_BASE_URL}/api/know-more-about-service/`,
         {
           service_name: title,
           model_name: "4o-mini",
