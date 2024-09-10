@@ -84,9 +84,10 @@ const Boot41 = () => {
   return (
     <div className="flex flex-col items-center bg-gray-100 py-8 px-4">
       <header className="text-center mb-4"> {/* Reduced margin-bottom here */}
-        <h1 className="text-3xl sm:text-4xl font-extrabold leading-tight text-black">
-          Boot41 at Think41
+        <h1 className="text-5xl sm:text-4xl font-extrabold leading-tight text-black mb-4">
+          Boot41 
         </h1>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
       </header>
       <main className="flex flex-col items-center w-full max-w-6xl">
         <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-4"> {/* Reduced margin-bottom here */}

@@ -136,7 +136,7 @@ const Demo = ({ onMessageAdd = () => {} }) => {
       </header>
       <Box className="relative h-[300px] md:h-[500px]">
         {/* Container for background image and button */}
-        <Box className="relative h-full">
+        <Box className="relative h-full" style={{ zIndex: 1 }}>
           <Box
             className="absolute inset-0 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
             style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
@@ -158,15 +158,14 @@ const Demo = ({ onMessageAdd = () => {} }) => {
                     {DemoData[currentIndex].description}
                   </Typography>
                   {/* Button container */}
-                  <Box className="flex justify-center w-full mt-4"> {/* Changed to flex and added margin-top */}
                     <Button
                       variant="contained"
                       onClick={handleClick} // Ensure this is correctly set
                       className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300"
+                      style={{ zIndex: 2 }}
                     >
                       Know More
                     </Button>
-                  </Box>
                 </Box>
                 </Box>
               </Box>
