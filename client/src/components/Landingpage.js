@@ -8,7 +8,6 @@ import Autopods from "./LandingpageComps/Autopods";
 import Demo2 from "./LandingpageComps/Demo2";
 import HeroSection2 from "./LandingpageComps/HeroSection";
 import PressSection from "./LandingpageComps/PressSection";
-import BlobComponent from "./BlobComponents/BlobComponent";
 
 const LandingPage = () => {
   const [showChat, setShowChat] = useState(false);
@@ -70,7 +69,6 @@ const LandingPage = () => {
       <SectionComponent id="latest-insights-section">
         <LatestInsights />
       </SectionComponent>
-      <BlobComponent />
     </div>
   );
 };

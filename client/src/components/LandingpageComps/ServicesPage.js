@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import axios from "axios";
 import { ServicesData } from "../../InformationFiles/LandingPageInfo";
-import ChatConversation from "../chathistory/chatconversation";
+import { useChat } from '../../context/ChatContext';
 
-const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
+const ParallaxCard = ({ title, description, image }) => {
   const [inView, setInView] = useState(false);
+  const { addMessage, toggleChat } = useChat();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +28,8 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
 
   const handleclick = async () => {
     try {
-      onMessageAdd({ type: "user", content: `Tell me more about ${title}` });
+      addMessage({ type: "user", content: `Tell me more about ${title}` });
+      toggleChat();
 
       const response = await axios.post(
         "http://localhost:8000/api/know-more-about-service/",
@@ -37,11 +39,11 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
         }
       );
 
-      onMessageAdd({ type: "assistant", content: response.data.response });
+      addMessage({ type: "assistant", content: response.data.response });
       console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error making API call:", error);
-      onMessageAdd({
+      addMessage({
         type: "assistant",
         content: "Sorry, I encountered an error. Please try again.",
       });
@@ -97,15 +99,13 @@ const ParallaxCard = ({ title, description, image, onMessageAdd }) => {
 };
 
 const ServicesSection = () => {
-  const [chatMessages, setChatMessages] = useState([]);
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [updatedServicesData, setUpdatedServicesData] = useState([]);
 
   useEffect(() => {
     // Fetch or initialize your services data here
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/services"); // Replace with your API endpoint
+        const response = await axios.get("http://localhost:8000/api/services");
         setUpdatedServicesData(response.data);
       } catch (error) {
         console.error("Error fetching services data:", error);
@@ -114,20 +114,6 @@ const ServicesSection = () => {
 
     fetchData();
   }, []);
-
-  const handleMessageAdd = (newMessage) => {
-    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-    setIsChatOpen(true);
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
-  };
-
-  const handleSendMessage = (newMessage) => {
-    setChatMessages((prevMessages) => [...prevMessages, newMessage]);
-    // You might want to add API call logic here similar to BlobComponent's handleSendMessage
-  };
 
   return (
     <div className="mb-10 relative">
@@ -158,19 +144,9 @@ const ServicesSection = () => {
           ))}
         </section>
       </div>
-      <ChatConversation
-        messages={chatMessages}
-        isOpen={isChatOpen}
-        onClose={handleChatClose}
-        onSendMessage={handleSendMessage}
-        onCollapse={() => {}} // Add collapse functionality if needed
-        isCollapsed={false}
-        isSpeaking={false}
-      />
     </div>
   );
 };
-
 
 export default ServicesSection;
 
