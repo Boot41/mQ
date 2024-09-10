@@ -1,31 +1,90 @@
-import React from "react";
+import React, { useCallback, useState} from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
+
 import { API_BASE_URL } from '../config';
 
-const Autopods = () => {
+import { useChat } from '../../context/ChatContext';
+import { speakText } from '../../utils/speechUtils';
+
+const Autopods = ({ onMessageAdd = () => {} }) => {
+  const { addMessage, toggleChat } = useChat();
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const handleMessageAdd = (newMessage) => {
+    addMessage(newMessage);
+    toggleChat();
+  };
+
+
   const handleClick = async () => {
+    const userMessage = "Tell me more about Think41's Autopods";
+    
     try {
+      handleMessageAdd({
+        type: "user",
+        content: userMessage,
+      });
+
+      if (typeof onMessageAdd === 'function') {
+        onMessageAdd({
+          type: "user",
+          content: userMessage,
+        });
+      }
+
       const response = await axios.post(
         "${API_BASE_URL}/api/website-interaction/",
         {
-          user_input:
-            "I'd like to know more about Think41's Autopods. Can you provide detailed information about what Autopods are, how they work, their benefits, and how they integrate Gen AI agents? Also, how do Autopods enhance the software development process and what makes them unique compared to traditional development teams?",
+          user_input: `The user has clicked 'Know More' about Autopods on our landing page. Based on the information provided in the Autopods section, please elaborate on the following:
+1. What are Autopods and how do they work?
+2. How do Autopods integrate Gen AI agents into the software development process?
+3. What are the key benefits of using Autopods?
+4. How do Autopods enhance productivity and efficiency in software development?
+5. What makes Autopods unique compared to traditional development teams?
+Please provide a comprehensive yet concise response that a potential client would find informative and engaging.`,
           model_name: "4o-mini",
           section_id: "autopods-section",
-          user_context: {},
+          user_context: {
+            section: "Autopods",
+            user_action: "Clicked 'Know More' button",
+            displayed_info: {
+              title: AutoPodsData.title,
+              subtitle1: AutoPodsData.subtitle1,
+              subtitle2: AutoPodsData.subtitle2,
+              description: AutoPodsData.description,
+            },
+          },
         }
       );
 
-      // Handle the response as needed
+      const assistantMessage = { type: "assistant", content: response.data.response };
+      handleMessageAdd(assistantMessage);
+      speakTextWrapper(response.data.response);
+
+      if (typeof onMessageAdd === 'function') {
+        onMessageAdd(assistantMessage);
+      }
+
       console.log("API Response:", response.data);
     } catch (error) {
-      // Handle errors
       console.error("Error making API call:", error);
+      const errorMessage = {
+        type: "assistant",
+        content: "I apologize, but I encountered an error while fetching information about Autopods. Please try again or contact our support team for assistance.",
+      };
+      handleMessageAdd(errorMessage);
+      if (typeof onMessageAdd === 'function') {
+        onMessageAdd(errorMessage);
+      }
     }
   };
+
+  const speakTextWrapper = useCallback((text) => {
+    speakText(text, true, setIsSpeaking, () => {}, () => {});
+  }, [setIsSpeaking]);
 
   return (
     <div className="py-10 mb-10">
@@ -99,7 +158,7 @@ const Autopods = () => {
             <Box className="flex justify-center md:justify-start">
               <Link to="#">
                 <Button
-                  onClick={() => handleClick("Button1")}
+                  onClick={handleClick}
                   variant="outlined"
                   color="warning"
                   sx={{

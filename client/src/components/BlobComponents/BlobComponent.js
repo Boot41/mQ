@@ -2,15 +2,16 @@ import React, { useCallback, useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useSection } from "../TrackUserComps/SectionContext";
 import Jarvis from "./Jarvis";
-import ChatConversation from "../chathistory/chatconversation";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { CSSTransition } from 'react-transition-group';
 import { FaChevronUp, FaChevronDown, FaTimes } from 'react-icons/fa';
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
 import { API_BASE_URL } from '../config';
+import './BlobComponent.css'; // Make sure to create this file
 
-const BlobComponent = () => {
+
+const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
   const { currentSection } = useSection();
   const [isRecording, setIsRecording] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -28,6 +29,12 @@ const BlobComponent = () => {
   const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
 
   const { chatMessages, isChatOpen, addMessage, toggleChat } = useChat();
+
+  useEffect(() => {
+    if (additionalMessages.length > 0) {
+      additionalMessages.forEach(message => addMessage(message));
+    }
+  }, [additionalMessages, addMessage]);
 
   const stopRecording = useCallback(() => {
     setAbortController(new AbortController());
@@ -73,6 +80,8 @@ const BlobComponent = () => {
   const welcomeMessageRef = useRef(null);
 
   const playerRef = useRef(null);
+
+  const [chatKey, setChatKey] = useState(0);
 
   useEffect(() => {
     if (showWelcomeMessage) {
@@ -132,7 +141,7 @@ const BlobComponent = () => {
     } finally {
       setIsRecording(false);
     }
-  }, [currentSection]);
+  }, [currentSection, addMessage, speakTextWrapper, toggleChat]);
 
   const handleChatCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -140,6 +149,9 @@ const BlobComponent = () => {
 
   const handleSendMessage = async (newMessage) => {
     addMessage(newMessage);
+    if (onMessageAdd) {
+      onMessageAdd(newMessage);
+    }
     if (isVoiceMode) {
       stopRecording();
     }
@@ -236,37 +248,31 @@ const BlobComponent = () => {
     const oscillator = audioContext.createOscillator();
   };
 
+  useEffect(() => {
+    // Cleanup function
+    return () => {
+      // Close the chat if it's open
+      if (isChatOpen) {
+        toggleChat();
+      }
+      // Reset the chat key
+      setChatKey(prevKey => prevKey + 1);
+    };
+  }, [isChatOpen, toggleChat]);
+
   return (
-    <div>
-      {isChatOpen && (
-        <ChatConversation 
-          onSendMessage={handleSendMessage}
-          onCollapse={handleChatCollapse}
-          isCollapsed={isCollapsed}
-          isSpeaking={isSpeaking}
-          isVoiceMode={isVoiceMode}
-          setIsVoiceMode={setIsVoiceMode}
-          darkMode={darkMode}
-        />
-      )}
-      <CSSTransition
-        in={showWelcomeMessage}
-        timeout={300}
-        classNames="welcome-message"
-        unmountOnExit
-      >
-        <div ref={welcomeMessageRef} className="welcome-message">
-          Hello! How can I assist you today?
+    <div className="blob-container" id="unique-blob-container">
+      <div className="blob-chat-wrapper">
+        {isChatOpen }
+        <div ref={playerRef} className="blob-wrapper">
+          <Jarvis
+            isRecording={isRecording}
+            isMinimized={isMinimized}
+            isClosing={isClosing}
+            playerRef={playerRef}
+            onClick={handleClick}
+          />
         </div>
-      </CSSTransition>
-      <div ref={playerRef} style={{ marginBottom: '80px' }}>
-        <Jarvis
-          isRecording={isRecording}
-          isMinimized={isMinimized}
-          isClosing={isClosing}
-          playerRef={playerRef}
-          onClick={handleClick}
-        />
       </div>
     </div>
   );
