@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/static/",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
@@ -24,6 +25,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.4.0",
     "glider-js": "^1.7.9",
+    "i": "^0.3.7",
     "loglevel": "^1.9.1",
     "lottie-web": "^5.12.2",
     "lucide-react": "^0.436.0",
