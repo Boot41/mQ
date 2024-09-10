@@ -8,7 +8,7 @@ const Values = () => {
         <div className="flex flex-col lg:flex-row items-start justify-between space-y-8 lg:space-y-0 lg:space-x-12">
           {/* Text Section */}
           <div className="lg:w-1/2 w-full">
-            <h2 className="text-3xl font-bold mb-6">{valuesData.title}</h2>
+            <h2 className="text-3xl font-bold mb-4">{valuesData.title}</h2>
             <p className="text-lg text-gray-700 mb-6">
               {valuesData.description}
             </p>

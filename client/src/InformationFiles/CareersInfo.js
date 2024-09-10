@@ -115,7 +115,7 @@ export const jobs = [
 // LifeATT41.js
 
 export const LifeAtT41 = {
-  title: "LIFE AT THINK 41",
+  title: "Life At Think 41",
   description: "Reach your audience at their most engaged",
   content: [
     {

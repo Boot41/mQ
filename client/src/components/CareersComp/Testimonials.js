@@ -26,21 +26,23 @@ const TestimonialSection = () => {
   return (
     <section className="py-16 bg-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto text-center relative z-10 px-4">
-        <p className="text-orange-500 font-semibold mb-3 relative z-10">
-          What our employees have to say about us
-        </p>
 
-        <div className="relative mb-16">
+        {/* <div className="relative mb-10">
           <h2
-            className="text-[8rem] font-bold text-gray-200 absolute inset-0 flex items-center justify-center tracking-wide hidden md:flex"
+            className="text-[8rem] font-bold text-gray-300 absolute inset-0 flex items-center justify-center tracking-wide hidden md:flex"
             aria-hidden="true"
           >
             Thinkers
           </h2>
-          <h2 className="text-4xl font-bold text-gray-900 relative z-10 mb-20">
+          <h2 className="text-5xl font-bold text-gray-900 relative z-10">
             Speak
           </h2>
-        </div>
+        </div> */}
+        <h1 className="text-center text-5xl font-bold mb-4">Thinker's Speak</h1>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-4"></div>
+        <p className="text-lg text-orange-500 font-semibold mb-3 relative z-10">
+          What our employees have to say
+        </p>
 
         <div className="flex justify-center items-center space-x-4">
           <button onClick={prevTestimonial} className="text-3xl">
@@ -51,7 +53,7 @@ const TestimonialSection = () => {
               <div
                 key={testimonial.id}
                 className={`bg-white p-6 rounded-lg shadow-lg ${
-                  index === 1 ? "md:scale-110 z-10" : "md:scale-90 md:blur-sm"
+                  index === 1 ? "md:scale-110 z-10" : "md:scale-90 md:blur-[1px]"
                 } transition-all duration-300 hover:scale-105 hover:shadow-2xl mb-4 md:mb-0`}
                 style={{ width: "300px", maxWidth: "100%" }}
               >

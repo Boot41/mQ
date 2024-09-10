@@ -127,9 +127,10 @@ const Demo = ({ onMessageAdd = () => {} }) => {
   return (
     <>
       <header className="text-center my-10 p-4 md:p-10">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-orange-400">
+        <h1 className="text-5xl md:text-5xl font-extrabold text-gray-900 mb-4">
           Check Out Some Demos
         </h1>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
         <p className="mt-3 text-base md:text-lg text-gray-500">
           Discover the features and capabilities of our latest demos and see how
           they can benefit you.
@@ -137,7 +138,7 @@ const Demo = ({ onMessageAdd = () => {} }) => {
       </header>
       <Box className="relative h-[300px] md:h-[500px]">
         {/* Container for background image and button */}
-        <Box className="relative h-full">
+        <Box className="relative h-full" style={{ zIndex: 1 }}>
           <Box
             className="absolute inset-0 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
             style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
@@ -148,38 +149,31 @@ const Demo = ({ onMessageAdd = () => {} }) => {
                 <Box className="text-center bg-opacity-50 p-4 bg-transparent backdrop-blur-3xl border-4 rounded-3xl">
                   <Typography
                     variant="h2"
-                    className="text-orange-400 text-3xl md:text-5xl font-bold mb-2 border-b-2"
+                    className="text-orange-400 text-3xl md:text-5xl font-bold mb-4 border-b-2"
                   >
                     {DemoData[currentIndex].name}
                   </Typography>
                   <Typography
-                    variant="h5"
-                    className="text-gray-400 text-lg md:text-2xl font-semibold mb-4"
-                  >
-                    Discover Our Product
-                  </Typography>
-                  <Typography
                     variant="body1"
-                    className="text-white text-sm md:text-base leading-relaxed text-justify"
+                    className="text-white text-sm md:text-base leading-relaxed text-justify mb-6" // Increased margin-bottom
                   >
                     {DemoData[currentIndex].description}
                   </Typography>
+                  {/* Button container */}
+                    <Button
+                      variant="contained"
+                      onClick={handleClick} // Ensure this is correctly set
+                      className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300"
+                      style={{ zIndex: 2 }}
+                    >
+                      Know More
+                    </Button>
+                </Box>
                 </Box>
               </Box>
             </Box>
           </Box>
 
-          {/* Button container */}
-          <Box className="absolute bottom-5 w-5/6 flex  justify-end  space-x-2 overflow-x-auto pb-4 ">
-            <Button
-              variant="contained"
-              onClick={handleClick}
-              className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300 ml-10"
-            >
-              Know More
-            </Button>
-          </Box>
-        </Box>
 
         {/* Thumbnail images */}
         <Box className="absolute bottom-20 w-full flex justify-end space-x-2 overflow-x-auto pb-4 ">

@@ -46,17 +46,15 @@ const LandingPage = () => {
       </SectionComponent>
 
       <SectionComponent id="about-section">
-        <About className="-mb-28" />
+        <About/>
       </SectionComponent>
 
       <SectionComponent id="autopods-section">
-        <Autopods className=" mb-28" />
+        <Autopods/>
       </SectionComponent>
 
-      <SectionComponent id="services-section">
-        <div className="py-20">
-          <ServicesPage />
-        </div>
+      <SectionComponent id="services-section" className="mt-0"> {/* Adjusted margin-top */}
+        <ServicesPage />
       </SectionComponent>
 
       <SectionComponent id="press-section">

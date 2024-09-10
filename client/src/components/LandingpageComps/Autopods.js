@@ -27,7 +27,7 @@ const Autopods = () => {
   };
 
   return (
-    <div className="py-10 mb-28">
+    <div className="py-10 mb-10">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           {/* Video Section */}
@@ -107,8 +107,12 @@ const Autopods = () => {
                     borderColor: "black",
                     backgroundColor: "black",
                     color: "white",
-                    px: 4,
-                    py: 2,
+                    // fontSize: { xs: "16px", lg: "12px" },
+                    // px: 4,
+                    // py: 2,
+                    fontSize: { xs: "16px", lg: "14px" },
+                    px: { xs: 3, lg: 2 },
+                    py: { xs: 1.5, lg: 2 },
                     "&:hover": {
                       color: "white",
                       backgroundColor: "transparent",
