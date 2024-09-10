@@ -1,33 +1,37 @@
-
+# Stage 1: Build the frontend application
 FROM node:22 AS client_build
 
 WORKDIR /code
 
 COPY ./client /code
+
 RUN npm install --legacy-peer-deps
 RUN npm run build
 
-
-# Stage 2: Build the Django backend and serve static files with Whitenoise
+# Stage 2: Build the backend application
 FROM python:3.12.3
 
-
-COPY backend/requirements.txt /code/requirements.txt
-RUN pip install gunicorn
-RUN pip install -r requirements.txt
-
-WORKDIR /codeRUN Xvfb :99 -screen 0 1024x768x24 &
-ENV DISPLAY=:99
-
+WORKDIR /code
 RUN apt-get update && apt-get install -y \
     xvfb \
     python3-pip
 
+# Copy backend code
+COPY backend /code
 
+# Install Python dependencies
+COPY backend/requirements.txt /code/requirements.txt
+RUN pip install -r /code/requirements.txt
 
-COPY --from=client_build /code/build/static/ /code/static/
+# Install Gunicorn
+RUN pip install gunicorn
+
+# Copy the built frontend files from the client_build stage
+COPY --from=client_build /code/build/static/ /code/static/static/
 COPY --from=client_build /code/build/ /code/static/
-COPY ./backend/config  /code
 
-# Run Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "config.wsgi:application"]
+
+
+
+# Set the command to run the application
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "config.wsgi:application"]

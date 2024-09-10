@@ -130,16 +130,7 @@ function HeroSection2() {
         </div>
       </Box>
 
-      {/* Right section - Spline Model */}
-      <Box className="w-full lg:w-1/2 lg:p-24 lg:mr-10 relative h-64 sm:h-80 md:h-96 lg:h-full flex justify-center">
-        <iframe
-          src="https://my.spline.design/nexbotrobotcharacterconcept-daa066f84acfc7f95db37781feb78e68/"
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          title="Spline Model"
-        ></iframe>
-      </Box>
+      
     </Box>
   );
 }
