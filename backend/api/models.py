@@ -6,6 +6,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.postgres.search import SearchVectorField
 from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.operations import CreateExtension
+from django.db import migrations
 
 def get_default_company():
     from django.conf import settings
@@ -185,6 +187,8 @@ class UniversalContent(models.Model):
     class Meta:
         indexes = [
             GinIndex(fields=['search_vector']),
+            GinIndex(fields=['title'], name='title_trigram_index', opclasses=['gin_trgm_ops']),
+            GinIndex(fields=['content'], name='content_trigram_index', opclasses=['gin_trgm_ops']),
         ]
 
     def __str__(self):
