@@ -30,6 +30,8 @@ function AboutUS2() {
 
         <SectionComponent id="meetfounders-section">
           <div id="t41-advantage">
+            <h1 className="text-5xl text-center text-bold mb-4">Meet our founders</h1>
+            <div className="w-24 h-1 bg-orange-400 mx-auto mb-4"></div>
             <MeetFounders />
           </div>
         </SectionComponent>

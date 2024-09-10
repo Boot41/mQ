@@ -21,6 +21,7 @@ const OpenPositions = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden w-2/3">
         <div className="px-6 py-4 border-b">
           <h2 className="text-2xl font-bold">Open Positions</h2>
+          <div className="w-24 h-1 bg-orange-400 mx-auto mb-4"></div>
         </div>
         <div className="px-6 py-4">
           <p>There are currently no open positions.</p>
@@ -32,7 +33,8 @@ const OpenPositions = () => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden w-2/3">
       <div className="px-6 py-4 border-b">
-        <h2 className="text-2xl font-bold">Open Positions</h2>
+        <h2 className="text-2xl text-center font-bold mb-4">Open Positions</h2>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-4"></div>
       </div>
       <div className="px-6 py-4 space-y-4">
         {randomJobs.map((job, index) => (
