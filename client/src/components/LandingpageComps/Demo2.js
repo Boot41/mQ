@@ -28,7 +28,12 @@ const Demo = ({ onMessageAdd = () => {} }) => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/website-interaction/",
-        // ... request body ...
+        {
+          user_input: newMessage,
+          model_name: "4o-mini",
+          section_id: "demo-section",
+          user_context: {},
+        }
       );
 
       const assistantResponse = response.data.response;
@@ -59,15 +64,14 @@ const Demo = ({ onMessageAdd = () => {} }) => {
   }, [DemoData.length]);
 
   const handleClick = async () => {
-    const userMessage = `Tell me more about ${DemoData[currentIndex].name}`;
+    const currentDemo = DemoData[currentIndex];
+    const userMessage = `Tell me more about ${currentDemo.name}`;
     try {
-      // Add user message to local state
       handleMessageAdd({
         type: "user",
         content: userMessage,
       });
 
-      // Only call onMessageAdd if it's a function
       if (typeof onMessageAdd === 'function') {
         onMessageAdd({
           type: "user",
@@ -78,34 +82,32 @@ const Demo = ({ onMessageAdd = () => {} }) => {
       const response = await axios.post(
         "http://localhost:8000/api/website-interaction/",
         {
-          user_input: `Tell me about ${DemoData[currentIndex].name} if You Dont have information tell me what u have regarding demo section`,
+          user_input: `The user has clicked 'Know More' about ${currentDemo.name}. Please provide detailed information about this product, including its key features, benefits, and how it compares to similar products in the market. If you don't have specific information about ${currentDemo.name}, please provide general information about our demo products and their typical features. Also, suggest some questions the user might want to ask about this product.`,
           model_name: "4o-mini",
           section_id: "demo-section",
-          user_context: {},
+          user_context: {
+            current_demo: currentDemo.name,
+            demo_description: currentDemo.description,
+            user_action: "Clicked 'Know More' button",
+            user_intent: "Learn detailed information about the demo product",
+          },
         }
       );
 
-      // Add assistant message to local state
       const assistantMessage = { type: "assistant", content: response.data.response };
       handleMessageAdd(assistantMessage);
+      speakTextWrapper(response.data.response);
 
-      // Add this line to speak the response
-      speakText(response.data.response);
-
-      // Only call onMessageAdd if it's a function
       if (typeof onMessageAdd === 'function') {
         onMessageAdd(assistantMessage);
       }
 
       console.log("API Response:", response.data);
-
-      // Speak the assistant's response
-      speakText(response.data.response);
     } catch (error) {
       console.error("Error making API call:", error);
       const errorMessage = {
         type: "assistant",
-        content: "Sorry, I encountered an error. Please try again.",
+        content: "I apologize, but I encountered an error while fetching information about this demo. Please try again or contact our support team for assistance.",
       };
       handleMessageAdd(errorMessage);
       if (typeof onMessageAdd === 'function') {
