@@ -4,10 +4,10 @@ import { useInView } from 'react-intersection-observer';
 
 // Team member data
 const teamMembers = [
-  { name: 'Anshuman Singh, CEO', description: 'Anshu loves tech and scalability...', image: 'placeholder.png' },
-  { name: 'Harshit Singhal, CTO', description: 'Harshit loves business and has supercharged...', image: 'placeholder.png' },
-  { name: 'Himanshu Varshney, CEO', description: 'Himanshu is a people person...', image: 'placeholder.png' },
-  { name: 'Sripathi Krishnan, CFO', description: 'Sri is a tech guy...', image: 'placeholder.png' },
+  { name: 'Anshuman Singh', description: 'Anshu loves tech and scalability...', image: 'placeholder.png' },
+  { name: 'Harshit Singhal', description: 'Harshit loves business and has supercharged...', image: 'placeholder.png' },
+  { name: 'Himanshu Varshney', description: 'Himanshu is a people person...', image: 'placeholder.png' },
+  { name: 'Sripathi Krishnan', description: 'Sri is a tech guy...', image: 'placeholder.png' },
 ];
 
 // Milestones data

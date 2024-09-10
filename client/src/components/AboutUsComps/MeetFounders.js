@@ -132,7 +132,7 @@ function MeetFounders() {
                       alignItems: "baseline",
                     }}
                   >
-                    <div className="-mt-5 ">
+                    <div className="-mt-20">
                       <IconButton
                         component="a"
                         href={member.linkedin}

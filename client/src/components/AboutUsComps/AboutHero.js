@@ -20,7 +20,7 @@ const AboutHero = () => {
         <p className="text-xl sm:text-2xl text-gray-200 mb-8">
           Discover our journey of innovation and impact.
         </p>
-        <Button
+        {/* <Button
           onClick={handleLearnMore}
           variant="outlined"
           color="warning"
@@ -54,7 +54,7 @@ const AboutHero = () => {
           }}
         >
           Learn More
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
