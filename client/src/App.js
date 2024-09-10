@@ -15,7 +15,7 @@ import { LoadingScreen } from "./components/AnimatedNumber";
 import ContactUs from "./components/ContactUsComps/ContactUs";
 import { SectionProvider } from "../src/components/TrackUserComps/SectionContext"; // Import the SectionProvider
 import CareersHome from "./components/Careersexp";
-import BlobComponent from "./components/BlobComponents/BlobComponent";
+import BlobChatWrapper from "./components/BlobComponents/BlobChatWrapper";
 import ReadMoreBlog from "./components/LandingpageComps/ReadMore";
 import { ChatProvider } from "./context/ChatContext";
 
@@ -60,7 +60,7 @@ function App() {
               <Route path="/ReadmoreBlogs" element={<ReadMoreBlog />} />
             </Routes>
             <Footer />
-            <BlobComponent />
+            <BlobChatWrapper />
           </SectionProvider>
         </ChatProvider>
       )}

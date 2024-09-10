@@ -11,7 +11,7 @@ export const ChatProvider = ({ children }) => {
   };
 
   const toggleChat = () => {
-    setIsChatOpen((prev) => !prev);
+    setIsChatOpen((prevState) => !prevState);
   };
 
   return (

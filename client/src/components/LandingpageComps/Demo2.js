@@ -2,51 +2,17 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { DemoData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
-import ChatConversation from "../chathistory/chatconversation";
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
 
 const Demo = ({ onMessageAdd = () => {} }) => {
   const { addMessage, toggleChat } = useChat();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isVoiceMode, setIsVoiceMode] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
 
   const handleMessageAdd = (newMessage) => {
     addMessage(newMessage);
     toggleChat();
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
-  };
-
-  const handleSendMessage = async (newMessage) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
-        {
-          user_input: newMessage,
-          model_name: "4o-mini",
-          section_id: "demo-section",
-          user_context: {},
-        }
-      );
-
-      const assistantResponse = response.data.response;
-      addMessage({ type: 'assistant', content: assistantResponse });
-
-      // Add this line to speak the response
-      speakTextWrapper(assistantResponse);
-      speakText(assistantResponse);
-
-      // ... rest of the function ...
-    } catch (error) {
-      // ... error handling ...
-    }
   };
 
   const handleThumbnailClick = (index) => {
@@ -116,10 +82,6 @@ const Demo = ({ onMessageAdd = () => {} }) => {
     }
   };
 
-  const handleChatCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
   const speakTextWrapper = useCallback((text) => {
     speakText(text, true, setIsSpeaking, () => {}, () => {});
   }, [setIsSpeaking]);
@@ -141,7 +103,6 @@ const Demo = ({ onMessageAdd = () => {} }) => {
           <Box
             className="absolute inset-0 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
             style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
-           
           >
             <Box className="w-full h-full flex items-center justify-center p-4 md:p-6">
               <Box className="absolute inset-y-1/2 left-4 transform -translate-y-80 hidden md:flex flex-col bg-opacity-50 p-4 md:p-6 rounded-lg w-full max-w-xs md:max-w-md">
@@ -202,15 +163,6 @@ const Demo = ({ onMessageAdd = () => {} }) => {
           ))}
         </Box>
       </Box>
-      <ChatConversation
-        onSendMessage={handleSendMessage}
-        onCollapse={handleChatCollapse}
-        isCollapsed={isCollapsed}
-        isSpeaking={isSpeaking}
-        isVoiceMode={isVoiceMode}
-        setIsVoiceMode={setIsVoiceMode}
-        darkMode={darkMode}
-      />
     </>
   );
 };
