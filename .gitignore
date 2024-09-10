@@ -58,3 +58,5 @@ coverage/
 
 # Misc
 Think41data.pdf
+/code_review_project/static/
+/code_review_project/staticfiles/
