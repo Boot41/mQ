@@ -5,6 +5,7 @@ import axios from "axios";
 import ChatConversation from "../chathistory/chatconversation";
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
+import { API_BASE_URL } from '../config';
 
 const Demo = ({ onMessageAdd = () => {} }) => {
   const { addMessage, toggleChat } = useChat();
@@ -27,7 +28,7 @@ const Demo = ({ onMessageAdd = () => {} }) => {
   const handleSendMessage = async (newMessage) => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
+        "${API_BASE_URL}/api/website-interaction/",
         {
           user_input: newMessage,
           model_name: "4o-mini",
@@ -80,7 +81,7 @@ const Demo = ({ onMessageAdd = () => {} }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
+        "${API_BASE_URL}/api/website-interaction/",
         {
           user_input: `The user has clicked 'Know More' about ${currentDemo.name}. Please provide detailed information about this product, including its key features, benefits, and how it compares to similar products in the market. If you don't have specific information about ${currentDemo.name}, please provide general information about our demo products and their typical features. Also, suggest some questions the user might want to ask about this product.`,
           model_name: "4o-mini",
