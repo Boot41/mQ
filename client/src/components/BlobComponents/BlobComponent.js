@@ -7,7 +7,9 @@ import { CSSTransition } from 'react-transition-group';
 import { FaChevronUp, FaChevronDown, FaTimes } from 'react-icons/fa';
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
+import { API_BASE_URL } from '../config';
 import './BlobComponent.css'; // Make sure to create this file
+
 
 const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
   const { currentSection } = useSection();
@@ -115,7 +117,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
+        "${API_BASE_URL}/api/website-interaction/",
         {
           user_input: `You are an AI assistant for Think41's website. The user is currently viewing the ${currentSection} section. Provide a brief, friendly welcome and offer assistance. Highlight 1-2 key points about this section and how they relate to Think41's services. Be concise and engaging.`,
           model_name: "4o-mini",
@@ -156,7 +158,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
+        "${API_BASE_URL}/api/website-interaction/",
         {
           user_input: newMessage.content,
           model_name: "4o-mini",

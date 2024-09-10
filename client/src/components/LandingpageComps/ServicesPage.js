@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { ChevronRight } from "lucide-react";
 import axios from "axios";
 import { ServicesData } from "../../InformationFiles/LandingPageInfo";
+import ChatConversation from "../chathistory/chatconversation";
+import { API_BASE_URL } from '../config';
 import { useChat } from '../../context/ChatContext';
 
 const ParallaxCard = ({ title, description, image }) => {
@@ -32,7 +34,7 @@ const ParallaxCard = ({ title, description, image }) => {
       toggleChat();
 
       const response = await axios.post(
-        "http://localhost:8000/api/know-more-about-service/",
+        "${API_BASE_URL}/api/know-more-about-service/",
         {
           service_name: title,
           model_name: "4o-mini",
@@ -105,7 +107,9 @@ const ServicesSection = () => {
     // Fetch or initialize your services data here
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/services");
+
+        const response = await axios.get("${API_BASE_URL}/api/services"); // Replace with your API endpoint
+
         setUpdatedServicesData(response.data);
       } catch (error) {
         console.error("Error fetching services data:", error);

@@ -3,6 +3,9 @@ import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
+
+import { API_BASE_URL } from '../config';
+
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
 
@@ -14,6 +17,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
     addMessage(newMessage);
     toggleChat();
   };
+
 
   const handleClick = async () => {
     const userMessage = "Tell me more about Think41's Autopods";
@@ -32,7 +36,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
       }
 
       const response = await axios.post(
-        "http://localhost:8000/api/website-interaction/",
+        "${API_BASE_URL}/api/website-interaction/",
         {
           user_input: `The user has clicked 'Know More' about Autopods on our landing page. Based on the information provided in the Autopods section, please elaborate on the following:
 1. What are Autopods and how do they work?
