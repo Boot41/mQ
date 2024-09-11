@@ -1,5 +1,5 @@
-// export const API_BASE_URL = 'https://genaiemailbox-mha4s7stfa-uc.a.run.app';
-const API_BASE_URL = 'http://localhost:8000';
+export const API_BASE_URL = 'https://mq-1081098542602.us-central1.run.app';
+// const API_BASE_URL = 'http://localhost:8000';
 
 export default {
   API_BASE_URL
