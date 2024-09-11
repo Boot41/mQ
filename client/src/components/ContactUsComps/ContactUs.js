@@ -36,6 +36,8 @@ function ContactUs() {
         }
       );
 
+      console.log(response);
+
       // console.log("API Response:", response.data);
       toast.success("Form submitted successfully!"); // Show success toast
       reset();
@@ -113,6 +115,7 @@ function ContactUs() {
         </form>
         {/* Form Ends */}
       </div>
+      <ToastContainer />
     </div>
   );
 }
