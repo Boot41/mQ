@@ -32,10 +32,11 @@ RUN mkdir /staticfiles
 COPY --from=client_build /code/build/static/ /code/static/static/
 COPY --from=client_build /code/build/ /code/static/
 
+# Create the staticfiles directory
+RUN mkdir -p /code/staticfiles
 
 WORKDIR /code
 RUN python manage.py collectstatic --noinput --clear
-
 
 # Set the command to run the application
 CMD ["gunicorn", "-b", "0.0.0.0:8080", "config.wsgi:application"]
