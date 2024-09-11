@@ -26,7 +26,6 @@ RUN pip install -r /code/requirements.txt
 # Install Gunicorn
 RUN pip install gunicorn
 
-RUN mkdir /staticfiles
 
 # Copy the built frontend files from the client_build stage
 COPY --from=client_build /code/build/static/ /code/static/static/
