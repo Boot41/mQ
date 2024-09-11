@@ -138,6 +138,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       speakTextWrapper(response.data.response);
     } catch (error) {
       console.error("Error making API call:", error);
+      console.log("API Base URL:", config.API_BASE_URL); // Add this line for debugging
     } finally {
       setIsRecording(false);
     }
@@ -179,6 +180,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       setProgress(response.data.progress || 0);
     } catch (error) {
       console.error("Error making API call:", error);
+      console.log("API Base URL:", config.API_BASE_URL); // Add this line for debugging
       const errorMessage = "Sorry, I encountered an error. Please try again.";
       addMessage({ type: 'assistant', content: errorMessage });
       speakTextWrapper(errorMessage);
