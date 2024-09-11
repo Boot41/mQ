@@ -1,8 +1,7 @@
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import FileSystemStorage
-# from .models import ServiceContact, CareerContact
-from .models import ServiceContact , CareerContact
+from .models import ServiceContact
 from django.core.files.storage import default_storage
 import json
 
@@ -102,5 +101,3 @@ def handle_service_contact(request):
 #         return JsonResponse({'message': 'Career contact submitted successfully.'})
 
 #     return JsonResponse({'error': 'Invalid request method'}, status=400)
-
-
