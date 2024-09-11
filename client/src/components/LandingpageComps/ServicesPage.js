@@ -122,7 +122,7 @@ const ServicesSection = () => {
     // Fetch or initialize your services data here
     const fetchData = async () => {
       try {
-        const response = await axios.get("${API_BASE_URL}/api/services"); // Replace with your API endpoint
+        const response = await axios.get(`${config.API_BASE_URL}/api/services`);; // Replace with your API endpoint
         setUpdatedServicesData(response.data);
       } catch (error) {
         console.error("Error fetching services data:", error);

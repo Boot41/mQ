@@ -12,7 +12,7 @@ function ContactUs() {
 
   // Handle form submission
   const onSubmit = async (data) => {
-    if (!data.name || !data.email || !data.phone || !data.jobTitle || !data.message) {
+    if (!data.name || !data.email || !data.phone || !data.organization || !data.message) { // Updated to organization
       toast.error("Please fill in all fields."); // Show error toast if fields are empty
       return;
     }
@@ -23,7 +23,7 @@ function ContactUs() {
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("phone", data.phone);
-      formData.append("jobTitle", data.jobTitle); // Include job title
+      formData.append("organization", data.organization); // Updated to organization
       formData.append("message", data.message);
 
       const response = await axios.post(
