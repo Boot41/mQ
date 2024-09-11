@@ -213,6 +213,7 @@ class ServiceContact(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
+    organization = models.CharField(max_length=50, null=True, blank=True)  # New field
     message = models.TextField()
     file_upload = models.FileField(upload_to='uploads/services/', blank=True, null=True)
 
@@ -221,19 +222,6 @@ class ServiceContact(models.Model):
     
     class Meta:
         db_table ='service_contact'
-        
-
-# Model for career connection form
-class CareerContact(models.Model):
-    career_name = models.CharField(max_length=255)
-    career_email = models.EmailField()
-    country = models.CharField(max_length=100)
-    file_upload = models.FileField(upload_to='uploads/careers/', blank=True, null=True)
-
-    def __str__(self):
-        return self.career_name
-    class Meta:
-        db_table ='careers_contact'
 
 # New model for website sections
 class WebsiteSection(models.Model):

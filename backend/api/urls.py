@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from .contact_views import handle_career_contact , handle_service_contact
+from .contact_views import handle_service_contact
 from .tour_views import (
     start_tour, next_tour_step, previous_tour_step, get_tour_progress,
     get_all_tour_steps, go_to_step, navigate_to_page
@@ -67,8 +67,8 @@ urlpatterns = [
     path('ppt-data/', get_ppt_data, name='get_ppt_data'),
 
     # Contact Us page endpoints
-    path('service-contact/', handle_service_contact, name='service-contact'),
-    path('career-contact/', handle_career_contact, name='career-contact'),
+    path('service-contact/', handle_service_contact, name='service_contact'),
+    # path('career-contact/', handle_career_contact, name='career_contact'),
 ]
 
 if settings.DEBUG:
