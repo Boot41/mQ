@@ -1,29 +1,29 @@
 // Boot 41 Slides Info
 export const Boot41Slides = [
   {
-    imageSrc: "boot1.jpeg",
+    imageSrc: "static/boot1.jpeg",
     alt: "Description of Image 1",
     text: "Learn from industry leaders on cutting-edge tech and business insights.",
   },
   {
-    imageSrc: "boot2.jpeg",
+    imageSrc: "static/boot2.jpeg",
     alt: "Description of Image 2",
     text: "Master SDLC and full-stack concepts with hands-on AI experience.",
   },
   {
-    imageSrc: "boot3.jpeg",
+    imageSrc: "static/boot3.jpeg",
     alt: "Description of Image 3",
     text: "Take breaks and enjoy fun activities to recharge and connect.",
   },
   {
-    imageSrc: "boot4.jpeg",
+    imageSrc: "static/boot4.jpeg",
     alt: "Description of Image 3",
     text: "Receive recognition and appreciation for your hard work and achievements.",
   },
 ];
 
 export const heroSectionData = {
-  backgroundImage: "careers2.webp",
+  backgroundImage: "static/careers2.webp",
   title: "Be the force behind impactful",
   highlightText: "AI advancements",
   description:
@@ -50,21 +50,21 @@ export const FunActivityData = {
     {
       title: "TeammattersI",
       description: "The team having fun at the spring boot",
-      imgSrc: "fun2.jpg",
+      imgSrc: "static/fun2.jpg",
       isVideo: true,
       className: "h-[400px]",
     },
     {
       title: "Teammatters II",
       description: "Team retreat at Spring",
-      imgSrc: "fun6.jpg",
+      imgSrc: "static/fun6.jpg",
       descriptionOnRight: true,
       className: "h-full",
     },
     {
       title: "Teammatters III",
       description: "Spring retreat at",
-      imgSrc: "fun5.jpg",
+      imgSrc: "static/fun5.jpg",
       descriptionOnRight: true,
       className: "h-full",
     },
@@ -206,21 +206,21 @@ export const fresherJobs = [
 export const testimonials = [
   {
     id: 1,
-    image: "placeholder.png",
+    image: "static/placeholder.png",
     name: "Hussain",
     role: "Engineering Manager",
     text: "At Think41, the culture perfectly matches my expectations—innovative and supportive. The seamless integration of AI into our projects is impressive. I value the autonomy to lead my team while receiving strong support from leadership. It’s fantastic to work in an environment where freedom and collaboration thrive together.",
   },
   {
     id: 2,
-    image: "adarsh.jpeg",
+    image: "static/adarsh.jpeg",
     name: "Kumar Adarsh Pandita",
     role: "Full Stack Engineer",
     text: "Transitioning from an intern to a full-time role at Think41 has been an incredible journey. The steep learning curve has been highly rewarding. I've made great friends, love the vibrant office in HSR, and see immense growth potential here. It’s a place where my career is truly thriving.",
   },
   {
     id: 3,
-    image: "anusha.jpeg",
+    image: "static/anusha.jpeg",
     name: "Anusha Aravapalli",
     role: "Technical Product Manager",
     text: "Working as a product manager at Think41 has been incredibly rewarding. The open and approachable leadership fosters a culture where every idea is valued. Our team is both friendly and highly collaborative, making problem-solving a collective effort. The work is challenging and engaging, with thought-provoking projects that keep us constantly learning.",
@@ -241,7 +241,7 @@ export const valuesData = {
     text: "Imagine a place where AI handles the routine, so you can focus on the extraordinary. At Think41, AI streamlines processes to boost your productivity, giving you more space to innovate, create, and grow. Here, AI is not just a tool—it’s a catalyst for your career, helping you stay ahead in technology and turn your ideas into impactful solutions.",
   },
   image: {
-    src: "careerslifeatthink41.webp",
+    src: "static/careerslifeatthink41.webp",
     alt: "office",
   },
 };

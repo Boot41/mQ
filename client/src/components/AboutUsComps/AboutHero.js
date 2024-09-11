@@ -10,7 +10,7 @@ const AboutHero = () => {
     <div className="relative h-[300px] flex items-center justify-center overflow-hidden">
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: 'url("r5.png")' }}
+        style={{ backgroundImage: 'url("static/r5.png")' }}
       />
       <div className="absolute inset-0 bg-black opacity-50 z-10" />
       <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-3xl">

@@ -5,7 +5,7 @@ const ProcessSection = () => (
     <div className="flex flex-col md:flex-row items-center md:justify-center">
       {/* Image Section */}
       <div className="md:w-1/3 flex justify-center">
-        <img src="office.jpg" alt="Person using tablet" className="rounded-lg shadow-lg" />
+        <img src="static/office.jpg" alt="Person using tablet" className="rounded-lg shadow-lg" />
       </div>
       {/* Text Section */}
       <div className="md:w-1/3 md:pl-8 mt-8 md:mt-0">

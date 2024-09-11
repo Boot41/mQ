@@ -6,6 +6,7 @@ from .models import ServiceContact , CareerContact
 from django.core.files.storage import default_storage
 import json
 
+
 @csrf_exempt
 def handle_service_contact(request):
     if request.method == "POST":

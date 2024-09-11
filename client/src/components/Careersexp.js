@@ -25,12 +25,15 @@ const CareersHome = () => {
     <GlassdoorRating />
     
       
-=======
+
       
       <SectionComponent id="values-careers">
         <Values />
       </SectionComponent>
+      <SectionComponent id="lifeatthink41-careers">
       <OurAds />
+      </SectionComponent>
+     
 
       {/* <LifeAtT41 /> */}
       <SectionComponent id="boot41-careers">

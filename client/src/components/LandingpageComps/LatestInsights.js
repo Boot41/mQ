@@ -32,7 +32,7 @@ const LatestInsights = () => {
       {/* Podcast Section */}
       <div
         className="relative h-[300px] bg-cover bg-center rounded-lg overflow-hidden shadow-xl mb-12"
-        style={{ backgroundImage: "url(podcast2.jpg)" }}
+        style={{ backgroundImage: "url(static/podcast2.jpg)" }}
       >
         <div className="absolute bottom-0 left-0 w-full h-1/4 bg-white bg-opacity-40 p-4">
           <h2 className="text-4xl font-bold text-gray-900">

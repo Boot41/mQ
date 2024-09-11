@@ -5,6 +5,8 @@ import { ServicesData } from "../../InformationFiles/LandingPageInfo";
 import ChatConversation from "../chathistory/chatconversation";
 import config from '../../lib/config';
 import { useChat } from '../../context/ChatContext';
+import { motion } from 'framer-motion';
+
 
 const ParallaxCard = ({ title, description, image }) => {
   const [inView, setInView] = useState(false);
@@ -28,7 +30,7 @@ const ParallaxCard = ({ title, description, image }) => {
     };
   }, [title]);
 
-  const handleclick = async () => {
+  const handleClick = async () => {
     try {
       addMessage({ type: "user", content: `Tell me more about ${title}` });
       toggleChat();
@@ -52,12 +54,21 @@ const ParallaxCard = ({ title, description, image }) => {
     }
   };
 
+<motion.div 
+  className="border-t border-white mb-4"
+  initial={{ width: '4rem' }}
+  whileHover={{ width: '100%' }}
+  transition={{ duration: 0.3 }}
+/>
+
+
+  
   return (
     <div
       id={title}
       className={`relative overflow-hidden rounded-lg shadow-lg w-[250px] h-[200px] transition-transform duration-500 transform-gpu ${
         inView ? "opacity-100" : "opacity-0"
-      } group hover:scale-105 hover:shadow-2xl cursor-pointer `}
+      } group hover:scale-105 hover:shadow-2xl cursor-pointer`}
     >
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-110"
@@ -68,21 +79,24 @@ const ParallaxCard = ({ title, description, image }) => {
 
       {/* Content container */}
       <div className="relative h-full">
-  {/* Title and line container */}
-  <div className="relative h-full">
-  {/* Title and line container */}
-  <div
-    className={`absolute bottom-0 w-full transition-transform duration-300 ease-in-out transform ${
-      inView ? "translate-y-0" : "translate-y-full"
-    } group-hover:translate-y-[-60%] z-20`}
-  >
-    <div className="bg-gradient-to-t from-black to-transparent p-4">
-      <h2 className="text-xl font-bold mb-2 text-white">{title}</h2>
-      <div className="border-t border-white w-16 mb-4"></div>
-    </div>
-  </div>
-</div>
-
+        {/* Title and line container */}
+        <div className="relative h-full">
+          <div
+            className={`absolute bottom-0 w-full transition-transform duration-300 ease-in-out transform ${
+              inView ? "translate-y-0" : "translate-y-full"
+            } group-hover:translate-y-[-60%] z-20`}
+          >
+            <div className="bg-gradient-to-t from-black to-transparent p-4">
+              <h2 className="text-xl font-bold mb-2 text-white">{title}</h2>
+              <motion.div 
+                className="border-t border-white mb-4"
+                initial={{ width: '4rem' }}
+                whileHover={{ width: '100%' }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* Description container */}
         <div
@@ -97,6 +111,7 @@ const ParallaxCard = ({ title, description, image }) => {
         </div>
       </div>
     </div>
+
   );
 };
 
@@ -107,9 +122,7 @@ const ServicesSection = () => {
     // Fetch or initialize your services data here
     const fetchData = async () => {
       try {
-
         const response = await axios.get("${API_BASE_URL}/api/services"); // Replace with your API endpoint
-
         setUpdatedServicesData(response.data);
       } catch (error) {
         console.error("Error fetching services data:", error);
@@ -120,7 +133,7 @@ const ServicesSection = () => {
   }, []);
 
   return (
-    <div className="mb-10 relative">
+     <div className="mb-10 relative">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
           <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
