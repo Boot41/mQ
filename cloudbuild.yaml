@@ -4,32 +4,32 @@ steps:
   - name: gcr.io/cloud-builders/docker
     args:
       - '-c'
-      - 'docker pull gcr.io/$PROJECT_ID/mQ:latest || exit 0'
+      - 'docker pull gcr.io/$PROJECT_ID/mq:latest || exit 0'
     entrypoint: bash
   # Build using the cached layers to speed things up
   - name: gcr.io/cloud-builders/docker
     args:
       - build
       - '--cache-from'
-      - 'gcr.io/$PROJECT_ID/mQ:latest'
+      - 'gcr.io/$PROJECT_ID/mq:latest'
       - '-t'
-      - 'gcr.io/$PROJECT_ID/mQ:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/mq:$COMMIT_SHA'
       - .
   # Push it to gcr
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - 'gcr.io/$PROJECT_ID/mQ:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/mq:$COMMIT_SHA'
   # Tag as latest - so its used next time
   - name: gcr.io/cloud-builders/docker
     args:
       - tag
-      - 'gcr.io/$PROJECT_ID/mQ:$COMMIT_SHA'
-      - 'gcr.io/$PROJECT_ID/mQ:latest'
+      - 'gcr.io/$PROJECT_ID/mq:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/mq:latest'
   # Update Latest in gcr
   - name: gcr.io/cloud-builders/docker
     args:
       - push
-      - 'gcr.io/$PROJECT_ID/mQ:latest'
+      - 'gcr.io/$PROJECT_ID/mq:latest'
 options:
   logging: CLOUD_LOGGING_ONLY
