@@ -2,7 +2,7 @@ import React from 'react';
 
 const ConnectSection = () => {
   return (
-    <div className="mx-auto relative bg-center bg-no-repeat bg-cover w-3/4" style={{ backgroundImage: 'url(contact.png)' }}>
+    <div className="mx-auto relative bg-center bg-no-repeat bg-cover w-3/4" style={{ backgroundImage: 'url(static/contact.png)' }}>
       <div className="absolute inset-0 bg-black opacity-40"></div>
       <div className="relative flex flex-col items-center justify-center h-70 p-8 text-white max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-center">Connect with Think41</h1>

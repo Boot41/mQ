@@ -27,19 +27,19 @@ export const typicalConfig = {
 
 export const CVPData = [
   {
-    image: "p1.png",
+    image: "static/p1.png",
     title: "Optimize processes for speed and efficiency.",
     description:
       "Leverage AI-driven automation to accelerate software cycles. Enhance business processes for faster, smarter delivery.",
   },
   {
-    image: "p2.png",
+    image: "static/p2.png",
     title: "Enable innovative, once-impossible solutions.",
     description:
       "Automate initial interviews using Conversational AI. Unlock new possibilities through advanced automation.",
   },
   {
-    image: "p3.png",
+    image: "static/p3.png",
     title: "Develop cutting-edge, Innovative use cases.",
     description:
       "Create personalized AI-driven learning environments. Utilize AI for vision, decision-making, and business processes.",
@@ -49,7 +49,7 @@ export const CVPData = [
 //Auto Pods Data
 
 export const AutoPodsData = {
-  videoSrc: "/autobots.webm",
+  videoSrc: "static//autobots.webm",
   title: "AutoPods",
   subtitle1: "Pods empowered with AI tools delivering exceptional performance",
   description: `Autonomous pods is a cross-functional teams consisting of full stack engineers, engineering & product managers, working alongside Gen AI agents. This approach ensures that we deliver robust, end-to-end products and services tailored to your specific needs
@@ -97,7 +97,7 @@ export const PressReleasePosts = [
     summary:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
     date: "September 5, 2024", // Add a sample date
-    image: "news.jpeg",
+    image: "static/news.jpeg",
     author: "John Doe", // Add a sample author
     tags: ["Business", "Success", "Leadership"], // Add sample tags
     content1: `Success is often measured by various factors, including professional achievements, personal growth, and the impact you have on others. In this article, we explore different metrics that can be used to gauge success, from financial stability to the pursuit of passion.`,
@@ -110,7 +110,7 @@ export const PressReleasePosts = [
     summary:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
     date: "August 30, 2024", // Add a sample date
-    image: "news3.jpeg",
+    image: "static/news3.jpeg",
     author: "Jane Doe", // Add a sample author
     tags: ["Success", "Career", "Motivation"], // Add sample tags
     content1: `Understanding how to measure success involves setting clear goals and assessing progress along the way. Successful individuals often break down their objectives into manageable tasks, ensuring steady growth over time.`,
@@ -123,7 +123,7 @@ export const PressReleasePosts = [
     summary:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget nisl non orci scelerisque blandit vel id lacus.",
     date: "September 1, 2024", // Add a sample date
-    image: "a3.png",
+    image: "static/a3.png",
     author: "Michael Smith", // Add a sample author
     tags: ["Success", "Entrepreneurship", "Strategy"], // Add sample tags
     content1: `Success in entrepreneurship is not just about profits but also about resilience, innovation, and leadership. In this post, we dive into the strategies successful entrepreneurs use to grow their businesses and make a lasting impact.`,
@@ -138,19 +138,19 @@ export const PressReleasePosts = [
 export const ServicesData = [
   {
     title: "POC to Production",
-    image: "services3.webp",
+    image: "static/services3.webp",
     description:
       "Think41 transforms GenAI MVPs into scalable, production-ready systems, ensuring efficient transitions while maintaining quality and cost-effectiveness. We help turn your AI innovations into impactful solutions.",
   },
   {
     title: "Conversational AI at Scale",
-    image: "services2.webp",
+    image: "static/services2.webp",
     description:
       "Think41 excels in perfecting the final 25% of GenAI voice systems, creating scalable, low-cost solutions with human-like latency, reactions, and conversational flow. Our Recruit41 bot showcases this expertise by conducting nuanced, human-like interviews beyond basic Q&A.",
   },
   {
     title: "Custom Agent Development",
-    image: "services4.webp",
+    image: "static/services4.webp",
     description:
       "Think41 builds autonomous AI agents that predict, recommend, and adapt, seamlessly integrating with your systems to automate tasks and enhance decision-making. Experience the future of automation with rQ.",
   },
@@ -163,19 +163,19 @@ export const DemoData = [
     name: "Recruit 41",
     description:
       "Recruit 41 is an AI-powered digital hiring web application designed to revolutionize the recruitment process. Leveraging advanced machine learning algorithms, Recruit 41 helps companies identify and hire the best-fitting employees by analyzing resumes, assessing skills, and matching candidates to job roles with precision. This automated recruitment agent streamlines the hiring process, reduces time-to-hire, and ensures that organizations find the most qualified talent efficiently.",
-    img: "Recruit41.webp",
+    img: "static/Recruit41.webp",
   },
   {
     name: "RQ",
     description:
       "Auto Mailer is a cutting-edge AI-powered email marketing outreach tool that automates the creation and delivery of personalized email campaigns. With its advanced content generation capabilities, Auto Mailer can scrape user data, create dynamic templates, and send tailored emails to target audiences based on their interests. The platform's ability to map multiple content pieces to different users ensures that every message is relevant, increasing engagement and conversion rates.",
-    img: "RQ.webp",
+    img: "static/RQ.webp",
   },
   {
     name: "Podcast Generator",
     description:
       "Podcast Generator is an innovative AI-powered tool that enables users to create customized podcasts with ease. Users can generate podcasts on a wide range of topics, and the platform allows for the personalization of podcast characters, including voice, tone, and style. Whether for entertainment, education, or business, Podcast Generator provides a dynamic and interactive way to produce high-quality audio content that resonates with listeners.",
-    img: "podcastdemo.png",
+    img: "static/podcastdemo.png",
   },
 ];
 
@@ -187,7 +187,7 @@ export const BlogPosts = [
     summary:
       "Explore how generative AI is shaping the future of various industries...",
     date: "August 15, 2024",
-    image: "blog2.webp",
+    image: "static/blog2.webp",
     author: "Jane Doe",
     tags: ["AI", "Tech", "Innovation"],
     content1: `Generative AI, powered by advancements in machine learning and neural networks, is rapidly changing the way industries operate. From automated content creation to complex problem-solving, the potential applications of generative AI are vast. The technology is already being applied in healthcare, where AI systems can analyze patient data to suggest personalized treatments or create detailed medical reports. Similarly, in finance, AI is revolutionizing fraud detection and risk assessment through automated pattern recognition. Generative AI also holds immense potential in creative industries like film, music, and graphic design, where it can generate new ideas, scripts, or even artworks.
@@ -208,7 +208,7 @@ export const BlogPosts = [
     summary:
       "Learn about the importance of responsible AI practices in today's tech landscape...",
     date: "August 20, 2024",
-    image: "blog1.jpg",
+    image: "static/blog1.jpg",
     author: "John Smith",
     tags: ["AI", "Ethics", "Technology"],
     content1: `Responsible AI refers to the development and use of artificial intelligence systems in a manner that ensures fairness, accountability, and transparency. As AI technologies become more integrated into our daily lives, the need for responsible AI practices has grown significantly. This is because AI systems are capable of making decisions that can have far-reaching consequences, from hiring practices to criminal justice. Without proper oversight, these systems can perpetuate existing biases, resulting in discrimination or unfair outcomes.

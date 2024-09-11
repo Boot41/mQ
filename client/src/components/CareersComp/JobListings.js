@@ -66,7 +66,7 @@ const HeroImage = () => {
     <div className="relative w-1/3 h-7xl">
       <div className="relative w-full h-full">
   <img
-    src="r3.webp"
+    src="static/r3.webp"
     alt="Hero Image"
     className="w-full h-full object-cover rounded-lg"
   />

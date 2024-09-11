@@ -32,7 +32,7 @@ const OurAds = () => {
           {/* Left Column: Image */}
           <div className="w-full md:w-1/2">
             <img
-              src="careersabout.webp"
+              src="static/careersabout.webp"
               alt="Life at Think 41"
               className="w-full h-[200px] object-cover rounded-lg"
             />
