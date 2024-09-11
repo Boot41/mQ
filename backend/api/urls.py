@@ -68,7 +68,6 @@ urlpatterns = [
 
     # Contact Us page endpoints
     path('service-contact/', handle_service_contact, name='service-contact'),
-    path('career-contact/', handle_career_contact, name='career-contact'),
 ]
 
 if settings.DEBUG:
