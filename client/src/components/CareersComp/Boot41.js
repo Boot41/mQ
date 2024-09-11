@@ -7,8 +7,8 @@ const CarouselItem = ({ item }) => (
     <img
       src={item.imageSrc}
       alt={item.alt}
-      className="w-full object-cover rounded-lg mb-4"
-      style={{ height: '350px' }} // Adjust the height value to be slightly smaller
+      className="w-full object-cover rounded-lg mb-2"
+      style={{ height: '250px' }} // Adjust the height value as needed
     />
     <p className="text-base text-center text-gray-800 font-medium">{item.text}</p>
   </div>
@@ -55,13 +55,13 @@ const Carousel = ({ items }) => {
       </div>
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all lg:hidden"
       >
         <ChevronLeft className="w-6 h-6 text-gray-800" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all lg:hidden"
       >
         <ChevronRight className="w-6 h-6 text-gray-800" />
       </button>
@@ -83,14 +83,14 @@ const Carousel = ({ items }) => {
 const Boot41 = () => {
   return (
     <div className="flex flex-col items-center bg-gray-100 py-8 px-4">
-      <header className="text-center mb-4"> {/* Reduced margin-bottom here */}
-        <h1 className="text-5xl sm:text-4xl font-extrabold leading-tight text-black mb-4">
-          Boot41 
+      <header className="text-center mb-4">
+        <h1 className="text-4xl sm:text-3xl font-extrabold leading-tight text-black mb-4">
+          Boot41
         </h1>
         <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
       </header>
-      <main className="flex flex-col items-center w-full max-w-6xl">
-        <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-4"> {/* Reduced margin-bottom here */}
+      <main className="flex flex-col items-center w-full max-w-7xl">
+        <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-4">
           <div className="text-2xl lg:text-3xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900">
             {/* Optional content */}
           </div>
@@ -103,7 +103,6 @@ const Boot41 = () => {
         <Carousel items={Boot41Slides} />
       </main>
     </div>
-
   );
 };
 

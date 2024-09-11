@@ -31,7 +31,7 @@ COPY --from=client_build /code/build/static/ /code/static/static/
 COPY --from=client_build /code/build/ /code/static/
 
 WORKDIR /code
-RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --noinput --clear
 
 
 # Set the command to run the application
