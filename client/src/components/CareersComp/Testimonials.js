@@ -54,7 +54,7 @@ const TestimonialSection = () => {
                 key={testimonial.id}
                 className={`bg-white p-6 rounded-lg shadow-lg ${
                   index === 1 ? "md:scale-110 z-10" : "md:scale-90 md:blur-[1px]"
-                } transition-all duration-300 hover:scale-105 hover:shadow-2xl mb-4 md:mb-0`}
+                } transition-all duration-600 hover:scale-105 hover:shadow-2xl mb-4 md:mb-0`}
                 style={{ width: "300px", maxWidth: "100%" }}
               >
                 <div className="flex items-center mb-4">
