@@ -6,44 +6,28 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ContactUs() {
-  const [isCareers, setCareers] = useState(true);
-  const [isService, setService] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState("");
   // Initialize useForm hook
   const { register, handleSubmit, reset } = useForm();
 
   // Handle form submission
   const onSubmit = async (data) => {
+    if (!data.name || !data.email || !data.phone || !data.jobTitle || !data.message) {
+      toast.error("Please fill in all fields."); // Show error toast if fields are empty
+      return;
+    }
+    
     try {
       const formData = new FormData();
 
-      if (isService) {
-        // Service Form Fields
-        formData.append("name", data.name);
-        formData.append("email", data.email);
-        formData.append("phone", data.phone);
-        formData.append("message", data.message);
-
-        if (data.fileUpload && data.fileUpload.length > 0) {
-          formData.append("fileUpload", data.fileUpload[0]);
-        }
-      } else {
-        // Careers Form Fields
-        formData.append("name", data.name);
-        formData.append("email", data.email);
-        formData.append("country", data.country);
-
-        if (data.fileUpload && data.fileUpload.length > 0) {
-          formData.append("fileUpload", data.fileUpload[0]);
-        }
-      }
-
-      const endpoint = isService
-        ? "api/service-contact/"
-        : "api/career-contact/";
+      formData.append("name", data.name);
+      formData.append("email", data.email);
+      formData.append("phone", data.phone);
+      formData.append("jobTitle", data.jobTitle); // Include job title
+      formData.append("message", data.message);
 
       const response = await axios.post(
-        `${config.API_URL}/${endpoint}`,
+        `${config.API_BASE_URL}/api/service-contact/`, // Adjust endpoint as needed
         formData,
         {
           headers: {
@@ -70,232 +54,64 @@ function ContactUs() {
     }
   };
   return (
-    <div className="flex justify-center">
+    // <div className>
+    //   <div
+    //     className={`relative w-3/4 min-h-[480px] bg-white rounded-[30px] shadow-lg overflow-hidden flex transition-all duration-600 ease-in-out mt-40 justify-center`}
+    //   >
+
+    //   </div>
+    //     <ToastContainer />
+    // </div>
+    <div className="flex justify-center items-center h-[80vh]"> {/* Set a fixed height */}
       <div
-        className={`relative w-3/4 min-h-[480px] bg-white rounded-[30px] shadow-lg overflow-hidden flex transition-all duration-600 ease-in-out mt-40 justify-center ${
-          isService ? "rounded-r-full" : ""
-        }`}
+        className={`bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out z-10`}
+        style={{ margin: "auto" }} // Center the inner div
       >
-        {/* Connect for Services (Sign Up) Form */}
-        <div
-          className={`absolute top-0 left-0 w-1/2 bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out ${
-            isCareers
-              ? "translate-y-full opacity-0"
-              : "translate-x-0 opacity-100"
-          } z-10`}
-        >
-          <h1 className="text-2xl font-bold mb-4">Connect for Services</h1>
-          <span className="text-sm mb-4">
-            or use your email for registration
-          </span>
+        <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
+        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
 
-          {/* Form Starts */}
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-            <input
-              {...register("name")}
-              type="text"
-              placeholder="Name"
-              className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-            />
-            <input
-              {...register("email")}
-              type="email"
-              placeholder="Company Email"
-              className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-            />
-            <input
-              {...register("phone")}
-              type="phone"
-              placeholder="Telephone"
-              className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-            />
-            <textarea
-              {...register("message")}
-              placeholder="Messages"
-              className="w-full h-40 p-3 mb-2 bg-gray-200 rounded-lg outline-none resize-none overflow-y-auto"
-            ></textarea>
+        {/* Form Starts */}
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="Name"
+            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
+          />
+          <input
+            {...register("email")}
+            type="email"
+            placeholder="Company Email"
+            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
+          />
+          <input
+            {...register("phone")}
+            type="phone"
+            placeholder="Telephone"
+            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
+          />
+          <input
+            {...register("jobTitle")} // New input field for job title
+            type="text"
+            placeholder="Job Title"
+            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
+          />
+          <textarea
+            {...register("message")}
+            placeholder="Messages"
+            className="w-full h-40 p-3 mb-2 bg-gray-200 rounded-lg outline-none resize-none overflow-y-auto"
+          ></textarea>
 
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-purple-700 text-white p-4 rounded-lg font-semibold  w-full text-xl"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          {/* Form Ends */}
-
-          <button
-            onClick={() => {
-              setCareers(true);
-              setService(false);
-            }}
-            className="mt-4 bg-transparent border-2 border-purple-700 text-purple-700 px-10 py-2 rounded-lg font-semibold"
-          >
-            Connect for Careers
-          </button>
-        </div>
-
-        {/* Connect for Careers (Sign In) Form */}
-        <div
-          className={`absolute top-0 left-1/2 w-1/2 h-full bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out ${
-            isCareers
-              ? "translate-x-0 opacity-100"
-              : "translate-y-full opacity-0"
-          } z-10`}
-        >
-          <h1 className="text-2xl font-bold mb-4">Connect for Careers</h1>
-          <span className="text-sm mb-4">or use your email for login</span>
-
-          {/* Form Starts */}
-          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-            <input
-              {...register("name")}
-              type="text"
-              placeholder="Name"
-              className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-            />
-            <input
-              {...register("email")}
-              type="email"
-              placeholder="Email"
-              className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-            />
-            <input
-              {...register("country")}
-              type="text"
-              placeholder="Country"
-              className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-            />
-            <div className="flex items-center justify-center w-full">
-              <label
-                htmlFor="file-upload"
-                className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-200 hover:bg-gray-300"
-              >
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg
-                    aria-hidden="true"
-                    className="w-10 h-10 mb-3 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M7 16V9a4 4 0 014-4h2a4 4 0 014 4v7m-5 4v-2a2 2 0 00-2-2h-1a2 2 0 00-2 2v2m8 0H7"
-                    ></path>
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500">
-                    <span className="font-semibold">Click to upload</span> or
-                    drag and drop
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
-                </div>
-                <input
-                  {...register("fileUpload")}
-                  id="file-upload"
-                  type="file"
-                  className="hidden"
-                  onChange={handleFileChange} // Add onChange handler
-                />
-              </label>
-            </div>
-
-            {uploadedFileName && (
-              <div className="mt-4 text-center text-gray-700">
-                <p>
-                  Uploaded File:{" "}
-                  <span className="font-semibold">{uploadedFileName}</span>
-                </p>
-              </div>
-            )}
-
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-purple-700 text-white p-4 rounded-lg font-semibold  w-full text-xl"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          {/* Form Ends */}
-
-          <button
-            onClick={() => {
-              setCareers(false);
-              setService(true);
-            }}
-            className="mt-4 bg-transparent border-2 border-purple-700 text-purple-700 px-10 py-2 rounded-lg font-semibold"
-          >
-            Connect for Services
-          </button>
-        </div>
-
-        {/* Decorative Panel */}
-        {isCareers && (
-          <div
-            className={`absolute top-0 left-1/2 w-1/2 h-full bg-gradient-to-r from-blue-400 to-purple-700 transition-transform duration-500 ease-in-out ${
-              isCareers ? "-translate-x-full" : "translate-x-0"
-            } z-0 rounded-r-full flex flex-col items-center justify-center p-10 text-white`}
-          >
-            <div
-              className={`${
-                isCareers ? "opacity-0" : "opacity-100"
-              } transition-opacity duration-500`}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-orange-400 text-white p-4 rounded-lg font-semibold  w-full text-xl"
             >
-              <h1 className="text-2xl font-bold mb-4">Welcome Back!</h1>
-              <p className="mb-4">
-                Enter your personal details to use all site features
-              </p>
-            </div>
-            <div
-              className={`${
-                isCareers ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-500`}
-            >
-              <h1 className="text-2xl font-bold mb-4">Hello, Friend!</h1>
-              <p className="mb-4">
-                Register with your personal details to enjoy the features
-              </p>
-            </div>
+              Submit
+            </button>
           </div>
-        )}
-        {isService && (
-          <div
-            className={`absolute top-0 left-1/2 w-1/2 h-full bg-gradient-to-r rounded-r-full from-blue-400 to-purple-700 transition-transform duration-500 ease-in-out ${
-              isCareers ? "-translate-x-full" : "translate-x-0"
-            } z-0 flex flex-col items-center justify-center p-10 text-white`}
-          >
-            <div
-              className={`${
-                isCareers ? "opacity-0" : "opacity-100"
-              } transition-opacity duration-500`}
-            >
-              <h1 className="text-2xl font-bold mb-4">Welcome Back!</h1>
-              <p className="mb-4">
-                Enter your personal details to use all site features
-              </p>
-            </div>
-            <div
-              className={`${
-                isCareers ? "opacity-100" : "opacity-0"
-              } transition-opacity duration-500`}
-            >
-              <h1 className="text-2xl font-bold mb-4">Hello, Friend!</h1>
-              <p className="mb-4">
-                Register with your personal details to enjoy the features
-              </p>
-            </div>
-          </div>
-        )}
-        <ToastContainer />
+        </form>
+        {/* Form Ends */}
       </div>
     </div>
   );
