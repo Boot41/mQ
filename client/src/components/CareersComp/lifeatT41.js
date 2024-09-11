@@ -31,11 +31,11 @@ const OurAds = () => {
         <div className="flex flex-row md:flex-row gap-6 sm:gap-8 mt-8 sm:mt-12">
   {/* Left Column: Image */}
   <div className="w-full flex justify-center items-center md:w-1/2">
-    <div className="w-full max-w-[200px] sm:max-w-[250px] md:max-w-[300px] lg:max-w-[300px]">
+    <div className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] relative">
       <img
         src="static/careersabout.webp"
         alt="Life at Think 41"
-        className="w-full h-auto object-cover rounded-lg"
+        className="w-full h-auto object-cover rounded-lg md:max-h-[200px]"
       />
     </div>
   </div>
@@ -48,6 +48,9 @@ const OurAds = () => {
     </p>
   </div>
 </div>
+
+
+
 
 
 

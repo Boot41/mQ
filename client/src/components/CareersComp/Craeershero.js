@@ -14,15 +14,15 @@ const HeroSection = () => {
       style={{ backgroundImage: 'url(static/careershero.webp)' }}
     >
       <div 
-        className="bg-black bg-opacity-50 px-8 py-10 rounded-lg max-w-4xl mx-auto text-center"
+        className="bg-black bg-opacity-50 px-4 py-8 rounded-lg max-w-4xl mx-auto text-center"
       >
-        <h1 className="text-5xl font-bold mb-4 text-white">
-          Be the force behind impactful <br></br><span className="text-orange-400">AI advancements</span>
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+          Be the force behind impactful <br /> <span className="text-orange-400">AI advancements</span>
         </h1>
-        <p className="mb-8 text-lg text-white">
+        <p className="text-base md:text-lg mb-8 text-white">
           We are a bunch of tech enthusiasts and dreamers who want to turn AI possibilities into reality. Founded by seasoned entrepreneurs, we offer a culture of inclusivity, balance, and a flat structure where your career growth is in your hands.
         </p>
-        <div className="flex justify-center space-x-4">
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <Link to="/openpositions">
             <Button
               onClick={() => handleClick("Open Positions")}
@@ -34,9 +34,9 @@ const HeroSection = () => {
                 borderColor: "black",
                 backgroundColor: "black",
                 color: "white",
-                fontSize: { xs: "16px", lg: "14px" },
-                px: { xs: 3, lg: 2 },
-                py: { xs: 1.5, lg: 2 },
+                fontSize: { xs: "14px", sm: "16px" },
+                px: { xs: 2, sm: 3 },
+                py: { xs: 1.5, sm: 2 },
                 "&:hover": {
                   color: "white",
                   backgroundColor: "transparent",
@@ -71,9 +71,9 @@ const HeroSection = () => {
                 borderColor: "black",
                 backgroundColor: "black",
                 color: "white",
-                fontSize: { xs: "16px", lg: "14px" },
-                px: { xs: 3, lg: 2 },
-                py: { xs: 1.5, lg: 2 },
+                fontSize: { xs: "14px", sm: "16px" },
+                px: { xs: 2, sm: 3 },
+                py: { xs: 1.5, sm: 2 },
                 "&:hover": {
                   color: "white",
                   backgroundColor: "transparent",

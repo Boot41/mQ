@@ -11,7 +11,6 @@ import {
   CardMedia,
   Typography,
   IconButton,
-  Button,
 } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
@@ -132,7 +131,7 @@ function MeetFounders() {
                       alignItems: "baseline",
                     }}
                   >
-                    <div className="-mt-20">
+                    <div>
                       <IconButton
                         component="a"
                         href={member.linkedin}
@@ -141,16 +140,16 @@ function MeetFounders() {
                         sx={{
                           color: "#0A66C2",
                           fontSize: {
-                            xs: "2.5rem",
-                            sm: "3rem",
-                            md: "3.5rem",
-                            mr: "3rem",
+                            xs: "2rem",   // Adjusted for smaller screens
+                            sm: "2.5rem",
+                            md: "3rem",
+                            lg: "3.5rem", // Adjusted for larger screens
                           },
                         }}
                       >
                         <LinkedInIcon
-                          sx={{ fontSize: "inherit", marginRight: "1rem" }}
-                          onclick={() => {
+                          sx={{ fontSize: "inherit" }}
+                          onClick={() => {
                             window.open(member.linkedin, "_blank");
                           }}
                         />
@@ -168,3 +167,4 @@ function MeetFounders() {
 }
 
 export default MeetFounders;
+  

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react"; // Import menu and close icons from lucide-react
+import { Menu, X } from "lucide-react";
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // For mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleHeaderClick = (section) => {
@@ -18,10 +18,7 @@ const Header = () => {
 
   return (
     <>
-      <header
-        className="fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 bg-white"
-        id="header-content"
-      >
+      <header className="fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 bg-white shadow-md">
         <div className="flex justify-between items-center">
           <div
             className="text-orange-500 font-bold text-2xl cursor-pointer"
@@ -39,58 +36,53 @@ const Header = () => {
             </button>
           </div>
           <nav className="hidden lg:flex space-x-6 items-center">
-            <div className="relative flex space-x-6">
-              {["about-us", "careers"].map((section) => (
-                <div key={section}>
-                  <Link
-                    to={`/${section}`}
-                    className="text-black hover:text-black hover:underline text-lg" // Increased font size
-                    onClick={() => handleHeaderClick(section)}
-                  >
-                    {section.charAt(0).toUpperCase() + section.slice(1).replace("-", " ")} {/* Updated this line */}
-                  </Link>
-                </div>
-              ))}
-            </div>
+            {["about-us", "careers"].map((section) => (
+              <Link
+                key={section}
+                to={`/${section}`}
+                className="text-black hover:text-gray-700 hover:underline text-lg"
+                onClick={() => handleHeaderClick(section)}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1).replace("-", " ")}
+              </Link>
+            ))}
             <Link
               to="/contact"
-              className="text-black hover:text-black hover:underline text-lg" // Increased font size
+              className="text-black hover:text-gray-700 hover:underline text-lg"
               onClick={() => handleHeaderClick("contact")}
             >
               Contact Us
             </Link>
           </nav>
         </div>
-      </header>
 
-      {/* Mobile Menu Content */}
-      {isMenuOpen && (
-        <div
-          id="mobile-menu"
-          className="fixed top-16 left-0 w-full bg-white shadow-lg rounded-lg p-4 lg:hidden"
-        >
-          <div className="flex flex-col space-y-4">
-            {["about-us", "careers"].map((section) => (
+        {/* Mobile Menu Content */}
+        {isMenuOpen && (
+          <div
+            id="mobile-menu"
+            className="fixed top-16 left-0 w-full bg-white shadow-lg rounded-lg p-4 lg:hidden"
+          >
+            <div className="flex flex-col space-y-4">
+              {["about-us", "careers"].map((section) => (
+                <Link
+                  key={section}
+                  to={`/${section}`}
+                  className="text-black hover:text-gray-700 hover:underline text-lg"
+                  onClick={() => handleHeaderClick(section)}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1).replace("-", " ")}
+                </Link>
+              ))}
               <Link
-                key={section}
-                to={`/${section}`}
-                className="text-black hover:text-black hover:underline"
-                onClick={() => {
-                  handleHeaderClick(section);
-                }}
+                to="/contact"
+                className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 text-center"
               >
-                {section.replace("-", " ").toUpperCase()}
+                Contact Us
               </Link>
-            ))}
-            <Link
-              to="/contact"
-              className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600"
-            >
-              Contact Us
-            </Link>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </header>
     </>
   );
 };

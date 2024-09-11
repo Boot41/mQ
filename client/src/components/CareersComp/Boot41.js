@@ -8,7 +8,7 @@ const CarouselItem = ({ item }) => (
       src={item.imageSrc}
       alt={item.alt}
       className="w-full object-cover rounded-lg mb-2"
-      style={{ height: '250px' }} // Adjust the height value as needed
+      style={{ height: '250px' }}
     />
     <p className="text-base text-center text-gray-800 font-medium">{item.text}</p>
   </div>
@@ -22,21 +22,19 @@ const Carousel = ({ items }) => {
       setCurrentIndex((prevIndex) =>
         prevIndex === items.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // Change slide every 3 seconds
+    }, 3000);
 
-    return () => clearInterval(intervalId); // Clear interval on component unmount
+    return () => clearInterval(intervalId);
   }, [items.length]);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === items.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
-    );
+  const navigate = (direction) => {
+    setCurrentIndex((prevIndex) => {
+      if (direction === "next") {
+        return prevIndex === items.length - 1 ? 0 : prevIndex + 1;
+      } else {
+        return prevIndex === 0 ? items.length - 1 : prevIndex - 1;
+      }
+    });
   };
 
   return (
@@ -54,14 +52,14 @@ const Carousel = ({ items }) => {
         </div>
       </div>
       <button
-        onClick={prevSlide}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all lg:hidden"
+        onClick={() => navigate("prev")}
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all"
       >
         <ChevronLeft className="w-6 h-6 text-gray-800" />
       </button>
       <button
-        onClick={nextSlide}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all lg:hidden"
+        onClick={() => navigate("next")}
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-70 rounded-full p-2 shadow-md hover:bg-opacity-90 transition-all"
       >
         <ChevronRight className="w-6 h-6 text-gray-800" />
       </button>
@@ -82,9 +80,9 @@ const Carousel = ({ items }) => {
 
 const Boot41 = () => {
   return (
-    <div className="flex flex-col items-center bg-gray-100 py-8 px-4">
-      <header className="text-center mb-4">
-        <h1 className="text-4xl sm:text-3xl font-extrabold leading-tight text-black mb-4">
+    <div className="flex flex-col items-center bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+      <header className="text-center mb-4 w-full">
+        <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-black mb-4">
           Boot41
         </h1>
         <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
@@ -95,8 +93,11 @@ const Boot41 = () => {
             {/* Optional content */}
           </div>
           <div className="text-base lg:text-lg lg:w-full text-gray-700">
+            <p className="mb-4">
+              Bootcamps at Think41 are high-energy, hands-on programs designed to transform new hires into top-notch Think41 professionals. With a blend of intense learning, interactive activities, and deep dives into full-stack development and AI, you'll gain practical skills and a forward-thinking mindset.
+            </p>
             <p>
-              Bootcamps at Think41 are high-energy, hands-on programs designed to transform new hires into top-notch Think41 professionals. With a blend of intense learning, interactive activities, and deep dives into full-stack development and AI, you'll gain practical skills and a forward-thinking mindset. Connect with industry leaders, collaborate with peers, and immerse yourself in AI’s exciting possibilities. Our bootcamp equips you with the expertise and enthusiasm to excel in our innovative tech-driven culture.
+              Connect with industry leaders, collaborate with peers, and immerse yourself in AI's exciting possibilities. Our bootcamp equips you with the expertise and enthusiasm to excel in our innovative tech-driven culture.
             </p>
           </div>
         </div>
