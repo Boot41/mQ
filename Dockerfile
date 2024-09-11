@@ -30,6 +30,7 @@ RUN pip install gunicorn
 COPY --from=client_build /code/build/static/ /code/static/static/
 COPY --from=client_build /code/build/ /code/static/
 
+RUN mkdir /staticfiles
 WORKDIR /code
 RUN python manage.py collectstatic --noinput --clear
 
