@@ -5,7 +5,7 @@ import { useChat } from '../../context/ChatContext';
 import './BlobChatWrapper.css';
 import axios from 'axios';
 import { useSection } from "../TrackUserComps/SectionContext";
-import config from '../../lib/config';
+import  { API_BASE_URL } from '../../lib/config';
 
 const BlobChatWrapper = () => {
   const { isChatOpen, toggleChat, addMessage } = useChat();
@@ -15,7 +15,7 @@ const BlobChatWrapper = () => {
 
     try {
       const response = await axios.post(
-        `${config.API_BASE_URL}/api/website-interaction/`,
+        `${API_BASE_URL}/api/website-interaction/`,
         {
           user_input: message.content,
           model_name: "4o-mini",
