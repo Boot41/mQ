@@ -91,9 +91,9 @@ function ContactUs() {
             className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
           />
           <input
-            {...register("jobTitle")} // New input field for job title
+            {...register("organization")} // Changed from jobTitle to organization
             type="text"
-            placeholder="Job Title"
+            placeholder="Organization" // Updated placeholder
             className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
           />
           <textarea
