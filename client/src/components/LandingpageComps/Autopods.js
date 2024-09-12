@@ -87,121 +87,117 @@ Please provide a comprehensive yet concise response that a potential client woul
   }, [setIsSpeaking]);
 
   return (
-    <div className="py-10 mb-10">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-          {/* Video Section */}
-
-          <div className="w-full md:w-1/2 flex justify-center">
-            <video
-              src={AutoPodsData.videoSrc}
-              autoPlay
-              loop
-              muted
-              className="w-full h-auto max-w-md rounded-lg"
-            ></video>
-          </div>
-
-          {/* Text Section */}
-          <Box className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
-            <Typography
-              variant="h3"
-              component="h3"
-              color="orange"
-              fontWeight="bold"
-              fontFamily="Baskervville SC, serif"
-              gutterBottom
-              sx={{ fontSize: { xs: "2rem", md: "3rem", lg: "4rem" } }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.title}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              color="gray"
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.7rem" },
-                mb: 2,
-              }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.subtitle1}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              color="gray"
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.7rem" },
-                mb: 2,
-              }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.subtitle2}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              color="gray"
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "1rem", md: "1.2rem", lg: "1.5rem" },
-                mb: 4,
-              }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.description}
-            </Typography>
-            <Box className="flex justify-center md:justify-start">
-              <Link to="#">
-                <Button
-                  onClick={handleClick}
-                  variant="outlined"
-                  color="warning"
-                  sx={{
-                    position: "relative",
-                    overflow: "hidden",
-                    borderColor: "black",
-                    backgroundColor: "black",
-                    color: "white",
-                    // fontSize: { xs: "16px", lg: "12px" },
-                    // px: 4,
-                    // py: 2,
-                    fontSize: { xs: "16px", lg: "14px" },
-                    px: { xs: 3, lg: 2 },
-                    py: { xs: 1.5, lg: 2 },
-                    "&:hover": {
-                      color: "white",
-                      backgroundColor: "transparent",
-                    },
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: 0,
-                      left: "-100%",
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "orange",
-                      transition: "left 0.5s ease",
-                      zIndex: -1,
-                      border: "white",
-                    },
-                    "&:hover::before": {
-                      left: 0,
-                    },
-                  }}
-                >
-                  {AutoPodsData.buttonText}
-                </Button>
-              </Link>
-            </Box>
-          </Box>
+    <div className="py-16 px-32 md:px-24 lg:px-32 xl:px-40 mb-16">  {/* Increased side padding */}
+    <div className="container mx-auto">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-0"> {/* Removed gap */}
+        {/* Image Section */}
+        <div className="w-full md:w-1/2 flex justify-center px-24">{/* Adjusted padding */}
+          <img
+            src="static/autopods.webp"
+            alt="AutoPods illustration"
+            className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
+          />
         </div>
+
+        {/* Text Section */}
+        <Box className="w-full md:w-1/2 flex flex-col justify-center space-y-6 px-10"> {/* Adjusted padding */}
+          <Typography
+            variant="h3"
+            component="h3"
+            color="orange"
+            fontWeight="bold"
+            fontFamily="Baskervville SC, serif"
+            gutterBottom
+            sx={{ fontSize: { xs: "2rem", md: "3rem", lg: "4rem" } }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.title}
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h6"
+            color="gray"
+            fontWeight="medium"
+            sx={{
+              fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.5rem" },
+              mb: 2,
+            }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.subtitle1}
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h6"
+            color="gray"
+            fontWeight="medium"
+            sx={{
+              fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1rem" },
+              mb: 2,
+            }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.subtitle2}
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h6"
+            color="gray"
+            fontWeight="medium"
+            sx={{
+              fontSize: { xs: "1rem", md: "1.2rem", lg: "1rem" },
+              mb: 4,
+            }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.description}
+          </Typography>
+          <Box className="flex justify-center md:justify-start">
+            <Link to="#">
+              <Button
+                onClick={handleClick}
+                variant="outlined"
+                color="warning"
+                sx={{
+                  position: "relative",
+                  overflow: "hidden",
+                  borderColor: "black",
+                  backgroundColor: "black",
+                  color: "white",
+                  fontSize: { xs: "14px", lg: "9px" },
+                  px: { xs: 3, lg: 2 },
+                  py: { xs: 1.5, lg: 2 },
+                  "&:hover": {
+                    color: "white",
+                    backgroundColor: "transparent",
+                  },
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: "-100%",
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "orange",
+                    transition: "left 0.5s ease",
+                    zIndex: -1,
+                    border: "white",
+                  },
+                  "&:hover::before": {
+                    left: 0,
+                  },
+                }}
+              >
+                {AutoPodsData.buttonText}
+              </Button>
+            </Link>
+          </Box>
+        </Box>
       </div>
     </div>
+  </div>
+
+
   );
 };
 

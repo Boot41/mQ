@@ -1,30 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {API_BASE_URL}from "../../lib/config";
 import { ToastContainer, toast } from "react-toastify";
+import { motion } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
 
 function ContactUs() {
-  const [uploadedFileName, setUploadedFileName] = useState("");
-  // Initialize useForm hook
   const { register, handleSubmit, reset } = useForm();
 
-  // Handle form submission
   const onSubmit = async (data) => {
-    if (!data.name || !data.email || !data.phone || !data.organization || !data.message) { // Updated to organization
-      toast.error("Please fill in all fields."); // Show error toast if fields are empty
+    if (!data.name || !data.email || !data.phone || !data.organization || !data.message) {
+      toast.error("Please fill in all fields.");
       return;
     }
-    
+
     try {
       const formData = new FormData();
-
       formData.append("name", data.name);
       formData.append("email", data.email);
       formData.append("phone", data.phone);
-      formData.append("organization", data.organization); // Updated to organization
+      formData.append("organization", data.organization);
       formData.append("message", data.message);
+
 
       const response = await axios.post(
         `${API_BASE_URL}/api/service-contact/`, // Adjust endpoint as needed
@@ -36,85 +34,107 @@ function ContactUs() {
         }
       );
 
-      console.log(response);
-
-      // console.log("API Response:", response.data);
-      toast.success("Form submitted successfully!"); // Show success toast
+      toast.success("Form submitted successfully!");
       reset();
-      setUploadedFileName("");
     } catch (error) {
-      // console.error("Error submitting form:", error);
-      toast.error("Error submitting form. Please try again."); // Show error toast
+      toast.error("Error submitting form. Please try again.");
     }
   };
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setUploadedFileName(file.name);
-    } else {
-      setUploadedFileName("");
-    }
-  };
+
   return (
-    // <div className>
-    //   <div
-    //     className={`relative w-3/4 min-h-[480px] bg-white rounded-[30px] shadow-lg overflow-hidden flex transition-all duration-600 ease-in-out mt-40 justify-center`}
-    //   >
-
-    //   </div>
-    //     <ToastContainer />
-    // </div>
-    <div className="flex justify-center items-center h-[80vh]"> {/* Set a fixed height */}
-      <div
-        className={`bg-white flex flex-col items-center justify-center p-10 transition-transform duration-500 ease-in-out z-10`}
-        style={{ margin: "auto" }} // Center the inner div
+    <div className="flex items-center justify-center h-[800px] bg-gray-100 p-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-white rounded-lg shadow-2xl overflow-hidden max-w-6xl w-full"
       >
-        <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
-        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
+        <div className="flex flex-col md:flex-row">
+        <div className="relative w-1/2 md:w-1/2flex-grow">
+    <img
+      src="static/s3.png" // Replace with your image path
+      alt="Contact Us"
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-8">
+  <h2 className="text-3xl font-bold mb-4 text-center">Contact Information</h2>
+  <p className="text-xl mb-6 text-center">Have any questions?</p>
+  <div className="space-y-2 text-center">
+    <p>123 Main Street, City, Country</p>
+    <p>contact@example.com</p>
+    <p>+1 234 567 890</p>
+  </div></div></div>
 
-        {/* Form Starts */}
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-          <input
-            {...register("name")}
-            type="text"
-            placeholder="Name"
-            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-          />
-          <input
-            {...register("email")}
-            type="email"
-            placeholder="Company Email"
-            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-          />
-          <input
-            {...register("phone")}
-            type="phone"
-            placeholder="Telephone"
-            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-          />
-          <input
-            {...register("organization")} // Changed from jobTitle to organization
-            type="text"
-            placeholder="Organization" // Updated placeholder
-            className="bg-gray-200 border-none rounded-lg p-3 mb-2 w-full outline-none"
-          />
-          <textarea
-            {...register("message")}
-            placeholder="Messages"
-            className="w-full h-40 p-3 mb-2 bg-gray-200 rounded-lg outline-none resize-none overflow-y-auto"
-          ></textarea>
 
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="bg-orange-400 text-white p-4 rounded-lg font-semibold  w-full text-xl"
-            >
-              Submit
-            </button>
+          <div className="w-full md:w-1/2 p-8">
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Get in Touch</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="flex flex-col md:flex-row md:space-x-4">
+                <div className="flex-1">
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    {...register("name")}
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    {...register("email")}
+                    type="email"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-col md:flex-row md:space-x-4">
+                <div className="flex-1">
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Phone <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    {...register("phone")}
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Organization <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    {...register("organization")}
+                    type="text"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2">
+                  Message <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  {...register("message")}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  rows={4}
+                />
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="bg-orange-500 text-white font-bold py-2 px-6 rounded-md hover:bg-orange-600 transition duration-300"
+                >
+                  Send Message
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-        {/* Form Ends */}
-      </div>
+        </div>
+      </motion.div>
       <ToastContainer />
     </div>
   );

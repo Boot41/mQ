@@ -20,7 +20,7 @@ const HeroSection = () => {
           Be the force behind impactful <br /> <span className="text-orange-400">AI advancements</span>
         </h1>
         <p className="text-base md:text-lg mb-8 text-white">
-          We are a bunch of tech enthusiasts and dreamers who want to turn AI possibilities into reality. Founded by seasoned entrepreneurs, we offer a culture of inclusivity, balance, and a flat structure where your career growth is in your hands.
+        Join us in transforming innovative ideas into real AI advancements. At Think41, we're a team of tech enthusiasts and dreamers committed to making a difference. Founded by seasoned entrepreneurs, we foster a culture of inclusivity, flexibility, and personal growth. Be a part of shaping the future of AI and make an impact with us.
         </p>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <Link to="/openpositions">

@@ -1,52 +1,74 @@
-import React from "react";
-import { CVPData } from "../../InformationFiles/LandingPageInfo";
-import { Typography } from "@mui/material";
+import React, { useState } from "react";
 
-const About = () => {
+// Card Component
+function Card({ title, description, image }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="py-10 rounded-t-3xl">
-      <h1 className="text-center text-6xl text-orange-400 font-bold"></h1>
-      <Typography
-            variant="h3"
-            component="h3"
-            color="orange"
-            fontWeight="bold"
-            fontFamily="Baskervville SC, serif"
-            gutterBottom
-            sx={{ 
-                fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
-                textAlign: 'center' // {{ edit_1 }} Centering the text
-            }}
-            className="text-center" // {{ edit_1 }} Centering the text for all screen sizes
-      >
-        Unlocking AI's Potential With The 3P's
-      </Typography>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-center">
-          <div className="flex overflow-x-auto gap-8 py-4 scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
-            {CVPData.map((service, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-80 bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center"
-              >
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-24 h-24 mb-4 object-cover rounded-full border-2 border-orange-400"
-                />
-                <h3 className="text-lg font-semibold mb-2 text-center text-black">
-                  {service.title}
-                </h3>
-                <p className="text-gray-700 text-center text-base">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
+    <div
+      className={`bg-white bg-opacity-90 backdrop-blur-md border border-gray-200 rounded-lg flex h-[125px] w-[1000px] overflow-hidden transition-transform duration-300 ease-in-out ${
+        isHovered ? "scale-105 shadow-2xl rotate-1" : "scale-100 shadow-lg rotate-0"
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Image section */}
+      <div className="w-1/3 h-full overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="object-cover w-full h-full"
+          style={{ border: 'none' }} // Ensure no border
+        />
+      </div>
+      {/* Content section */}
+      <div className="w-2/3 p-6 flex flex-col justify-between">
+        <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
+        <p className="text-sm text-gray-600">{description}</p>
+      </div>
+    </div>
+  );
+}
+
+// Data for the cards
+const cards = [
+  {
+    title: "PRODUCTIVITY",
+    description:
+      "Explore the latest changes in our blockchain system! Stay informed about the latest developments.",
+    image: "static/S4.png",
+  },
+  {
+    title: "POSSIBILITIES",
+    description:
+      "Security is paramount in the blockchain world, and new protocols aim to strengthen this foundation.",
+    image: "static/s2.jpeg",
+  },
+  {
+    title: "PIONEERING",
+    description:
+      "Guide through the fundamentals of blockchain that will help you embark on exploring the world of this fascinating technology.",
+    image: "static/s1.avif",
+  },
+];
+
+// Main Component
+export default function BlockchainUpdates() {
+  return (
+    <div className="bg-gray-50 py-16 px-6 sm:px-8 lg:px-12">
+      <div className="max-w-8xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-black font-bold mb-4 text-xs sm:text-base md:text-2xl lg:text-5xl">
+            Unlocking AI's Potential with the 3Ps
+          </h2>
+          <div className="w-32 mx-auto h-2 bg-orange-500"></div>
+        </div>
+        <div className="flex justify-center gap-12">
+          {cards.map((card, index) => (
+            <Card key={index} {...card} />
+          ))}
         </div>
       </div>
     </div>
   );
-};
-
-export default About;
+}

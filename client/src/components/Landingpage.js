@@ -9,6 +9,7 @@ import Demo2 from "./LandingpageComps/Demo2";
 import HeroSection2 from "./LandingpageComps/HeroSection";
 import PressSection from "./LandingpageComps/PressSection";
 
+
 const LandingPage = () => {
   const [showChat, setShowChat] = useState(false);
   const [clickedButton, setClickedButton] = useState(null);
@@ -47,7 +48,7 @@ const LandingPage = () => {
       <SectionComponent id="about-section">
         <About/>
       </SectionComponent>
-
+     
       <SectionComponent id="autopods-section">
         <Autopods/>
       </SectionComponent>
