@@ -248,17 +248,17 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
     const oscillator = audioContext.createOscillator();
   };
 
-  useEffect(() => {
-    // Cleanup function
-    return () => {
-      // Close the chat if it's open
-      if (isChatOpen) {
-        toggleChat();
-      }
-      // Reset the chat key
-      setChatKey(prevKey => prevKey + 1);
-    };
-  }, [isChatOpen, toggleChat]);
+  // useEffect(() => {
+  //   // Cleanup function
+  //   return () => {
+  //     // Close the chat if it's open
+  //     if (isChatOpen) {
+  //       toggleChat();
+  //     }
+  //     // Reset the chat key
+  //     setChatKey(prevKey => prevKey + 1);
+  //   };
+  // }, [isChatOpen, toggleChat]); do 
 
   return (
     <div className="blob-container" id="unique-blob-container">

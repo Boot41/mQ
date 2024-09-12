@@ -10,12 +10,16 @@ export const ChatProvider = ({ children }) => {
     setChatMessages((prevMessages) => [...prevMessages, message]);
   };
 
+  const clearChatMessages = () => {
+    setChatMessages([]); // Clear all messages
+  };
+
   const toggleChat = () => {
     setIsChatOpen((prevState) => !prevState);
   };
 
   return (
-    <ChatContext.Provider value={{ chatMessages, isChatOpen, addMessage, toggleChat }}>
+    <ChatContext.Provider value={{ chatMessages, isChatOpen, addMessage, clearChatMessages, toggleChat }}>
       {children}
     </ChatContext.Provider>
   );

@@ -2,7 +2,7 @@
     position: relative;
     bottom: 80px; /* Adjust this value to position the chat above the blob */
     width: 300px; /* Adjust as needed */
-    max-height: calc(100vh - 120px); /* Adjust to prevent overflow */
+    max-height: 50vh; /* Adjust to prevent overflow */
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -191,4 +191,38 @@
     color: #ffffff;
   }
 
-  
+  .back-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px; /* Adjust size as needed */
+    margin-right: 10px; /* Space between button and title */
+  }
+
+.new-conversation-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.new-conversation-button,
+.back-to-chat-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.new-conversation-button:hover,
+.back-to-chat-button:hover {
+  background-color: #0056b3;
+}
+
+.new-conversation-message,
+.back-to-chat-message {
+  cursor: pointer; /* Indicate that these are clickable */
+  color: red; /* Optional: Change text color */
+}
