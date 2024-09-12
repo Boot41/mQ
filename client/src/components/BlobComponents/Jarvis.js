@@ -3,9 +3,10 @@ import './Jarvis.css';
 
 const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => {
   const canvasRef = useRef(null);
+  const offscreenCanvasRef = useRef(null);
 
   const particleConfig = useMemo(() => ({
-    count: 200, // Reduced particle count
+    count: 100, // Reduced particle count
     size: 0.5, // Smaller particle size
     maxSpeed: 0.025, // Reduced speed
     minSpeed: 0.005,
@@ -15,14 +16,15 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const offscreenCanvas = offscreenCanvasRef.current;
     const context = canvas.getContext("2d");
+    const offscreenContext = offscreenCanvas.getContext("2d");
 
     let sphereRad = 25; // Reduced sphere radius
     let radius_sp = 0.9;
 
     let displayWidth;
     let displayHeight;
-    let timer;
     let wait;
     let count;
     let numToAddEachFrame;
@@ -43,11 +45,14 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
     let randAccelX, randAccelY, randAccelZ;
     let gravity;
     let rgbString;
+    let animationFrameId;
+    let lastFrameTime = 0;
+    const frameInterval = 1000 / 30; // Target 30 FPS
 
     function init() {
       wait = 1;
       count = wait - 1;
-      numToAddEachFrame = 8;
+      numToAddEachFrame = 4; // Reduced particles added each frame
 
       if(isRecording){
         r = 235;
@@ -64,6 +69,8 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
 
       displayWidth = canvas.width;
       displayHeight = canvas.height;
+      offscreenCanvas.width = displayWidth;
+      offscreenCanvas.height = displayHeight;
 
       fLen = 80; // Reduced focal length
       projCenterX = displayWidth / 2;
@@ -91,10 +98,16 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
       turnSpeed = 2 * Math.PI / 1200;
       turnAngle = 0;
 
-      timer = setInterval(onTimer, 10 / 24);
+      animationFrameId = requestAnimationFrame(onTimer);
     }
 
-    function onTimer() {
+    function onTimer(timestamp) {
+      if (timestamp - lastFrameTime < frameInterval) {
+        animationFrameId = requestAnimationFrame(onTimer);
+        return;
+      }
+      lastFrameTime = timestamp;
+
       count++;
       if (count >= wait) {
         count = 0;
@@ -126,7 +139,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
       let sinAngle = Math.sin(turnAngle);
       let cosAngle = Math.cos(turnAngle);
 
-      context.clearRect(0, 0, displayWidth, displayHeight);
+      offscreenContext.clearRect(0, 0, displayWidth, displayHeight);
 
       let p = particleList.first;
       while (p != null) {
@@ -182,16 +195,22 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
         } else {
           let depthAlphaFactor = (1 - rotZ / zeroAlphaDepth);
           depthAlphaFactor = (depthAlphaFactor > 1) ? 1 : ((depthAlphaFactor < 0) ? 0 : depthAlphaFactor);
-          context.fillStyle = rgbString + depthAlphaFactor * p.alpha + ")";
+          offscreenContext.fillStyle = rgbString + depthAlphaFactor * p.alpha + ")";
 
-          context.beginPath();
-          context.arc(p.projX, p.projY, m * particleRad, 0, 2 * Math.PI, false);
-          context.closePath();
-          context.fill();
+          offscreenContext.beginPath();
+          offscreenContext.arc(p.projX, p.projY, m * particleRad, 0, 2 * Math.PI, false);
+          offscreenContext.closePath();
+          offscreenContext.fill();
         }
 
         p = nextParticle;
       }
+
+      // Draw the offscreen canvas to the main canvas
+      context.clearRect(0, 0, displayWidth, displayHeight);
+      context.drawImage(offscreenCanvas, 0, 0);
+
+      animationFrameId = requestAnimationFrame(onTimer);
     }
 
     function addParticle(x0, y0, z0, vx0, vy0, vz0) {
@@ -262,7 +281,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
     init();
 
     return () => {
-      clearInterval(timer);
+      cancelAnimationFrame(animationFrameId);
     };
   }, [isRecording]);
 
@@ -294,6 +313,10 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
           width: '100%',
           height: '100%'
         }}
+      />
+      <canvas 
+        ref={offscreenCanvasRef} 
+        style={{ display: 'none' }} 
       />
       <div className={`square ${isRecording ? 'recording' : ''}`}>
         <span></span>
