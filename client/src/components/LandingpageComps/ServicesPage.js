@@ -121,21 +121,6 @@ const ParallaxCard = ({ title, description, image }) => {
 const ServicesSection = () => {
   const [updatedServicesData, setUpdatedServicesData] = useState([]);
 
-  // Removed useEffect
-
-  useEffect(() => {
-    // Fetch or initialize your services data here
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/api/services`); // Replace with your API endpoint
-        setUpdatedServicesData(response.data);
-      } catch (error) {
-        console.error("Error fetching services data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
      <div className="mb-10 relative">
