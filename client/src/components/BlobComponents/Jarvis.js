@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState, useMemo } from 'react';
 import './Jarvis.css';
 
-const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => {
+const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, onClick }) => {
   const canvasRef = useRef(null);
   const offscreenCanvasRef = useRef(null);
 
   const particleConfig = useMemo(() => ({
-    count: 100, // Reduced particle count
-    size: 0.5, // Smaller particle size
-    maxSpeed: 0.025, // Reduced speed
+    count: 100,
+    size: 0.5,
+    maxSpeed: 0.025,
     minSpeed: 0.005,
-    color: isRecording ? [235, 94, 52] : [0, 72, 255],
+    color: isRecording || isSpeaking ? [235, 94, 52] : [0, 72, 255],
     blurFactor: 0.5,
-  }), [isRecording]);
+  }), [isRecording, isSpeaking]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -55,7 +55,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
       count = wait - 1;
       numToAddEachFrame = 4; // Reduced particles added each frame
 
-      if(isRecording){
+      if (isRecording || isSpeaking) {
         r = 235;
         g = 94;
         b = 52;
@@ -252,7 +252,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
     }
 
     function recycle(p) {
-      if (particleList.first == p) {
+      if (particleList.first === p) {
         if (p.next != null) {
           p.next.prev = null;
           particleList.first = p.next;
@@ -284,7 +284,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [isRecording]);
+  }, [isRecording,isSpeaking]);
 
   return (
     <div 
@@ -319,7 +319,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
         ref={offscreenCanvasRef} 
         style={{ display: 'none' }} 
       />
-      <div className={`square ${isRecording ? 'recording' : ''}`}>
+      <div className={`square ${isRecording || isSpeaking ? 'recording' : ''}`}>
         <span></span>
         <span></span>
         <span></span>
