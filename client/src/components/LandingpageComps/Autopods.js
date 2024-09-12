@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
 
-import config from '../../lib/config';
+import {API_BASE_URL} from '../../lib/config';
 
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
@@ -36,7 +36,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
       }
 
       const response = await axios.post(
-        `${config.API_BASE_URL}/api/website-interaction/`,
+        `${API_BASE_URL}/api/website-interaction/`,
         {
           user_input: `The user has clicked 'Know More' about Autopods on our landing page. Based on the information provided in the Autopods section, please elaborate on the following:
 1. What are Autopods and how do they work?

@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import axios from "axios";
 import { ServicesData } from "../../InformationFiles/LandingPageInfo";
 import ChatConversation from "../chathistory/chatconversation";
-import config from '../../lib/config';
+import { API_BASE_URL } from '../../lib/config';
 import { useChat } from '../../context/ChatContext';
 import { motion } from 'framer-motion';
 
@@ -36,7 +36,7 @@ const ParallaxCard = ({ title, description, image }) => {
       toggleChat();
 
       const response = await axios.post(
-         `${config.API_BASE_URL}/api/know-more-about-service/`,
+         `${API_BASE_URL}/api/know-more-about-service/`,
         {
           service_name: title,
           model_name: "4o-mini",
@@ -105,7 +105,10 @@ const ParallaxCard = ({ title, description, image }) => {
           } group-hover:translate-y-0 group-hover:z-30`}
         >
           <p className="text-sm mb-4 text-white">{description}</p>
-          <div className="flex items-center text-orange-400 font-semibold">
+          <div 
+            className="flex items-center text-orange-400 font-semibold cursor-pointer"
+            onClick={handleClick}
+          >
             Learn More <ChevronRight className="ml-2" size={18} />
           </div>
         </div>
@@ -118,26 +121,14 @@ const ParallaxCard = ({ title, description, image }) => {
 const ServicesSection = () => {
   const [updatedServicesData, setUpdatedServicesData] = useState([]);
 
-  useEffect(() => {
-    // Fetch or initialize your services data here
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${config.API_BASE_URL}/api/services`);; // Replace with your API endpoint
-        setUpdatedServicesData(response.data);
-      } catch (error) {
-        console.error("Error fetching services data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
      <div className="mb-10 relative">
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
-          <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
-            Our Differentiating Factor
+          <h1 className="text-5xl text-gray-800  font-bold font-['Baskervville SC, serif'] mb-4">
+            Our Key Differentiator
+
           </h1>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

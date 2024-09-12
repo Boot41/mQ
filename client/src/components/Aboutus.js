@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import LazyLoad from 'react-lazyload';
 
 // Team member data
 const teamMembers = [
@@ -62,7 +63,9 @@ const AboutUs = () => {
             </p>
           </div>
           <div className="flex-1">
-            <img src="about2.webp" alt="Who We Are" className="w-full h-auto object-cover rounded-lg shadow-lg" />
+            <LazyLoad height={200} once>
+              <img src="about2.webp" alt="Who We Are" className="w-full h-auto object-cover rounded-lg shadow-lg" />
+            </LazyLoad>
           </div>
         </div>
       </div>
@@ -83,7 +86,9 @@ const AboutUs = () => {
             </button>
           </div>
           <div className="flex-1">
-            <img src="about3.jpg" alt="What We Do" className="w-full h-auto object-cover rounded-lg shadow-lg" />
+            <LazyLoad height={200} once>
+              <img src="about3.jpg" alt="What We Do" className="w-full h-auto object-cover rounded-lg shadow-lg" />
+            </LazyLoad>
           </div>
         </div>
       </div>
@@ -92,11 +97,13 @@ const AboutUs = () => {
       <div className="bg-gray-100 py-24">
         <div className="max-w-screen-xl mx-auto px-4 flex flex-col md:flex-row items-start gap-12">
           <div className="md:w-1/2">
-            <img
-              src="aboutpage.png"
-              alt="blue background"
-              className="w-full h-auto object-cover rounded-lg shadow-lg"
-            />
+            <LazyLoad height={200} once>
+              <img
+                src="aboutpage.png"
+                alt="blue background"
+                className="w-full h-auto object-cover rounded-lg shadow-lg"
+              />
+            </LazyLoad>
           </div>
 
           <div className="md:w-1/2 flex flex-col items-start gap-6">
@@ -125,11 +132,13 @@ const AboutUs = () => {
             <div key={index} className="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg w-full md:w-96 h-auto overflow-hidden">
               {/* Image Card */}
               <div className="w-full md:w-1/2 h-64 md:h-full">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
+                <LazyLoad height={200} once>
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                </LazyLoad>
               </div>
               {/* Information Card */}
               <div className="flex-1 flex flex-col justify-center items-center p-4">

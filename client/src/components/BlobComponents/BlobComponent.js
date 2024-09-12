@@ -7,7 +7,7 @@ import { CSSTransition } from 'react-transition-group';
 import { FaChevronUp, FaChevronDown, FaTimes } from 'react-icons/fa';
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
-import config from '../../lib/config';
+import {API_BASE_URL} from '../../lib/config';
 import './BlobComponent.css'; // Make sure to create this file
 
 
@@ -117,7 +117,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
 
     try {
       const response = await axios.post(
-        `${config.API_BASE_URL}/api/website-interaction/`,
+        `${API_BASE_URL}/api/website-interaction/`,
         {
           user_input: `You are an AI assistant for Think41's website. The user is currently viewing the ${currentSection} section. Provide a brief, friendly welcome and offer assistance. Highlight 1-2 key points about this section and how they relate to Think41's services. Be concise and engaging.`,
           model_name: "4o-mini",
@@ -138,6 +138,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       speakTextWrapper(response.data.response);
     } catch (error) {
       console.error("Error making API call:", error);
+      console.log("API Base URL:", API_BASE_URL); // Add this line for debugging
     } finally {
       setIsRecording(false);
     }
@@ -158,7 +159,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
 
     try {
       const response = await axios.post(
-        `${config.API_BASE_URL}/api/website-interaction/`,
+        `${API_BASE_URL}/api/website-interaction/`,
         {
           user_input: newMessage.content,
           model_name: "4o-mini",
@@ -179,6 +180,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       setProgress(response.data.progress || 0);
     } catch (error) {
       console.error("Error making API call:", error);
+      console.log("API Base URL:", API_BASE_URL); // Add this line for debugging
       const errorMessage = "Sorry, I encountered an error. Please try again.";
       addMessage({ type: 'assistant', content: errorMessage });
       speakTextWrapper(errorMessage);
@@ -248,17 +250,17 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
     const oscillator = audioContext.createOscillator();
   };
 
-  useEffect(() => {
-    // Cleanup function
-    return () => {
-      // Close the chat if it's open
-      if (isChatOpen) {
-        toggleChat();
-      }
-      // Reset the chat key
-      setChatKey(prevKey => prevKey + 1);
-    };
-  }, [isChatOpen, toggleChat]);
+  // useEffect(() => {
+  //   // Cleanup function
+  //   return () => {
+  //     // Close the chat if it's open
+  //     if (isChatOpen) {
+  //       toggleChat();
+  //     }
+  //     // Reset the chat key
+  //     setChatKey(prevKey => prevKey + 1);
+  //   };
+  // }, [isChatOpen, toggleChat]); do 
 
   return (
     <div className="blob-container" id="unique-blob-container">
