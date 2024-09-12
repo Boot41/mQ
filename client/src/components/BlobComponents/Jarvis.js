@@ -47,7 +47,8 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, playerRef, onClick }) => 
     let rgbString;
     let animationFrameId;
     let lastFrameTime = 0;
-    const frameInterval = 1000 / 30; // Target 30 FPS
+    const targetFPS = 30;
+    const frameInterval = 1000 / targetFPS;
 
     function init() {
       wait = 1;
