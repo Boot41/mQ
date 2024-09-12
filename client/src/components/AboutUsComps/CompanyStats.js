@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import LazyLoad from 'react-lazyload';
 
 const CompStats = () => {
   const stats = [
@@ -10,19 +11,21 @@ const CompStats = () => {
   ];
 
   return (
-    <section 
-      className="relative bg-cover bg-center py-20" 
-      style={{ backgroundImage: 'url("r3.webp")' }}
-    >
-      <div className="absolute inset-0 bg-white opacity-20"></div>
-      <div className="relative max-w-7xl mx-auto px-7 sm:px-6 lg:px-9">
-        <div className="flex overflow-x-auto space-x-6 pb-5">
-          {stats.map((stat, index) => (
-            <StatItem key={index} stat={stat} />
-          ))}
+    <LazyLoad height={200} once>
+      <section 
+        className="relative bg-cover bg-center py-20" 
+        style={{ backgroundImage: 'url("r3.webp")' }}
+      >
+        <div className="absolute inset-0 bg-white opacity-20"></div>
+        <div className="relative max-w-7xl mx-auto px-7 sm:px-6 lg:px-9">
+          <div className="flex overflow-x-auto space-x-6 pb-5">
+            {stats.map((stat, index) => (
+              <StatItem key={index} stat={stat} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </LazyLoad>
   );
 };
 
