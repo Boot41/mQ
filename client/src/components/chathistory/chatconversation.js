@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatConversation.css';
-import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane, FaUser, FaRobot, FaChevronDown, FaChevronUp, FaTimes } from 'react-icons/fa';
+import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane, FaUser, FaRobot, FaChevronDown, FaChevronUp, FaTimes, FaArrowLeft } from 'react-icons/fa';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import debounce from 'lodash.debounce';
 import { useChat } from '../../context/ChatContext';
 
 const ChatConversation = ({ 
@@ -14,7 +13,8 @@ const ChatConversation = ({
   darkMode,
   isSpeaking,
 }) => {
-  const { chatMessages, isChatOpen, toggleChat } = useChat();
+  const { chatMessages, isChatOpen, toggleChat, clearChatMessages, addMessage } = useChat();
+
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
@@ -22,6 +22,10 @@ const ChatConversation = ({
   const [timeoutId, setTimeoutId] = useState(null);
   const [speakingTimeoutId, setSpeakingTimeoutId] = useState(null);
   const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
+
+  const [showNewConversationButton, setShowNewConversationButton] = useState(false);
+  const [showBackToChatButton, setShowBackToChatButton] = useState(false);
+  const [showMessages, setShowMessages] = useState(true); // Track message visibility
 
   const {
     transcript,
@@ -130,11 +134,33 @@ const ChatConversation = ({
     setIsVoiceMode(!isVoiceMode);
   };
 
+  const handleBackButtonClick = () => {
+    setShowMessages(false); // Hide messages
+    setShowNewConversationButton(true); // Show new conversation button
+    setShowBackToChatButton(true); // Show back to chat button
+  };
+
+  const handleNewConversation = () => {
+    clearChatMessages(); // Clear messages permanently
+    setShowNewConversationButton(false);
+    setShowBackToChatButton(false);
+    setShowMessages(true); // Reset message visibility
+  };
+
+  const handleBackToChat = () => {
+    setShowNewConversationButton(false);
+    setShowBackToChatButton(false);
+    setShowMessages(true); // Show messages again
+  };
+
   if (!isChatOpen) return null;
 
   return (
     <div className={`chat-conversation ${isChatOpen ? 'open' : ''} ${isCollapsed ? 'collapsed' : ''} ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-header">
+        <button onClick={handleBackButtonClick} className="back-button" title="Back">
+          <FaArrowLeft />
+        </button>
         <h3>Chat History</h3>
         <div className="header-buttons">
           {isSpeaking && <span className="speaking-indicator" title="AI is speaking">🔊</span>}
@@ -147,7 +173,7 @@ const ChatConversation = ({
         </div>
       </div>
       <div className={`chat-content ${isCollapsed ? 'collapsed' : ''}`}>
-        <div className="chat-messages">
+        <div className="chat-messages" style={{ display: showMessages ? 'block' : 'none' }}>
           {chatMessages.map((message, index) => (
             <div key={index} className={`message ${message.type}`}>
               <div className="message-icon">
@@ -158,6 +184,16 @@ const ChatConversation = ({
           ))}
           <div ref={messagesEndRef} />
         </div>
+        {showNewConversationButton && (
+          <div className="message new-conversation-message" onClick={handleNewConversation}>
+            <div className="message-content">Start New Conversation</div>
+          </div>
+        )}
+        {showBackToChatButton && (
+          <div className="message back-to-chat-message" onClick={handleBackToChat}>
+            <div className="message-content">Go Back to Chat</div>
+          </div>
+        )}
       </div>
       <div className="chat-input-container">
         <button
