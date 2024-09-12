@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import config from "../../lib/config";
+import {API_BASE_URL}from "../../lib/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -27,7 +27,7 @@ function ContactUs() {
       formData.append("message", data.message);
 
       const response = await axios.post(
-        `${config.API_BASE_URL}/api/service-contact/`, // Adjust endpoint as needed
+        `${API_BASE_URL}/api/service-contact/`, // Adjust endpoint as needed
         formData,
         {
           headers: {
