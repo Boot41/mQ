@@ -7,7 +7,7 @@ const AboutHero = () => {
   };
 
   return (
-    <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden">
+    <div className="relative h-[250px] sm:h-[300px] lg:h-[300px] flex items-center justify-center overflow-hidden">
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ backgroundImage: 'url("static/r5.png")' }}
@@ -20,41 +20,7 @@ const AboutHero = () => {
         <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 sm:mb-8 lg:mb-10">
           Discover our journey of innovation and impact.
         </p>
-        <Button
-          onClick={handleLearnMore}
-          variant="outlined"
-          color="warning"
-          sx={{
-            position: "relative",
-            overflow: "hidden",
-            borderColor: "black",
-            backgroundColor: "black",
-            color: "white",
-            px: { xs: 2, sm: 4 },
-            py: { xs: 1, sm: 2 },
-            fontSize: { xs: '14px', sm: '16px' },
-            "&:hover": {
-              color: "white",
-              backgroundColor: "transparent",
-            },
-            "&::before": {
-              content: '""',
-              position: "absolute",
-              top: 0,
-              left: "-100%",
-              width: "100%",
-              height: "100%",
-              backgroundColor: "orange",
-              transition: "left 0.5s ease",
-              zIndex: -1,
-            },
-            "&:hover::before": {
-              left: 0,
-            },
-          }}
-        >
-          Learn More
-        </Button>
+        
       </div>
     </div>
   );

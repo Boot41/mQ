@@ -137,7 +137,7 @@ const ServicesSection = () => {
       <div className="container mx-auto px-4">
         <header className="text-center mb-16">
           <h1 className="text-5xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4">
-            Our Services
+            Our Differentiating Factor
           </h1>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">

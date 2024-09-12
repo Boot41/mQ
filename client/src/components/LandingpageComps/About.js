@@ -1,52 +1,74 @@
-import React from "react";
-import { CVPData } from "../../InformationFiles/LandingPageInfo";
-import { Typography } from "@mui/material";
+import React, { useState } from "react";
 
-const About = () => {
+const cards = [
+  {
+    title: "PRODUCTIVITY",
+    description:
+      "Explore the latest changes in our blockchain system! Stay informed about the latest developments.",
+    image: "static/S4.png",
+  },
+  {
+    title: "POSSIBILITIES",
+    description:
+      "Security is paramount in the blockchain world, and new protocols aim to strengthen this foundation.",
+    image: "static/s2.jpeg",
+  },
+  {
+    title: "PIONEERING",
+    description:
+      "Guide through the fundamentals of blockchain that will help you embark on exploring the world of this fascinating technology.",
+    image: "static/s1.avif",
+  },
+];
+
+function Card({ title, description, image }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="py-10 rounded-t-3xl">
-      <h1 className="text-center text-6xl text-orange-400 font-bold"></h1>
-      <Typography
-            variant="h3"
-            component="h3"
-            color="orange"
-            fontWeight="bold"
-            fontFamily="Baskervville SC, serif"
-            gutterBottom
-            sx={{ 
-                fontSize: { xs: "2rem", md: "3rem", lg: "4rem" },
-                textAlign: 'center' // {{ edit_1 }} Centering the text
-            }}
-            className="text-center" // {{ edit_1 }} Centering the text for all screen sizes
-      >
-        Unlocking AI's Potential With The 3P's
-      </Typography>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-center">
-          <div className="flex overflow-x-auto gap-8 py-4 scroll-smooth scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
-            {CVPData.map((service, index) => (
-              <div
-                key={index}
-                className="flex-shrink-0 w-80 bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center"
-              >
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-24 h-24 mb-4 object-cover rounded-full border-2 border-orange-400"
-                />
-                <h3 className="text-lg font-semibold mb-2 text-center text-black">
-                  {service.title}
-                </h3>
-                <p className="text-gray-700 text-center text-base">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
+    <div
+      className={`bg-white bg-opacity-90 backdrop-blur-md border border-gray-200 rounded-lg p-6 flex flex-col h-[340px] w-[320px] relative overflow-hidden transition-transform duration-300 ease-in-out transform ${
+        isHovered ? "scale-105 shadow-2xl rotate-1" : "scale-100 shadow-lg rotate-0"
+      }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Image section */}
+      <div className="relative w-full h-1/2 overflow-hidden mb-4">
+        <img
+          src={image}
+          alt={title}
+          className="absolute inset-0 object-cover w-full h-full"
+          style={{ objectFit: 'cover', border: 'none' }} // Ensure no border
+        />
+      </div>
+
+      {/* Content section */}
+      <div className="flex justify-between items-start mb-4 relative z-10">
+        {/* Removed the icon */}
+      </div>
+      <h3 className="text-xl font-bold text-gray-800 mb-3 relative z-10">{title}</h3>
+      <p className="text-sm text-gray-600 mb-4 flex-grow relative z-10">{description}</p>
+    </div>
+  );
+}
+
+export default function BlockchainUpdates() {
+  return (
+    <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+            Unlocking AI's Potential with the 3Ps
+          </h2>
+          <div className="w-32 mx-auto h-1 bg-orange-500"></div>
+        </div>
+        
+        <div className="flex flex-col md:flex-row justify-center items-center md:items-stretch space-y-8 md:space-y-0 md:space-x-6">
+          {cards.map((card, index) => (
+            <Card key={index} {...card} />
+          ))}
         </div>
       </div>
     </div>
   );
-};
-
-export default About;
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaThumbsUp, FaShareAlt } from "react-icons/fa";
 
-function ReadMoreBlog() {
+function ReadMore() {
   const location = useLocation();
   const { post } = location.state || {}; // Get the post data from the route state
   const navigate = useNavigate();
@@ -23,6 +23,30 @@ function ReadMoreBlog() {
   const handleShare = () => {
     // Implement the share functionality
     alert("Share functionality to be implemented.");
+  };
+
+  const renderSection = (section, index) => {
+    switch (section.type) {
+      case "heading":
+        const HeadingTag = `h${section.level}`;
+        return (
+          <HeadingTag
+            key={index}
+            className={`text-${section.level === 2 ? '2xl' : '4xl'} font-bold mb-2`}
+            dangerouslySetInnerHTML={{ __html: section.text }}
+          />
+        );
+      case "paragraph":
+        return (
+          <p
+            key={index}
+            className={`mb-4 ${section.isBold ? 'font-bold' : ''}`}
+            dangerouslySetInnerHTML={{ __html: section.text }}
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -76,8 +100,8 @@ function ReadMoreBlog() {
 
       {/* Blog Content */}
       <div className="mt-6 text-gray-800 leading-relaxed">
-        <p className="mb-6">{post.content1}</p>
-        <p>{post.content2}</p>
+        {post.content1.sections.map((section, index) => renderSection(section, index))}
+        <p className="mt-6">{post.content2}</p>
       </div>
 
       {/* Related Posts Section */}
@@ -98,4 +122,4 @@ function ReadMoreBlog() {
   );
 }
 
-export default ReadMoreBlog;
+export default ReadMore;

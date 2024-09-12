@@ -129,46 +129,40 @@ const Demo = ({ onMessageAdd = () => {} }) => {
           they can benefit you.
         </p>
       </header>
-      <Box className="relative h-[300px] md:h-[500px]">
-        {/* Container for background image and button */}
-        <Box className="relative h-full" style={{ zIndex: 1 }}>
-          <Box
-            className="absolute inset-0 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
-            style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
-          >
-            <Box className="w-full h-full flex items-center justify-center p-4 md:p-6">
-              <Box className="absolute inset-y-1/2 left-4 transform -translate-y-80 hidden md:flex flex-col bg-opacity-50 p-4 md:p-6 rounded-lg w-full max-w-xs md:max-w-md">
-                <Box className="text-center bg-opacity-50 p-4 bg-transparent backdrop-blur-3xl border-4 rounded-3xl">
-                  <Typography
-                    variant="h2"
-                    className="text-orange-400 text-3xl md:text-5xl font-bold mb-4 border-b-2"
-                  >
-                    {DemoData[currentIndex].name}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    className="text-white text-sm md:text-base leading-relaxed text-justify mb-6" // Increased margin-bottom
-                  >
-                    {DemoData[currentIndex].description}
-                  </Typography>
-                  {/* Button container */}
-                    <Button
-                      variant="contained"
-                      onClick={handleClick} // Ensure this is correctly set
-                      className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300"
-                      style={{ zIndex: 2 }}
-                    >
-                      Know More
-                    </Button>
-                </Box>
-                </Box>
+      <Box className="relative mx-auto h-[300px] w-[1000px] md:h-[500px]">
+        {/* Container for large background image */}
+        <Box className="absolute inset-0 z-10 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
+          style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
+        >
+          <Box className="w-full h-full flex items-center justify-center p-4 md:p-6">
+            <Box className="absolute inset-y-1/2 left-4 transform -translate-y-80 hidden md:flex flex-col bg-opacity-50 p-4 md:p-6 rounded-lg w-full max-w-xs md:max-w-md">
+              <Box className="text-center bg-opacity-50 p-4 bg-transparent backdrop-blur-3xl border-4 rounded-3xl">
+                <Typography
+                  variant="h2"
+                  className="text-orange-400 text-3xl md:text-5xl font-bold mb-4 border-b-2"
+                >
+                  {DemoData[currentIndex].name}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  className="text-white text-sm md:text-base leading-relaxed text-justify mb-6"
+                >
+                  {DemoData[currentIndex].description}
+                </Typography>
+                <Button
+                  variant="contained"
+                  onClick={handleClick}
+                  className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300"
+                >
+                  Know More
+                </Button>
               </Box>
             </Box>
           </Box>
+        </Box>
 
-
-        {/* Thumbnail images */}
-        <Box className="absolute bottom-20 w-full flex justify-end space-x-2 overflow-x-auto pb-4 ">
+        {/* Thumbnail images positioned above the large image */}
+        <Box className="absolute bottom-20 w-full flex justify-end space-x-2 overflow-x-auto pb-4 z-20">
           {DemoData.map((item, index) => (
             <Box
               key={index}
