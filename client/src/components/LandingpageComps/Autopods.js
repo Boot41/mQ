@@ -87,9 +87,9 @@ Please provide a comprehensive yet concise response that a potential client woul
   }, [setIsSpeaking]);
 
   return (
-    <div className="py-10 mb-10">
+    <div className="py-8 mb-10">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
           {/* Video Section */}
 
           <div className="w-full md:w-1/2 flex justify-center">
@@ -122,7 +122,7 @@ Please provide a comprehensive yet concise response that a potential client woul
               color="gray"
               fontWeight="medium"
               sx={{
-                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.7rem" },
+                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.5rem" },
                 mb: 2,
               }}
               className="text-center md:text-left"
@@ -135,7 +135,7 @@ Please provide a comprehensive yet concise response that a potential client woul
               color="gray"
               fontWeight="medium"
               sx={{
-                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.7rem" },
+                fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1 rem" },
                 mb: 2,
               }}
               className="text-center md:text-left"
@@ -148,7 +148,7 @@ Please provide a comprehensive yet concise response that a potential client woul
               color="gray"
               fontWeight="medium"
               sx={{
-                fontSize: { xs: "1rem", md: "1.2rem", lg: "1.5rem" },
+                fontSize: { xs: "1rem", md: "1.2rem", lg: "1 rem" },
                 mb: 4,
               }}
               className="text-center md:text-left"
@@ -167,10 +167,10 @@ Please provide a comprehensive yet concise response that a potential client woul
                     borderColor: "black",
                     backgroundColor: "black",
                     color: "white",
-                    // fontSize: { xs: "16px", lg: "12px" },
+                    // fontSize: { xs: "16px", lg: "10px" },
                     // px: 4,
                     // py: 2,
-                    fontSize: { xs: "16px", lg: "14px" },
+                    fontSize: { xs: "14px", lg: "9px" },
                     px: { xs: 3, lg: 2 },
                     py: { xs: 1.5, lg: 2 },
                     "&:hover": {

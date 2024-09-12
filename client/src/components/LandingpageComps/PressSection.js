@@ -9,15 +9,10 @@ const PressSection = () => {
   };
   return (
     <section className="px-6 py-12 bg-white mb-20">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-xl mx-auto">
         <div className="flex justify-center items-center mb-4"> {/* Changed justify-between to justify-center */}
           <h1 className="text-5xl font-bold text-gray-900 mr-4">Press Release</h1> {/* Added margin-right for spacing */}
-          <a
-            href="/all-press-releases"
-            className="bg-gray text-sm text-gray-600 hover:underline"
-          >
-            SEE ALL
-          </a>
+          
         </div>
         <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
 

@@ -7,14 +7,34 @@ import { typicalConfig } from "../../InformationFiles/LandingPageInfo";
 function HeroSection2() {
   return (
     <Box
-      className="relative flex flex-col lg:flex-row items-center justify-between text-left text-white overflow-hidden mt-24 mx-4 lg:mx-10 md:flex-col  md:"
+      className="relative flex flex-col lg:flex-row items-center justify-between text-left text-white overflow-hidden "
       sx={{
         height: { xs: "auto", lg: "calc(100vh - 300px)" },
         backdropBlur: "md",
+        backgroundImage: `url('static/hero1.jpeg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        position: "relative",
+        overflow: "hidden",
+        padding: 0, // Ensure no padding
       }}
     >
+      {/* Black tint overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.7)", // Black tint with 70% opacity
+          zIndex: -1,
+        }}
+      />
+
       {/* Left section - Text and Buttons */}
-      <Box className="w-full lg:w-1/2 p-6 lg:p-24 lg:ml-10">
+      <Box className="w-1/2 lg:w-1/2 p-6 lg:p-24 lg:ml-10">
         <div className="flex flex-col lg:justify-start lg:items-start justify-center items-center">
           <Typography
             variant="h3"
@@ -24,14 +44,14 @@ function HeroSection2() {
             fontFamily="Baskervville SC, serif"
             gutterBottom
             sx={{
-              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "4rem" }, // Adjusted for smaller screens
-              lineHeight: "1.2", // Consistent line spacing
-              maxWidth: "100%", // Ensure full-width usage
-              height: { xs: "4rem", sm: "5rem", md: "6rem", lg: "20rem" }, // Fixed height for different screen sizes
-              overflow: "hidden", // Prevent content overflow
-              display: "flex", // Flex display for centering
-              alignItems: "center", // Vertically center text
-              justifyContent: "center", // Horizontally center text
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "4rem" },
+              lineHeight: "1.2",
+              maxWidth: "100%",
+              height: { xs: "4rem", sm: "5rem", md: "6rem", lg: "20rem" },
+              overflow: "hidden",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
             <span style={{ color: "orange" }}>
@@ -79,7 +99,6 @@ function HeroSection2() {
                     position: "absolute",
                     top: 0,
                     left: "-100%",
-              
                     width: "100%",
                     height: "100%",
                     backgroundColor: "orange",
@@ -132,8 +151,6 @@ function HeroSection2() {
           </Box>
         </div>
       </Box>
-
-      
     </Box>
   );
 }

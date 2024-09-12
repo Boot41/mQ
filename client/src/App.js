@@ -11,7 +11,7 @@ import ai from "./assets/images/ai.gif";
 import ReadMore from "./components/InsightsComps/ReadMore";
 import LandingPage from "./components/Landingpage";
 import JobList from "./components/CareersComp/Openpositions";
-import { LoadingScreen } from "./components/AnimatedNumber";
+import  LoadingScreen  from "./components/AnimatedNumber";
 import ContactUs from "./components/ContactUsComps/ContactUs";
 import { SectionProvider } from "../src/components/TrackUserComps/SectionContext"; // Import the SectionProvider
 import CareersHome from "./components/Careersexp";
