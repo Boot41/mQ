@@ -4,6 +4,15 @@
     right: 20px;
     z-index: 1000;
   }
+
+.minimized {
+    position: relative;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 20px;
+    height: 20px;
+  }
   
   .blob-wrapper {
     position: relative;
