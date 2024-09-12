@@ -16,7 +16,7 @@ const KnowAboutUsSection = () => {
           </div>
         </div>
         {/* Add negative margin to reduce space below */}
-        <div className="mt-[-70px]"></div>
+        <div className="mt-[-75px]"></div>
       </div>
     </section>
   );
