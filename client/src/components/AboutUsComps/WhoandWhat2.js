@@ -23,6 +23,7 @@ export default function WhoAndWhat2() {
               height: { xs: "auto", md: 400 }, // Adjust height for responsiveness
               maxWidth: "100%", // Ensure full width for the container
               mx: "auto", // Center the cards
+              fontFamily: 'inherit', // Ensure font family is inherited
             }}
           >
             <Box
@@ -49,6 +50,7 @@ export default function WhoAndWhat2() {
                   },
                   fontWeight: 600, // Bolder text
                   color: "black", // Text color
+                  fontFamily: 'inherit', // Ensure the same font family
                 }}
               >
                 {slide.header}
@@ -80,6 +82,7 @@ export default function WhoAndWhat2() {
                   },
                   color: "grey", // Text color
                   textAlign: "justify", // Justify the text
+                  fontFamily: 'inherit', // Ensure the same font family
                 }}
               >
                 {"  " + slide.body}
@@ -90,10 +93,11 @@ export default function WhoAndWhat2() {
                   fontSize: {
                     xs: "body2.fontSize",
                     sm: "body1.fontSize",
-                    lg: "h6.fontSize",
+                    lg: "3xl",
                   },
                   color: "grey", // Text color
                   textAlign: "justify", // Justify the text
+                  fontFamily: 'inherit', // Ensure the same font family
                 }}
               >
                 {"  " + slide.body2}

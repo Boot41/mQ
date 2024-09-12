@@ -34,7 +34,6 @@ const CareersHome = () => {
       <OurAds />
       </SectionComponent>
      
-
       {/* <LifeAtT41 /> */}
       <SectionComponent id="boot41-careers" className="container">
         <Boot41 />
