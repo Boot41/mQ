@@ -105,7 +105,10 @@ const ParallaxCard = ({ title, description, image }) => {
           } group-hover:translate-y-0 group-hover:z-30`}
         >
           <p className="text-sm mb-4 text-white">{description}</p>
-          <div className="flex items-center text-orange-400 font-semibold">
+          <div 
+            className="flex items-center text-orange-400 font-semibold cursor-pointer"
+            onClick={handleClick}
+          >
             Learn More <ChevronRight className="ml-2" size={18} />
           </div>
         </div>
@@ -118,19 +121,7 @@ const ParallaxCard = ({ title, description, image }) => {
 const ServicesSection = () => {
   const [updatedServicesData, setUpdatedServicesData] = useState([]);
 
-  useEffect(() => {
-    // Fetch or initialize your services data here
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${config.API_BASE_URL}/api/services`);; // Replace with your API endpoint
-        setUpdatedServicesData(response.data);
-      } catch (error) {
-        console.error("Error fetching services data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  // Removed useEffect
 
   return (
      <div className="mb-10 relative">
