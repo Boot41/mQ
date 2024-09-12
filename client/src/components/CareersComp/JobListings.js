@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { jobs } from "../../InformationFiles/CareersInfo";
+import LazyLoad from 'react-lazyload';
 
 const OpenPositions = () => {
   const [randomJobs, setRandomJobs] = useState([]);
@@ -63,11 +64,13 @@ const HeroImage = () => {
   return (
     <div className="relative w-full lg:w-1/3 h-64 lg:h-auto mb-4 lg:mb-0">
       <div className="relative w-full h-full">
-        <img
-          src="static/r3.webp"
-          alt="Hero Image"
-          className="w-full h-full object-cover rounded-lg"
-        />
+        <LazyLoad height={200} once>
+          <img
+            src="static/r3.webp"
+            alt="Hero Image"
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </LazyLoad>
         <div className="absolute inset-0 bg-gray-200 opacity-30 rounded-lg"></div>
       </div>
       

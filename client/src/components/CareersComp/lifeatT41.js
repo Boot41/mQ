@@ -6,6 +6,7 @@ import {
   FaSmile,
   FaHeartbeat,
 } from "react-icons/fa";
+import LazyLoad from 'react-lazyload';
 
 const OurAds = () => {
   const benefits = [
@@ -32,11 +33,13 @@ const OurAds = () => {
   {/* Left Column: Image */}
   <div className="w-full flex justify-center items-center md:w-1/2">
     <div className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] relative">
-      <img
-        src="static/careersabout.webp"
-        alt="Life at Think 41"
-        className="w-full h-auto object-cover rounded-lg md:max-h-[200px]"
-      />
+      <LazyLoad height={200} once>
+        <img
+          src="static/careersabout.webp"
+          alt="Life at Think 41"
+          className="w-full h-auto object-cover rounded-lg md:max-h-[200px]"
+        />
+      </LazyLoad>
     </div>
   </div>
 

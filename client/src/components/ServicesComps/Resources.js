@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
-
+import LazyLoad from 'react-lazyload';
 const Resource = ({ category, title, description, image }) => (
   <div className="relative bg-white rounded-lg shadow-lg overflow-hidden flex flex-col w-[300px] h-96 transform transition-transform duration-300 hover:scale-105">
+    <LazyLoad height={200} once>
     <div className="relative h-1/2 parallax-bg" style={{ backgroundImage: `url(${image})` }}>
       <span className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white px-2 py-1 text-sm">
         {category}
       </span>
     </div>
+    </LazyLoad>
     <div className="p-4 flex-1">
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-gray-600 mb-4">{description}</p>
