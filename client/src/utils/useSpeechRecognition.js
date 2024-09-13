@@ -10,7 +10,7 @@ export const useSpeechRecognition = (onTranscriptChange) => {
   const {
     transcript,
     resetTranscript,
-    browserSupportsSpeechRecognition
+    browserSupportsSpeechRecognition    
   } = useSpeechRecognitionLib({
     continuous: true,
     onError: (event) => {
