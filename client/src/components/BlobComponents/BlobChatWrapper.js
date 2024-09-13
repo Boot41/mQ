@@ -167,7 +167,99 @@
 
 // export default BlobChatWrapper;
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import BlobComponent from './BlobComponent';
+// import ChatConversation from '../chathistory/chatconversation';
+// import { useChat } from '../../context/ChatContext';
+// import './BlobChatWrapper.css';
+// import axios from 'axios';
+// import { useSection } from "../TrackUserComps/SectionContext";
+// import { API_BASE_URL } from '../../lib/config';
+
+// const BlobChatWrapper = () => {
+//   const { isChatOpen, toggleChat, addMessage } = useChat();
+//   const { currentSection } = useSection();
+//   const [playVideo, setPlayVideo] = useState(false);
+
+//   const handleSendMessage = async (message) => {
+//     addMessage(message);
+
+//     if (message.content.toLowerCase().includes("capitalism")) {
+//       const promptMessage = { type: 'assistant', content: "We have a video on capitalism. Do you want to play it? Reply with 'yes' or 'play' to start the video." };
+//       addMessage(promptMessage);
+//       return;
+//     }
+
+//     try {
+//       const response = await axios.post(
+//         `${API_BASE_URL}/api/website-interaction/`,
+//         {
+//           user_input: message.content,
+//           model_name: "4o-mini",
+//           section_id: currentSection,
+//           user_context: {
+//             chat_opened: true,
+//             interaction_type: "text_input"
+//           },
+//         }
+//       );
+
+//       console.log("API Response:", response.data);
+
+//       const assistantResponse = response.data.response;
+//       const assistantMessage = { type: 'assistant', content: assistantResponse };
+//       addMessage(assistantMessage);
+
+//     } catch (error) {
+//       console.error("Error making API call:", error);
+//       const errorMessage = { type: 'assistant', content: "Sorry, I encountered an error. Please try again." };
+//       addMessage(errorMessage);
+//     }
+//   };
+
+//   const handleUserResponse = (message) => {
+//     if (message.content.toLowerCase().includes("yes")) {
+//       setPlayVideo(true);
+//     }
+//   };
+
+//   const handleCloseVideo = () => {
+//     setPlayVideo(false);
+//   };
+
+//   return (
+//     <div className={`blob-chat-wrapper ${playVideo ? 'blur-background' : ''}`}>
+//       <BlobComponent playvideo={playVideo} />
+//       {!playVideo && isChatOpen && (
+//         <ChatConversation
+//           onSendMessage={handleSendMessage}
+//           onUserResponse={handleUserResponse}
+//           onCollapse={toggleChat}
+//           isCollapsed={false}
+//           isVoiceMode={true}
+//           setIsVoiceMode={() => {}}
+//           darkMode={false}
+//           isSpeaking={false}
+//         />
+//       )}
+//       {playVideo && (
+//         <div className="video-container">
+//           <button className="video-close-button" onClick={handleCloseVideo}>
+//             &times; {/* Close button for video */}
+//           </button>
+//           <video width="600" controls autoPlay onEnded={() => setPlayVideo(false)}>
+//             <source src="static/harshithcapitalism.mp4" type="video/webm" />
+//             Your browser does not support the video tag.
+//           </video>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default BlobChatWrapper;
+
+import React, { useEffect, useState } from 'react';
 import BlobComponent from './BlobComponent';
 import ChatConversation from '../chathistory/chatconversation';
 import { useChat } from '../../context/ChatContext';
@@ -177,7 +269,7 @@ import { useSection } from "../TrackUserComps/SectionContext";
 import { API_BASE_URL } from '../../lib/config';
 
 const BlobChatWrapper = () => {
-  const { isChatOpen, toggleChat, addMessage } = useChat();
+  const { isChatOpen,setIsChatOpen, toggleChat, addMessage } = useChat();
   const { currentSection } = useSection();
   const [playVideo, setPlayVideo] = useState(false);
 
@@ -185,6 +277,7 @@ const BlobChatWrapper = () => {
     addMessage(message);
 
     if (message.content.toLowerCase().includes("capitalism")) {
+      // Prompt user to play video
       const promptMessage = { type: 'assistant', content: "We have a video on capitalism. Do you want to play it? Reply with 'yes' or 'play' to start the video." };
       addMessage(promptMessage);
       return;
@@ -227,10 +320,19 @@ const BlobChatWrapper = () => {
     setPlayVideo(false);
   };
 
+  useEffect(()=>{
+    if(playVideo){
+      setIsChatOpen(false);
+    }
+    else{
+      setIsChatOpen(true);
+    }
+  },[playVideo])
+
   return (
     <div className={`blob-chat-wrapper ${playVideo ? 'blur-background' : ''}`}>
-      {!playVideo && <BlobComponent />}
-      {!playVideo && isChatOpen && (
+      <BlobComponent playvideo={playVideo} />
+      {isChatOpen && (
         <ChatConversation
           onSendMessage={handleSendMessage}
           onUserResponse={handleUserResponse}

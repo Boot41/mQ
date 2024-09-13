@@ -58,6 +58,7 @@ export const ChatProvider = ({ children }) => {
   };
 
   return (
+
     <ChatContext.Provider value={{ 
       chatMessages, 
       isChatOpen, 
@@ -67,7 +68,9 @@ export const ChatProvider = ({ children }) => {
       toggleChat,
       handleDemoChoice,
       speakTextWrapper
+      setIsChatOpen
     }}>
+
       {children}
     </ChatContext.Provider>
   );

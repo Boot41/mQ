@@ -175,18 +175,20 @@ function HeroSection2() {
               </span>
             </Typography>
 
-            <Typography
-              variant="h6"
-              component="h6"
-              color="#c0c0c0" // Light gray color
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem", lg: "1.7rem" },
-                mb: 4,
-              }}
-            >
-              Crafting intelligent software to solve your unique challenges.
-            </Typography>
+
+          <Typography
+  variant="h6"
+  component="h6"
+  color="#6a6a6a" // Light gray color
+  fontWeight="medium"
+  sx={{
+    fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem", lg: "1.7rem" },
+    mb: 4,
+  }}
+>
+  Crafting intelligent software to solve your unique challenges.
+</Typography>
+
 
             <Box className="flex justify-center lg:justify-start">
               <Button

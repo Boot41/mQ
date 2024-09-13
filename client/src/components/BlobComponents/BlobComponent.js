@@ -10,7 +10,7 @@ import { useSpeechRecognition } from '../../utils/useSpeechRecognition';
 // Add this import statement
 import ChatConversation from '../chathistory/chatconversation';
 
-const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
+const BlobComponent = ({ playvideo, additionalMessages = [], onMessageAdd }) => {
   const [voices, setVoices] = useState([]);
   const [isSpeechSynthesisReady, setIsSpeechSynthesisReady] = useState(false);
   const [isSpeechInitialized, setIsSpeechInitialized] = useState(false);
@@ -232,6 +232,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
             isSpeaking={isSpeaking}
             playerRef={playerRef}
             onClick={handleClick}
+            playvideo={playvideo}
           />
         </div>
       </div>
