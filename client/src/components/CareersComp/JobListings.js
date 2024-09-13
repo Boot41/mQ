@@ -17,7 +17,7 @@ const OpenPositions = () => {
 
   if (jobs.length === 0) {
     return (
-      <div className="bg-white rounded-lg shadow-md overflow-hidden w-full lg:w-2/3">
+      <div className="bg-white rounded-lg shadow-md overflow-hidden w-full lg:w-2/3" style={{ fontFamily: 'Open Sans, sans-serif' }}>
         <div className="px-6 py-4 border-b">
           <h2 className="text-2xl font-bold text-center">Open Positions</h2>
           <div className="w-24 h-1 bg-orange-400 mx-auto mb-4"></div>
@@ -30,10 +30,10 @@ const OpenPositions = () => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full lg:w-2/3">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden w-full lg:w-2/3" style={{ fontFamily: 'Open Sans, sans-serif' }}>
       <div className="px-6 py-4 border-b">
-        <h2 className="text-2xl text-center font-bold mb-4">Open Positions</h2>
-        <div className="w-24 h-1 bg-orange-400 mx-auto mb-4"></div>
+        <h2 className="text-4xl text-center font-bold mb-4">Open Positions</h2>
+        <div className="w-32 h-1 bg-orange-400 mx-auto mb-4"></div>
       </div>
       <div className="px-6 py-4 space-y-4">
         {randomJobs.map((job, index) => (
@@ -62,21 +62,22 @@ const OpenPositions = () => {
 
 const HeroImage = () => {
   return (
-    <div className="relative w-full lg:w-1/3 h-64 lg:h-auto mb-4 lg:mb-0">
-      <div className="relative w-full h-full">
+    <div className="relative w-76 lg:w-1/3 flex flex-col" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+      <div className="relative flex-1">
         <LazyLoad height={200} once>
           <img
             src="static/r3.webp"
             alt="Hero Image"
             className="w-full h-full object-cover rounded-lg"
+            style={{ position: 'absolute', top: 0, left: 0 }}
           />
         </LazyLoad>
         <div className="absolute inset-0 bg-gray-200 opacity-30 rounded-lg"></div>
       </div>
       
       <div
-        className="absolute inset-0 flex flex-col justify-center items-center text-center bg-transparent p-4"
-        style={{ fontFamily: "Open Sans, sans-serif" }}
+        className="absolute inset-0 flex flex-col justify-center items-center text-center p-4"
+        style={{ fontFamily: 'Open Sans, sans-serif', zIndex: 1 }}
       >
         <h2 className="text-white text-xl lg:text-2xl font-bold mb-2 lg:mb-4">
           Want to explore more open positions?
@@ -92,16 +93,13 @@ const HeroImage = () => {
           Explore More &rarr;
         </Link>
       </div>
-      <style jsx>{`
-        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
-      `}</style>
     </div>
   );
 };
 
 const JobListings = () => {
   return (
-    <div className="flex items-center justify-center min-h-screen py-8 px-4">
+    <div className="flex items-center justify-center py-4 px-4" style={{ margin: 0, minHeight: 'auto' }}>
       <div className="flex flex-col lg:flex-row w-full max-w-7xl space-y-4 lg:space-y-0 lg:space-x-4">
         <HeroImage />
         <OpenPositions />

@@ -4,21 +4,17 @@ import { DemoData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
-import {API_BASE_URL} from '../../lib/config';
+import { API_BASE_URL } from '../../lib/config';
+import { FaArrowRight } from 'react-icons/fa';
 
 const Demo = ({ onMessageAdd = () => {} }) => {
   const { addMessage, toggleChat } = useChat();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleMessageAdd = (newMessage) => {
     addMessage(newMessage);
     toggleChat();
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
   };
 
   const handleSendMessage = async (newMessage) => {
@@ -35,19 +31,11 @@ const Demo = ({ onMessageAdd = () => {} }) => {
 
       const assistantResponse = response.data.response;
       addMessage({ type: 'assistant', content: assistantResponse });
-
-      // Add this line to speak the response
       speakTextWrapper(assistantResponse);
       speakText(assistantResponse);
-
-      // ... rest of the function ...
     } catch (error) {
       // ... error handling ...
     }
-  };
-
-  const handleThumbnailClick = (index) => {
-    setCurrentIndex(index);
   };
 
   useEffect(() => {
@@ -58,7 +46,7 @@ const Demo = ({ onMessageAdd = () => {} }) => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [DemoData.length]);
+  }, []);
 
   const handleClick = async () => {
     const currentDemo = DemoData[currentIndex];
@@ -98,8 +86,6 @@ const Demo = ({ onMessageAdd = () => {} }) => {
       if (typeof onMessageAdd === 'function') {
         onMessageAdd(assistantMessage);
       }
-
-      console.log("API Response:", response.data);
     } catch (error) {
       console.error("Error making API call:", error);
       const errorMessage = {
@@ -119,12 +105,13 @@ const Demo = ({ onMessageAdd = () => {} }) => {
 
   return (
     <>
-      <header className="text-center my-10 p-4 md:p-10">
-        <h1 className="text-5xl md:text-5xl font-extrabold text-gray-900 mb-4">
-          Check Out Some Demos
-        </h1>
-        <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
-        <p className="mt-3 text-base md:text-lg text-gray-500">
+      <header className="text-center my-10 p-4 md:p-10" style={{ fontFamily: 'inherit' }}>
+      <h1 className="text-6xl md:text-7xl lg:text-9xl font-extrabold text-gray-800 mb-4" style={{ fontFamily: 'inherit' }}>
+  Check Out Some Demos
+</h1>
+
+        <div className="w-32 h-1 bg-orange-400 mx-auto mb-6"></div>
+        <p className="mt-3 text-base md:text-3xl text-gray-600" style={{ fontFamily: 'inherit' }}>
           Discover the features and capabilities of our latest demos and see how
           they can benefit you.
         </p>
@@ -134,52 +121,62 @@ const Demo = ({ onMessageAdd = () => {} }) => {
         <Box className="absolute inset-0 z-10 bg-cover bg-center transition-all duration-500 rounded-3xl lg:mx-20"
           style={{ backgroundImage: `url(${DemoData[currentIndex].img})` }}
         >
-          <Box className="w-full h-full flex items-center justify-center p-4 md:p-6">
-            <Box className="absolute inset-y-1/2 left-4 transform -translate-y-80 hidden md:flex flex-col bg-opacity-50 p-4 md:p-6 rounded-lg w-full max-w-xs md:max-w-md">
-              <Box className="text-center bg-opacity-50 p-4 bg-transparent backdrop-blur-3xl border-4 rounded-3xl">
+          <Box className="w-full h-full flex items-center justify-center p-4 md:p-6 mb:10">
+            {/* Fixed-size box for text and button */}
+            <Box className="absolute inset-y-1/2 left-4 transform -translate-y-80 hidden md:flex flex-col bg-opacity-50 p-4 md:p-6 rounded-lg w-full max-w-xs md:max-w-md h-[450px]">
+              <Box className="text-center bg-opacity-50 p-4 bg-transparent backdrop-blur-3xl border-4 rounded-3xl h-full" style={{ fontFamily: 'inherit' }}>
                 <Typography
                   variant="h2"
-                  className="text-orange-400 text-3xl md:text-5xl font-bold mb-4 border-b-2"
+                  className="text-orange-500 text-3xl md:text-5xl font-bold mb-4 border-b-2"
+                  style={{ fontFamily: 'inherit' }}
                 >
                   {DemoData[currentIndex].name}
                 </Typography>
                 <Typography
                   variant="body1"
                   className="text-white text-sm md:text-base leading-relaxed text-justify mb-6"
+                  style={{ fontFamily: 'inherit' }}
                 >
                   {DemoData[currentIndex].description}
                 </Typography>
                 <Button
-                  variant="contained"
                   onClick={handleClick}
-                  className="bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white py-2 px-4 md:py-2 md:px-6 rounded-full text-sm md:text-lg shadow-lg transition-all duration-300"
+                  variant="outlined"
+                  color="warning"
+                  sx={{
+                    position: "relative",
+                    overflow: "hidden",
+                    borderColor: "black",
+                    backgroundColor: "#f57c00",
+                    color: "white",
+                    fontSize: { xs: "16px", lg: "12px" },
+                    px: { xs: 3, lg: 2 },
+                    py: { xs: 1, lg: 1 },
+                    borderRadius: 0,
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      top: 0,
+                      left: "-100%",
+                      width: "100%",
+                      height: "100%",
+                      backgroundColor: "#f57c00",
+                      transition: "left 0.5s ease",
+                      zIndex: -1,
+                    },
+                    "&:hover::before": {
+                      left: 0,
+                    },
+                  }}
                 >
                   Know More
+                  <FaArrowRight style={{ marginLeft: '8px' }} />
                 </Button>
               </Box>
             </Box>
           </Box>
-        </Box>
-
-        {/* Thumbnail images positioned above the large image */}
-        <Box className="absolute bottom-20 w-full flex justify-end space-x-2 overflow-x-auto pb-4 z-20">
-          {DemoData.map((item, index) => (
-            <Box
-              key={index}
-              className={`cursor-pointer border-2 rounded-3xl ${
-                index === currentIndex
-                  ? "border-blue-500"
-                  : "border-transparent"
-              }`}
-              onClick={() => handleThumbnailClick(index)}
-            >
-              <img
-                src={item.img}
-                alt={item.name}
-                className="w-[100px] h-[150px] md:w-[150px] md:h-[200px] object-cover rounded-3xl"
-              />
-            </Box>
-          ))}
         </Box>
       </Box>
     </>

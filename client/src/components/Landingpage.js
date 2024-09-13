@@ -57,18 +57,18 @@ const LandingPage = () => {
         <ServicesPage />
       </SectionComponent>
 
-      <SectionComponent id="press-section">
-        <PressSection />
-      </SectionComponent>
-
       <SectionComponent id="demo-section">
-        <div className="min-h-screen ">
+       
           <Demo2 />
-        </div>
+        
       </SectionComponent>
 
       <SectionComponent id="latest-insights-section">
         <LatestInsights />
+      </SectionComponent>
+
+      <SectionComponent id="press-section">
+        <PressSection />
       </SectionComponent>
     </div>
   );

@@ -52,11 +52,12 @@ export const AutoPodsData = {
   videoSrc: "static//autobots.webm",
   title: "AutoPods",
   subtitle1: "Pods empowered with AI tools delivering exceptional performance",
-  description: `Autonomous pods is a cross-functional teams consisting of full stack engineers, engineering & product managers, working alongside Gen AI agents. This approach ensures that we deliver robust, end-to-end products and services tailored to your specific needs
-`,
+  description: `Autonomous pods is a cross-functional teams consisting of full stack engineers, engineering & product managers, working alongside Gen AI agents. This approach ensures that we deliver robust, end-to-end products and services tailored to your specific needs.`,
+  additionalParagraph: `Autopods leverage dev41 tools and the broader AI ecosystem to ensure our teams are innovative, iterative, and exceptionally efficient in executing processes, all while maintaining the highest standards of quality.`,
   buttonText: "Know More..",
   link: "/visualizingai",
 };
+
 
 // pressSectionData.js
 
