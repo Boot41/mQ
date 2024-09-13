@@ -1,4 +1,4 @@
-export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording, handleSpeechEnd, voices) => {
+export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording, handleSpeechEnd, voices, maxRetries = 3) => {
   console.log("speakText called with:", { text, shouldSpeak, setIsSpeaking, stopRecording, handleSpeechEnd, voices });
   if (!shouldSpeak) return;
 
@@ -18,7 +18,7 @@ export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording
   const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
   let currentSentence = 0;
 
-  const speakNextSentence = () => {
+  const speakNextSentence = (retries = 0) => {
     if (currentSentence >= sentences.length) {
       setIsSpeaking(false);
       if (handleSpeechEnd && typeof handleSpeechEnd === 'function') {
@@ -47,8 +47,14 @@ export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording
 
     speech.onerror = (event) => {
       console.error("Speech synthesis error:", event);
-      currentSentence++;
-      speakNextSentence();
+      if (retries < maxRetries) {
+        console.log(`Retrying speech synthesis (attempt ${retries + 1} of ${maxRetries})...`);
+        setTimeout(() => speakNextSentence(retries + 1), 1000);
+      } else {
+        console.error(`Failed to synthesize speech after ${maxRetries} attempts.`);
+        currentSentence++;
+        speakNextSentence();
+      }
     };
 
     window.speechSynthesis.speak(speech);
