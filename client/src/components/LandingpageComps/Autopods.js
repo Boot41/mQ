@@ -107,9 +107,9 @@ Please provide a comprehensive yet concise response that a potential client woul
           <Typography
             variant="h3"
             component="h3"
-            color="orange"
+            color="#f57c00"
             fontWeight="bold"
-            fontFamily="Baskervville SC, serif"
+            fontFamily="inherit"
             gutterBottom
             sx={{ fontSize: { xs: "2rem", md: "3rem", lg: "4rem" } }}
             className="text-center md:text-left"
@@ -165,7 +165,7 @@ Please provide a comprehensive yet concise response that a potential client woul
                   position: "relative",
                   overflow: "hidden",
                   borderColor: "black",
-                  backgroundColor: "black",
+                  backgroundColor: "#f57c00",
                   color: "white",
                   fontSize: { xs: "14px", lg: "9px" },
                   px: { xs: 3, lg: 2 },
@@ -181,7 +181,7 @@ Please provide a comprehensive yet concise response that a potential client woul
                     left: "-100%",
                     width: "100%",
                     height: "100%",
-                    backgroundColor: "orange",
+                    backgroundColor: "orange[500]",
                     transition: "left 0.5s ease",
                     zIndex: -1,
                     border: "white",

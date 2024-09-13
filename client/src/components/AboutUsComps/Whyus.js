@@ -6,7 +6,7 @@ const KnowAboutUsSection = () => {
       <div className="container mx-auto px-4 sm:px-4 lg:px-6 mb-0">
         <div className="text-center" style={{ fontFamily: 'inherit' }}>
           <h2 className="text-5xl font-bold text-gray-800 mb-2" style={{ fontFamily: 'inherit' }}>
-            About Us
+            Who are we?
           </h2>
           <div className="w-32 h-1 bg-orange-500 mx-auto mb-4"></div>
           <div className="max-w-6xl text-2xl mx-auto text-center" style={{ fontFamily: 'inherit' }}>

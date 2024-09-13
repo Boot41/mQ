@@ -10,7 +10,7 @@ const HeroSection = () => {
 
   return (
     <div 
-      className="flex items-center justify-center h-[450px] bg-cover bg-center relative" 
+      className="flex items-center justify-center h-[350px] bg-cover bg-center relative" 
       style={{ backgroundImage: 'url(static/careershero.webp)' }}
     >
       <div 
@@ -18,10 +18,10 @@ const HeroSection = () => {
         style={{ zIndex: 1 }} // Ensure the text is above the background
       >
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-          Be the force behind impactful <br /> <span className="text-orange-500">AI advancements</span>
+           <br /> <span className="text-orange-500">About Us</span>
         </h1>
         <p className="text-base md:text-lg mb-8 text-white">
-          Join us in transforming innovative ideas into real AI advancements. At Think41, we're a team of tech enthusiasts and dreamers committed to making a difference. Founded by seasoned entrepreneurs, we foster a culture of inclusivity, flexibility, and personal growth. Be a part of shaping the future of AI and make an impact with us.
+          Transforming businesses through advanced GenAI solutions. At Think41, we harness the power of Generative AI to revolutionize how businesses operate, innovate, and grow. Our mission is to drive the next wave of digital transformation by delivering cutting-edge AI solutions tailored to meet the unique challenges of modern enterprises.   
         </p>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           

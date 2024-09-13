@@ -6,7 +6,7 @@ function Card({ title, description, image }) {
 
   return (
     <div
-      className={`bg-white bg-opacity-90 backdrop-blur-md border border-gray-200 rounded-lg flex h-[125px] w-[1000px] overflow-hidden transition-transform duration-300 ease-in-out ${
+      className={`bg-white bg-opacity-90 backdrop-blur-md border border-gray-200 rounded-lg flex h-[150px] w-[1000px] overflow-hidden transition-transform duration-300 ease-in-out ${
         isHovered ? "scale-105 shadow-2xl" : "scale-100 shadow-lg"
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -43,13 +43,13 @@ const cards = [
   {
     title: "POSSIBILITIES",
     description:
-      "Transform previously impossible use-cases into reality by enabling innovative solutions, such as fully automated initial interviews using Conversational AI.",
+      "Leverage GenAI to achieve what was once unthinkable in technology and business. Through strategic investment in emerging possibilities, we empower organisations to unlock unprecedented growth and redefine industry standards.",
     image: "static/Possibilities.webp",
   },
   {
     title: "PIONEERING",
     description:
-      "Explore and develop cutting-edge use-cases that push the boundaries of what's imaginable, such as AI-driven personalized learning environments and computer vision for inventory management",
+      "Turn today's pioneering concepts into your competitive advantages, ensuring your organisation always stays ahead of the curve. At the forefront of GenAI innovation, we'll help your organisation explore and develop use-cases that challenge conventional limits and reshape your industry.",
     image: "static/pioneering.webp",
   },
 ];
