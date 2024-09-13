@@ -2,7 +2,14 @@ import React, { useCallback, useState } from "react";
 import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
+
 import { FaArrowRight } from "react-icons/fa";
+import axios from "axios";
+import LazyLoad from 'react-lazyload';
+
+import {API_BASE_URL} from '../../lib/config';
+
+
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
 import axios from "axios";
@@ -13,7 +20,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const handleMessageAdd = (newMessage) => {
-    addMessage(newMessage);
+    addMessage(newMessage);>>>>>>> main
     toggleChat();
   };
 
@@ -26,16 +33,114 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
   }, [setIsSpeaking]);
 
   return (
+
     <Box className="py-16 px-4 md:px-8 lg:px-16 xl:px-24">
       <Box className="container mx-auto">
         <Box className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Image Section */}
           <Box className="w-full md:w-1/2 flex justify-center">
+            <div className="w-full md:w-1/2 flex justify-center px-24">{/* Adjusted padding */}
+          <LazyLoad height={400} once>
             <img
               src="static/autopods.webp"
               alt="AutoPods illustration"
-              className="w-full max-w-[500px] h-auto rounded-lg shadow-lg"
+              className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
             />
+          </LazyLoad>
+        </div>   
+
+        {/* Text Section */}
+        <Box className="w-full md:w-1/2 flex flex-col justify-center space-y-6 px-10"> {/* Adjusted padding */}
+          <Typography
+            variant="h3"
+            component="h3"
+            color="orange"
+            fontWeight="bold"
+            fontFamily="Baskervville SC, serif"
+            gutterBottom
+            sx={{ fontSize: { xs: "2rem", md: "3rem", lg: "4rem" } }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.title}
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h6"
+            color="gray"
+            fontWeight="medium"
+            sx={{
+              fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1.5rem" },
+              mb: 2,
+            }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.subtitle1}
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h6"
+            color="gray"
+            fontWeight="medium"
+            sx={{
+              fontSize: { xs: "1.2rem", md: "1.5rem", lg: "1rem" },
+              mb: 2,
+            }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.subtitle2}
+          </Typography>
+          <Typography
+            variant="h6"
+            component="h6"
+            color="gray"
+            fontWeight="medium"
+            sx={{
+              fontSize: { xs: "1rem", md: "1.2rem", lg: "1rem" },
+              mb: 4,
+            }}
+            className="text-center md:text-left"
+          >
+            {AutoPodsData.description}
+          </Typography>
+          <Box className="flex justify-center md:justify-start">
+            <Link to="#">
+              <Button
+                onClick={handleClick}
+                variant="outlined"
+                color="warning"
+                sx={{
+                  position: "relative",
+                  overflow: "hidden",
+                  borderColor: "black",
+                  backgroundColor: "black",
+                  color: "white",
+                  fontSize: { xs: "14px", lg: "9px" },
+                  px: { xs: 3, lg: 2 },
+                  py: { xs: 1.5, lg: 2 },
+                  "&:hover": {
+                    color: "white",
+                    backgroundColor: "transparent",
+                  },
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: "-100%",
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "orange",
+                    transition: "left 0.5s ease",
+                    zIndex: -1,
+                    border: "white",
+                  },
+                  "&:hover::before": {
+                    left: 0,
+                  },
+                }}
+              >
+                {AutoPodsData.buttonText}
+              </Button>
+            </Link>
           </Box>
 
           {/* Text Section */}

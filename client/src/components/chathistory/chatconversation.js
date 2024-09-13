@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatConversation.css';
 import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane, FaUser, FaRobot, FaChevronDown, FaChevronUp, FaTimes, FaArrowLeft } from 'react-icons/fa';
 import { useSpeechRecognition } from '../../utils/useSpeechRecognition';
 import { useChat } from '../../context/ChatContext';
+import DOMPurify from 'dompurify';
 
 const ChatConversation = ({ 
   onSendMessage, 
@@ -10,9 +11,20 @@ const ChatConversation = ({
   isCollapsed, 
   darkMode,
   isSpeaking,
-  setIsSpeaking,
+  onUserResponse // Add this prop
+  // setIsSpeaking,
+  onUserResponse
 }) => {
-  const { chatMessages, isChatOpen, toggleChat, clearChatMessages } = useChat();
+  const { 
+    chatMessages, 
+    isChatOpen, 
+    isSpeaking,
+    toggleChat, 
+    clearChatMessages, 
+    handleDemoChoice,
+    speakTextWrapper
+  } = useChat();
+
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
   const [timeoutId, setTimeoutId] = useState(null);
@@ -82,7 +94,16 @@ const ChatConversation = ({
 
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
-      onSendMessage({ type: 'user', content: inputMessage.trim() });
+      const message = { type: 'user', content: inputMessage.trim() };
+      onSendMessage(message);
+
+      // Check if the message is a demo choice
+      if (['1', '2', '3'].includes(message.content)) {
+        handleDemoChoice(message.content);
+      } else if (message.content.toLowerCase() === 'yes' || message.content.toLowerCase() === 'play') {
+        onUserResponse(message);
+      }
+
       setInputMessage('');
       resetTranscript();
     }
@@ -122,6 +143,17 @@ const ChatConversation = ({
     onCollapse();
   };
 
+  const createMarkup = (content) => {
+    return { __html: DOMPurify.sanitize(content) };
+  };
+
+  const renderMessageContent = (message) => {
+    if (message.isHtml) {
+      return <div dangerouslySetInnerHTML={createMarkup(message.content)} />;
+    }
+    return <div>{message.content}</div>;
+  };
+
   if (!isChatOpen) return null;
 
   return (
@@ -149,7 +181,9 @@ const ChatConversation = ({
                 <div className="message-icon">
                   {message.type === 'user' ? <FaUser /> : <FaRobot />}
                 </div>
-                <div className="message-content">{message.content}</div>
+                <div className="message-content">
+                  {renderMessageContent(message)}
+                </div>
               </div>
             ))}
             <div ref={messagesEndRef} />
@@ -192,3 +226,5 @@ const ChatConversation = ({
 };
 
 export default ChatConversation;
+
+
