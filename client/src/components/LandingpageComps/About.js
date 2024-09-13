@@ -35,7 +35,7 @@ const cards = [
   {
     title: "PRODUCTIVITY",
     description:
-      "Explore the latest changes in our blockchain system! Stay informed about the latest developments.",
+      "Harnessing GenAI's power, we revolutionise your organisation's productivity at individual, team, and enterprise levels. Our solutions streamline existing processes and software, accelerating development cycles and optimising business operations through AI-driven automation.",
     image: "static/S4.png",
   },
   {

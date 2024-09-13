@@ -15,11 +15,11 @@ export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording
     stopRecording();
   }
 
-  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
-  let currentSentence = 0;
+  const utterances = text.match(/.{1,200}(?:\s|$)/g) || [text];
+  let currentUtterance = 0;
 
-  const speakNextSentence = (retries = 0) => {
-    if (currentSentence >= sentences.length) {
+  const speakNextUtterance = (retries = 0) => {
+    if (currentUtterance >= utterances.length) {
       setIsSpeaking(false);
       if (handleSpeechEnd && typeof handleSpeechEnd === 'function') {
         handleSpeechEnd();
@@ -27,40 +27,45 @@ export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording
       return;
     }
 
-    const speech = new SpeechSynthesisUtterance(sentences[currentSentence]);
+    const speech = new SpeechSynthesisUtterance(utterances[currentUtterance]);
 
     if (voices && voices.length > 0) {
-      const englishVoice = voices.find(voice => voice.lang.startsWith('en-') && voice.name.includes('Female'));
-      if (englishVoice) {
-        speech.voice = englishVoice;
-      }
+      const maleVoice = voices.find(voice => voice.name.includes('Male')) || voices[0];
+      speech.voice = maleVoice;
     }
 
     speech.volume = 1;
-    speech.rate = 0.95;
-    speech.pitch = 1.05;
+    speech.rate = 1;
+    speech.pitch = 1;
+
+    speech.onstart = () => {
+      console.log('Speech started:', utterances[currentUtterance]);
+      setIsSpeaking(true);
+      stopRecording();
+    };
 
     speech.onend = () => {
-      currentSentence++;
-      speakNextSentence();
+      console.log('Speech ended:', utterances[currentUtterance]);
+      currentUtterance++;
+      speakNextUtterance();
     };
 
     speech.onerror = (event) => {
       console.error("Speech synthesis error:", event);
       if (retries < maxRetries) {
         console.log(`Retrying speech synthesis (attempt ${retries + 1} of ${maxRetries})...`);
-        setTimeout(() => speakNextSentence(retries + 1), 1000);
+        setTimeout(() => speakNextUtterance(retries + 1), 1000);
       } else {
         console.error(`Failed to synthesize speech after ${maxRetries} attempts.`);
-        currentSentence++;
-        speakNextSentence();
+        currentUtterance++;
+        speakNextUtterance();
       }
     };
 
     window.speechSynthesis.speak(speech);
   };
 
-  speakNextSentence();
+  speakNextUtterance();
 
   // Return a function to cancel the speech
   return () => {

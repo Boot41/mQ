@@ -3,16 +3,23 @@ import SpeechRecognition, { useSpeechRecognition as useSpeechRecognitionLib } fr
 
 export const useSpeechRecognition = (onTranscriptChange) => {
   const [isVoiceMode, setIsVoiceMode] = useState(true);
-  const [speakingTimeoutId, setSpeakingTimeoutId] = useState(null);
-  const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
-  const [abortController, setAbortController] = useState(new AbortController());
+  const [transcriptBuffer, setTranscriptBuffer] = useState('');
+  const [sendTimeout, setSendTimeout] = useState(null);
 
   const {
     transcript,
     resetTranscript,
-    browserSupportsSpeechRecognition    
+    browserSupportsSpeechRecognition
   } = useSpeechRecognitionLib({
     continuous: true,
+    onResult: (result) => {
+      setTranscriptBuffer(result);
+      if (sendTimeout) clearTimeout(sendTimeout);
+      setSendTimeout(setTimeout(() => {
+        onTranscriptChange(result);
+        setTranscriptBuffer('');
+      }, 1500)); // 1.5 seconds delay
+    },
     onError: (event) => {
       console.error('Speech recognition error:', event.error);
       if (event.error === 'no-speech' || event.error === 'audio-capture') {
@@ -23,26 +30,16 @@ export const useSpeechRecognition = (onTranscriptChange) => {
 
   const startRecording = useCallback(() => {
     SpeechRecognition.startListening({ continuous: true, language: 'en-GB' });
-    if (speakingTimeoutId) {
-      clearTimeout(speakingTimeoutId);
-    }
-    const id = setTimeout(() => {
-      // Placeholder for any future logic
-    }, 10000);
-    setSpeakingTimeoutId(id);
-  }, [speakingTimeoutId]);
+  }, []);
 
   const stopRecording = useCallback(() => {
-    setAbortController(new AbortController());
-    abortController.abort();
     SpeechRecognition.stopListening();
-    if (speakingTimeoutId) {
-      clearTimeout(speakingTimeoutId);
+    if (sendTimeout) clearTimeout(sendTimeout);
+    if (transcriptBuffer) {
+      onTranscriptChange(transcriptBuffer);
+      setTranscriptBuffer('');
     }
-    if (pauseTimeoutId) {
-      clearTimeout(pauseTimeoutId);
-    }
-  }, [abortController, speakingTimeoutId, pauseTimeoutId]);
+  }, [sendTimeout, transcriptBuffer, onTranscriptChange]);
 
   const toggleVoiceMode = useCallback(() => {
     if (isVoiceMode) {
@@ -66,7 +63,7 @@ export const useSpeechRecognition = (onTranscriptChange) => {
     toggleVoiceMode,
     startRecording,
     stopRecording,
-    transcript,
+    transcript: transcriptBuffer,
     resetTranscript,
     browserSupportsSpeechRecognition
   };

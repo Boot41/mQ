@@ -195,7 +195,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
     } catch (error) {
       console.error("Error making API call:", error);
       console.log("API Base URL:", API_BASE_URL);
-      const errorMessage = "Sorry, I encountered an error. Please try again.";
+      const errorMessage = "Sorry, I encountered an error. Please try again later.";
       addMessage({ type: 'assistant', content: errorMessage });
       speakTextWrapper(errorMessage);
     }
