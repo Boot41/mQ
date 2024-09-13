@@ -51,15 +51,16 @@ function ContactUs() {
   className="bg-black items-center bg-opacity-50 px-4 py-8 rounded-lg max-w-4xl mx-auto text-center relative flex justify-center items-center"
   style={{ zIndex: 1 }}
 >
-  <div>
-    <h1 className="text-4xl md:text-5xl font-bold mb-5 text-white">
-      We'd love to hear from you! <br />
-      <span className="text-orange-500">Contact Us</span>
-    </h1>
-    <p className="text-base md:text-lg mb-8 text-white">
-      Reach out with any inquiries, and we'll get back to you as soon as possible.
-    </p>
-  </div>
+<div className="px-4 py-6">
+  <h1 className="text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white">
+    We’d love to hear from you! <br />
+    <span className="text-orange-500">Contact Us</span>
+  </h1>
+  <p className="text-base md:text-lg mb-6 text-white">
+    Reach out with any inquiries, and we’ll get back to you as soon as possible.
+  </p>
+</div>
+
 </div></div>
 
       {/* Contact Form Section */}

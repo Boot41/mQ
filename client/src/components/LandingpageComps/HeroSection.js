@@ -78,7 +78,7 @@ function HeroSection2() {
           <Typography
   variant="h6"
   component="h6"
-  color="#c0c0c0" // Light gray color
+  color="#6a6a6a" // Light gray color
   fontWeight="medium"
   sx={{
     fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem", lg: "1.7rem" },
