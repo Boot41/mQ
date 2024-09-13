@@ -10,6 +10,9 @@ const ChatConversation = ({
   onCollapse,
   isCollapsed, 
   darkMode,
+  isSpeaking,
+  onUserResponse // Add this prop
+  // setIsSpeaking,
   onUserResponse
 }) => {
   const { 
