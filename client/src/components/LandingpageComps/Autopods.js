@@ -3,6 +3,7 @@ import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
+import LazyLoad from 'react-lazyload';
 
 import {API_BASE_URL} from '../../lib/config';
 
@@ -92,11 +93,13 @@ Please provide a comprehensive yet concise response that a potential client woul
       <div className="flex flex-col md:flex-row items-center justify-center gap-0"> {/* Removed gap */}
         {/* Image Section */}
         <div className="w-full md:w-1/2 flex justify-center px-24">{/* Adjusted padding */}
-          <img
-            src="static/autopods.webp"
-            alt="AutoPods illustration"
-            className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
-          />
+          <LazyLoad height={400} once>
+            <img
+              src="static/autopods.webp"
+              alt="AutoPods illustration"
+              className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
+            />
+          </LazyLoad>
         </div>
 
         {/* Text Section */}
