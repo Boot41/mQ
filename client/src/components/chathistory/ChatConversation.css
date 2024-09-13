@@ -11,13 +11,13 @@
     overflow: hidden;
     z-index: 1002; /* Increased z-index to be above the blob */
     margin-bottom: 10px; /* Add some space between chat and blob */
+    transition: height 0.3s ease-out;
+    height: 400px; /* Adjust this value as needed */
 }
 
 .chat-conversation.open {
     display: flex;
 }
-
-/* ... rest of the styles ... */
   
   .chat-content {
     flex-grow: 1;
@@ -84,6 +84,9 @@
     padding: 10px;
     background-color: #f8f8f8;
     border-top: 1px solid #e0e0e0;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 50px; /* Adjust this value as needed */
+    opacity: 1;
   }
   
   .voice-mode-button,
@@ -116,7 +119,7 @@
   }
 
   .chat-conversation.collapsed {
-    height: 110px; /* Increased height to accommodate input container */
+    height: auto;
   }
   .chat-header {
     display: flex;
@@ -225,4 +228,70 @@
 .back-to-chat-message {
   cursor: pointer; /* Indicate that these are clickable */
   color: red; /* Optional: Change text color */
+}
+
+.chat-conversation.collapsed .chat-content {
+  display: none;
+}
+
+.chat-conversation.collapsed .chat-header {
+  border-bottom: none;
+}
+
+.chat-conversation .chat-body {
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  max-height: 350px; /* Adjust this value as needed */
+  opacity: 1;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.chat-conversation.collapsed .chat-body {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.chat-input-container {
+  padding: 10px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chat-conversation.collapsed .chat-input-container {
+  border-top: none;
+}
+
+.chat-conversation {
+  transition: height 0.3s ease-out;
+  height: 400px; /* Adjust this value as needed */
+}
+
+.chat-conversation.collapsed {
+  height: 50px; /* Height of the header */
+}
+
+.chat-body {
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  max-height: 300px; /* Adjust this value as needed */
+  opacity: 1;
+  overflow-y: auto;
+}
+
+.chat-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.chat-input-container {
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+  max-height: 50px; /* Adjust this value as needed */
+  opacity: 1;
+}
+
+.chat-input-container.collapsed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 }

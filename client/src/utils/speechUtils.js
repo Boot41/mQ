@@ -1,37 +1,64 @@
-export const speakText = (text, isVoiceBotActive, setIsSpeaking, stopRecording, handleSpeechEnd) => {
-  if (isVoiceBotActive && 'speechSynthesis' in window) {
-    console.log('Speaking text:', text);
-    const utterances = text.match(/.{1,200}(?:\s|$)/g);
-    const voices = speechSynthesis.getVoices();
-    
-    const selectedVoice = voices.find(voice => voice.name === 'Google US English') || voices[0];
-    console.log('Selected voice:', selectedVoice.name);
+export const speakText = (text, shouldSpeak = true, setIsSpeaking, stopRecording, handleSpeechEnd, voices) => {
+  console.log("speakText called with:", { text, shouldSpeak, setIsSpeaking, stopRecording, handleSpeechEnd, voices });
+  if (!shouldSpeak) return;
 
-    speechSynthesis.cancel();
-
-    utterances.forEach((chunk, index) => {
-      const speech = new SpeechSynthesisUtterance(chunk);
-      speech.voice = selectedVoice;
-      speech.rate = 1;
-      speech.pitch = 1;
-      speech.volume = 1;
-      speech.onstart = () => {
-        console.log('Speech started:', chunk);
-        setIsSpeaking(true);
-        stopRecording();
-      };
-      speech.onend = () => {
-        console.log('Speech ended:', chunk);
-        if (index === utterances.length - 1) {
-          handleSpeechEnd();
-        }
-      };
-      speech.onerror = (event) => {
-        console.error('Speech synthesis error:', event.error);
-      };
-      speechSynthesis.speak(speech);
-    });
-  } else {
-    console.log('Speech synthesis not supported or voice bot not active');
+  if (!('speechSynthesis' in window)) {
+    console.error("This browser does not support speech synthesis.");
+    return;
   }
+
+  // Cancel any ongoing speech
+  window.speechSynthesis.cancel();
+
+  setIsSpeaking(true);
+  if (stopRecording && typeof stopRecording === 'function') {
+    stopRecording();
+  }
+
+  const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
+  let currentSentence = 0;
+
+  const speakNextSentence = () => {
+    if (currentSentence >= sentences.length) {
+      setIsSpeaking(false);
+      if (handleSpeechEnd && typeof handleSpeechEnd === 'function') {
+        handleSpeechEnd();
+      }
+      return;
+    }
+
+    const speech = new SpeechSynthesisUtterance(sentences[currentSentence]);
+
+    if (voices && voices.length > 0) {
+      const englishVoice = voices.find(voice => voice.lang.startsWith('en-') && voice.name.includes('Female'));
+      if (englishVoice) {
+        speech.voice = englishVoice;
+      }
+    }
+
+    speech.volume = 1;
+    speech.rate = 0.95;
+    speech.pitch = 1.05;
+
+    speech.onend = () => {
+      currentSentence++;
+      speakNextSentence();
+    };
+
+    speech.onerror = (event) => {
+      console.error("Speech synthesis error:", event);
+      currentSentence++;
+      speakNextSentence();
+    };
+
+    window.speechSynthesis.speak(speech);
+  };
+
+  speakNextSentence();
+
+  // Return a function to cancel the speech
+  return () => {
+    window.speechSynthesis.cancel();
+    setIsSpeaking(false);
+  };
 };

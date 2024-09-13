@@ -131,7 +131,7 @@ function MeetFounders() {
                       alignItems: "baseline",
                     }}
                   >
-                    <div>
+                    <div className="-mt-20">
                       <IconButton
                         component="a"
                         href={member.linkedin}

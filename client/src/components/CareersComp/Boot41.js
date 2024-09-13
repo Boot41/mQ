@@ -8,7 +8,7 @@ const CarouselItem = ({ item }) => (
       src={item.imageSrc}
       alt={item.alt}
       className="w-full object-cover rounded-lg mb-2"
-      style={{ height: '250px' }}
+      style={{ height: '400px' }}
     />
     <p className="text-base text-center text-gray-800 font-medium">{item.text}</p>
   </div>

@@ -11,6 +11,7 @@ import SectionComponent from "./TrackUserComps/SectionComponent";
 import WhyUsSection from "./AboutUsComps/Whyus";
 import StatsSection from "./AboutUsComps/Stats";
 
+
 function AboutUS2() {
   return (
     <>
@@ -23,6 +24,7 @@ function AboutUS2() {
         <WhyUsSection />
 
         <SectionComponent id="mission-vision">
+  
           <div id="mission-vision">
             <WhoAndWhat2 />
           </div>

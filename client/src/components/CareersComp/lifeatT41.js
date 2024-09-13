@@ -1,21 +1,7 @@
 import React from "react";
-import {
-  FaClock,
-  FaUtensils,
-  FaLightbulb,
-  FaSmile,
-  FaHeartbeat,
-} from "react-icons/fa";
 import LazyLoad from 'react-lazyload';
 
 const OurAds = () => {
-  const benefits = [
-    "Flexible Work Hours",
-    "Free Meals",
-    "Incubator for New Ideas",
-    "Fun With Purpose",
-    "Health and Wellness Programs",
-  ];
 
   return (
     <div className="bg-white py-8 sm:py-12">
@@ -54,12 +40,6 @@ const OurAds = () => {
 
 
 
-
-
-
-
-
-
         {/* Four Key Benefits */}
         <div className="flex flex-wrap justify-between mt-12 sm:mt-20 pt-8 sm:pt-12 gap-4"> 
           {[
@@ -73,7 +53,7 @@ const OurAds = () => {
               key={index}
               className="flex items-center p-2 border rounded-lg shadow-sm bg-white h-16 sm:h-20 w-[calc(50%-8px)] sm:w-[calc(33.333%-16px)] lg:w-[calc(20%-16px)]"
             >
-              <div className="flex-none w-2 h-8 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 flex items-center justify-center text-lg font-bold text-white">
+              <div className="flex-none w-2 h-8 rounded-full bg-gradient-to-r from-green-400 to-green-600 flex items-center justify-center text-lg font-bold text-white">
                 <span className="text-sm">✓</span>
               </div>
                             <div className="ml-2">

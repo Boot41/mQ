@@ -2,51 +2,103 @@ import React, { useCallback, useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useSection } from "../TrackUserComps/SectionContext";
 import Jarvis from "./Jarvis";
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { CSSTransition } from 'react-transition-group';
-import { FaChevronUp, FaChevronDown, FaTimes } from 'react-icons/fa';
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
-import {API_BASE_URL} from '../../lib/config';
-import './BlobComponent.css'; // Make sure to create this file
-
+import { API_BASE_URL } from '../../lib/config';
+import './BlobComponent.css';
+import { useSpeechRecognition } from '../../utils/useSpeechRecognition';
+// Add this import statement
+import ChatConversation from '../chathistory/chatconversation';
 
 const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
+  const [voices, setVoices] = useState([]);
+  const [isSpeechSynthesisReady, setIsSpeechSynthesisReady] = useState(false);
+  const [isSpeechInitialized, setIsSpeechInitialized] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const loadVoices = useCallback(() => {
+    const availableVoices = window.speechSynthesis.getVoices();
+    console.log('Voices loaded:', availableVoices);
+    if (availableVoices.length > 0) {
+      setVoices(availableVoices);
+      setIsSpeechSynthesisReady(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    // Try to load voices immediately
+    loadVoices();
+
+    // If voices aren't loaded immediately, try again after a short delay
+    const timeoutId = setTimeout(loadVoices, 1000);
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+      clearTimeout(timeoutId);
+    };
+  }, [loadVoices]);
+
+  const initializeSpeechSynthesis = useCallback(() => {
+    if (isSpeechInitialized) return;
+
+    const utterance = new SpeechSynthesisUtterance('');
+    utterance.onend = () => {
+      console.log('Speech synthesis initialized successfully');
+      setIsSpeechInitialized(true);
+    };
+    utterance.onerror = (event) => {
+      console.warn('Speech synthesis initialization error:', event);
+      if (event.error === 'not-allowed') {
+        console.log('Speech synthesis permission denied. Please try interacting with the page again.');
+      }
+    };
+    
+    window.speechSynthesis.speak(utterance);
+  }, [isSpeechInitialized]);
+
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      if (!isSpeechInitialized) {
+        initializeSpeechSynthesis();
+      }
+    };
+
+    document.addEventListener('click', handleUserInteraction);
+    document.addEventListener('keydown', handleUserInteraction);
+
+    return () => {
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+    };
+  }, [initializeSpeechSynthesis, isSpeechInitialized]);
+
   const { currentSection } = useSection();
-  const [isRecording, setIsRecording] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isVoiceMode, setIsVoiceMode] = useState(true);
-
-  const [darkMode, setDarkMode] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isVoiceBotActive, setIsVoiceBotActive] = useState(true);
-
-  const [abortController, setAbortController] = useState(new AbortController());
-  const [speakingTimeoutId, setSpeakingTimeoutId] = useState(null);
-  const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
-
   const { chatMessages, isChatOpen, addMessage, toggleChat } = useChat();
+  const playerRef = useRef(null);
+  const [isRecording, setIsRecording] = useState(false);
 
+  const {
+    transcript,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+    startRecording,
+    stopRecording,
+    isVoiceMode,
+    toggleVoiceMode
+  } = useSpeechRecognition((newTranscript) => {
+    handleSendMessage({ type: 'user', content: newTranscript });
+  });
   useEffect(() => {
     if (additionalMessages.length > 0) {
       additionalMessages.forEach(message => addMessage(message));
     }
   }, [additionalMessages, addMessage]);
-
-  const stopRecording = useCallback(() => {
-    setAbortController(new AbortController());
-    abortController.abort();
-    SpeechRecognition.stopListening();
-    if (speakingTimeoutId) {
-      clearTimeout(speakingTimeoutId);
-    }
-    if (pauseTimeoutId) {
-      clearTimeout(pauseTimeoutId);
-    }
-  }, [abortController, speakingTimeoutId, pauseTimeoutId]);
 
   const handleSpeechEnd = useCallback(() => {
     setIsSpeaking(false);
@@ -55,56 +107,26 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
         startRecording();
       }
     }, 5000);
-  }, [isVoiceMode]);
+  }, [isVoiceMode, startRecording, setIsSpeaking]);
 
   const speakTextWrapper = useCallback((text) => {
-    speakText(text, true, setIsSpeaking, () => {}, () => {});
-  }, []);
-
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition({
-    continuous: true,
-    onError: (event) => {
-      console.error('Speech recognition error:', event.error);
-      if (event.error === 'no-speech' || event.error === 'audio-capture') {
-        startRecording();
-      }
+    console.log("speakTextWrapper called with:", text);
+    if (!isSpeechSynthesisReady) {
+      console.warn("Speech synthesis is not ready yet. Skipping speech.");
+      return;
     }
-  });
-
-  const [showWelcomeMessage, setShowWelcomeMessage] = useState(false);
-  const welcomeMessageRef = useRef(null);
-
-  const playerRef = useRef(null);
-
-  const [chatKey, setChatKey] = useState(0);
-
-  useEffect(() => {
-    if (showWelcomeMessage) {
-      const timer = setTimeout(() => {
-        setShowWelcomeMessage(false);
-      }, 3000);
-      return () => clearTimeout(timer);
+    setIsSpeaking(true);
+    try {
+      speakText(text, true, setIsSpeaking, stopRecording, () => {
+        console.log("Speech ended callback");
+        setIsSpeaking(false);
+        handleSpeechEnd();
+      }, voices);
+    } catch (error) {
+      console.error("Error in speech synthesis:", error);
+      setIsSpeaking(false);
     }
-  }, [showWelcomeMessage]);
-
-  useEffect(() => {
-    const loadVoices = () => {
-      const voices = speechSynthesis.getVoices();
-      console.log('Voices loaded:', voices);
-    };
-
-    speechSynthesis.onvoiceschanged = loadVoices;
-    loadVoices(); // Initial load
-
-    return () => {
-      speechSynthesis.onvoiceschanged = null;
-    };
-  }, []);
+  }, [isSpeechSynthesisReady, setIsSpeaking, stopRecording, handleSpeechEnd, voices]);
 
   const handleClick = useCallback(async () => {
     if (!currentSection) {
@@ -113,7 +135,6 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
     }
     
     setIsRecording(true);
-    setShowWelcomeMessage(true);
 
     try {
       const response = await axios.post(
@@ -138,23 +159,16 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       speakTextWrapper(response.data.response);
     } catch (error) {
       console.error("Error making API call:", error);
-      console.log("API Base URL:", API_BASE_URL); // Add this line for debugging
+      console.log("API Base URL:", API_BASE_URL);
     } finally {
       setIsRecording(false);
     }
-  }, [currentSection, addMessage, speakTextWrapper, toggleChat]);
-
-  const handleChatCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  }, [currentSection, addMessage, speakTextWrapper, toggleChat, setIsRecording]);
 
   const handleSendMessage = async (newMessage) => {
     addMessage(newMessage);
     if (onMessageAdd) {
       onMessageAdd(newMessage);
-    }
-    if (isVoiceMode) {
-      stopRecording();
     }
 
     try {
@@ -180,97 +194,42 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       setProgress(response.data.progress || 0);
     } catch (error) {
       console.error("Error making API call:", error);
-      console.log("API Base URL:", API_BASE_URL); // Add this line for debugging
+      console.log("API Base URL:", API_BASE_URL);
       const errorMessage = "Sorry, I encountered an error. Please try again.";
       addMessage({ type: 'assistant', content: errorMessage });
       speakTextWrapper(errorMessage);
-    } finally {
-      if (isVoiceMode) {
-        startRecording();
-      }
     }
   };
 
-  const startRecording = useCallback(() => {
-    SpeechRecognition.startListening({ continuous: true, language: 'en-GB' });
-    if (speakingTimeoutId) {
-      clearTimeout(speakingTimeoutId);
+  const handleCollapse = () => {
+    setIsCollapsed((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    if (isVoiceMode && transcript) {
+      handleSendMessage({ type: 'user', content: transcript });
     }
-    const id = setTimeout(() => {
-      // Placeholder for any future logic
-    }, 10000);
-    setSpeakingTimeoutId(id);
-  }, [speakingTimeoutId]);
-
-  const testSpeech = () => {
-    console.log('Testing speech...');
-    if ('speechSynthesis' in window) {
-      const voices = speechSynthesis.getVoices();
-      console.log('Available voices:', voices);
-
-      const utterance = new SpeechSynthesisUtterance("This is a test speech.");
-      utterance.voice = voices.find(voice => voice.name === 'Google US English') || voices[0];
-      utterance.rate = 1;
-      utterance.pitch = 1;
-      utterance.volume = 1;
-      console.log('Selected voice:', utterance.voice);
-
-      utterance.onstart = () => console.log('Speech started');
-      utterance.onend = () => console.log('Speech ended');
-      utterance.onerror = (event) => console.error('Speech error:', event);
-
-      // Cancel any ongoing speech
-      speechSynthesis.cancel();
-
-      // Speak the new utterance
-      speechSynthesis.speak(utterance);
-
-      // Log the speech synthesis state
-      console.log('Speech synthesis speaking:', speechSynthesis.speaking);
-      console.log('Speech synthesis pending:', speechSynthesis.pending);
-      console.log('Speech synthesis paused:', speechSynthesis.paused);
-    } else {
-      console.error('Speech synthesis not supported');
-    }
-  };
-
-  const testAudio = () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    oscillator.type = 'sine';
-    oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // 440 Hz
-    oscillator.connect(audioContext.destination);
-    oscillator.start();
-    setTimeout(() => oscillator.stop(), 1000); // Stop after 1 second
-    console.log('Audio test started');
-  };
-
-  const initializeAudio = () => {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-  };
-
-  // useEffect(() => {
-  //   // Cleanup function
-  //   return () => {
-  //     // Close the chat if it's open
-  //     if (isChatOpen) {
-  //       toggleChat();
-  //     }
-  //     // Reset the chat key
-  //     setChatKey(prevKey => prevKey + 1);
-  //   };
-  // }, [isChatOpen, toggleChat]); do 
+  }, [isVoiceMode, transcript, handleSendMessage]);
 
   return (
     <div className="blob-container" id="unique-blob-container">
       <div className="blob-chat-wrapper">
-        {isChatOpen }
+        {isChatOpen && (
+          <ChatConversation
+            onSendMessage={handleSendMessage}
+            onCollapse={handleCollapse}
+            isCollapsed={isCollapsed}
+            darkMode={false}
+            isSpeaking={isSpeaking}
+            setIsSpeaking={setIsSpeaking}
+          />
+        )}
         <div ref={playerRef} className="blob-wrapper">
           <Jarvis
             isRecording={isRecording}
             isMinimized={isMinimized}
             isClosing={isClosing}
+            isSpeaking={isSpeaking}
             playerRef={playerRef}
             onClick={handleClick}
           />
