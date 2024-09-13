@@ -111,7 +111,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       console.error("Section ID is not set");
       return;
     }
-    setIsMinimized(true);
+    
     setIsRecording(true);
     setShowWelcomeMessage(true);
 

@@ -7,3 +7,63 @@
     align-items: flex-end;
     z-index: 1000;
   }
+
+  .blob-chat-wrapper.blur-background {
+    overflow: hidden;
+  }
+  
+  .blur-background::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Optional: Darken the background */
+    backdrop-filter: blur(10px); /* Applies the blur effect */
+    z-index: 999; /* Ensures the blur effect is below the video container */
+  }
+  
+  .video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the container */
+    background: rgba(0, 0, 0, 0.8); /* Adds a background color with transparency */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: Adds a shadow for better visibility */
+    z-index: 1000; /* Ensures the video container is on top of other elements */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .video {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .video-close-button {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: rgba(0, 0, 0, 0.5); /* Dark background for the button */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001; /* Ensure button is above the video */
+  }
+  
+  .video-close-button:hover {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
