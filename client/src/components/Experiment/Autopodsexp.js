@@ -1,10 +1,13 @@
 import React from 'react';
 import '../../App.css'; // Assuming your Tailwind CSS is imported here
+import LazyLoad from 'react-lazyload';
 
 const AutoPodsExp = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <ParallaxSection />
+      <LazyLoad height={'100vh'} once>
+        <ParallaxSection />
+      </LazyLoad>
     </div>
   );
 };

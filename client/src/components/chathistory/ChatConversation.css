@@ -295,3 +295,12 @@
   opacity: 0;
   overflow: hidden;
 }
+
+.message-content a {
+  color: #0000FF;
+  text-decoration: underline;
+}
+
+.message-content a:hover {
+  text-decoration: none;
+}

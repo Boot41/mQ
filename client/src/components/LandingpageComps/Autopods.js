@@ -3,6 +3,7 @@ import { Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
+import LazyLoad from 'react-lazyload';
 
 import {API_BASE_URL} from '../../lib/config';
 
@@ -92,11 +93,13 @@ Please provide a comprehensive yet concise response that a potential client woul
       <div className="flex flex-col md:flex-row items-center justify-center gap-0"> {/* Removed gap */}
         {/* Image Section */}
         <div className="w-full md:w-1/2 flex justify-center px-24">{/* Adjusted padding */}
-          <img
-            src="static/autopods.webp"
-            alt="AutoPods illustration"
-            className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
-          />
+          <LazyLoad height={400} once>
+            <img
+              src="static/autopods.webp"
+              alt="AutoPods illustration"
+              className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
+            />
+          </LazyLoad>
         </div>
 
         {/* Text Section */}
@@ -104,9 +107,9 @@ Please provide a comprehensive yet concise response that a potential client woul
           <Typography
             variant="h3"
             component="h3"
-            color="orange"
+            color="#f57c00"
             fontWeight="bold"
-            fontFamily="Baskervville SC, serif"
+            fontFamily="inherit"
             gutterBottom
             sx={{ fontSize: { xs: "2rem", md: "3rem", lg: "4rem" } }}
             className="text-center md:text-left"
@@ -162,7 +165,7 @@ Please provide a comprehensive yet concise response that a potential client woul
                   position: "relative",
                   overflow: "hidden",
                   borderColor: "black",
-                  backgroundColor: "black",
+                  backgroundColor: "#f57c00",
                   color: "white",
                   fontSize: { xs: "14px", lg: "9px" },
                   px: { xs: 3, lg: 2 },
@@ -178,7 +181,7 @@ Please provide a comprehensive yet concise response that a potential client woul
                     left: "-100%",
                     width: "100%",
                     height: "100%",
-                    backgroundColor: "orange",
+                    backgroundColor: "orange[500]",
                     transition: "left 0.5s ease",
                     zIndex: -1,
                     border: "white",

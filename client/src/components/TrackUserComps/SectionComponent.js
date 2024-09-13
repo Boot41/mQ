@@ -13,7 +13,7 @@ const SectionComponent = ({ id, children }) => {
 
   useEffect(() => {
     if (hasBeenInViewFor2Seconds) {
-      console.log(`Section ${id} has been in view for more than 2 seconds.`);
+      // console.log(`Section ${id} has been in view for more than 2 seconds.`);
       setCurrentSection(id);
     }
   }, [hasBeenInViewFor2Seconds, id, setCurrentSection]);

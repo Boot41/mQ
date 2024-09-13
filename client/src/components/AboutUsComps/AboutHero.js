@@ -1,24 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button'; // Import MUI Button component
 
-const AboutHero = () => {
+const HeroSection = () => {
+  const handleClick = (buttonName) => {
+    // Implement the click handler logic here
+    console.log(`${buttonName} clicked`);
+  };
+
   return (
-    <div className="relative h-[250px] sm:h-[300px] lg:h-[300px] flex items-center justify-center overflow-hidden">
+    <div 
+      className="flex items-center justify-center h-[350px] bg-cover bg-center relative" 
+      style={{ backgroundImage: 'url(static/careershero.webp)' }}
+    >
       <div 
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: 'url("static/r5.png")' }}
-      />
-      <div className="absolute inset-0 bg-black opacity-50 z-10" />
-      <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-3xl">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 sm:mb-6 lg:mb-8 leading-tight">
-          Leading with Passion and Purpose
+        className="bg-black bg-opacity-50 px-4 py-8 rounded-lg max-w-4xl mx-auto text-center relative"
+        style={{ zIndex: 1 }} // Ensure the text is above the background
+      >
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+           <br /> <span className="text-orange-500">About Us</span>
         </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-200">
-          Discover our journey of innovation and impact.
+        <p className="text-base md:text-lg mb-8 text-white">
+          Transforming businesses through advanced GenAI solutions. At Think41, we harness the power of Generative AI to revolutionize how businesses operate, innovate, and grow. Our mission is to drive the next wave of digital transformation by delivering cutting-edge AI solutions tailored to meet the unique challenges of modern enterprises.   
         </p>
-
+        <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+          
+          
+        </div>
       </div>
     </div>
   );
 };
 
-export default AboutHero;
+export default HeroSection;

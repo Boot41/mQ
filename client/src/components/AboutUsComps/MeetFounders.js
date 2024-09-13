@@ -104,13 +104,13 @@ function MeetFounders() {
                           md: "2rem",
                         },
                         marginBottom: "1.5rem",
+                        color: "grey.800", // Updated color
                       }}
                     >
                       {member.name}
                     </Typography>
                     <Typography
                       variant="body2"
-                      color="text.secondary"
                       sx={{
                         mb: 10,
                         fontSize: {
@@ -118,6 +118,7 @@ function MeetFounders() {
                           sm: "1rem",
                           md: "1.2rem",
                         },
+                        color: "grey.700", // Updated color
                       }}
                     >
                       {member.description}
@@ -167,4 +168,3 @@ function MeetFounders() {
 }
 
 export default MeetFounders;
-  
