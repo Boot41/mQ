@@ -67,7 +67,7 @@ export const ChatProvider = ({ children }) => {
       clearChatMessages, 
       toggleChat,
       handleDemoChoice,
-      speakTextWrapper
+      speakTextWrapper,
       setIsChatOpen
     }}>
 
