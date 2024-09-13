@@ -6,7 +6,7 @@ function Card({ title, description, image }) {
 
   return (
     <div
-      className={`bg-white bg-opacity-90 backdrop-blur-md border border-gray-200 rounded-lg flex h-[200px] w-[1000px] overflow-hidden transition-transform duration-300 ease-in-out ${
+      className={`bg-white bg-opacity-90 backdrop-blur-md border border-gray-200 rounded-lg flex h-[125px] w-[1000px] overflow-hidden transition-transform duration-300 ease-in-out ${
         isHovered ? "scale-105 shadow-2xl" : "scale-100 shadow-lg"
       }`}
       onMouseEnter={() => setIsHovered(true)}
@@ -21,10 +21,13 @@ function Card({ title, description, image }) {
         />
       </div>
       {/* Content section */}
-      <div className="w-2/3 p-6 flex flex-col justify-between">
-        <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
-        <p className="text-xl text-gray-600">{description}</p>
-      </div>
+      <div className="w-2/3 p-4 flex flex-col justify-between">
+  <h3 className="text-xl font-bold text-gray-800 mb-4">{title}</h3>
+  <p className="text-sm text-gray-600 mt-0 mb-4">{description}</p>
+</div>
+
+
+
     </div>
   );
 }
@@ -33,20 +36,19 @@ function Card({ title, description, image }) {
 const cards = [
   {
     title: "PRODUCTIVITY",
-    description:
-      "Explore the latest changes in our blockchain system! Stay informed about the latest developments.",
+    description:"Accelerate business processes and streamline software development cycles through AI-driven automation and Agentic-led workflows to enhance efficiency and speed",
     image: "static/Productivity.webp",
   },
   {
     title: "POSSIBILITIES",
     description:
-      "Security is paramount in the blockchain world, and new protocols aim to strengthen this foundation.",
+      "Transform previously impossible use-cases into reality by enabling innovative solutions, such as fully automated initial interviews using Conversational AI.",
     image: "static/Possibilities.webp",
   },
   {
     title: "PIONEERING",
     description:
-      "Guide through the fundamentals of blockchain that will help you embark on exploring the world of this fascinating technology.",
+      "Explore and develop cutting-edge use-cases that push the boundaries of what's imaginable, such as AI-driven personalized learning environments and computer vision for inventory management",
     image: "static/pioneering.webp",
   },
 ];

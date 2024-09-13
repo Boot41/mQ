@@ -1,6 +1,7 @@
 import React from "react";
 import { VisionData } from "../../InformationFiles/AboutUsInfo";
 import { Box, Typography, CardMedia, Container, Paper } from "@mui/material";
+import { grey } from "@mui/material/colors"; // Import grey color palette
 
 export default function WhoAndWhat2() {
   return (
@@ -23,7 +24,7 @@ export default function WhoAndWhat2() {
               height: { xs: "auto", md: 400 }, // Adjust height for responsiveness
               maxWidth: "100%", // Ensure full width for the container
               mx: "auto", // Center the cards
-              fontFamily: 'inherit', // Ensure font family is inherited
+              fontFamily: "inherit", // Ensure font family is inherited
             }}
           >
             <Box
@@ -43,14 +44,10 @@ export default function WhoAndWhat2() {
                 component="h2"
                 gutterBottom
                 sx={{
-                  fontSize: {
-                    xs: "h5.fontSize",
-                    sm: "h5.fontSize",
-                    md: "10xl",
-                  },
+                  fontSize: "2.5rem", // Equivalent to '5xl' in Material-UI
                   fontWeight: 600, // Bolder text
-                  color: "#6a6a6a", // Text color
-                  fontFamily: 'inherit', // Ensure the same font family
+                  color: grey[800], // Use grey.800 for the title
+                  fontFamily: "inherit", // Ensure the same font family
                 }}
               >
                 {slide.header}
@@ -59,28 +56,20 @@ export default function WhoAndWhat2() {
                 variant="h6"
                 sx={{
                   mb: 2,
-                  fontSize: {
-                    xs: "body2.fontSize",
-                    sm: "",
-                    lg: "7xl",
-                  },
-                  color: "grey", // Text color
+                  fontSize: "1.5rem", // Equivalent to '2xl' in Material-UI
+                  color: grey[700], // Use grey.400 for the body text
                   textAlign: "justify", // Justify the text
-                  fontFamily: 'inherit', // Ensure the same font family
+                  fontFamily: "inherit", // Ensure the same font family
                 }}
               >
                 {"  " + slide.body}
               </Typography>
               <Typography
                 sx={{
-                  fontSize: {
-                    xs: "body2.fontSize",
-                    sm: "",
-                    lg: "2xl",
-                  },
-                  color: "grey", // Text color
+                  fontSize: "1.5rem", // Equivalent to '2xl' for body2 text
+                  color: grey[700], // Use grey.400 for the second body text
                   textAlign: "justify", // Justify the text
-                  fontFamily: 'inherit', // Ensure the same font family
+                  fontFamily: "inherit", // Ensure the same font family
                 }}
               >
                 {"  " + slide.body2}

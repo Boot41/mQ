@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-20 py-4 px-8  transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 transition-all duration-300 ease-in-out ${
         isLandingPage ? (isScrolled ? 'bg-white shadow-md' : 'bg-transparent') : 'bg-white shadow-md'
       }`}
     >

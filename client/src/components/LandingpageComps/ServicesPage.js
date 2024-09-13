@@ -120,12 +120,7 @@ const ServicesSection = () => {
           </h1>
           <div className="w-32 h-1 bg-orange-400 mx-auto mb-6"></div>
           <p className="text-2xl text-gray-600 max-w-4xl mx-auto" style={{ fontFamily: 'inherit' }}>
-            Think41 excels in turning Generative AI MVPs into scalable,
-            production-ready solutions, seamlessly integrating them across your
-            organization. Our expertise extends to perfecting Conversational AI
-            with human-like interactions and developing custom autonomous agents
-            that predict, recommend, and adapt. Experience the future of
-            AI-driven efficiency and automation with our innovative solutions.
+          At Think41, we specialize in advancing GenAI solutions from proof of concept to production, developing scalable, intelligent conversation AI and creating autonomous custom agents. We transform GenAI concepts into operational systems, seamlessly integrating them into your workflows to boost efficiency and reduce costs. Our focus on measurable, long-term impact ensures that each solution drives ongoing value and performance.
           </p>
         </header>
         <section className="flex flex-wrap justify-center gap-12">

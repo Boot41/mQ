@@ -11,7 +11,7 @@ const HeroSection = () => {
   return (
     <div 
       className="flex items-center justify-center h-[450px] bg-cover bg-center relative" 
-      style={{ backgroundImage: 'url(static/careershero.webp)' }}
+      style={{ backgroundImage: 'url(static/careersheropage.webp)' }}
     >
       <div 
         className="bg-black bg-opacity-50 px-4 py-8 rounded-lg max-w-4xl mx-auto text-center relative"

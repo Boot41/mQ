@@ -84,7 +84,7 @@ const Boot41 = () => {
   return (
     <div className="flex flex-col items-center bg-white py-8 px-4 sm:px-6 lg:px-8" style={{ fontFamily: 'inherit' }}>
       <header className="text-center mb-4 w-full">
-        <h1 className="text-5xl sm:text-5xl font-extrabold leading-tight text-black mb-4" style={{ fontFamily: 'inherit' }}>
+        <h1 className="text-5xl sm:text-5xl font-extrabold leading-tight text-gray-800 mb-4" style={{ fontFamily: 'inherit' }}>
           Boot41
         </h1>
         <div className="w-32 h-1 bg-orange-400 mx-auto mb-6"></div>
