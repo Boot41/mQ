@@ -19,7 +19,7 @@ const BlobChatWrapper = () => {
         {
           user_input: message.content,
           model_name: "4o-mini",
-          section_id: currentSection, // You might want to update this if you have section information
+          section_id: currentSection,
           user_context: {
             chat_opened: true,
             interaction_type: "text_input"
