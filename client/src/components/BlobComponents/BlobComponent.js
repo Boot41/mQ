@@ -133,7 +133,7 @@ const BlobComponent = ({ additionalMessages = [], onMessageAdd }) => {
       console.error("Section ID is not set");
       return;
     }
-
+    
     setIsRecording(true);
 
     try {
