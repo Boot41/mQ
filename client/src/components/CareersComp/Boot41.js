@@ -84,17 +84,17 @@ const Boot41 = () => {
   return (
     <div className="flex flex-col items-center bg-white py-8 px-4 sm:px-6 lg:px-8" style={{ fontFamily: 'inherit' }}>
       <header className="text-center mb-4 w-full">
-        <h1 className="text-4xl sm:text-6xl font-extrabold leading-tight text-black mb-4" style={{ fontFamily: 'inherit' }}>
+        <h1 className="text-5xl sm:text-5xl font-extrabold leading-tight text-black mb-4" style={{ fontFamily: 'inherit' }}>
           Boot41
         </h1>
         <div className="w-32 h-1 bg-orange-400 mx-auto mb-6"></div>
       </header>
       <main className="flex flex-col items-center w-full max-w-7xl">
         <div className="flex flex-col lg:flex-row lg:justify-between w-full mb-4">
-          <div className="text-2xl lg:text-3xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900" style={{ fontFamily: 'inherit' }}>
+          <div className="text-2xl lg:text-xl font-bold lg:mr-6 mb-4 lg:mb-0 text-gray-900" style={{ fontFamily: 'inherit' }}>
             {/* Optional content */}
           </div>
-          <div className="text-2xl lg:text-2xl lg:w-full text-gray-700" style={{ fontFamily: 'inherit' }}>
+          <div className="text-xl lg:text-xl lg:w-full text-gray-700" style={{ fontFamily: 'inherit' }}>
             <p className="mb-4">
               Bootcamps at Think41 are high-energy, hands-on programs designed to transform new hires into top-notch Think41 professionals. With a blend of intense learning, interactive activities, and deep dives into full-stack development and AI, you'll gain practical skills and a forward-thinking mindset.
             </p>

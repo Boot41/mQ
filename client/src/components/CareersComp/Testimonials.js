@@ -28,7 +28,7 @@ const TestimonialSection = () => {
       <div className="max-w-4xl mx-auto text-center relative z-10 px-4">
         <h1 className="text-center text-5xl font-bold mb-4" style={{ fontFamily: 'inherit' }}>Thinker's Speak</h1>
         <div className="w-32 h-1 bg-orange-400 mx-auto mb-4"></div>
-        <p className="text-lg text-orange-500 font-semibold mb-3 relative z-10" style={{ fontFamily: 'inherit' }}>
+        <p className="text-xl text-orange-500 font-semibold mb-3 relative z-10" style={{ fontFamily: 'inherit' }}>
           What our employees have to say
         </p>
 

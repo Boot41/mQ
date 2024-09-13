@@ -62,7 +62,7 @@ export default function BlockchainUpdates() {
           </h2>
           <div className="w-32 mx-auto h-2 bg-orange-500"></div>
         </div>
-        <div className="flex justify-center gap-12">
+        <div className="flex justify-center gap-12 px-4 sm:px-8 lg:px-12">
           {cards.map((card, index) => (
             <Card key={index} {...card} />
           ))}

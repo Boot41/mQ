@@ -39,7 +39,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
           </Box>
 
           {/* Text Section */}
-          <Box className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
+          <Box className="w-full md:w-1/2 flex flex-col text-center justify-center space-y-4">
             <Typography
               variant="h2"
               component="h2"
@@ -78,7 +78,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
               variant="body1"
               color="textSecondary"
               sx={{
-                fontSize: { xs: "1rem", md: "1.1rem", lg: "1.3rem" },
+                fontSize: { xs: "1rem", md: "1.1rem", lg: "1.5rem" },
                 fontFamily: 'inherit',
               }}
             >
@@ -93,7 +93,7 @@ const Autopods = ({ onMessageAdd = () => {} }) => {
                     sx={{
                       position: "relative",
                       overflow: "hidden",
-                      borderColor: "black",
+                      borderColor: "orange",
                       backgroundColor: "#f57c00",
                       color: "white",
                       fontSize: { xs: "16px", lg: "12px" },

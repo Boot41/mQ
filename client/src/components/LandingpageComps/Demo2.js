@@ -106,11 +106,12 @@ const Demo = ({ onMessageAdd = () => {} }) => {
   return (
     <>
       <header className="text-center my-10 p-4 md:p-10" style={{ fontFamily: 'inherit' }}>
-        <h1 className="text-10xl md:text-6xl font-extrabold text-gray-800 mb-4" style={{ fontFamily: 'inherit' }}>
-          Check Out Some Demos
-        </h1>
+      <h1 className="text-6xl md:text-7xl lg:text-9xl font-extrabold text-gray-800 mb-4" style={{ fontFamily: 'inherit' }}>
+  Check Out Some Demos
+</h1>
+
         <div className="w-32 h-1 bg-orange-400 mx-auto mb-6"></div>
-        <p className="mt-3 text-base md:text-2xl text-gray-600" style={{ fontFamily: 'inherit' }}>
+        <p className="mt-3 text-base md:text-3xl text-gray-600" style={{ fontFamily: 'inherit' }}>
           Discover the features and capabilities of our latest demos and see how
           they can benefit you.
         </p>

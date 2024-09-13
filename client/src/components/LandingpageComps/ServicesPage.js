@@ -77,7 +77,7 @@ const ParallaxCard = ({ title, description, image }) => {
             } group-hover:translate-y-full group-hover:opacity-0 z-20`} // Updated class to hide on hover
           >
             <div className="bg-gradient-to-t from-black to-transparent p-4" style={{ fontFamily: 'inherit' }}>
-              <h2 className="text-xl font-bold mb-2 text-white" style={{ fontFamily: 'inherit' }}>{title}</h2>
+              <h2 className="text-2xl font-bold mb-2 text-white" style={{ fontFamily: 'inherit' }}>{title}</h2>
               <motion.div 
                 className="border-t border-white mb-4"
                 initial={{ width: '4rem' }}
@@ -115,11 +115,11 @@ const ServicesSection = () => {
     <div className="mb-10 bg-gray-200 relative">
       <div className="container mx-auto px-4" style={{ fontFamily: 'inherit' }}>  {/* Apply uniform font */}
         <header className="text-center mb-16">
-          <h1 className="text-6xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4" style={{ fontFamily: 'inherit' }}>
+          <h1 className="text-7xl text-gray-800 font-bold font-['Baskervville SC, serif'] mb-4" style={{ fontFamily: 'inherit' }}>
             Our Key Differentiator
           </h1>
-          <div className="w-24 h-1 bg-orange-400 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto" style={{ fontFamily: 'inherit' }}>
+          <div className="w-32 h-1 bg-orange-400 mx-auto mb-6"></div>
+          <p className="text-2xl text-gray-600 max-w-4xl mx-auto" style={{ fontFamily: 'inherit' }}>
             Think41 excels in turning Generative AI MVPs into scalable,
             production-ready solutions, seamlessly integrating them across your
             organization. Our expertise extends to perfecting Conversational AI

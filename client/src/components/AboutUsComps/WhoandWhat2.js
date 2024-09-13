@@ -45,40 +45,24 @@ export default function WhoAndWhat2() {
                 sx={{
                   fontSize: {
                     xs: "h5.fontSize",
-                    sm: "h4.fontSize",
-                    md: "h3.fontSize",
+                    sm: "h5.fontSize",
+                    md: "10xl",
                   },
                   fontWeight: 600, // Bolder text
-                  color: "black", // Text color
+                  color: "#6a6a6a", // Text color
                   fontFamily: 'inherit', // Ensure the same font family
                 }}
               >
                 {slide.header}
               </Typography>
-              {/* <Typography
-                variant="h6"
-                component="h2"
-                color="text.secondary"
-                gutterBottom
-                sx={{
-                  fontSize: {
-                    xs: "body1.fontSize",
-                    sm: "h6.fontSize",
-                    md: "h5.fontSize",
-                  },
-                  color: "grey", // Text color
-                }}
-              >
-                {slide.header2}
-              </Typography> */}
               <Typography
                 variant="h6"
                 sx={{
                   mb: 2,
                   fontSize: {
                     xs: "body2.fontSize",
-                    sm: "body1.fontSize",
-                    lg: "h6.fontSize",
+                    sm: "",
+                    lg: "7xl",
                   },
                   color: "grey", // Text color
                   textAlign: "justify", // Justify the text
@@ -88,12 +72,11 @@ export default function WhoAndWhat2() {
                 {"  " + slide.body}
               </Typography>
               <Typography
-                variant=""
                 sx={{
                   fontSize: {
                     xs: "body2.fontSize",
-                    sm: "body1.fontSize",
-                    lg: "3xl",
+                    sm: "",
+                    lg: "2xl",
                   },
                   color: "grey", // Text color
                   textAlign: "justify", // Justify the text

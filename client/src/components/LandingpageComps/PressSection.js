@@ -13,7 +13,7 @@ const PressSection = () => {
     <section className="px-6 py-12 bg-white mb-20" style={{ fontFamily: 'inherit' }}>
       <div className="max-w-xl mx-auto" style={{ fontFamily: 'inherit' }}>
         <div className="flex justify-center items-center mb-4" style={{ fontFamily: 'inherit' }}>
-          <h1 className="text-6xl font-bold text-gray-800 mr-4" style={{ fontFamily: 'inherit' }}>
+          <h1 className="text-7xl font-bold text-gray-800 mr-4" style={{ fontFamily: 'inherit' }}>
             Press Release
           </h1>
         </div>
