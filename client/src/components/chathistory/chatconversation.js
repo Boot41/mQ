@@ -241,7 +241,7 @@ const ChatConversation = ({
   darkMode,
   isSpeaking,
   onUserResponse // Add this prop
-  setIsSpeaking,
+  // setIsSpeaking,
 }) => {
   const { chatMessages, isChatOpen, toggleChat, clearChatMessages } = useChat();
   const [inputMessage, setInputMessage] = useState('');

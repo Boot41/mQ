@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 import './Jarvis.css';
 
-const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, onClick }) => {
+const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, onClick ,playvideo}) => {
   const canvasRef = useRef(null);
   const offscreenCanvasRef = useRef(null);
 
@@ -103,20 +103,22 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, on
     };
   }, [particleColor]);
 
+  const containerStyle = {
+    width: playvideo ? '60px' : '100px',
+    height: playvideo ? '60px' : '100px',
+    bottom: playvideo ? '420px' : '20px',
+    right: playvideo ? '960px' : '20px',
+    position: 'fixed',
+    transition: 'all 0.5s ease-in-out',
+    zIndex: 1002,
+    cursor: 'pointer'
+  };
+
   return (
     <div 
       id="JarvisHood" 
       className={isMinimized && !isClosing ? 'minimized' : ''} 
-      style={{
-        width: '100px', 
-        height: '100px', 
-        position: 'fixed',
-        transition: 'all 0.5s ease-in-out',
-        bottom: '20px',
-        right: '20px',
-        zIndex: 1002,
-        cursor: 'pointer'
-      }}
+      style={containerStyle}
       onClick={onClick}
     >
       <canvas 

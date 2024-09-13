@@ -19,7 +19,7 @@ export const ChatProvider = ({ children }) => {
   };
 
   return (
-    <ChatContext.Provider value={{ chatMessages, isChatOpen, addMessage, clearChatMessages, toggleChat }}>
+    <ChatContext.Provider value={{ chatMessages, setIsChatOpen ,isChatOpen, addMessage, clearChatMessages, toggleChat }}>
       {children}
     </ChatContext.Provider>
   );
