@@ -1,24 +1,33 @@
-import { useState, useCallback, useEffect } from 'react';
-import SpeechRecognition, { useSpeechRecognition as useSpeechRecognitionLib } from 'react-speech-recognition';
+import { useState, useCallback, useEffect, useRef } from 'react';
+import SpeechRecognition, { useSpeechRecognition as useSR } from 'react-speech-recognition';
 
-export const useSpeechRecognition = (onTranscriptChange) => {
+/**
+ * Custom hook for managing speech recognition with debounce.
+ * @param {Function} onTranscriptChange - Callback when transcript updates.
+ */
+export const useCustomSpeechRecognition = (onTranscriptChange) => {
   const [isVoiceMode, setIsVoiceMode] = useState(true);
   const [transcriptBuffer, setTranscriptBuffer] = useState('');
-  const [sendTimeout, setSendTimeout] = useState(null);
+  const debounceTimeoutRef = useRef(null);
+  const DEBOUNCE_DELAY = 500; // 0.5 seconds for testing
 
   const {
     transcript,
     resetTranscript,
     browserSupportsSpeechRecognition
-  } = useSpeechRecognitionLib({
+  } = useSR({
     continuous: true,
+    interimResults: false, // Disable interim results
     onResult: (result) => {
       setTranscriptBuffer(result);
-      if (sendTimeout) clearTimeout(sendTimeout);
-      setSendTimeout(setTimeout(() => {
+      // Reset debounce timer
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+      debounceTimeoutRef.current = setTimeout(() => {
         onTranscriptChange(result);
         setTranscriptBuffer('');
-      }, 1500)); // 1.5 seconds delay
+      }, DEBOUNCE_DELAY);
     },
     onError: (event) => {
       console.error('Speech recognition error:', event.error);
@@ -34,12 +43,14 @@ export const useSpeechRecognition = (onTranscriptChange) => {
 
   const stopRecording = useCallback(() => {
     SpeechRecognition.stopListening();
-    if (sendTimeout) clearTimeout(sendTimeout);
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
+    }
     if (transcriptBuffer) {
       onTranscriptChange(transcriptBuffer);
       setTranscriptBuffer('');
     }
-  }, [sendTimeout, transcriptBuffer, onTranscriptChange]);
+  }, [transcriptBuffer, onTranscriptChange]);
 
   const toggleVoiceMode = useCallback(() => {
     if (isVoiceMode) {
@@ -52,11 +63,13 @@ export const useSpeechRecognition = (onTranscriptChange) => {
   }, [isVoiceMode, stopRecording, resetTranscript, startRecording]);
 
   useEffect(() => {
-    if (isVoiceMode && transcript !== '') {
-      onTranscriptChange(transcript);
-      resetTranscript();
-    }
-  }, [transcript, isVoiceMode, onTranscriptChange, resetTranscript]);
+    // Cleanup on unmount
+    return () => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+    };
+  }, []);
 
   return {
     isVoiceMode,

@@ -1,56 +1,72 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import './ChatConversation.css';
-import { FaMicrophone, FaMicrophoneSlash, FaPaperPlane, FaUser, FaRobot, FaChevronDown, FaChevronUp, FaTimes, FaArrowLeft } from 'react-icons/fa';
-import { useSpeechRecognition } from '../../utils/useSpeechRecognition';
+import React, { useCallback, useState, useRef, useEffect } from "react";
+import axios from "axios";
+import { useSection } from "../TrackUserComps/SectionContext";
+import Jarvis from '../BlobComponents/Jarvis'; // Corrected import path
 import { useChat } from '../../context/ChatContext';
+import { speakText } from '../../utils/speechUtils';
+import { API_BASE_URL } from '../../lib/config';
+import '../BlobComponents/BlobComponent.css'; // Corrected import path
+import { useCustomSpeechRecognition } from '../../utils/useSpeechRecognition';
 import DOMPurify from 'dompurify';
-
+import PropTypes from 'prop-types';
+import {
+  FaMicrophone,
+  FaMicrophoneSlash,
+  FaPaperPlane,
+  FaUser,
+  FaRobot,
+  FaTimes
+} from 'react-icons/fa';
+import './ChatConversation.css';
+/**
+ * ChatConversation handles displaying messages and user input.
+ */
 const ChatConversation = ({ 
   onSendMessage, 
   onCollapse,
   isCollapsed, 
   darkMode,
-  // isSpeaking,
-  onUserResponse // Add this prop
-  // setIsSpeaking,
-  // onUserResponse
+  isSpeaking,
+  selectedVoice // New Prop
 }) => {
   const { 
     chatMessages, 
-    isChatOpen, 
-    isSpeaking,
     toggleChat, 
-    clearChatMessages, 
+    addMessage, 
     handleDemoChoice,
-    speakTextWrapper
+    isChatOpen
   } = useChat();
 
   const [inputMessage, setInputMessage] = useState('');
   const messagesEndRef = useRef(null);
-  const [timeoutId, setTimeoutId] = useState(null);
-  const [pauseTimeoutId, setPauseTimeoutId] = useState(null);
   const inputRef = useRef(null);
-  const [showNewConversationButton, setShowNewConversationButton] = useState(false);
-  const [showBackToChatButton, setShowBackToChatButton] = useState(false);
-  const [showMessages, setShowMessages] = useState(true);
-  
+
   const {
     isVoiceMode,
     toggleVoiceMode,
     transcript,
     resetTranscript,
     startRecording,
-    stopRecording
-  } = useSpeechRecognition((newTranscript) => {
-    setInputMessage(newTranscript);
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    const id = setTimeout(() => {
-      handleSendMessage();
-    }, 4000);
-    setTimeoutId(id);
+    stopRecording,
+    browserSupportsSpeechRecognition
+  } = useCustomSpeechRecognition((newTranscript) => {
+    console.log("Transcribed text:", newTranscript);
+    onSendMessage({ type: 'user', content: newTranscript });
   });
+
+  useEffect(() => {
+    if (!browserSupportsSpeechRecognition) {
+      alert("Browser does not support speech recognition.");
+      return;
+    }
+  }, [browserSupportsSpeechRecognition]);
+
+  /**
+   * Scroll to the bottom of the chat messages.
+   */
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     scrollToBottom();
@@ -65,166 +81,119 @@ const ChatConversation = ({
     }
   }, [isVoiceMode, transcript]);
 
-  useEffect(() => {
-    if (isVoiceMode && transcript !== '') {
-      setInputMessage(transcript);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      if (pauseTimeoutId) {
-        clearTimeout(pauseTimeoutId);
-      }
-      const id = setTimeout(() => {
-        setTimeout(() => {
-          handleSendMessage();
-        }, 100);
-      }, 4000);
-      setTimeoutId(id);
-
-      const pauseId = setTimeout(() => {
-        // Placeholder for any future logic
-      }, 5000);
-      setPauseTimeoutId(pauseId);
-    }
-  }, [transcript, isVoiceMode]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleSendMessage = () => {
-    if (inputMessage.trim()) {
-      const message = { type: 'user', content: inputMessage.trim() };
-      onSendMessage(message);
-
-      // Check if the message is a demo choice
-      if (['1', '2', '3'].includes(message.content)) {
-        handleDemoChoice(message.content);
-      } else if (message.content.toLowerCase() === 'yes' || message.content.toLowerCase() === 'play') {
-        onUserResponse(message);
-      }
-
-      setInputMessage('');
-      resetTranscript();
-    }
-  };
-
-  const handleInputChange = (e) => {
-    setInputMessage(e.target.value);
-  };
-
+  /**
+   * Handle sending a message when Enter is pressed.
+   */
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
+    if (e.key === 'Enter') {
+      handleSend();
     }
   };
 
-  const handleBackButtonClick = () => {
-    setShowMessages(false);
-    setShowNewConversationButton(true);
-    setShowBackToChatButton(true);
+  /**
+   * Handle sending the message.
+   */
+  const handleSend = () => {
+    if (inputMessage.trim() === '') return;
+    onSendMessage({ type: 'user', content: inputMessage.trim() });
+    setInputMessage('');
+    resetTranscript();
   };
 
-  const handleNewConversation = () => {
-    clearChatMessages();
-    setShowNewConversationButton(false);
-    setShowBackToChatButton(false);
-    setShowMessages(true);
+  /**
+   * Handle sending the message when the send button is clicked.
+   */
+  const handleSendClick = () => {
+    handleSend();
   };
 
-  const handleBackToChat = () => {
-    setShowNewConversationButton(false);
-    setShowBackToChatButton(false);
-    setShowMessages(true);
-  };
-
-  const handleCollapseClick = () => {
-    onCollapse();
-  };
-
-  const createMarkup = (content) => {
-    return { __html: DOMPurify.sanitize(content) };
-  };
-
+  /**
+   * Render the content of each message safely.
+   * @param {Object} message - The message object.
+   */
   const renderMessageContent = (message) => {
-    if (message.isHtml) {
-      return <div dangerouslySetInnerHTML={createMarkup(message.content)} />;
-    }
-    return <div>{message.content}</div>;
+    return (
+      <div
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(message.content) }}
+      />
+    );
   };
 
-  if (!isChatOpen) return null;
+  // Log the selected voice for debugging
+  useEffect(() => {
+    if (selectedVoice) {
+      console.log(`Selected Voice: ${selectedVoice.name}`);
+    }
+  }, [selectedVoice]);
+
+  useEffect(() => {
+    return () => {
+      stopRecording();
+    };
+  }, [stopRecording]);
 
   return (
-    <div className={`chat-conversation ${isCollapsed ? 'collapsed' : ''} ${darkMode ? 'dark-mode' : ''}`}>
-      <div className={`chat-header ${isCollapsed ? 'collapsed' : ''}`}>
-        <button onClick={handleBackButtonClick} className="back-button" title="Back">
-          <FaArrowLeft />
-        </button>
-        <h3>Chat History</h3>
-        <div className="header-buttons">
-          {isSpeaking && <span className="speaking-indicator" title="AI is speaking">🔊</span>}
-          <button onClick={handleCollapseClick} className="collapse-button" title={isCollapsed ? "Expand" : "Collapse"}>
-            {isCollapsed ? <FaChevronUp /> : <FaChevronDown />}
-          </button>
-          <button onClick={toggleChat} className="close-button" title="Close chat">
-            <FaTimes />
-          </button>
-        </div>
-      </div>
-      <div className={`chat-body ${isCollapsed ? 'collapsed' : ''}`}>
-        {showMessages && (
-          <div className="chat-messages">
-            {chatMessages.map((message, index) => (
-              <div key={index} className={`message ${message.type}`}>
-                <div className="message-icon">
-                  {message.type === 'user' ? <FaUser /> : <FaRobot />}
-                </div>
-                <div className="message-content">
-                  {renderMessageContent(message)}
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-        )}
-        {showNewConversationButton && (
-          <button onClick={handleNewConversation} className="new-conversation-button">Start New Conversation</button>
-        )}
-        {showBackToChatButton && (
-          <button onClick={handleBackToChat} className="back-to-chat-button">Back to Chat</button>
-        )}
-      </div>
-      <div className="chat-input-container">
-        <button
-          onClick={toggleVoiceMode}
-          className={`voice-mode-button ${isVoiceMode ? 'active' : ''}`}
-          type="button"
+    <div className={`chat-conversation ${darkMode ? 'dark' : 'light'} ${isCollapsed ? 'collapsed' : ''}`}>
+      <div className="chat-header">
+        <button 
+          onClick={toggleVoiceMode} 
+          className={`voice-toggle-button ${isVoiceMode ? 'active' : ''}`} 
           title={isVoiceMode ? "Disable voice input" : "Enable voice input"}
         >
           {isVoiceMode ? <FaMicrophone /> : <FaMicrophoneSlash />}
         </button>
-        <input
-          ref={inputRef}
-          type="text"
-          value={inputMessage}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          placeholder={isVoiceMode ? "Speak your message..." : "Type your message..."}
-          className="input-field"
-        />
-        <button onClick={handleSendMessage} className="send-button" type="button" title="Send message">
-          <FaPaperPlane />
+        <button 
+          onClick={toggleChat} 
+          className="close-chat-button" 
+          title="Close chat"
+        >
+          <FaTimes />
         </button>
-        <button onClick={handleCollapseClick} className="collapse-button" title={isCollapsed ? "Expand" : "Collapse"}>
-          {isCollapsed ? <FaChevronUp /> : <FaChevronDown />}
-        </button>
+      </div>
+      <div className="chat-body">
+        <div className="messages">
+          {chatMessages.map((msg, idx) => (
+            <div key={idx} className={`message ${msg.type}`}>
+              <div className="message-icon">
+                {msg.type === 'user' ? <FaUser /> : <FaRobot />}
+              </div>
+              <div className="message-content">
+                {renderMessageContent(msg)}
+              </div>
+            </div>
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+        <div className="chat-input">
+          <input
+            ref={inputRef}
+            type="text"
+            value={inputMessage}
+            onChange={(e) => setInputMessage(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder={isVoiceMode ? "Speak your message..." : "Type your message..."}
+          />
+          <button 
+            onClick={handleSendClick} 
+            className="send-button" 
+            title="Send message"
+            disabled={isSpeaking}
+          >
+            <FaPaperPlane />
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
+ChatConversation.propTypes = {
+  onSendMessage: PropTypes.func.isRequired,
+  onCollapse: PropTypes.func.isRequired,
+  isCollapsed: PropTypes.bool.isRequired,
+  darkMode: PropTypes.bool.isRequired,
+  isSpeaking: PropTypes.bool.isRequired,
+  selectedVoice: PropTypes.object
+};
+
 export default ChatConversation;
-
-
