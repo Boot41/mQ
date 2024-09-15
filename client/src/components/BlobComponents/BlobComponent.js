@@ -24,7 +24,9 @@ const BlobComponent = ({
   isSpeaking,
   setIsSpeaking,
   playerRef,
-  handleClick
+  handleClick,
+  activated,
+  setactivated
 }) => {
 
   return (
@@ -41,6 +43,8 @@ const BlobComponent = ({
             playerRef={playerRef}
             onClick={handleClick}
             playvideo={playvideo}
+            activated={activated}
+            setactivated={setactivated}
           />
         </div>
       </div>

@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useMemo } from 'react';
 import './Jarvis.css';
 
-const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, onClick ,playvideo}) => {
+const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, onClick ,playvideo,activated,setactivated}) => {
   const canvasRef = useRef(null);
   const offscreenCanvasRef = useRef(null);
 
+  // const particleColor = useMemo(() => 
+  //   isRecording || isSpeaking ? 'rgba(235, 94, 52,' : 'rgba(0, 72, 255,',
+  // [isRecording, isSpeaking]);
+
   const particleColor = useMemo(() => 
-    isRecording || isSpeaking ? 'rgba(235, 94, 52,' : 'rgba(0, 72, 255,',
-  [isRecording, isSpeaking]);
+    activated ? 'rgba(235, 94, 52,' : 'rgba(128, 128, 128,',
+  [activated]);
 
   useEffect(() => {
     console.log('Particle color:', particleColor); // Debug log
@@ -114,12 +118,16 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, on
     cursor: 'pointer'
   };
 
+  const handleclick = ()=>{
+    setactivated(prev => !prev);
+  }
+
   return (
     <div 
       id="JarvisHood" 
       className={isMinimized && !isClosing ? 'minimized' : ''} 
       style={containerStyle}
-      onClick={onClick}
+      onClick={handleclick}
     >
       <canvas 
         ref={canvasRef} 
@@ -138,7 +146,7 @@ const Jarvis = ({ isRecording, isMinimized, isClosing, isSpeaking, playerRef, on
         ref={offscreenCanvasRef} 
         style={{ display: 'none' }} 
       />
-      <div className={`square ${isRecording || isSpeaking ? 'recording' : ''}`}>
+      <div className={`square ${isRecording || isSpeaking || activated? 'recording' : ''}`}>
         <span></span>
         <span></span>
         <span></span>

@@ -31,6 +31,7 @@ const BlobChatWrapper = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [activated,setactivated] = useState(false)
 
   const {
     speak,
@@ -216,6 +217,8 @@ const BlobChatWrapper = () => {
         setIsSpeaking={setIsSpeaking}
         playerRef={playerRef}
         handleClick={handleClick}
+        activated={activated}
+        setactivated={setactivated}
       />
       {/* Removed ChatConversation component rendering */}
       {playVideo && (
