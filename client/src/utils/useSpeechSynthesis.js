@@ -43,12 +43,17 @@ const useSpeechSynthesis = (voices, selectedVoice) => {
         return;
       }
 
+      if (!voices || voices.length === 0) {
+        console.error("No voices available for speech synthesis.");
+        return;
+      }
+
       // Cancel any ongoing speech
       window.speechSynthesis.cancel();
       setIsSpeaking(true);
 
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.voice = selectedVoice || voices[0] || null;
+      utterance.voice = selectedVoice || voices[0];
       utterance.onend = () => {
         console.log('Speech ended');
         setIsSpeaking(false);
@@ -77,6 +82,24 @@ const useSpeechSynthesis = (voices, selectedVoice) => {
     window.speechSynthesis.resume();
   }, []);
 
+  /**
+   * Listen for voices changed event to update readiness.
+   */
+  useEffect(() => {
+    const handleVoicesChanged = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      if (availableVoices.length > 0) {
+        setIsSpeechSynthesisReady(true);
+      }
+    };
+
+    window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
+
+    return () => {
+      window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+    };
+  }, []);
+
   return {
     speak,
     initializeSpeechSynthesis,
@@ -85,6 +108,7 @@ const useSpeechSynthesis = (voices, selectedVoice) => {
     resumeSpeech,
     isSpeechSynthesisReady,
     setIsSpeechSynthesisReady,
+    setIsSpeaking,
   };
 };
 

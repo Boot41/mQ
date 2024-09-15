@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import BlobComponent from './BlobComponent';
-import ChatConversation from '../chathistory/chatconversation';
 import { useChat } from '../../context/ChatContext';
 import { useSection } from "../TrackUserComps/SectionContext";
 import axios from 'axios';
@@ -10,47 +9,81 @@ import { API_BASE_URL } from '../../lib/config';
 import useSpeechSynthesis from '../../utils/useSpeechSynthesis';
 import './BlobChatWrapper.css';
 
-/**
- * BlobChatWrapper component integrates the Blob visualizer with the chatbot.
- * It handles user messages, API interactions, and manages speech synthesis.
- */
 const BlobChatWrapper = () => {
-  const { isChatOpen, setIsChatOpen, toggleChat, addMessage } = useChat();
+  const { 
+    isChatOpen, 
+    setIsChatOpen, 
+    toggleChat, 
+    addMessage, 
+    speakTextWrapper, 
+    setVoices, 
+    setSelectedVoice,
+    isSpeechSynthesisReady,
+  } = useChat();
   const { currentSection } = useSection();
   const [playVideo, setPlayVideo] = useState(false);
   const cancelTokenRef = useRef(null);
-  const [voices, setVoices] = useState([]);
-  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [voicesLocal, setVoicesLocal] = useState([]);
+  const [selectedVoiceLocal, setSelectedVoiceLocal] = useState(null);
   const playerRef = useRef(null);
+
+  // **Define Missing State Variables**
+  const [isRecording, setIsRecording] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const {
     speak,
     initializeSpeechSynthesis,
     isSpeaking,
-    isSpeechSynthesisReady,
+    isSpeechSynthesisReady: hookIsSpeechSynthesisReady,
     setIsSpeechSynthesisReady,
-  } = useSpeechSynthesis(voices, selectedVoice);
+    setIsSpeaking
+  } = useSpeechSynthesis(voicesLocal, selectedVoiceLocal);
 
-  // Define additional state variables
-  const [isRecording, setIsRecording] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
+  useEffect(() => {
+    setVoices(voicesLocal);
+    setSelectedVoice(selectedVoiceLocal);
+  }, [voicesLocal, selectedVoiceLocal, setVoices, setSelectedVoice]);
 
-  /**
-   * Load available speech synthesis voices.
-   */
-  const loadVoices = useCallback(() => {
-    const availableVoices = window.speechSynthesis.getVoices();
-    console.log('Voices loaded:', availableVoices);
-    if (availableVoices.length > 0) {
-      const femaleEnglishVoice = availableVoices.find(
-        voice => voice.lang.startsWith('en') && /female/i.test(voice.name)
-      );
-      setSelectedVoice(femaleEnglishVoice || availableVoices.find(voice => voice.lang.startsWith('en')));
-      setVoices(availableVoices);
-      setIsSpeechSynthesisReady(true);
+  // Sync hook's readiness with context
+  useEffect(() => {
+    if (hookIsSpeechSynthesisReady && !isSpeechSynthesisReady) {
+      setIsSpeechSynthesisReady(hookIsSpeechSynthesisReady);
     }
-  }, [setIsSpeechSynthesisReady]);
+  }, [hookIsSpeechSynthesisReady, isSpeechSynthesisReady, setIsSpeechSynthesisReady]);
+
+  // Load voices on component mount and when voices change
+  useEffect(() => {
+    const loadVoices = () => {
+      const availableVoices = window.speechSynthesis.getVoices();
+      console.log('Voices loaded:', availableVoices);
+      if (availableVoices.length > 0) {
+        const femaleEnglishVoice = availableVoices.find(
+          voice => voice.lang.startsWith('en') && /female/i.test(voice.name)
+        );
+        setSelectedVoiceLocal(femaleEnglishVoice || availableVoices.find(voice => voice.lang.startsWith('en')));
+        setVoicesLocal(availableVoices);
+        setIsSpeechSynthesisReady(true);
+        console.log("Speech synthesis is ready.");
+      } else {
+        console.warn("No voices loaded yet.");
+      }
+    };
+
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    // Try to load voices immediately
+    loadVoices();
+
+    // If voices aren't loaded immediately, try again after a short delay
+    const timeoutId = setTimeout(loadVoices, 1000);
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+      clearTimeout(timeoutId);
+    };
+  }, [setIsSpeechSynthesisReady, setVoicesLocal, setSelectedVoiceLocal]);
 
   /**
    * Initialize speech synthesis on user interaction.
@@ -72,30 +105,11 @@ const BlobChatWrapper = () => {
   }, [initializeSpeechSynthesis, isSpeechSynthesisReady]);
 
   /**
-   * Load voices on component mount and when voices change.
-   */
-  useEffect(() => {
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-
-    // Try to load voices immediately
-    loadVoices();
-
-    // If voices aren't loaded immediately, try again after a short delay
-    const timeoutId = setTimeout(loadVoices, 1000);
-
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null;
-      clearTimeout(timeoutId);
-    };
-  }, [loadVoices]);
-
-  /**
    * Handle user responses from ChatConversation.
    * @param {Object} response - The user response object.
    */
   const handleUserResponse = (response) => {
     console.log("User Response:", response);
-    // Example: Trigger video playback if the response is affirmative
     const userContent = response.content.toLowerCase();
     if (userContent === 'yes' || userContent === 'play') {
       setPlayVideo(true);
@@ -118,7 +132,12 @@ const BlobChatWrapper = () => {
           "We have a video on capitalism. Do you want to play it? Reply with 'yes' or 'play' to start the video."
       };
       addMessage(promptMessage);
-      speak(promptMessage.content);
+      
+      if (isSpeechSynthesisReady) {
+        speakTextWrapper(promptMessage.content);
+      } else {
+        console.warn("Speech synthesis not ready. Skipping speech.");
+      }
       return;
     }
 
@@ -147,7 +166,11 @@ const BlobChatWrapper = () => {
       
       addMessage({ type: 'assistant', content: response.data.response });
       
-      speak(response.data.response);
+      if (isSpeechSynthesisReady) {
+        speakTextWrapper(response.data.response);
+      } else {
+        console.warn("Speech synthesis not ready. Skipping speech.");
+      }
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Previous request canceled:", error.message);
@@ -181,28 +204,20 @@ const BlobChatWrapper = () => {
         playvideo={playVideo} 
         onUserResponse={handleUserResponse} 
         onMessageAdd={(msg) => addMessage(msg)}
-        handleSendMessage={handleSendMessage} // Passed as prop
-        handleCollapse={toggleChat}         // Passed as prop
-        isRecording={isRecording}           // Passed as prop
-        setIsRecording={setIsRecording}     // Passed as prop
-        isMinimized={isMinimized}           // Passed as prop
-        setIsMinimized={setIsMinimized}     // Passed as prop
-        isClosing={isClosing}               // Passed as prop
-        setIsClosing={setIsClosing}         // Passed as prop
-        isSpeaking={isSpeaking}             // Passed as prop
-        playerRef={playerRef}               // Passed as prop
-        handleClick={handleClick}           // Passed as prop
+        handleSendMessage={handleSendMessage}
+        handleCollapse={toggleChat}
+        isRecording={isRecording}
+        setIsRecording={setIsRecording}
+        isMinimized={isMinimized}
+        setIsMinimized={setIsMinimized}
+        isClosing={isClosing}
+        setIsClosing={setIsClosing}
+        isSpeaking={isSpeaking}
+        setIsSpeaking={setIsSpeaking}
+        playerRef={playerRef}
+        handleClick={handleClick}
       />
-      {isChatOpen && (
-        <ChatConversation
-          onSendMessage={handleSendMessage}
-          onCollapse={toggleChat}
-          isCollapsed={false}
-          darkMode={false}
-          isSpeaking={isSpeaking}
-          selectedVoice={selectedVoice}
-        />
-      )}
+      {/* Removed ChatConversation component rendering */}
       {playVideo && (
         <div className="video-container">
           <button

@@ -1,8 +1,8 @@
 // client/src/components/BlobComponents/BlobComponent.js
 
 import React from "react";
-import Jarvis from "./Jarvis"; // Assuming Jarvis is correctly imported
-import './BlobComponent.css';   // Ensure CSS is correctly imported
+import Jarvis from "./Jarvis";
+import './BlobComponent.css';
 import PropTypes from 'prop-types';
 
 /**
@@ -37,6 +37,7 @@ const BlobComponent = ({
             isMinimized={isMinimized}
             isClosing={isClosing}
             isSpeaking={isSpeaking}
+            setIsSpeaking={setIsSpeaking} // Pass it to Jarvis if needed
             playerRef={playerRef}
             onClick={handleClick}
             playvideo={playvideo}

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
-import { speakText } from '../utils/speechUtils'; // Make sure this import path is correct
+import { speakText } from '../utils/speechUtils';
 
 const ChatContext = createContext();
 
@@ -7,6 +7,9 @@ export const ChatProvider = ({ children }) => {
   const [chatMessages, setChatMessages] = useState([]);
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [voices, setVoices] = useState([]);
+  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [isSpeechSynthesisReady, setIsSpeechSynthesisReady] = useState(false);
 
   const addMessage = (message) => {
     setChatMessages((prevMessages) => [...prevMessages, message]);
@@ -20,9 +23,20 @@ export const ChatProvider = ({ children }) => {
     setIsChatOpen((prevState) => !prevState);
   };
 
-  const speakTextWrapper = useCallback((text) => {
-    speakText(text, true, setIsSpeaking, () => {}, () => {});
-  }, []);
+  const speakTextWrapper = useCallback(
+    (text) => {
+      if (!isSpeechSynthesisReady) {
+        console.warn("Speech synthesis not ready. Skipping speech.");
+        return;
+      }
+      if (voices.length === 0) {
+        console.error("No voices available for speech synthesis.");
+        return;
+      }
+      speakText(text, true, setIsSpeaking, () => {}, () => {}, voices, selectedVoice);
+    },
+    [voices, selectedVoice, isSpeechSynthesisReady]
+  );
 
   const handleDemoChoice = async (choice) => {
     let demoUrl;
@@ -52,13 +66,12 @@ export const ChatProvider = ({ children }) => {
     addMessage({
       type: "assistant",
       content: responseMessage,
-      isHtml: true // Add this flag to indicate HTML content
+      isHtml: true
     });
     speakTextWrapper(`Great! You've chosen to check out the ${demoName} demo. Would you like me to explain more about this specific product?`);
   };
 
   return (
-
     <ChatContext.Provider value={{ 
       chatMessages, 
       isChatOpen, 
@@ -68,9 +81,14 @@ export const ChatProvider = ({ children }) => {
       toggleChat,
       handleDemoChoice,
       speakTextWrapper,
-      setIsChatOpen
+      setIsChatOpen,
+      voices,
+      setVoices,
+      selectedVoice,
+      setSelectedVoice,
+      isSpeechSynthesisReady,
+      setIsSpeechSynthesisReady
     }}>
-
       {children}
     </ChatContext.Provider>
   );
