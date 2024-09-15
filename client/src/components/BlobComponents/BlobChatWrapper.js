@@ -7,7 +7,7 @@ import { useChat } from '../../context/ChatContext';
 import { useSection } from "../TrackUserComps/SectionContext";
 import axios from 'axios';
 import { API_BASE_URL } from '../../lib/config';
-import { speakText } from '../../utils/speechUtils';
+import useSpeechSynthesis from '../../utils/useSpeechSynthesis';
 import './BlobChatWrapper.css';
 
 /**
@@ -20,16 +20,21 @@ const BlobChatWrapper = () => {
   const [playVideo, setPlayVideo] = useState(false);
   const cancelTokenRef = useRef(null);
   const [voices, setVoices] = useState([]);
-  const [isSpeechSynthesisReady, setIsSpeechSynthesisReady] = useState(false);
-  const [isSpeechInitialized, setIsSpeechInitialized] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [selectedVoice, setSelectedVoice] = useState(null);
+  const playerRef = useRef(null);
+
+  const {
+    speak,
+    initializeSpeechSynthesis,
+    isSpeaking,
+    isSpeechSynthesisReady,
+    setIsSpeechSynthesisReady,
+  } = useSpeechSynthesis(voices, selectedVoice);
 
   // Define additional state variables
   const [isRecording, setIsRecording] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const playerRef = useRef(null);
 
   /**
    * Load available speech synthesis voices.
@@ -45,35 +50,14 @@ const BlobChatWrapper = () => {
       setVoices(availableVoices);
       setIsSpeechSynthesisReady(true);
     }
-  }, []);
+  }, [setIsSpeechSynthesisReady]);
 
   /**
    * Initialize speech synthesis on user interaction.
    */
-  const initializeSpeechSynthesis = useCallback(() => {
-    if (isSpeechInitialized) return;
-
-    const utterance = new SpeechSynthesisUtterance('');
-    utterance.onend = () => {
-      console.log('Speech synthesis initialized successfully');
-      setIsSpeechInitialized(true);
-    };
-    utterance.onerror = (event) => {
-      console.warn('Speech synthesis initialization error:', event);
-      if (event.error === 'not-allowed') {
-        console.log('Speech synthesis permission denied.');
-      }
-    };
-
-    window.speechSynthesis.speak(utterance);
-  }, [isSpeechInitialized]);
-
-  /**
-   * Handle user interactions to initialize speech synthesis.
-   */
   useEffect(() => {
     const handleUserInteraction = () => {
-      if (!isSpeechInitialized) {
+      if (!isSpeechSynthesisReady) {
         initializeSpeechSynthesis();
       }
     };
@@ -85,7 +69,7 @@ const BlobChatWrapper = () => {
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('keydown', handleUserInteraction);
     };
-  }, [initializeSpeechSynthesis, isSpeechInitialized]);
+  }, [initializeSpeechSynthesis, isSpeechSynthesisReady]);
 
   /**
    * Load voices on component mount and when voices change.
@@ -134,7 +118,7 @@ const BlobChatWrapper = () => {
           "We have a video on capitalism. Do you want to play it? Reply with 'yes' or 'play' to start the video."
       };
       addMessage(promptMessage);
-      speakTextWrapper(promptMessage.content);
+      speak(promptMessage.content);
       return;
     }
 
@@ -163,47 +147,15 @@ const BlobChatWrapper = () => {
       
       addMessage({ type: 'assistant', content: response.data.response });
       
-      speakTextWrapper(response.data.response);
+      speak(response.data.response);
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Previous request canceled:", error.message);
       } else {
         console.error("Error making API call:", error);
       }
-    } finally {
-      // No longer cancelTokenRef is being used here
     }
   };
-
-  /**
-   * Function to handle text-to-speech.
-   * Cancels any ongoing speech and speaks the new text.
-   * @param {string} text - The text to be spoken.
-   */
-  const speakTextWrapper = useCallback((text) => {
-    if (!isSpeechSynthesisReady) {
-      console.warn("Speech synthesis is not ready yet. Skipping speech.");
-      return;
-    }
-
-    // Cancel any ongoing speech
-    window.speechSynthesis.cancel();
-
-    setIsSpeaking(true);
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = selectedVoice || voices[0] || null;
-    utterance.onend = () => {
-      console.log("Speech ended");
-      setIsSpeaking(false);
-    };
-    utterance.onerror = (event) => {
-      console.error("Speech synthesis error:", event.error);
-      setIsSpeaking(false);
-    };
-
-    window.speechSynthesis.speak(utterance);
-  }, [isSpeechSynthesisReady, selectedVoice, voices]);
 
   /**
    * Handle closing the video playback.
@@ -238,7 +190,6 @@ const BlobChatWrapper = () => {
         isClosing={isClosing}               // Passed as prop
         setIsClosing={setIsClosing}         // Passed as prop
         isSpeaking={isSpeaking}             // Passed as prop
-        setIsSpeaking={setIsSpeaking}       // Passed as prop
         playerRef={playerRef}               // Passed as prop
         handleClick={handleClick}           // Passed as prop
       />

@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 export const speakText = (
   text,
   shouldSpeak = true,
@@ -37,24 +39,3 @@ export const speakText = (
 
   window.speechSynthesis.speak(utterance);
 };
-
-export const speakTextWrapper = useCallback((text) => {
-  if (!isSpeechSynthesisReady) {
-    console.warn("Speech synthesis is not ready yet. Skipping speech.");
-    return;
-  }
-
-  // Pause speech synthesis to prevent interference
-  window.speechSynthesis.pause();
-
-  // ... existing code ...
-
-  utterance.onend = () => {
-    console.log("Speech ended");
-    setIsSpeaking(false);
-    // Resume speech synthesis if needed
-    window.speechSynthesis.resume();
-  };
-
-  // ... existing code ...
-}, [isSpeechSynthesisReady, selectedVoice, voices]);
