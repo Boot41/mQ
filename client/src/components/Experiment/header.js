@@ -11,7 +11,7 @@ const Header = () => {
   // Update header background based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) { // Adjust this value based on when you want the background to change
+      if (window.scrollY > 100) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-20 py-4 px-8 border-b border-gray-200 transition-all duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 w-full z-20 py-4 px-8  transition-all duration-300 ease-in-out ${
         isLandingPage ? (isScrolled ? 'bg-white shadow-md' : 'bg-transparent') : 'bg-white shadow-md'
       }`}
     >
@@ -74,7 +74,7 @@ const Header = () => {
           ))}
           <Link
             to="/contact"
-            className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 text-center text-2xl"
+            className="bg-orange-500 text-white px-4 py-2 hover:bg-orange-600 text-center text-2xl"
             onClick={() => handleHeaderClick("contact")}
           >
             Contact Us
@@ -103,7 +103,7 @@ const Header = () => {
             ))}
             <Link
               to="/contact"
-              className="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 text-center text-xl"
+              className="bg-orange-500 text-white px-4 py-2 hover:bg-orange-600 text-center text-xl"
               onClick={() => handleHeaderClick("contact")}
             >
               Contact Us
