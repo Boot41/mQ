@@ -63,9 +63,9 @@ const LandingPage = () => {
         
       </SectionComponent>
 
-      <SectionComponent id="latest-insights-section">
+      {/* <SectionComponent id="latest-insights-section">
         <LatestInsights />
-      </SectionComponent>
+      </SectionComponent> */}
 
       <SectionComponent id="press-section">
         <PressSection />

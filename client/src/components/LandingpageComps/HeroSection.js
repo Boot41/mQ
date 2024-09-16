@@ -132,7 +132,7 @@ function HeroSection2() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.4)", // Black tint with 70% opacity
+            backgroundColor: "rgba(0, 0, 0, 0.4)", // Black tint with 40% opacity for better visibility
             zIndex: 0,
           }}
         />
@@ -143,7 +143,7 @@ function HeroSection2() {
             position: "relative",
             zIndex: 1,
             width: { xs: "100%", lg: "50%" },
-            p: { xs: 4, lg: 8 },
+            p: { xs: 4, sm: 5, md: 6, lg: 8 },
             textAlign: { xs: "center", lg: "left" },
           }}
         >
@@ -175,20 +175,18 @@ function HeroSection2() {
               </span>
             </Typography>
 
-
-          <Typography
-  variant="h6"
-  component="h6"
-  color="#6a6a6a" // Light gray color
-  fontWeight="medium"
-  sx={{
-    fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem", lg: "1.7rem" },
-    mb: 4,
-  }}
->
-  Crafting intelligent software to solve your unique challenges.
-</Typography>
-
+            <Typography
+              variant="h6"
+              component="h6"
+              color="#6a6a6a" // Light gray color
+              fontWeight="medium"
+              sx={{
+                fontSize: { xs: "1rem", sm: "1.5rem", md: "2rem", lg: "1.7rem" },
+                mb: 4,
+              }}
+            >
+              Crafting intelligent software to solve your unique challenges.
+            </Typography>
 
             <Box className="flex justify-center lg:justify-start">
               <Button
@@ -201,9 +199,9 @@ function HeroSection2() {
                   borderColor: "black",
                   backgroundColor: "#f57c00",
                   color: "white",
-                  fontSize: { xs: "16px", lg: "12px" },
-                  px: { xs: 3, lg: 2 },
-                  py: { xs: 1, lg: 1 },
+                  fontSize: { xs: "14px", sm: "16px", lg: "18px" },
+                  px: { xs: 2, sm: 3, md: 4, lg: 5 },
+                  py: { xs: 1, sm: 2 },
                   borderRadius: 0,
                   fontWeight: "bold",
                   textTransform: "uppercase",
