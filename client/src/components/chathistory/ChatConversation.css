@@ -5,6 +5,7 @@
     max-height: 50vh; /* Adjust to prevent overflow */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
