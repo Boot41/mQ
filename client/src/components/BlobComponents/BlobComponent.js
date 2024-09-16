@@ -133,36 +133,34 @@ const BlobComponent = ({ playvideo, additionalMessages = [], onMessageAdd }) => 
       console.error("Section ID is not set");
       return;
     }
-    
-    setIsRecording(true);
 
-    try {
-      const response = await axios.post(
-        `${API_BASE_URL}/api/website-interaction/`,
-        {
-          user_input: `You are an AI assistant for Think41's website. The user is currently viewing the ${currentSection} section. Provide a brief, friendly welcome and offer assistance. Highlight 1-2 key points about this section and how they relate to Think41's services. Be concise and engaging.`,
-          model_name: "4o-mini",
-          section_id: currentSection,
-          user_context: {
-            interaction_type: "initial_greeting",
-            current_section: currentSection
-          },
-        }
-      );
+    toggleChat();
+    // try {
+    //   const response = await axios.post(
+    //     `${API_BASE_URL}/api/website-interaction/`,
+    //     {
+    //       user_input: `You are an AI assistant for Think41's website. The user is currently viewing the ${currentSection} section. Provide a brief, friendly welcome and offer assistance. Highlight 1-2 key points about this section and how they relate to Think41's services. Be concise and engaging.`,
+    //       model_name: "4o-mini",
+    //       section_id: currentSection,
+    //       user_context: {
+    //         interaction_type: "initial_greeting",
+    //         current_section: currentSection
+    //       },
+    //     }
+    //   );
 
-      console.log("API Response:", response.data);
+    //   console.log("API Response:", response.data);
       
-      addMessage({ type: 'user', content: `Question about ${currentSection} section` });
-      addMessage({ type: 'assistant', content: response.data.response });
+    //   addMessage({ type: 'user', content: `Question about ${currentSection} section` });
+    //   addMessage({ type: 'assistant', content: response.data.response });
       
-      toggleChat();
-      speakTextWrapper(response.data.response);
-    } catch (error) {
-      console.error("Error making API call:", error);
-      console.log("API Base URL:", API_BASE_URL);
-    } finally {
-      setIsRecording(false);
-    }
+    //   speakTextWrapper(response.data.response);
+    // } catch (error) {
+    //   console.error("Error making API call:", error);
+    //   console.log("API Base URL:", API_BASE_URL);
+    // } finally {
+    //   setIsRecording(false);
+    // }
   }, [currentSection, addMessage, speakTextWrapper, toggleChat, setIsRecording]);
 
   const handleSendMessage = async (newMessage) => {

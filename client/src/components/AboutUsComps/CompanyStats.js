@@ -1,5 +1,58 @@
-import React, { useState, useEffect, useRef } from 'react';
-import LazyLoad from 'react-lazyload';
+import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
+
+const LazyLoad = lazy(() => import('react-lazyload'));
+
+// Inline critical CSS
+const criticalStyles = `
+  .stat-section {
+    position: relative;
+    padding: 5rem 0;
+    background-image: url("r3-compressed.webp");
+    background-size: cover;
+    background-position: center;
+  }
+  .stat-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .stat-container {
+    position: relative;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  .stat-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 1.25rem;
+  }
+  .stat-item {
+    flex: 0 0 auto;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 20rem;
+    height: 10rem;
+  }
+  .stat-value {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+`;
 
 const CompStats = () => {
   const stats = [
@@ -11,21 +64,21 @@ const CompStats = () => {
   ];
 
   return (
-    <LazyLoad height={200} once>
-      <section 
-        className="relative bg-cover bg-center py-20" 
-        style={{ backgroundImage: 'url("r3.webp")' }}
-      >
-        <div className="absolute inset-0 bg-white opacity-20"></div>
-        <div className="relative max-w-7xl mx-auto px-7 sm:px-6 lg:px-9">
-          <div className="flex overflow-x-auto space-x-6 pb-5">
-            {stats.map((stat, index) => (
-              <StatItem key={index} stat={stat} />
-            ))}
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyLoad height={200} once>
+        <style>{criticalStyles}</style>
+        <section className="stat-section">
+          <div className="stat-overlay"></div>
+          <div className="stat-container">
+            <div className="stat-list">
+              {stats.map((stat, index) => (
+                <StatItem key={index} stat={stat} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </LazyLoad>
+        </section>
+      </LazyLoad>
+    </Suspense>
   );
 };
 
@@ -76,14 +129,9 @@ const StatItem = ({ stat }) => {
   }, [isVisible, stat.value]);
 
   return (
-    <div 
-      ref={ref} 
-      className="bg-transparent border-2 border-white rounded-lg p-6 flex flex-col items-center text-center w-80 h-40"
-    >
-      <div className="auto-mx text-4xl font-bold text-white mb-2">{count}</div>
-      <div className="text-white text-lg font-medium">
-        {stat.label}
-      </div>
+    <div ref={ref} className="stat-item">
+      <div className="stat-value">{count}</div>
+      <div className="stat-label">{stat.label}</div>
     </div>
   );
 };
