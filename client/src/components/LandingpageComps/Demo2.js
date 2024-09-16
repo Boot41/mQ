@@ -107,77 +107,61 @@ const Demo = ({ onMessageAdd = () => {} }) => {
     <>
       <header className="text-center my-5 sm:my-10 p-2 sm:p-4 md:p-10" style={{ fontFamily: 'inherit' }}>
         <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-9xl font-extrabold text-gray-800 mb-2 sm:mb-4" style={{ fontFamily: 'inherit' }}>
-          Check Out Some Demos
+          Check Out Some Of Our <span style={{ color: '#f57c00' }}>Solutions</span>
         </h1>
-        <div className="w-16 sm:w-24 md:w-32 h-1 bg-orange-400 mx-auto mb-3 sm:mb-6"></div>
+        <div className="w-16 sm:w-24 md:w-32 h-1 bg-orange-500 mx-auto mb-3 sm:mb-6"></div>
         <p className="mt-2 sm:mt-3 text-sm sm:text-base md:text-lg lg:text-2xl xl:text-3xl text-gray-600" style={{ fontFamily: 'inherit' }}>
           Discover the features and capabilities of our latest demos and see how they can benefit you.
         </p>
       </header>
-
-      <Box className="relative mx-auto h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] w-[95%] sm:w-[90%] max-w-[1000px]">
+    
+      <Box className="relative mx-auto h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] w-full">
         <Box className="absolute inset-0 z-10 bg-cover bg-center transition-all duration-500"
-          style={{ backgroundImage: `url(${DemoData[currentIndex].img}) ` }}
+          style={{ backgroundImage: `url(${DemoData[currentIndex].img})`, width: '100%' }}
         >
           <Box className="w-full h-full flex items-center justify-center p-2 sm:p-4">
-            <Box className="absolute inset-y-1/2 left-2 sm:left-4 transform -translate-y-1/2 sm:-translate-y-80 flex flex-col bg-opacity-50 p-2 sm:p-4 rounded-lg w-[90%] sm:w-[60%] md:w-[50%] lg:w-[40%] max-w-xs md:max-w-md h-[200px] sm:h-[350px] md:h-[400px] lg:h-[450px]">
-              <Box className="text-center bg-opacity-50 p-2 sm:p-4 bg-transparent backdrop-blur-3xl border-2 sm:border-4 h-full" style={{ fontFamily: 'inherit' }}>
+            <Box className="absolute inset-y-1/2 left-2 sm:left-4 transform -translate-y-1/2 flex flex-col bg-opacity-70 p-4 rounded-xl w-[90%] sm:w-[90%] md:w-[90%] lg:w-[90%] max-w-2xl md:max-w-3xl h-[200px] sm:h-[350px] md:h-[400px] lg:h-[350px] bg-black rounded-lg">
+              <Box className="text-left p-2 sm:p-4 h-full rounded-lg flex flex-col justify-between" style={{ fontFamily: 'inherit' }}>
                 <Typography
                   variant="h4"
-                  className="text-orange-500 text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 sm:mb-4 border-b-2"
+                  className="text-orange-500 text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 sm:mb-4"
                   style={{ fontFamily: 'inherit' }}
                 >
                   {DemoData[currentIndex].name}
                 </Typography>
                 <Typography
                   variant="body1"
-                  className="text-white text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-3 sm:mb-6"
-                  style={{ fontFamily: 'inherit' }}
+                  className="text-white text-sm sm:text-base md:text-lg leading-relaxed mb-3 sm:mb-6 overflow-y-auto"
+                  style={{ fontFamily: 'inherit', maxHeight: '60%' }}
                 >
                   {DemoData[currentIndex].description}
                 </Typography>
                 <Button
-  onClick={handleClick}
-  variant="outlined"
-  color="warning"
-  sx={{
-    position: "relative",
-    overflow: "hidden",
-    borderColor: "black",
-    backgroundColor: "#f57c00",
-    color: "white",
-    fontSize: { xs: "8px", sm: "10px", md: "12px", lg: "14px" },
-    px: { xs: 1, sm: 1.5, md: 2, lg: 2.5 }, // Adjust padding for smaller size
-    py: { xs: 0.25, sm: 0.5, md: 0.75 }, // Adjust padding for smaller size
-    borderRadius: 0,
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: "-100%",
-      width: "100%",
-      height: "100%",
-      backgroundColor: "#f57c00",
-      transition: "left 0.5s ease",
-      zIndex: -1,
-    },
-    "&:hover::before": {
-      left: 0,
-    },
-  }}
->
-  Know More
-  <FaArrowRight style={{ marginLeft: '2px', fontSize: '0.8em' }} />
-</Button>
-
+                  onClick={handleClick}
+                  variant="outlined"
+                  color="warning"
+                  className="self-start"
+                >
+                  Know More
+                  <FaArrowRight style={{ marginLeft: '8px', fontSize: '0.8em' }} />
+                </Button>
               </Box>
             </Box>
           </Box>
         </Box>
+        {/* Navigation dots */}
+        <Box className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+          {DemoData.map((_, index) => (
+            <Box
+              key={index}
+              className={`w-3 h-3 rounded-full cursor-pointer ${index === currentIndex ? 'bg-orange-500' : 'bg-gray-400'}`}
+              onClick={() => setCurrentIndex(index)}
+            />
+          ))}
+        </Box>
       </Box>
     </>
+  
   );
 };
 

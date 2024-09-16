@@ -61,7 +61,7 @@ function App() {
               <Route path="/ReadmoreBlogs" element={<ReadMoreBlog />} />
             </Routes>
             <Footer />
-            <BlobChatWrapper />
+            {/* <BlobChatWrapper /> */}
           </SectionProvider>
         </ChatProvider>
       {/* )} */}
