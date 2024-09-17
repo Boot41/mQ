@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Typography, Button, Box } from "@mui/material";
-import Typical from "react-typical";
-import { typicalConfig } from "../../InformationFiles/LandingPageInfo";
 import { FaArrowRight } from 'react-icons/fa';
 import LazyLoad from 'react-lazyload';
 import axios from "axios";
@@ -21,9 +19,9 @@ function HeroSection2() {
 
   const { addMessage, toggleChat } = useChat();
 
-  const speakTextWrapper = useCallback((text) => {
+  const speakTextWrapper = (text) => {
     speakText(text, true, setIsSpeaking, () => {}, () => {});
-  }, [setIsSpeaking]);
+  };
 
   const handleVisualizingAIClick = async () => {
     const userMessage = "Tell me more about the Think41 centre";
@@ -72,38 +70,6 @@ function HeroSection2() {
     }
   };
 
-  const handleDemoChoice = async (choice) => {
-    let demoUrl;
-    let demoName;
-    switch(choice) {
-      case "1":
-        demoUrl = "https://dev-41-1081098542602.us-central1.run.app/";
-        demoName = "RQ (RecruitmentQ)";
-        break;
-      case "2":
-        demoUrl = "https://dev-41-1081098542602.us-central1.run.app/";
-        demoName = "CQ (CandidateQ)";
-        break;
-      case "3":
-        demoUrl = "https://demo.recruit41.com/";
-        demoName = "Recruit41";
-        break;
-      default:
-        addMessage({
-          type: "assistant",
-          content: "I'm sorry, but that's not a valid choice. Please choose 1, 2, or 3."
-        });
-        return;
-    }
-
-    const responseMessage = `Great! You've chosen to check out the ${demoName} demo. You can access it at: ${demoUrl}\n\nWould you like me to explain more about this specific product?`;
-    addMessage({
-      type: "assistant",
-      content: responseMessage
-    });
-    speakTextWrapper(responseMessage);
-  };
-
   return (
     <LazyLoad height={'calc(100vh - 300px)'} once>
       <Box
@@ -142,7 +108,7 @@ function HeroSection2() {
           sx={{
             position: "relative",
             zIndex: 1,
-            width: { xs: "100%", lg: "50%" },
+            width: { xs: "100%", lg: "60%" },
             p: { xs: 4, sm: 5, md: 6, lg: 8 },
             textAlign: { xs: "center", lg: "left" },
           }}
@@ -151,9 +117,9 @@ function HeroSection2() {
             <Typography
               variant="h3"
               component="h3"
-              color="white"
-              fontWeight="bold"
-              fontFamily="Baskervville SC, serif"
+              color="#f57c00"
+              fontWeight=""
+              fontFamily="inherit"
               gutterBottom
               sx={{
                 fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "4rem" },
@@ -166,13 +132,7 @@ function HeroSection2() {
                 justifyContent: "center",
               }}
             >
-              <span style={{ color: "#f57c00" }}>
-                <Typical
-                  steps={typicalConfig.steps}
-                  loop={Infinity}
-                  wrapper="span"
-                />
-              </span>
+              Innovate faster. Transform faster. Predictable outcome with Autopods.
             </Typography>
 
             <Typography
@@ -189,42 +149,43 @@ function HeroSection2() {
             </Typography>
 
             <Box className="flex justify-center lg:justify-start">
-              <Button
-                onClick={handleVisualizingAIClick}
-                variant="outlined"
-                color="warning"
-                sx={{
-                  position: "relative",
-                  overflow: "hidden",
-                  borderColor: "black",
-                  backgroundColor: "#f57c00",
-                  color: "white",
-                  fontSize: { xs: "14px", sm: "16px", lg: "18px" },
-                  px: { xs: 2, sm: 3, md: 4, lg: 5 },
-                  py: { xs: 1, sm: 2 },
-                  borderRadius: 0,
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  "&::before": {
-                    content: '""',
-                    position: "absolute",
-                    top: 0,
-                    left: "-100%",
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "orange",
-                    transition: "left 0.5s ease",
-                    zIndex: -1,
-                  },
-                  "&:hover::before": {
-                    left: 0,
-                  },
-                }}
-              >
-                Visualizing AI
-                <FaArrowRight style={{ marginLeft: '8px' }} />
-              </Button>
-            </Box>
+  <Button
+    onClick={handleVisualizingAIClick}
+    variant="outlined"
+    color="warning"
+    sx={{
+      position: "relative",
+      overflow: "hidden",
+      borderColor: "black",
+      backgroundColor: "#f57c00",
+      color: "white",
+      fontSize: { xs: "12px", sm: "14px", lg: "14px" }, // Reduced font size
+      px: { xs: 1.5, sm: 2, md: 3, lg: 3 }, // Reduced padding on x-axis
+      py: { xs: 1, sm: 1.5 }, // Reduced padding on y-axis
+      borderRadius: "12px", // Added curved edges
+      fontWeight: "bold",
+      textTransform: "uppercase",
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        top: 0,
+        left: "-100%",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "#f57c00",
+        transition: "left 0.5s ease",
+        zIndex: -1,
+      },
+      "&:hover::before": {
+        left: 0,
+      },
+    }}
+  >
+    Visualizing AI
+    <FaArrowRight style={{ marginLeft: '8px' }} />
+  </Button>
+</Box>
+
           </div>
         </Box>
       </Box>

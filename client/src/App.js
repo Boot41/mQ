@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Experiment/header";
-import Footer from "./components/FooterComps/Footer";
+// import Footer from "./components/FooterComps/Footer";
 import Careersexp from "./components/Careersexp";
 import Visualizingai from "./components/Visualizingai";
 import AboutUS2 from "./components/AboutUS2";
@@ -18,6 +18,7 @@ import CareersHome from "./components/Careersexp";
 import BlobChatWrapper from "./components/BlobComponents/BlobChatWrapper";
 import ReadMoreBlog from "./components/LandingpageComps/ReadMore";
 import { ChatProvider } from "./context/ChatContext";
+import Footer from "./components/Footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
