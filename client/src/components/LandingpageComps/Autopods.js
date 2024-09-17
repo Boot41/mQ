@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import { AutoPodsData } from "../../InformationFiles/LandingPageInfo";
 import axios from "axios";
 import LazyLoad from 'react-lazyload';
-
 import { API_BASE_URL } from '../../lib/config';
-
 import { useChat } from '../../context/ChatContext';
 import { speakText } from '../../utils/speechUtils';
 
@@ -87,118 +85,110 @@ Please provide a comprehensive yet concise response that a potential client woul
   }, [setIsSpeaking]);
 
   return (
-    <Box className="py-16 px-4 md:px-8 lg:px-16 xl:px-24">
-      <Box className="container mx-auto">
-        <Box className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Image Section */}
-          <Box className="w-full md:w-1/2 flex justify-center">
-            <div className="w-full flex justify-center px-4 md:px-24"> {/* Adjusted padding */}
-              <LazyLoad height={400} once>
-                <img
-                  src="static/autopods.webp"
-                  alt="AutoPods illustration"
-                  className="w-full max-w-[500px] h-auto max-h-[400px] rounded-lg"
-                />
-              </LazyLoad>
-            </div>
-          </Box>
+    <Box
+      sx={{ 
+        display: 'flex', 
+        flexDirection: { xs: 'column', md: 'row' }, // Column on small screens, row on medium and up
+        height: { xs: 'auto', md: '45vh' }, // Auto height on small screens
+        overflow: 'hidden' 
+      }}
+    >
+      {/* Left side - Image */}
+      <Box
+        sx={{
+          flex: { xs: 'none', md: 2 / 3 }, // Full width on small screens, 2/3 on medium and up
+          position: 'relative',
+          width: '100%',
+          height: { xs: 'auto', md: '100%' }, // Auto height on small screens
+        }}
+      >
+        <LazyLoad height={450} once>
+          <img
+            src="static/autopods.webp"
+            alt="AutoPods illustration"
+            style={{ 
+              width: '100%', 
+              height: '100%',  // Set height to 100% to fit within the section
+              objectFit: 'contain' // Adjusted to fit the image within the section
+            }}
+          />
+        </LazyLoad>
+      </Box>
 
-          {/* Text Section */}
-          <Box className="w-full md:w-1/2 flex flex-col justify-center space-y-6 px-4 md:px-10"> {/* Adjusted padding */}
-            <Typography
-              variant="h3"
-              component="h3"
-              color="#f57c00"
-              fontWeight="bold"
-              fontFamily="Baskervville SC, serif"
-              gutterBottom
-              sx={{ fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem", lg: "3rem" } }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.title}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              color="gray"
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
-                mb: 2,
-              }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.subtitle1}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              color="gray"
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "1rem", sm: "1.2rem", md: "1.5rem" },
-                mb: 2,
-              }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.subtitle2}
-            </Typography>
-            <Typography
-              variant="h6"
-              component="h6"
-              color="gray"
-              fontWeight="medium"
-              sx={{
-                fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" },
-                mb: 4,
-              }}
-              className="text-center md:text-left"
-            >
-              {AutoPodsData.description}
-            </Typography>
-            <Box className="flex justify-center md:justify-start">
-              <Link to="#">
-                <Button
-                  onClick={handleClick}
-                  variant="outlined"
-                  color="warning"
-                  sx={{
-                    position: "relative",
-                    overflow: "hidden",
-                    borderColor: "#f57c00",
-                    backgroundColor: "#f57c00",
-                    color: "white",
-                    fontSize: { xs: "8px", sm: "10px", md: "12px", lg: "14px" }, // Adjust font size
-                    px: { xs: 1, sm: 1.5, md: 2, lg: 2.5 }, // Adjust padding for smaller size
-                    py: { xs: 0.25, sm: 0.5, md: 0.75 }, // Adjust padding for smaller size
-                    borderRadius: 0,
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    "&:hover": {
-                      color: "white",
-                      backgroundColor: "transparent",
-                    },
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      top: 0,
-                      left: "-100%",
-                      width: "100%",
-                      height: "100%",
-                      backgroundColor: "#f57c00",
-                      transition: "left 0.5s ease",
-                      zIndex: -1,
-                    },
-                    "&:hover::before": {
-                      left: 0,
-                    },
-                  }}
-                >
-                  {AutoPodsData.buttonText}
-                </Button>
-              </Link>
-            </Box>
-          </Box>
+      {/* Right side - Content */}
+      <Box
+        sx={{ 
+          flex: { xs: 'none', md: 1 / 3 }, // Full width on small screens, 1/3 on medium and up
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'center', 
+          p: 2, // Reduced padding on small screens
+          bgcolor: 'grey.200', // Light gray background
+          textAlign: { xs: 'left', md: 'left' } // Center text on small screens
+        }}
+      >
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{ 
+            fontFamily: 'inherit',
+            fontSize: { xs: '24px', md: '30px' }, // Responsive font size
+            fontWeight: 600,
+            lineHeight: { xs: '32px', md: '42.56px' },
+            textAlign: 'left', // Center text on small screens
+          }}
+          gutterBottom
+        >
+          <span>Auto</span>
+          <span style={{ color: '#f57c00' }}>PODS</span>
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{
+            fontFamily: 'inherit',
+            fontSize: { xs: '14px', md: '16px' }, // Responsive font size
+            fontWeight: 400,
+            lineHeight: { xs: '20px', md: '21.28px' },
+            textAlign: 'left', // Center text on small screens
+            color: 'text.secondary',
+          }}
+          gutterBottom
+        >
+          {AutoPodsData.subtitle1}
+        </Typography>
+        <Typography
+          variant="body1"
+          paragraph
+          sx={{
+            fontFamily: 'inherit',
+            fontSize: { xs: '14px', md: '16px' }, // Responsive font size
+            fontWeight: 400,
+            lineHeight: { xs: '20px', md: '21.28px' },
+            textAlign: 'left', // Center text on small screens
+            color: 'text.secondary',
+            mb: 2 // Reduced margin on small screens
+          }}
+        >
+          {AutoPodsData.description}
+        </Typography>
+        <Box>
+          <Button
+            component={Link}
+            to="#"
+            onClick={handleClick}
+            variant="outlined"
+            sx={{
+              borderColor: 'text.primary',
+              color: 'text.primary',
+              '&:hover': {
+                borderColor: 'text.primary',
+                bgcolor: 'rgba(0, 0, 0, 0.04)'
+              },
+              mx: 'auto', // Center button on small screens
+            }}
+          >
+            {AutoPodsData.buttonText}
+          </Button>
         </Box>
       </Box>
     </Box>
